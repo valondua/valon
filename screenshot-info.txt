@@ -1,0 +1,17 @@
+# Screenshot Information
+
+Since I cannot create an actual PNG file in this environment, you'll need to add a screenshot.png file manually.
+
+## Requirements for screenshot.png:
+- **Dimensions**: 1200px × 900px
+- **Format**: PNG
+- **Content**: A preview of your theme design
+- **Location**: Place it in the root of your theme folder
+
+## Quick way to create one:
+1. Take a screenshot of your theme in action on your site
+2. Resize it to 1200×900 pixels
+3. Save as "screenshot.png"
+4. Upload to your GitHub repository
+
+This file helps WordPress show a preview of your theme in the admin area.
