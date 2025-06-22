@@ -14,17 +14,11 @@
     <header id="masthead" class="site-header">
         <div class="container">
             <div class="site-branding">
-                <?php if (has_custom_logo()) : ?>
-                    <div class="site-logo">
-                        <?php the_custom_logo(); ?>
-                    </div>
-                <?php else : ?>
-                    <h1 class="site-title">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <?php bloginfo('name'); ?>
-                        </a>
-                    </h1>
-                <?php endif; ?>
+                <div class="site-logo">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                        <img src="https://www.valonasani.com/wp-content/uploads/2025/06/Valoni.png" alt="<?php bloginfo('name'); ?>" />
+                    </a>
+                </div>
                 
                 <?php 
                 $valon_tagline = get_theme_mod('valon_tagline', 'A journey of consciousness and authentic expression');
