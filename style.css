@@ -121,7 +121,7 @@ a:hover {
 }
 
 .site-header.scrolled .site-logo img {
-    max-height: 30px;
+    max-height: 35px;
 }
 
 .site-title {
@@ -162,7 +162,7 @@ a:hover {
 }
 
 .site-header.scrolled .main-navigation {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 .main-navigation ul {
