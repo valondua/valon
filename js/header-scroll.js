@@ -1,20 +1,30 @@
 /**
- * Header Scroll Behavior
- * Adds scrolled class to header for compact styling
+ * Naval-style Header Scroll Behavior
+ * Hide navigation when scrolling down, show when scrolling up
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.site-header');
     let lastScrollTop = 0;
+    const scrollThreshold = 50; // Start hiding after 50px scroll
     
     function handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Add scrolled class when user scrolls down more than 50px
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
+        // Remove all scroll classes first
+        header.classList.remove('scrolled-down', 'scrolled-up');
+        
+        if (scrollTop <= scrollThreshold) {
+            // At top - show everything
+            return;
+        }
+        
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - hide navigation, show only logo
+            header.classList.add('scrolled-down');
         } else {
-            header.classList.remove('scrolled');
+            // Scrolling up - show navigation again
+            header.classList.add('scrolled-up');
         }
         
         lastScrollTop = scrollTop;
