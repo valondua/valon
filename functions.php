@@ -49,7 +49,7 @@ add_action('after_setup_theme', 'valon_setup');
  */
 function valon_scripts() {
     // Enqueue main stylesheet
-    wp_enqueue_style('valon-style', get_stylesheet_uri(), array(), '1.0');
+    wp_enqueue_style('valon-style', get_stylesheet_uri(), array(), '1.1');
     
     // Enqueue Google Fonts
     wp_enqueue_style('valon-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap', array(), null);
