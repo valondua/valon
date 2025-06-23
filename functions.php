@@ -54,6 +54,9 @@ function valon_scripts() {
     // Enqueue Google Fonts
     wp_enqueue_style('valon-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap', array(), null);
     
+    // Enqueue header scroll script
+    wp_enqueue_script('valon-header-scroll', get_template_directory_uri() . '/js/header-scroll.js', array(), '1.0', true);
+    
     // Enqueue comment reply script on singular posts/pages
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
