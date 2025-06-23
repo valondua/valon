@@ -87,7 +87,7 @@ a:hover {
 .site-header {
     background-color: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid #e5e5e5;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -97,14 +97,14 @@ a:hover {
 
 /* Scrolled header - much more compact */
 .site-header.scrolled {
-    padding: 0.3rem 0;
+    padding: 0.2rem 0;
     background-color: rgba(255, 255, 255, 0.98);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .site-branding {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
 }
 
@@ -113,7 +113,7 @@ a:hover {
 }
 
 .site-logo img {
-    max-height: 60px;
+    max-height: 80px;
     width: auto;
     display: block;
     margin: 0 auto;
@@ -121,7 +121,7 @@ a:hover {
 }
 
 .site-header.scrolled .site-logo img {
-    max-height: 35px;
+    max-height: 50px;
 }
 
 .site-title {
@@ -157,12 +157,12 @@ a:hover {
 /* Navigation */
 .main-navigation {
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 0.75rem;
     transition: all 0.3s ease;
 }
 
 .site-header.scrolled .main-navigation {
-    margin-top: 0.25rem;
+    margin-top: 0.1rem;
 }
 
 .main-navigation ul {
@@ -595,19 +595,19 @@ strong {
     }
     
     .site-header {
-        padding: 0.75rem 0;
+        padding: 0.4rem 0;
     }
     
     .site-header.scrolled {
-        padding: 0.25rem 0;
+        padding: 0.15rem 0;
     }
     
     .main-navigation {
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
     
     .site-header.scrolled .main-navigation {
-        margin-top: 0.25rem;
+        margin-top: 0.1rem;
     }
     
     .main-navigation ul {
