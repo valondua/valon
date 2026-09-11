@@ -1,0 +1,5 @@
+# Defense in depth for the local bind-mounted workspace. Release ZIPs exclude these paths.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(?:\.|review/|tools/|docs/|plugins/|compose\.yaml|WEBSITE-REBUILD-PLAN\.md) - [F,L]
+</IfModule>

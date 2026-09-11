@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+.local/
+dist/
+node_modules/
+.DS_Store
+*.log
+
+/review/
+/WEBSITE-REBUILD-PLAN.md

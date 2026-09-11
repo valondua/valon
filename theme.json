@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "720px", "wideSize": "1240px" },
+    "color": {
+      "palette": [
+        { "slug": "paper", "name": "Paper", "color": "#f6f4ee" },
+        { "slug": "ink", "name": "Ink", "color": "#222820" },
+        { "slug": "olive", "name": "Olive", "color": "#465340" },
+        { "slug": "sand", "name": "Sand", "color": "#e9e5da" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "sans",
+          "name": "System sans",
+          "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+        },
+        {
+          "slug": "serif",
+          "name": "Editorial serif",
+          "fontFamily": "Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, serif"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": { "background": "#f6f4ee", "text": "#222820" },
+    "typography": {
+      "fontFamily": "var:preset|font-family|sans",
+      "lineHeight": "1.7"
+    }
+  }
+}
