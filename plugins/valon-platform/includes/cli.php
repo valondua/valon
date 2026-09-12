@@ -444,7 +444,15 @@ final class VP_Migration
                 is_wp_error($result) ||
                 get_post_status($target) !== "publish"
             ) {
-                $this->fail("Could not apply page " . $p->ID);
+                if (is_wp_error($result)) {
+                    $this->fail("Could not apply page " . $p->ID . ": " . $result->get_error_message());
+                }
+                $saved = get_post($target);
+                $this->fail("Could not apply page " . $p->ID . " to " . $target .
+                    "; status=" . get_post_status($target) .
+                    "; title=" . ($saved->post_title === $p->post_title ? "unchanged" : "changed") .
+                    "; content=" . ($saved->post_content === $p->post_content ? "unchanged" : "changed") .
+                    "; approved=" . (get_post_meta($target, "_vp_approved_hash", true) === vp_review_hash($saved->post_title, $saved->post_content) ? "yes" : "no"));
             }
             update_post_meta($target, "_valon_route", $route);
             update_post_meta(
