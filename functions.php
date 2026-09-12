@@ -61,6 +61,12 @@ add_action("wp_enqueue_scripts", function () {
         [],
         filemtime(get_template_directory() . "/style.css"),
     );
+    wp_enqueue_style(
+        "valon-editorial",
+        get_template_directory_uri() . "/assets/editorial.css",
+        ["valon-style"],
+        filemtime(get_template_directory() . "/assets/editorial.css"),
+    );
     wp_enqueue_script(
         "valon-site",
         get_template_directory_uri() . "/js/site.js",
@@ -77,7 +83,6 @@ function valon_nav()
             "writing" => ["Writing", "Shkrime"],
             "watch" => ["Watch", "Shiko"],
             "about" => ["About", "Rreth meje"],
-            "newsletter" => ["Newsletter", "Letrat"],
         ]
         as $r => $label
     ) {
@@ -87,6 +92,11 @@ function valon_nav()
             esc_html(valon_text(...$label)) .
             "</a>";
     }
+    echo '<a class="mobile-newsletter" href="' .
+        esc_url(valon_url("newsletter")) .
+        '">' .
+        esc_html(valon_text("Free newsletter", "Letra falas")) .
+        "</a>";
 }
 function valon_languages()
 {
@@ -179,9 +189,16 @@ function valon_posts($limit = 3, $featured = false)
         $q = new WP_Query($args);
     }
     if (!$q->have_posts() && valon_lang() === "sq") {
-        unset($args["meta_key"], $args["meta_value"]);
         $args["lang"] = "en";
+        if ($featured) {
+            $args["meta_key"] = "_valon_featured";
+            $args["meta_value"] = "1";
+        }
         $q = new WP_Query($args);
+        if (!$q->have_posts() && $featured) {
+            unset($args["meta_key"], $args["meta_value"]);
+            $q = new WP_Query($args);
+        }
         if ($q->have_posts()) {
             echo '<p class="muted archive-language-note">Prej arkivit, në anglisht. Shkrimet shqip po përgatiten.</p>';
         }

@@ -10,7 +10,7 @@ function vp_newsletter_form($placement = "inline", $lang = "en")
  ); ?>" data-lang="<?php echo esc_attr($lang); ?>">
  <div class="form-row"><label class="screen-reader-text" for="<?php echo esc_attr(
      $id,
- ); ?>"><?php echo esc_html(vp_text("Email address", "Adresa e emailit", $lang)); ?></label><input id="<?php echo esc_attr($id); ?>" name="email" type="email" autocomplete="email" placeholder="<?php echo esc_attr(vp_text("Your email address", "Adresa jote e emailit", $lang)); ?>" required maxlength="254"><button type="submit"><?php echo esc_html(vp_text("Join the letters", "Merri letrat", $lang)); ?> <span aria-hidden="true">↗</span></button></div>
+ ); ?>"><?php echo esc_html(vp_text("Email address", "Adresa e emailit", $lang)); ?></label><input id="<?php echo esc_attr($id); ?>" name="email" type="email" autocomplete="email" placeholder="<?php echo esc_attr(vp_text("Your email address", "Adresa jote e emailit", $lang)); ?>" required maxlength="254"><button type="submit"><?php echo esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)); ?></button></div>
  <div class="form-options"><label><?php echo esc_html(
      vp_text("Read in", "Lexo në", $lang),
  ); ?> <select name="language"><option value="en" <?php selected($lang, "en"); ?>>English</option><option value="sq" <?php selected($lang, "sq"); ?>>Shqip</option></select></label></div>

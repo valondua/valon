@@ -1,10 +1,10 @@
 <section class="newsletter-band"><div class="container newsletter-grid"><div><p class="eyebrow"><?php echo esc_html(
     valon_text("Letters from Valon", "Letra nga Valoni"),
 ); ?></p><h2><?php echo valon_lang() === "sq"
-    ? "Le ta vazhdojmë<br><em>bisedën.</em>"
-    : "Let’s keep the<br><em>conversation going.</em>"; ?></h2><p><?php echo esc_html(
+    ? "Ide që të mbesin.<br>Një letër çdo dy javë."
+    : "Ideas to live with.<br>A letter every two weeks."; ?></h2><p><?php echo esc_html(
     valon_text(
-        "One honest letter every two weeks. Ideas on building yourself, better relationships and a life you choose.",
-        "Një letër e sinqertë çdo dy javë. Ide për veten, marrëdhënie ma të mira dhe jetën që e zgjedh vetë.",
+        "One honest story. One useful idea. One thing to try. Join Letters from Valon, in English or Albanian.",
+        "Një histori e sinqertë. Një ide e dobishme. Diçka me provu. Merr Letra nga Valoni, në shqip ose anglisht.",
     ),
 ); ?></p></div><div><?php valon_newsletter("footer"); ?></div></div></section>

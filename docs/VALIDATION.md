@@ -1,11 +1,25 @@
-# Validation — 11 September 2026
+# Validation
 
 The implementation was verified locally. The public website was not deployed or modified.
+
+## Design and photography update — 12 September 2026
+
+The theme is now version 2.1.0. The homepage uses a portrait-led navy introduction, a prominent newsletter invitation, selected media coverage, featured articles and interview cards. Eleven supplied photographs are placed across Home, Start here, About, Newsletter, Now and selected article cards. Page featured images can override the supplied page-introduction defaults in WordPress.
+
+- Re-ran all **207 local HTTP assertions** after the final template changes: all passed. Existing URL, language, indexability and subscription error checks remain intact.
+- PHP syntax passed for the theme templates and newsletter include; JavaScript parsing and `git diff --check` passed.
+- Visually inspected desktop layouts at 1280/1440px and mobile at 390px. Checked English/Albanian homepage layout, language-specific signup preference, mobile navigation, search submission and Escape/focus behavior, newsletter layout, page portraits and article thumbnail crops.
+- Confirmed selected English articles remain the curated fallback on Albanian pages while translations await approval. Original article dates and URLs are retained.
+- Confirmed homepage interview thumbnails load and no video iframe loads with the initial page. Social feed authorization remains pending; profile links remain the fallback.
+- Photo copies have EXIF/XMP/IPTC/comment metadata removed, retaining encoded image data and color profiles. Source photos were not modified. Below-fold photos use lazy loading; no field performance score is claimed.
+- Rebuilt both release ZIPs and verified private drafts and development files remain excluded.
+
+The integration and restore evidence below was recorded on 11 September. Provider behavior was not changed by this design update. No new article, translation or newsletter was published, and the live website remains unchanged.
 
 ## Environment
 
 - WordPress 7.1, PHP 8.3 Apache, MariaDB 11.4.
-- Polylang 3.8.9, Yoast SEO 28.4, Valon theme 2.0.0, Valon Platform 1.0.0.
+- Polylang 3.8.9, Yoast SEO 28.4, Valon theme 2.1.0, Valon Platform 1.0.0.
 - Review preview: localhost:8094, noindex, bound to 127.0.0.1.
 - Separate restored database/site on localhost:8095 was used to verify indexable behavior, then stopped.
 

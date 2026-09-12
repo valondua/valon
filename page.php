@@ -6,12 +6,11 @@
     $route =
         get_post_meta(get_the_ID(), "_valon_route", true) ?:
         get_post_field("post_name");
-    ?><header class="page-heading"><p class="eyebrow">VALON ASANI / <?php echo esc_html(
-    valon_lang() === "sq" ? "SHQIP" : "ENGLISH",
-); ?></p><h1><?php the_title(); ?></h1></header><div class="prose"><?php
-the_content();
-wp_link_pages();
-?></div>
+    get_template_part("template-parts/page-intro", null, ["route" => $route]);
+    if ($route === "about") {
+        get_template_part("template-parts/photo-journal");
+    }
+    ?>
 <?php if (
     $route === "start"
 ): ?><section class="section"><div class="card-grid"><?php valon_posts(
@@ -81,7 +80,7 @@ $q = new WP_Query([
 } ?></nav><?php echo vp_render_feed($platform, 24);
 endif; ?>
 <?php if (
-    in_array($route, ["start", "newsletter"], true)
+    $route === "start"
 ): ?><div class="page-signup"><?php valon_newsletter(
     $route,
 ); ?></div><?php endif;

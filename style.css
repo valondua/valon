@@ -2,22 +2,24 @@
 Theme Name: Valon
 Description: An editorial home for Valon Asani: writing, life, social conversations and letters.
 Author: Valon Asani
-Version: 2.0.0
+Version: 2.1.0
 Requires at least: 6.6
 Requires PHP: 8.1
 License: GPL-2.0-or-later
 Text Domain: valon
 */
 :root {
-  --paper: #f6f4ee;
-  --ink: #222820;
-  --muted: #656a5e;
-  --olive: #465340;
-  --sand: #e9e5da;
-  --line: #d5d6cb;
+  --paper: #fafbfc;
+  --ink: #0b2030;
+  --muted: #566674;
+  --olive: #246ca8;
+  --sand: #edf2f6;
+  --line: #dce3e8;
   --serif:
     "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --sans:
+    "Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -73,9 +75,9 @@ p {
 }
 h1,
 h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.055em;
+  font-family: var(--sans);
+  font-weight: 650;
+  letter-spacing: -0.045em;
   line-height: 1.07;
 }
 h1 {
@@ -433,7 +435,7 @@ em {
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background: #222820b8;
+  background: #0b2030b8;
   color: white;
   font-size: 21px;
   display: grid;

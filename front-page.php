@@ -1,126 +1,258 @@
-<?php get_header(); ?><main id="main">
-<section class="hero container" aria-labelledby="hero-title"><div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> <?php echo esc_html(
-    valon_text("Entrepreneur. Curious human.", "Sipërmarrës. Njeri kureshtar."),
-); ?></p>
-<?php
-$intro = get_post_field("post_content", get_queried_object_id());
-if (trim($intro)) {
-    echo apply_filters("the_content", $intro);
-} else {
-     ?><h1 id="hero-title"><?php echo valon_lang() === "sq"
-    ? "Ndërto diçka.<br>Fillo me <em>veten.</em>"
-    : "Build something.<br>Start with <em>yourself.</em>"; ?></h1>
-<p class="hero-intro"><?php echo esc_html(
+<?php get_header(); ?>
+<main id="main">
+<section class="home-hero" aria-labelledby="hero-title">
+    <figure class="home-portrait">
+        <?php if ($portrait = get_theme_mod("valon_portrait")) {
+            echo wp_get_attachment_image($portrait, "full", false, [
+                "fetchpriority" => "high",
+                "loading" => "eager",
+                "alt" => "Valon Asani",
+            ]);
+        } else {
+             ?>
+            <img src="<?php echo esc_url(
+                get_template_directory_uri() . "/assets/valon-hero.jpeg",
+            ); ?>" width="1586" height="1983" alt="Valon Asani" fetchpriority="high" loading="eager">
+        <?php
+        } ?>
+        <figcaption>Prishtina & Zürich</figcaption>
+    </figure>
+    <div class="container home-hero-inner">
+        <div class="home-hero-copy">
+            <p class="hero-identity"><?php echo esc_html(
+                valon_text(
+                    "Valon Asani · Founder of dua.com & MIK Group",
+                    "Valon Asani · Themelues i dua.com & MIK Group",
+                ),
+            ); ?></p>
+            <?php
+            $intro = get_post_field("post_content", get_queried_object_id());
+            if (trim($intro)) {
+                echo apply_filters("the_content", $intro);
+            } else {
+                 ?>
+                <h1 id="hero-title"><?php echo valon_text(
+                    "Build something.<br>Start with yourself.",
+                    "Ndërto diçka.<br>Fillo me veten.",
+                ); ?></h1>
+                <p class="hero-intro"><?php echo esc_html(
+                    valon_text(
+                        "I’m Valon. I build companies and share what the journey teaches me about relationships, ambition and a life of your own.",
+                        "Jam Valoni. Ndërtoj kompani dhe ndaj çka po më mëson kjo rrugë për marrëdhëniet, ambicien dhe jetën që e zgjedh vetë.",
+                    ),
+                ); ?></p>
+            <?php
+            }
+            ?>
+            <div class="hero-newsletter">
+                <h2><?php echo esc_html(
+                    valon_text("Letters from Valon", "Letra nga Valoni"),
+                ); ?></h2>
+                <p><?php echo esc_html(
+                    valon_text(
+                        "One honest story. One useful idea. One thing to try. In your inbox every two weeks.",
+                        "Një histori e sinqertë. Një ide e dobishme. Diçka me provu. Në emailin tand çdo dy javë.",
+                    ),
+                ); ?></p>
+                <?php valon_newsletter("hero"); ?>
+                <a class="sample-link" href="<?php echo esc_url(
+                    valon_url("sample-letter"),
+                ); ?>"><?php echo esc_html(
+    valon_text("Read a sample letter", "Lexoje një letër shembull"),
+); ?> <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="press-strip container" aria-label="<?php echo esc_attr(
+    valon_text("Selected media coverage", "Media të zgjedhura"),
+); ?>">
+    <span><?php echo esc_html(valon_text("In the media", "Në media")); ?></span>
+    <a href="https://www.nzz.ch/international/kosovo-diaspora-wichtig-fuer-wirtschaft-und-gesellschaft-ld.1699736" class="press-nzz">NZZ</a>
+    <a href="https://www.srf.ch/news/schweiz/geld-schicken-kam-fuer-mich-nie-in-frage" class="press-srf">SRF</a>
+    <a href="https://www.watson.ch/international/schweiz/571493168-was-die-schweiz-vom-kosovo-lernen-kann" class="press-watson">watson</a>
+    <a href="https://balkaninsight.com/2020/08/20/new-app-aims-to-connect-albanians-around-the-world/" class="press-balkan">Balkan Insight</a>
+    <a href="<?php echo esc_url(
+        valon_url("media"),
+    ); ?>" class="text-link"><?php echo esc_html(
+    valon_text("All interviews", "Krejt intervistat"),
+); ?> <span aria-hidden="true">↗</span></a>
+</div>
+
+<section class="section container featured-section">
+    <div class="section-heading"><h2><span><?php echo esc_html(
+        valon_text("Start here.", "Fillo këtu."),
+    ); ?></span><br><?php echo esc_html(
+    valon_text("Ideas worth your time.", "Ide që ia vlejnë kohën."),
+); ?></h2>
+        <a class="text-link" href="<?php echo esc_url(
+            valon_url("start"),
+        ); ?>"><?php echo esc_html(
+    valon_text("Explore the essentials", "Zbulo shkrimet e zgjedhura"),
+); ?> <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="card-grid featured-grid"><?php valon_posts(3, true); ?></div>
+</section>
+
+<section class="interview-section">
+    <div class="container section">
+        <div class="section-heading"><div><h2><?php echo esc_html(
+            valon_text(
+                "Conversations that go deeper.",
+                "Biseda që shkojnë ma thellë.",
+            ),
+        ); ?></h2><p><?php echo esc_html(
     valon_text(
-        "I’m Valon. I build companies, question things, and share what I’m learning about relationships, growth and a life of your own.",
-        "Jam Valoni. Ndërtoj kompani, baj pyetje dhe ndaj çka po mësoj për marrëdhëniet, rritjen personale dhe jetën që e zgjedh vetë.",
+        "On building companies, connecting people and life between cultures.",
+        "Për ndërtimin e kompanive, lidhjen e njerëzve dhe jetën mes kulturave.",
     ),
-); ?></p>
-<?php
-}
-?>
-<div class="hero-letter"><p class="eyebrow"><?php echo esc_html(
-    valon_text("Letters from Valon", "Letra nga Valoni"),
-); ?> ↗</p><p><?php echo esc_html(
-     valon_text(
-         "Honest lessons. Useful ideas. One letter every two weeks.",
-         "Mësime të sinqerta. Ide të dobishme. Një letër çdo dy javë.",
-     ),
- ); ?></p><?php valon_newsletter("hero"); ?></div>
-<a class="text-link" href="<?php echo esc_url(
-    valon_url("start"),
-); ?>"><?php echo esc_html(
-    valon_text("New here? Start with these →", "Je i ri këtu? Fillo me këto →"),
-); ?></a></div>
-<figure class="hero-portrait"><?php
-$portrait = get_theme_mod("valon_portrait");
-if ($portrait) {
-    echo wp_get_attachment_image($portrait, "full", false, [
-        "fetchpriority" => "high",
-        "loading" => "eager",
-        "alt" => "Valon Asani",
-    ]);
-} else {
-    echo '<img src="' .
-        esc_url(get_template_directory_uri() . "/assets/portrait.jpg") .
-        '" width="724" height="1086" alt="Valon Asani" fetchpriority="high">';
-}
-?><figcaption><span>VALON ASANI</span><span>Prishtina ↔ Zürich</span></figcaption></figure></section>
-<div class="venture-strip container"><span class="eyebrow"><?php echo esc_html(
-    valon_text("A few things I’m building", "Disa gjana që po ndërtoj"),
-); ?></span><a href="https://www.dua.com/">dua<span class="brand-dot">.</span>com</a><a href="https://bethe.one/">bethe.one</a><a href="https://www.mikgroup.ch/">MIK GROUP</a><a href="https://www.spotted.de/">spotted</a></div>
-<section class="section container"><div class="section-heading"><div><p class="eyebrow">01 / <?php echo esc_html(
-    valon_text("A place to begin", "Një vend me fillu"),
-); ?></p><h2><?php echo esc_html(
-    valon_text("A few ideas to start with.", "Disa ide për me fillu."),
-); ?></h2></div><a class="text-link" href="<?php echo esc_url(
-    valon_url("start"),
-); ?>"><?php echo esc_html(
-    valon_text("Start here ↗", "Fillo këtu ↗"),
-); ?></a></div><div class="card-grid"><?php valon_posts(
-    3,
-    true,
-); ?></div></section>
-<section class="topic-section"><div class="container"><p class="eyebrow">02 / <?php echo esc_html(
-    valon_text("Follow your curiosity", "Ndiqe kureshtjen"),
-); ?></p><h2><?php echo esc_html(
-    valon_text("Life doesn’t fit in one box.", "Jeta s’hyn në një kuti."),
-); ?></h2><div class="topic-grid"><?php
-$i = 0;
-foreach (valon_topics() as $slug => $t):
-    $i++; ?><a class="topic-card" href="<?php echo esc_url(
-    valon_topic_url($slug),
-); ?>"><span class="topic-number">0<?php echo $i; ?> <span>↗</span></span><h3><?php echo esc_html(
-     valon_text($t[0], $t[1]),
- ); ?></h3><p><?php echo esc_html(valon_text($t[2], $t[3])); ?></p></a><?php
-endforeach;
-?></div></div></section>
-<section class="section container"><div class="section-heading"><div><p class="eyebrow">03 / <?php echo esc_html(
-    valon_text("From the notebook", "Nga shënimet"),
-); ?></p><h2><?php echo esc_html(
-    valon_text("Writing & reflections.", "Shkrime & mendime."),
-); ?></h2></div><a class="text-link" href="<?php echo esc_url(
+); ?></p></div>
+            <a class="text-link" href="<?php echo esc_url(
+                valon_url("media"),
+            ); ?>"><?php echo esc_html(
+    valon_text("More interviews", "Ma shumë intervista"),
+); ?> <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="interview-grid">
+        <?php foreach (
+            [
+                ["ln-JiohoLOw", "Startup Grind Tirana", "Shqip"],
+                ["h6jTohTFxps", "Swissalbs", "Schweizerdeutsch"],
+                ["yUDlopH-MWw", "RTK · Mysafiri i Mëngjesit", "Shqip"],
+            ]
+            as [$video, $title, $language]
+        ) { ?>
+            <a class="interview-card" href="<?php echo esc_url(
+                "https://www.youtube.com/watch?v=" . $video,
+            ); ?>">
+                <div class="interview-cover"><img src="<?php echo esc_url(
+                    "https://i.ytimg.com/vi/" . $video . "/hqdefault.jpg",
+                ); ?>" alt="" width="480" height="360" loading="lazy"><span class="interview-play" aria-hidden="true">▶</span></div>
+                <div class="interview-body"><p><?php echo esc_html(
+                    $language,
+                ); ?></p><h3><?php echo esc_html(
+    $title,
+); ?></h3><span><?php echo esc_html(
+    valon_text("Watch on YouTube", "Shiko në YouTube"),
+); ?> <span aria-hidden="true">↗</span></span></div>
+            </a>
+        <?php } ?>
+        </div>
+    </div>
+</section>
+
+<section class="section container latest-section">
+    <div class="section-heading"><h2><?php echo esc_html(
+        valon_text("Latest writing.", "Shkrimet e fundit."),
+    ); ?></h2><a class="text-link" href="<?php echo esc_url(
     valon_url("writing"),
 ); ?>"><?php echo esc_html(
-    valon_text("All writing ↗", "Krejt shkrimet ↗"),
-); ?></a></div><div class="writing-list"><?php valon_posts(
-    4,
-); ?></div></section>
-<section class="section container social-section"><div class="section-heading"><div><p class="eyebrow">04 / <?php echo esc_html(
-    valon_text("The conversation continues", "Biseda vazhdon"),
-); ?></p><h2><?php echo esc_html(
+    valon_text("All writing", "Krejt shkrimet"),
+); ?> <span aria-hidden="true">↗</span></a></div>
+    <div class="card-grid"><?php valon_posts(3); ?></div>
+</section>
+
+<section class="home-topics container">
+    <h2><?php echo esc_html(
+        valon_text("What’s on your mind?", "Çka po të sillet në mendje?"),
+    ); ?></h2>
+    <div class="home-topic-links"><?php foreach (
+        valon_topics()
+        as $slug => $topic
+    ) { ?>
+        <a href="<?php echo esc_url(
+            valon_topic_url($slug),
+        ); ?>"><?php echo esc_html(
+    valon_text($topic[0], $topic[1]),
+); ?> <span aria-hidden="true">↗</span></a>
+    <?php } ?></div>
+</section>
+
+<section class="section container social-section home-social">
+    <div class="section-heading"><div><h2><?php echo esc_html(
+        valon_text(
+            "From the daily conversations.",
+            "Prej bisedave të përditshme.",
+        ),
+    ); ?></h2><p><?php echo esc_html(
     valon_text(
-        "Less polished. More personal.",
-        "Pa shumë filtra. Ma personal.",
+        "The questions, replies and unfiltered moments I share on social.",
+        "Pyetjet, përgjigjet dhe momentet pa filtra që i ndaj në rrjete sociale.",
     ),
-); ?></h2></div><a class="text-link" href="<?php echo esc_url(
+); ?></p></div><a class="text-link" href="<?php echo esc_url(
     valon_url("watch"),
 ); ?>"><?php echo esc_html(
-    valon_text("Watch & explore ↗", "Shiko & zbulo ↗"),
-); ?></a></div><?php if (function_exists("vp_render_feed")) {
-    echo vp_render_feed("home", 6);
-} ?></section>
-<section class="about-strip container"><p class="eyebrow"><?php echo esc_html(
-    valon_text("A little about me", "Pak për mue"),
-); ?></p><h2><?php echo esc_html(
+    valon_text("Watch & explore", "Shiko & zbulo"),
+); ?> <span aria-hidden="true">↗</span></a></div>
+    <?php if (function_exists("vp_render_feed")) {
+        echo vp_render_feed("home", 6);
+    } ?>
+</section>
+
+<section class="home-about"><div class="container home-about-grid">
+    <figure class="about-portrait"><img src="<?php echo esc_url(
+        get_template_directory_uri() . "/assets/valon-portrait.jpeg",
+    ); ?>" width="879" height="894" alt="<?php echo esc_attr(
+    valon_text("Valon Asani", "Valon Asani"),
+); ?>" loading="lazy"></figure>
+    <div><p class="about-label"><?php echo esc_html(
+        valon_text("About Valon", "Rreth Valonit"),
+    ); ?></p><h2><?php echo esc_html(
     valon_text(
-        "A founder. A curious human. Still figuring things out.",
-        "Themelues. Njeri kureshtar. Ende tue mësu.",
+        "Building companies. Learning about life.",
+        "Tue ndërtu kompani. Tue mësu për jetën.",
     ),
 ); ?></h2><p><?php echo esc_html(
     valon_text(
-        "From Switzerland to Kosovo, from building businesses to building a more intentional life. This is where I share the lessons along the way.",
-        "Prej Zvicrës në Kosovë, prej ndërtimit të bizneseve te një jetë me ma shumë qëllim. Këtu i ndaj mësimet e kësaj rruge.",
+        "I’m a Swiss-Albanian founder living and working between Zürich and Prishtina. I founded dua.com and MIK Group. Today, I’m also building bethe.one and working with Spotted.",
+        "Jam themelues shqiptaro-zviceran dhe jetoj e punoj mes Zürichut dhe Prishtinës. Kam themelu dua.com dhe MIK Group. Sot po ndërtoj edhe bethe.one dhe po punoj me Spotted.",
     ),
 ); ?></p><a class="text-link" href="<?php echo esc_url(
     valon_url("about"),
 ); ?>"><?php echo esc_html(
-    valon_text("My story ↗", "Historia ime ↗"),
-); ?></a> <a class="text-link" href="<?php echo esc_url(
-    valon_url("media"),
-); ?>"><?php echo esc_html(
-    valon_text("Interviews & media ↗", "Intervista & media ↗"),
-); ?></a></section>
-<?php get_template_part(
-    "template-parts/newsletter",
-); ?></main><?php get_footer(); ?>
+    valon_text("Read my story", "Lexoje historinë time"),
+); ?> <span aria-hidden="true">↗</span></a></div>
+    <div class="venture-grid">
+        <?php foreach (
+            [
+                [
+                    "dua.com",
+                    "https://www.dua.com/",
+                    "Connecting people.",
+                    "Tue i lidhë njerëzit.",
+                ],
+                [
+                    "bethe.one",
+                    "https://bethe.one/",
+                    "Becoming yourself.",
+                    "Me u ba vetvetja.",
+                ],
+                [
+                    "MIK Group",
+                    "https://www.mikgroup.ch/",
+                    "Building digital growth.",
+                    "Rritje në botën digjitale.",
+                ],
+                [
+                    "Spotted",
+                    "https://www.spotted.de/",
+                    "Making connections.",
+                    "Tue kriju lidhje.",
+                ],
+            ]
+            as [$name, $url, $en, $sq]
+        ) { ?>
+            <a href="<?php echo esc_url(
+                $url,
+            ); ?>"><span class="venture-name"><?php echo esc_html(
+    $name,
+); ?></span><p><?php echo esc_html(
+    valon_text($en, $sq),
+); ?></p><span aria-hidden="true">↗</span></a>
+        <?php } ?>
+    </div>
+</div></section>
+<?php get_template_part("template-parts/newsletter"); ?>
+</main>
+<?php get_footer(); ?>
