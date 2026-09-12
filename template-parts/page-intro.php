@@ -39,7 +39,9 @@ $has_photo = $photo || has_post_thumbnail();
     <div class="page-intro-copy">
         <header class="page-heading">
             <p class="eyebrow">VALON ASANI / <?php echo esc_html(
-                valon_lang() === "sq" ? "SHQIP" : "ENGLISH",
+                ["en" => "ENGLISH", "sq" => "SHQIP", "de" => "DEUTSCH"][
+                    valon_lang()
+                ] ?? "ENGLISH",
             ); ?></p>
             <h1><?php the_title(); ?></h1>
         </header>

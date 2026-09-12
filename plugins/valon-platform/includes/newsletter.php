@@ -13,7 +13,7 @@ function vp_newsletter_form($placement = "inline", $lang = "en")
  ); ?>"><?php echo esc_html(vp_text("Email address", "Adresa e emailit", $lang)); ?></label><input id="<?php echo esc_attr($id); ?>" name="email" type="email" autocomplete="email" placeholder="<?php echo esc_attr(vp_text("Your email address", "Adresa jote e emailit", $lang)); ?>" required maxlength="254"><button type="submit"><?php echo esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)); ?></button></div>
  <div class="form-options"><label><?php echo esc_html(
      vp_text("Read in", "Lexo në", $lang),
- ); ?> <select name="language"><option value="en" <?php selected($lang, "en"); ?>>English</option><option value="sq" <?php selected($lang, "sq"); ?>>Shqip</option></select></label></div>
+ ); ?> <select name="language"><option value="en" <?php selected($lang, "en"); ?>>English</option><option value="sq" <?php selected($lang, "sq"); ?>>Shqip</option><option value="de" <?php selected($lang, "de"); ?>>Deutsch</option></select></label></div>
  <label class="form-consent"><input type="checkbox" name="consent" required value="1"><span><?php echo esc_html(
      vp_text(
          "Send me Letters from Valon every two weeks.",
@@ -40,7 +40,10 @@ function vp_newsletter_form($placement = "inline", $lang = "en")
 }
 function vp_subscribe($request)
 {
-    $lang = $request->get_param("language") === "sq" ? "sq" : "en";
+    $requested_language = $request->get_param("language");
+    $lang = in_array($requested_language, ["en", "sq", "de"], true)
+        ? $requested_language
+        : "en";
     $reply = fn($message, $status = 200) => new WP_REST_Response(
         ["message" => $message],
         $status,

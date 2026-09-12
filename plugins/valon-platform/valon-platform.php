@@ -2,19 +2,24 @@
 /**
  * Plugin Name: Valon Platform
  * Description: Owned social feeds, editorial review, Mailchimp double opt-in and personal identity.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires PHP: 8.1
  */
 defined("ABSPATH") || exit();
 define("VP_DIR", __DIR__);
 function vp_text($en, $sq, $lang = "")
 {
-    return ($lang ?:
+    $lang =
+        $lang ?:
         (function_exists("pll_current_language")
             ? pll_current_language("slug")
-            : "en")) === "sq"
-        ? $sq
-        : $en;
+            : "en");
+    if ($lang === "de") {
+        static $de;
+        $de ??= require VP_DIR . "/includes/strings-de.php";
+        return $de[$en] ?? $en;
+    }
+    return $lang === "sq" ? $sq : $en;
 }
 function vp_secret($name)
 {
@@ -50,6 +55,5 @@ add_action("wp_enqueue_scripts", function () {
         "isLocal" => wp_get_environment_type() === "local",
     ]);
 });
-if (defined("WP_CLI") && WP_CLI) {
-    require_once VP_DIR . "/includes/cli.php";
-}
+require_once VP_DIR . "/includes/cli.php";
+require_once VP_DIR . "/includes/deployment.php";

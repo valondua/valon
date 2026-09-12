@@ -60,3 +60,11 @@ This verifies the local restoration path, not backups or rollback on the existin
 - Search Console baseline and consent-aware GA4 wiring.
 - Valon's approval of core copy, privacy details, articles, translations and newsletters.
 - Final staging review, representative mobile performance testing and production rollout acceptance.
+
+### Swiss Standard German and dashboard deployment
+
+- 262 local HTTP assertions passed for all three language editions and legacy URLs.
+- 54 integration assertions passed, including German Mailchimp preference, double opt-in request, Swiss locale and unsupported-language fallback.
+- Dashboard migration rehearsed against a restored local database: all 42 core pages staged without changing published content, modified drafts rejected, and original page IDs/slugs retained after publication. Anonymous requests and malformed language bundles rejected; uploaded HTML sanitized.
+- PHP syntax checks passed on PHP 8.3; formatting targets PHP 8.1. Plugin JavaScript syntax passed.
+- German homepage visually checked at 390px. Original article copy stays in English until its editorial translation is approved.

@@ -528,6 +528,42 @@ try {
         ),
         "signup response never echoes email",
     );
+    $signup->set_param("language", "de");
+    $requests = [];
+    $r = vp_subscribe($signup);
+    $body = json_decode($requests[0][1]["body"], true);
+    check(
+        $body["merge_fields"]["VLANG"] === "de" &&
+            $body["status"] === "pending",
+        "German subscribers retain their language and double opt-in",
+    );
+    check(
+        str_contains($r->get_data()["message"], "Bestätigungs-E-Mail"),
+        "German subscription response is localized",
+    );
+    check(
+        pll_get_post_language(
+            (int) get_option("valon_pages")["de"]["home"],
+            "locale",
+        ) === "de_CH",
+        "German edition uses Swiss Standard German locale",
+    );
+    check(
+        preg_match(
+            '/value="de"\s+selected=/',
+            vp_newsletter_form("qa", "de"),
+        ) && !str_contains(vp_newsletter_form("qa", "de"), "ß"),
+        "German form selects German and uses Swiss spelling",
+    );
+    $signup->set_param("language", "xx");
+    $requests = [];
+    vp_subscribe($signup);
+    check(
+        json_decode($requests[0][1]["body"], true)["merge_fields"]["VLANG"] ===
+            "en",
+        "Unsupported signup language safely falls back to English",
+    );
+    $signup->set_param("language", "sq");
     $scenario = "existing";
     $requests = [];
     vp_subscribe($signup);

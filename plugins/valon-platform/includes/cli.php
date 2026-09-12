@@ -1,15 +1,31 @@
 <?php
 defined("ABSPATH") || exit();
-final class VP_CLI
+final class VP_Migration
 {
+    public array $messages = [];
+    public function __construct(private array $bundle = []) {}
+    private function fail($message)
+    {
+        throw new RuntimeException($message);
+    }
+    private function report($message)
+    {
+        $this->messages[] = $message;
+        if (defined("WP_CLI") && WP_CLI) {
+            WP_CLI::line($message);
+        }
+    }
     private function content($name, $assoc = [])
     {
+        if (isset($this->bundle[$name])) {
+            return $this->bundle[$name];
+        }
         $dir = $assoc["content-dir"] ?? vp_secret("VP_EDITORIAL_DIR");
         if (!$dir && wp_get_environment_type() === "local") {
             $dir = WP_CONTENT_DIR . "/themes/valon/review/content";
         }
         if (!$dir || !is_readable(rtrim($dir, "/") . "/" . $name . ".json")) {
-            WP_CLI::error(
+            $this->fail(
                 "Provide --content-dir pointing to the private editorial bundle, stored outside the public web root.",
             );
         }
@@ -18,16 +34,16 @@ final class VP_CLI
             true,
         );
         if (!is_array($rows)) {
-            WP_CLI::error("Invalid editorial manifest.");
+            $this->fail("Invalid editorial manifest.");
         }
         return $rows;
     }
 
-    /** Create the English/Albanian language structure. */
+    /** Create English, Albanian and Swiss Standard German languages. */
     function languages()
     {
         if (!function_exists("PLL")) {
-            WP_CLI::error("Install and activate Polylang first.");
+            $this->fail("Install and activate Polylang first.");
         }
         foreach (
             [
@@ -43,13 +59,19 @@ final class VP_CLI
                     "locale" => "sq",
                     "flag" => "al",
                 ],
+                [
+                    "slug" => "de",
+                    "name" => "Deutsch",
+                    "locale" => "de_CH",
+                    "flag" => "ch",
+                ],
             ]
             as $args
         ) {
             if (!PLL()->model->get_language($args["slug"])) {
                 $result = PLL()->model->add_language($args);
                 if (is_wp_error($result)) {
-                    WP_CLI::error($result->get_error_message());
+                    $this->fail($result->get_error_message());
                 }
             }
         }
@@ -61,20 +83,18 @@ final class VP_CLI
         $options["redirect_lang"] = 1;
         $options["browser"] = 0;
         update_option("polylang", $options);
-        WP_CLI::success(
-            "Languages ready. Run scaffold in a fresh CLI process.",
-        );
+        $this->report("Languages ready. Run scaffold in a fresh CLI process.");
     }
     /** Import the public archive into LOCAL preview only. Usage: wp valon import_public <directory> */
     function import_public($args)
     {
         if (wp_get_environment_type() !== "local") {
-            WP_CLI::error(
+            $this->fail(
                 "Public import is restricted to local previews. Production retains its database.",
             );
         }
         if (empty($args[0])) {
-            WP_CLI::error("Source directory required.");
+            $this->fail("Source directory required.");
         }
         $GLOBALS["vp_archive_import"] = true;
         $count = 0;
@@ -84,7 +104,7 @@ final class VP_CLI
                 true,
             );
             if (!is_array($data)) {
-                WP_CLI::error("Invalid archive.");
+                $this->fail("Invalid archive.");
             }
             foreach ($data as $source) {
                 $found = get_posts([
@@ -126,7 +146,7 @@ final class VP_CLI
                     true,
                 );
                 if (is_wp_error($id)) {
-                    WP_CLI::error($id->get_error_message());
+                    $this->fail($id->get_error_message());
                 }
                 pll_set_post_language($id, "en");
                 $media = $source["_embedded"]["wp:featuredmedia"][0] ?? [];
@@ -140,7 +160,7 @@ final class VP_CLI
                 $count++;
             }
         }
-        WP_CLI::success(
+        $this->report(
             "Imported " .
                 $count .
                 " original archive records; slugs and publication dates preserved.",
@@ -150,11 +170,11 @@ final class VP_CLI
     function scaffold($args, $assoc)
     {
         if (!function_exists("pll_set_post_language")) {
-            WP_CLI::error("Polylang is required.");
+            $this->fail("Polylang is required.");
         }
         $preview = isset($assoc["preview"]);
         if ($preview && wp_get_environment_type() !== "local") {
-            WP_CLI::error("Preview publication is local-only.");
+            $this->fail("Preview publication is local-only.");
         }
         $GLOBALS["vp_preview_pages"] = $preview;
         $manifest = $this->content("pages", $assoc);
@@ -168,6 +188,7 @@ final class VP_CLI
                         "post_type" => "page",
                         "post_status" => "any",
                         "name" => $item["slug"],
+                        "suppress_filters" => false,
                         "lang" => $lang,
                         "numberposts" => 1,
                     ]);
@@ -191,7 +212,9 @@ final class VP_CLI
                 $content = $item["content"];
                 $post = [
                     "post_type" => "page",
-                    "post_name" => $item["slug"],
+                    "post_name" => $published
+                        ? "valon-review-" . $published
+                        : $item["slug"],
                     "post_title" => $item["title"],
                     "post_content" => $content,
                     "post_status" => $preview ? "publish" : "draft",
@@ -201,7 +224,7 @@ final class VP_CLI
                 }
                 $id = wp_insert_post(wp_slash($post), true);
                 if (is_wp_error($id)) {
-                    WP_CLI::error($id->get_error_message());
+                    $this->fail($id->get_error_message());
                 }
                 update_post_meta($id, "_valon_route", $route);
                 update_post_meta($id, "_vp_requires_review", "1");
@@ -233,25 +256,27 @@ final class VP_CLI
             update_option("vp_editorial_owner", 1);
             wp_update_user(["ID" => 1, "display_name" => "Valon Asani"]);
         }
-        foreach (valon_topics() as $slug => $labels) {
+        foreach (vp_migration_topics() as $slug => $labels) {
             $translation = [];
-            foreach (["en" => 0, "sq" => 1] as $lang => $n) {
-                $s = $slug . ($lang === "sq" ? "-sq" : "");
+            foreach (["en", "sq", "de"] as $lang) {
+                $s = $slug . ($lang === "en" ? "" : "-" . $lang);
                 $term = get_term_by("slug", $s, "category");
                 $id = $term
                     ? $term->term_id
-                    : wp_insert_term($labels[$n], "category", ["slug" => $s])[
-                        "term_id"
-                    ];
+                    : wp_insert_term(
+                        $labels[array_search($lang, ["en", "sq", "de"], true)],
+                        "category",
+                        ["slug" => $s],
+                    )["term_id"];
                 pll_set_term_language($id, $lang);
                 $translation[$lang] = $id;
             }
             pll_save_term_translations($translation);
         }
         flush_rewrite_rules();
-        WP_CLI::success(
+        $this->report(
             $preview
-                ? "Local bilingual preview pages ready; all article translations remain drafts."
+                ? "Local multilingual preview pages ready; all article translations remain drafts."
                 : "New and replacement pages are staged as drafts. Existing published pages are unchanged.",
         );
     }
@@ -268,7 +293,7 @@ final class VP_CLI
                 "lang" => "en",
             ]);
             if (!$source) {
-                WP_CLI::warning("Missing source: " . $row["source_slug"]);
+                $this->report("Missing source: " . $row["source_slug"]);
                 continue;
             }
             $source = $source[0];
@@ -291,13 +316,13 @@ final class VP_CLI
                 true,
             );
             if (is_wp_error($id)) {
-                WP_CLI::error($id->get_error_message());
+                $this->fail($id->get_error_message());
             }
             pll_set_post_language($id, "sq");
             pll_save_post_translations(["en" => $source->ID, "sq" => $id]);
             $created++;
         }
-        WP_CLI::success(
+        $this->report(
             $created . " Albanian article drafts prepared for Valon’s review.",
         );
     }
@@ -313,6 +338,7 @@ final class VP_CLI
                 "post_status" => "publish",
                 "name" => $row["slug"],
                 "lang" => "en",
+                "suppress_filters" => false,
                 "numberposts" => 1,
             ]);
             if (!$source) {
@@ -321,7 +347,7 @@ final class VP_CLI
             $post = $source[0];
             $term = get_term_by("slug", $row["topic"], "category");
             if (!$term) {
-                WP_CLI::error("Run scaffold to create topic terms first.");
+                $this->fail("Run scaffold to create topic terms first.");
             }
             if (isset($assoc["apply"])) {
                 wp_set_post_categories($post->ID, [$term->term_id]);
@@ -338,7 +364,7 @@ final class VP_CLI
             }
             $count++;
         }
-        WP_CLI::success(
+        $this->report(
             $count .
                 " articles " .
                 (isset($assoc["apply"])
@@ -351,7 +377,7 @@ final class VP_CLI
     {
         $owner = (int) get_option("vp_editorial_owner");
         if (!$owner) {
-            WP_CLI::error(
+            $this->fail(
                 "Set vp_editorial_owner to Valon’s existing admin user ID first.",
             );
         }
@@ -365,6 +391,12 @@ final class VP_CLI
         $eligible = [];
         foreach ($pages as $p) {
             if (
+                isset($assoc["only"]) &&
+                !in_array($p->ID, $assoc["only"], true)
+            ) {
+                continue;
+            }
+            if (
                 (int) get_post_meta($p->ID, "_vp_approved_by", true) !==
                     $owner ||
                 get_post_meta($p->ID, "_vp_approved_hash", true) !==
@@ -376,9 +408,9 @@ final class VP_CLI
         }
         if (!isset($assoc["apply"])) {
             foreach ($eligible as $p) {
-                WP_CLI::line($p->ID . " " . $p->post_title);
+                $this->report($p->ID . " " . $p->post_title);
             }
-            WP_CLI::success(
+            $this->report(
                 count($eligible) .
                     " owner-approved pages ready. Pass --apply after backup.",
             );
@@ -412,7 +444,7 @@ final class VP_CLI
                 is_wp_error($result) ||
                 get_post_status($target) !== "publish"
             ) {
-                WP_CLI::error("Could not apply page " . $p->ID);
+                $this->fail("Could not apply page " . $p->ID);
             }
             update_post_meta($target, "_valon_route", $route);
             update_post_meta(
@@ -426,10 +458,13 @@ final class VP_CLI
             }
         }
         foreach ($map["en"] ?? [] as $route => $en) {
-            $sq = $map["sq"][$route] ?? 0;
-            if ($sq) {
-                pll_save_post_translations(["en" => $en, "sq" => $sq]);
+            $translations = ["en" => $en];
+            foreach ($map as $lang => $routes) {
+                if (!empty($routes[$route])) {
+                    $translations[$lang] = $routes[$route];
+                }
             }
+            pll_save_post_translations($translations);
         }
         update_option("valon_pages", $map);
         if (
@@ -440,7 +475,7 @@ final class VP_CLI
             update_option("page_on_front", $map["en"]["home"]);
         }
         flush_rewrite_rules();
-        WP_CLI::success(
+        $this->report(
             "Applied " .
                 count($eligible) .
                 " owner-approved core pages. No articles or newsletters were published.",
@@ -453,9 +488,9 @@ final class VP_CLI
         if ($args) {
             $r = VP_Social::sync($args[0], true);
             if (is_wp_error($r)) {
-                WP_CLI::error($r->get_error_message());
+                $this->fail($r->get_error_message());
             }
-            WP_CLI::success("Processed " . $r . " items.");
+            $this->report("Processed " . $r . " items.");
         } else {
             VP_Social::sync_all();
         }
@@ -466,7 +501,7 @@ final class VP_CLI
         foreach (["tiktok", "instagram", "facebook"] as $p) {
             $s = get_option("vp_status_" . $p, []);
             $c = VP_Social::config($p);
-            WP_CLI::line(
+            $this->report(
                 $p .
                     ": " .
                     ($c["token"] && $c["id"]
@@ -474,7 +509,7 @@ final class VP_CLI
                         : "Not connected"),
             );
         }
-        WP_CLI::line(
+        $this->report(
             "Next scheduled sync: " .
                 (wp_next_scheduled("vp_hourly_sync")
                     ? gmdate("c", wp_next_scheduled("vp_hourly_sync"))
@@ -482,4 +517,27 @@ final class VP_CLI
         );
     }
 }
-WP_CLI::add_command("valon", VP_CLI::class);
+function vp_migration_topics()
+{
+    return [
+        "relationships" => ["Relationships", "Marrëdhëniet", "Beziehungen"],
+        "personal-growth" => [
+            "Personal growth",
+            "Rritja personale",
+            "Persönliche Entwicklung",
+        ],
+        "business-technology" => [
+            "Business & technology",
+            "Biznesi & teknologjia",
+            "Unternehmertum & Technologie",
+        ],
+        "life-between-cultures" => [
+            "Life between cultures",
+            "Jeta mes kulturave",
+            "Leben zwischen Kulturen",
+        ],
+    ];
+}
+if (defined("WP_CLI") && WP_CLI) {
+    WP_CLI::add_command("valon", VP_Migration::class);
+}

@@ -591,7 +591,7 @@ final class VP_Social
             if (isset($item["language"])) {
                 $values["language"] = in_array(
                     $item["language"],
-                    ["sq", "en"],
+                    ["sq", "en", "de"],
                     true,
                 )
                     ? $item["language"]

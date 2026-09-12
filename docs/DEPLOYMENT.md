@@ -71,3 +71,13 @@ Record the deployed commit, release checksums, previous active theme/plugin vers
 5. Keep the failed release and sanitized logs for diagnosis.
 
 The local rehearsal uses a separate restore database. It does not prove that the existing production host is backed up or restorable.
+
+## September 2026 three-language launch
+
+Swiss Standard German uses `de_CH` / `de-CH` with `ss`, alongside English and Albanian. The `/de/` edition has its own core pages and newsletter language preference. The original English article archive remains available; unreviewed article translations remain drafts.
+
+When SSH is unavailable, install Valon Platform through WP Pusher from `valondua/valon`, repository subdirectory `plugins/valon-platform`. Tools → Valon website launch provides nonce-protected, administrator/owner-restricted language setup, draft staging and explicit publication. Staging keeps published page content intact; reviewed replacements use distinct temporary slugs so WordPress cannot rename legacy URLs. The launch accepts only known page routes and languages, sanitizes HTML and rejects changed drafts at publication.
+
+`includes/launch-copy.php` contains the core website copy authorized for public launch, including translations of the existing privacy text. It contains no article drafts, analytics exports, credentials or subscriber data. The separate private editorial bundle remains excluded. The dashboard can use this bundled copy without uploading files; a replacement JSON upload remains optional. No articles or newsletter campaigns are published by the launch action.
+
+Production backup on 2026-09-12 at 17:40 UTC: UpdraftPlus database, plugins, themes, uploads and other wp-content files, approximately 301.5 MB. The backup completed and all components passed UpdraftPlus restore preparation. A local database restore and full stage/publish rehearsal also passed; this is not a completed restore on the production host. PHP 8.3.33 is compatible with the release. WP Pusher tracks main with automatic theme deployment, so merge only at the planned activation point.

@@ -39,6 +39,23 @@ $q = new WP_Query([
     "paged" => $paged,
     "lang" => valon_lang(),
 ]);
+if (!$q->have_posts() && valon_lang() !== "en") {
+    $q = new WP_Query([
+        "post_type" => "post",
+        "post_status" => "publish",
+        "posts_per_page" => 12,
+        "paged" => $paged,
+        "lang" => "en",
+    ]);
+    echo '<p class="archive-note">' .
+        esc_html(
+            valon_text(
+                "From the English archive. Translations are being prepared.",
+                "Nga arkivi në anglisht. Përkthimet janë tue u përgatitë.",
+            ),
+        ) .
+        "</p>";
+}
 ?><div class="card-grid"><?php while ($q->have_posts()) {
     $q->the_post();
     get_template_part("template-parts/card");

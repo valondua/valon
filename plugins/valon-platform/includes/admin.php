@@ -59,7 +59,7 @@ function vp_admin_page()
         esc_url(admin_url("admin-post.php")) .
         '"><input type="hidden" name="action" value="vp_add_social">';
     wp_nonce_field("vp_add_social");
-    echo '<p><label>Platform <select name="platform"><option value="linkedin">LinkedIn</option><option value="x">X</option><option value="tiktok">TikTok</option></select></label></p><p><label>Public post URL <input type="url" name="url" required class="regular-text"></label></p><p><label>Caption in your own words<br><textarea name="caption" rows="3" cols="70"></textarea></label></p><p><label>Original publication date <input type="date" name="published_at" required></label></p><p><label>Language <select name="language"><option value="sq">Shqip</option><option value="en">English</option></select></label></p><p><label><input type="checkbox" name="owned" value="1" required> I confirm this is Valon’s own public post.</label></p>';
+    echo '<p><label>Platform <select name="platform"><option value="linkedin">LinkedIn</option><option value="x">X</option><option value="tiktok">TikTok</option></select></label></p><p><label>Public post URL <input type="url" name="url" required class="regular-text"></label></p><p><label>Caption in your own words<br><textarea name="caption" rows="3" cols="70"></textarea></label></p><p><label>Original publication date <input type="date" name="published_at" required></label></p><p><label>Language <select name="language"><option value="sq">Shqip</option><option value="en">English</option><option value="de">Deutsch</option></select></label></p><p><label><input type="checkbox" name="owned" value="1" required> I confirm this is Valon’s own public post.</label></p>';
     submit_button("Add selected post");
     echo "</form>";
     echo "<h2>Awaiting your review</h2><p>Approvals are restricted to the configured editorial owner. Approving unlocks the normal WordPress publish action; it does not publish automatically.</p>";
@@ -191,6 +191,7 @@ function vp_social_metabox($post)
             "und" => "Original language (unclassified)",
             "sq" => "Shqip",
             "en" => "English",
+            "de" => "Deutsch",
         ]
         as $v => $l
     ) {
@@ -243,7 +244,7 @@ add_action("save_post_valon_social", function ($id) {
     update_post_meta(
         $id,
         "_vp_language",
-        in_array($lang, ["en", "sq"], true) ? $lang : "und",
+        in_array($lang, ["en", "sq", "de"], true) ? $lang : "und",
     );
     $article = absint($_POST["vp_article_id"] ?? 0);
     if (!$article || get_post_type($article) === "post") {
@@ -281,7 +282,7 @@ function vp_make_draft($id)
         $lang = get_post_meta($id, "_vp_language", true);
         if (
             function_exists("pll_set_post_language") &&
-            in_array($lang, ["en", "sq"], true)
+            in_array($lang, ["en", "sq", "de"], true)
         ) {
             pll_set_post_language($post, $lang);
         }

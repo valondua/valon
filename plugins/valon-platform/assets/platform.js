@@ -2,6 +2,44 @@
   "use strict";
   const cfg = window.valonPlatform;
   if (!cfg) return;
+  const messages = {
+    en: {
+      sending: "Sending…",
+      retry: "Please try again.",
+      offline: "Couldn’t connect. Please try again.",
+      archive: "Archive video",
+      close: "Close",
+      social: "Social post",
+      notice: "This post loads from its social platform.",
+      original: "View original ↗",
+      unavailable: "The post could not load.",
+    },
+    sq: {
+      sending: "Tue dërgu…",
+      retry: "Provo prapë.",
+      offline: "S’u lidhëm dot. Provo prapë.",
+      archive: "Video e arkivit",
+      close: "Mbyll",
+      social: "Postim social",
+      notice: "Ky postim ngarkohet nga platforma sociale.",
+      original: "Shiko origjinalin ↗",
+      unavailable: "Postimi s’mund të ngarkohet.",
+    },
+    de: {
+      sending: "Wird gesendet…",
+      retry: "Bitte versuche es nochmals.",
+      offline: "Keine Verbindung. Bitte versuche es nochmals.",
+      archive: "Video aus dem Archiv",
+      close: "Schliessen",
+      social: "Social-Media-Beitrag",
+      notice: "Dieser Beitrag wird von der jeweiligen Plattform geladen.",
+      original: "Original ansehen ↗",
+      unavailable: "Der Beitrag konnte nicht geladen werden.",
+    },
+  };
+  const pageLanguage = document.documentElement.lang.split("-")[0];
+  const message = (key, language = pageLanguage) =>
+    (messages[language] || messages.en)[key];
   const track = (name, params = {}) => {
     // The consent manager may dispatch this event after consent. No new GA tag is installed.
     if (
@@ -44,8 +82,7 @@
         source: stored,
       };
       button.disabled = true;
-      status.textContent =
-        payload.language === "sq" ? "Tue dërgu…" : "Sending…";
+      status.textContent = message("sending", payload.language);
       try {
         const r = await fetch(cfg.subscribe, {
           method: "POST",
@@ -55,8 +92,7 @@
         });
         const result = await r.json();
         status.textContent =
-          result.message ||
-          (payload.language === "sq" ? "Provo prapë." : "Please try again.");
+          result.message || message("retry", payload.language);
         if (r.ok) {
           track("newsletter_submit", {
             language: payload.language,
@@ -66,10 +102,7 @@
           form.reset();
         }
       } catch {
-        status.textContent =
-          payload.language === "sq"
-            ? "S’u lidhëm dot. Provo prapë."
-            : "Couldn’t connect. Please try again.";
+        status.textContent = message("offline", payload.language);
       } finally {
         button.disabled = false;
       }
@@ -81,9 +114,7 @@
     if (legacy) {
       const iframe = document.createElement("iframe");
       iframe.src = legacy.dataset.legacyEmbed;
-      iframe.title = document.documentElement.lang.startsWith("sq")
-        ? "Video e arkivit"
-        : "Archive video";
+      iframe.title = message("archive");
       iframe.allow = "fullscreen";
       iframe.referrerPolicy = "strict-origin-when-cross-origin";
       legacy.replaceWith(iframe);
@@ -99,24 +130,19 @@
     if (!dialog) {
       dialog = document.createElement("dialog");
       dialog.className = "embed-dialog";
-      dialog.setAttribute("aria-label", "Social post");
+      dialog.setAttribute("aria-label", message("social"));
       document.body.append(dialog);
     }
     dialog.replaceChildren();
     const close = document.createElement("button");
     close.className = "embed-close";
     close.textContent = "×";
-    close.setAttribute(
-      "aria-label",
-      document.documentElement.lang.startsWith("sq") ? "Mbyll" : "Close",
-    );
+    close.setAttribute("aria-label", message("close"));
     close.onclick = () => dialog.close();
     dialog.append(close);
     const notice = document.createElement("p");
     notice.className = "embed-notice";
-    notice.textContent = document.documentElement.lang.startsWith("sq")
-      ? "Ky postim ngarkohet nga platforma sociale."
-      : "This post loads from its social platform.";
+    notice.textContent = message("notice");
     dialog.append(notice);
     const mount = document.createElement("div");
     mount.className = "embed-mount";
@@ -141,9 +167,7 @@
       if (!dialog.open) return;
       const link = document.createElement("a");
       link.href = data.source;
-      link.textContent = document.documentElement.lang.startsWith("sq")
-        ? "Shiko origjinalin ↗"
-        : "View original ↗";
+      link.textContent = message("original");
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       if (data.iframe) {
@@ -169,9 +193,7 @@
       mount.append(link);
       track("social_post_open", { platform: data.platform });
     } catch {
-      mount.textContent = document.documentElement.lang.startsWith("sq")
-        ? "Postimi s’mund të ngarkohet."
-        : "The post could not load.";
+      mount.textContent = message("unavailable");
       if (fallback) mount.append(fallback);
     }
   });

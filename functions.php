@@ -7,9 +7,15 @@ function valon_lang()
             "en")
         : "en";
 }
-function valon_text($en, $sq)
+function valon_text($en, $sq, $language = "")
 {
-    return valon_lang() === "sq" ? $sq : $en;
+    $language = $language ?: valon_lang();
+    if ($language === "de") {
+        static $de;
+        $de ??= require get_template_directory() . "/assets/strings-de.php";
+        return $de[$en] ?? $en;
+    }
+    return $language === "sq" ? $sq : $en;
 }
 function valon_url($route = "home", $lang = "")
 {
@@ -22,7 +28,7 @@ function valon_url($route = "home", $lang = "")
         return get_permalink($pages[$lang][$route]);
     }
     return home_url(
-        ($lang === "sq" ? "/sq" : "") .
+        ($lang === "en" ? "" : "/" . $lang) .
             ($route === "home" ? "/" : "/" . $route . "/"),
     );
 }
@@ -100,7 +106,7 @@ function valon_nav()
 }
 function valon_languages()
 {
-    foreach (["en" => "EN", "sq" => "SQ"] as $code => $label) {
+    foreach (["en" => "EN", "sq" => "SQ", "de" => "DE"] as $code => $label) {
         $target =
             function_exists("pll_get_post") && is_singular()
                 ? pll_get_post(get_queried_object_id(), $code)
@@ -114,7 +120,7 @@ function valon_languages()
             '" lang="' .
             $code .
             '" aria-label="' .
-            ($code === "en" ? "English" : "Shqip") .
+            ["en" => "English", "sq" => "Shqip", "de" => "Deutsch"][$code] .
             '"' .
             (valon_lang() === $code ? ' aria-current="true"' : "") .
             ">" .
@@ -155,7 +161,7 @@ function valon_topic_url($slug)
 {
     $term = get_term_by(
         "slug",
-        $slug . (valon_lang() === "sq" ? "-sq" : ""),
+        $slug . (valon_lang() === "en" ? "" : "-" . valon_lang()),
         "category",
     );
     return $term ? get_term_link($term) : valon_url("writing");
@@ -188,7 +194,7 @@ function valon_posts($limit = 3, $featured = false)
         unset($args["meta_key"], $args["meta_value"]);
         $q = new WP_Query($args);
     }
-    if (!$q->have_posts() && valon_lang() === "sq") {
+    if (!$q->have_posts() && valon_lang() !== "en") {
         $args["lang"] = "en";
         if ($featured) {
             $args["meta_key"] = "_valon_featured";
@@ -200,7 +206,14 @@ function valon_posts($limit = 3, $featured = false)
             $q = new WP_Query($args);
         }
         if ($q->have_posts()) {
-            echo '<p class="muted archive-language-note">Prej arkivit, në anglisht. Shkrimet shqip po përgatiten.</p>';
+            echo '<p class="muted archive-language-note">' .
+                esc_html(
+                    valon_text(
+                        "From the English archive. Translations are being prepared.",
+                        "Prej arkivit, në anglisht. Shkrimet shqip po përgatiten.",
+                    ),
+                ) .
+                "</p>";
         }
     }
     if (!$q->have_posts()) {

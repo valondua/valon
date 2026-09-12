@@ -35,18 +35,19 @@ def check(ok,name):
  results.append({'check':name,'passed':bool(ok)})
  if not ok:failures.append(name)
 manifest=json.loads(Path('review/content/pages.json').read_text())
-paths=['/','/sq/']+[('/' if lang=='en' else '/sq/')+p['slug']+'/' for route,langs in manifest.items() if route!='home' for lang,p in langs.items()]
+homes=['/','/sq/','/de/']
+paths=homes+[('/' if lang=='en' else '/'+lang+'/')+p['slug']+'/' for route,langs in manifest.items() if route!='home' for lang,p in langs.items()]
 for path in paths:
  status,url,p,body=get(path);check(status==200,'Core route '+path);check(p.h1==1,'Single H1 '+path);check(len(p.ids)==len(set(p.ids)),'Unique DOM IDs '+path)
- if path in ['/','/sq/','/about/','/sq/rreth-meje/']:
+ if path in homes+['/about/','/sq/rreth-meje/','/de/ueber-mich/']:
   check(p.canonical==BASE+path if INDEXABLE else (p.canonical==BASE+path or (not p.canonical and 'noindex' in p.meta.get('robots',''))),'Canonical output '+path)
-  check(len(p.alternates)>=2 and all(u.startswith(BASE+'/') for u in p.alternates.values()),'Real language alternates '+path)
+  check(len(p.alternates)>=3 and 'de' in p.alternates and all(u.startswith(BASE+'/') for u in p.alternates.values()),'Real language alternates '+path)
   check(('noindex' not in p.meta.get('robots','')) if INDEXABLE else ('noindex' in p.meta.get('robots','')),'Expected indexability '+path)
   check(bool(p.meta.get('description')),'Description '+path)
   graph=[n for data in p.schema for n in data.get('@graph',[])];people=[n for n in graph if n.get('@type')=='Person']
   check(len(people)==1 and people[0].get('name')=='Valon Asani','One consistent Person identity '+path)
-  if 'about' in path or 'rreth-meje' in path:check(any('ProfilePage' in n.get('@type',[]) for n in graph),'ProfilePage '+path)
- if path in ['/','/sq/']:check(p.iframes==0,'Players deferred '+path)
+  if path in ['/about/','/sq/rreth-meje/','/de/ueber-mich/']:check(any('ProfilePage' in n.get('@type',[]) for n in graph),'ProfilePage '+path)
+ if path in homes:check(p.iframes==0,'Players deferred '+path)
 source=json.loads(Path('.local/source/posts.json').read_text())+json.loads(Path('.local/source/pages.json').read_text())
 legacy_paths=list(dict.fromkeys(urlparse(p['link']).path for p in source))
 def verify(path):
@@ -55,7 +56,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
  for path,status,url in pool.map(verify,legacy_paths):check(status==200 and url==BASE+path,'Preserved legacy URL '+path)
 status,url,p,body=get('/?page_id=1233');check(status==200 and url==BASE+'/now/','Broken legacy Now redirects to /now/')
 status,url,p,body=get('/not-a-real-valon-page/');check(status==404 and p.h1==1,'Useful 404 retains 404 HTTP status')
-for path in ['/writing/page/2/','/category/relationships/','/category/personal-growth/','/category/business-technology/','/category/life-between-cultures/','/sq/category/relationships-sq/']:
+for path in ['/writing/page/2/','/category/relationships/','/category/personal-growth/','/category/business-technology/','/category/life-between-cultures/','/sq/category/relationships-sq/','/de/category/relationships-de/']:
  check(get(path)[0]==200,'Archive route '+path)
 
 for path in ['/wp-content/themes/valon/review/content/translations.json','/wp-content/themes/valon/.env.example','/wp-content/themes/valon/tools/qa.php','/wp-content/plugins/valon-platform/content/translations.json']:
