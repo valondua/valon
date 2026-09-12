@@ -25,4 +25,18 @@
   search?.addEventListener("toggle", () => {
     if (search.open) search.querySelector('input[type="search"]').focus();
   });
+  document.querySelectorAll("[data-youtube]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.youtube;
+      if (!/^[A-Za-z0-9_-]{11}$/.test(id)) return;
+      const frame = document.createElement("iframe");
+      frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      frame.title = button.getAttribute("aria-label");
+      frame.allow = "autoplay; fullscreen; picture-in-picture";
+      frame.allowFullscreen = true;
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      button.replaceWith(frame);
+      frame.focus();
+    });
+  });
 })();
