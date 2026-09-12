@@ -73,6 +73,7 @@ foreach ($oldmap as $routes) {
     }
 }
 $articles = wp_count_posts("post")->publish;
+update_post_meta($oldmap["en"]["contact"], "_wp_page_template", "retired-contact-template.php");
 vp_launch_run("stage", vp_launch_validate($bundle));
 foreach ($before as $id => $state) {
     $p = get_post($id);
@@ -102,6 +103,10 @@ try {
 }
 wp_update_post(wp_slash(["ID" => $first->ID, "post_content" => $content]));
 vp_launch_run("publish");
+migration_check(
+    get_post_meta($oldmap["en"]["contact"], "_wp_page_template", true) === "default",
+    "Legacy page templates are reset to the route-driven default",
+);
 migration_check(
     get_option("valon_pages") === $oldmap,
     "Publication preserves existing page IDs and language relationships",

@@ -437,6 +437,9 @@ final class VP_Migration
                     "post_title" => $p->post_title,
                     "post_content" => $p->post_content,
                     "post_status" => "publish",
+                    // Legacy pages may reference templates removed by an earlier theme.
+                    // The new theme resolves core layouts from _valon_route.
+                    "page_template" => "default",
                 ]),
                 true,
             );
