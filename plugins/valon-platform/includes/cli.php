@@ -1,0 +1,554 @@
+<?php
+defined("ABSPATH") || exit();
+final class VP_Migration
+{
+    public array $messages = [];
+    public function __construct(private array $bundle = []) {}
+    private function fail($message)
+    {
+        throw new RuntimeException($message);
+    }
+    private function report($message)
+    {
+        $this->messages[] = $message;
+        if (defined("WP_CLI") && WP_CLI) {
+            WP_CLI::line($message);
+        }
+    }
+    private function content($name, $assoc = [])
+    {
+        if (isset($this->bundle[$name])) {
+            return $this->bundle[$name];
+        }
+        $dir = $assoc["content-dir"] ?? vp_secret("VP_EDITORIAL_DIR");
+        if (!$dir && wp_get_environment_type() === "local") {
+            $dir = WP_CONTENT_DIR . "/themes/valon/review/content";
+        }
+        if (!$dir || !is_readable(rtrim($dir, "/") . "/" . $name . ".json")) {
+            $this->fail(
+                "Provide --content-dir pointing to the private editorial bundle, stored outside the public web root.",
+            );
+        }
+        $rows = json_decode(
+            file_get_contents(rtrim($dir, "/") . "/" . $name . ".json"),
+            true,
+        );
+        if (!is_array($rows)) {
+            $this->fail("Invalid editorial manifest.");
+        }
+        return $rows;
+    }
+
+    /** Create English, Albanian and Swiss Standard German languages. */
+    function languages()
+    {
+        if (!function_exists("PLL")) {
+            $this->fail("Install and activate Polylang first.");
+        }
+        foreach (
+            [
+                [
+                    "slug" => "en",
+                    "name" => "English",
+                    "locale" => "en_US",
+                    "flag" => "gb",
+                ],
+                [
+                    "slug" => "sq",
+                    "name" => "Shqip",
+                    "locale" => "sq",
+                    "flag" => "al",
+                ],
+                [
+                    "slug" => "de",
+                    "name" => "Deutsch",
+                    "locale" => "de_CH",
+                    "flag" => "ch",
+                ],
+            ]
+            as $args
+        ) {
+            if (!PLL()->model->get_language($args["slug"])) {
+                $result = PLL()->model->add_language($args);
+                if (is_wp_error($result)) {
+                    $this->fail($result->get_error_message());
+                }
+            }
+        }
+        $options = get_option("polylang", []);
+        $options["default_lang"] = "en";
+        $options["hide_default"] = 1;
+        $options["force_lang"] = 1;
+        $options["rewrite"] = 1;
+        $options["redirect_lang"] = 1;
+        $options["browser"] = 0;
+        update_option("polylang", $options);
+        $this->report("Languages ready. Run scaffold in a fresh CLI process.");
+    }
+    /** Import the public archive into LOCAL preview only. Usage: wp valon import_public <directory> */
+    function import_public($args)
+    {
+        if (wp_get_environment_type() !== "local") {
+            $this->fail(
+                "Public import is restricted to local previews. Production retains its database.",
+            );
+        }
+        if (empty($args[0])) {
+            $this->fail("Source directory required.");
+        }
+        $GLOBALS["vp_archive_import"] = true;
+        $count = 0;
+        foreach (["posts" => "post", "pages" => "page"] as $file => $type) {
+            $data = json_decode(
+                file_get_contents(rtrim($args[0], "/") . "/" . $file . ".json"),
+                true,
+            );
+            if (!is_array($data)) {
+                $this->fail("Invalid archive.");
+            }
+            foreach ($data as $source) {
+                $found = get_posts([
+                    "post_type" => $type,
+                    "post_status" => "any",
+                    "numberposts" => 1,
+                    "meta_key" => "_valon_legacy_id",
+                    "meta_value" => $source["id"],
+                    "fields" => "ids",
+                    "suppress_filters" => true,
+                ]);
+                if ($found) {
+                    continue;
+                }
+                $content = $source["content"]["rendered"];
+                $id = wp_insert_post(
+                    wp_slash([
+                        "post_type" => $type,
+                        "post_status" => "publish",
+                        "post_name" => $source["slug"],
+                        "post_title" => html_entity_decode(
+                            $source["title"]["rendered"],
+                            ENT_QUOTES,
+                            "UTF-8",
+                        ),
+                        "post_content" => $content,
+                        "post_excerpt" => wp_strip_all_tags(
+                            $source["excerpt"]["rendered"] ?? "",
+                        ),
+                        "post_date" => $source["date"],
+                        "post_date_gmt" => $source["date_gmt"],
+                        "post_modified" => $source["modified"],
+                        "post_modified_gmt" => $source["modified_gmt"],
+                        "meta_input" => [
+                            "_valon_legacy_id" => $source["id"],
+                            "_valon_legacy_url" => $source["link"],
+                        ],
+                    ]),
+                    true,
+                );
+                if (is_wp_error($id)) {
+                    $this->fail($id->get_error_message());
+                }
+                pll_set_post_language($id, "en");
+                $media = $source["_embedded"]["wp:featuredmedia"][0] ?? [];
+                if (!empty($media["source_url"])) {
+                    update_post_meta(
+                        $id,
+                        "_valon_legacy_image",
+                        esc_url_raw($media["source_url"]),
+                    );
+                }
+                $count++;
+            }
+        }
+        $this->report(
+            "Imported " .
+                $count .
+                " original archive records; slugs and publication dates preserved.",
+        );
+    }
+    /** Stage new pages as drafts. --preview publishes core PAGES only on localhost. */
+    function scaffold($args, $assoc)
+    {
+        if (!function_exists("pll_set_post_language")) {
+            $this->fail("Polylang is required.");
+        }
+        $preview = isset($assoc["preview"]);
+        if ($preview && wp_get_environment_type() !== "local") {
+            $this->fail("Preview publication is local-only.");
+        }
+        $GLOBALS["vp_preview_pages"] = $preview;
+        $manifest = $this->content("pages", $assoc);
+        $map = get_option("valon_pages", []);
+        foreach ($manifest as $route => $langs) {
+            $translations = [];
+            foreach ($langs as $lang => $item) {
+                $known = $map[$lang][$route] ?? 0;
+                if (!$known) {
+                    $existing = get_posts([
+                        "post_type" => "page",
+                        "post_status" => "any",
+                        "name" => $item["slug"],
+                        "suppress_filters" => false,
+                        "lang" => $lang,
+                        "numberposts" => 1,
+                    ]);
+                    $known = $existing ? $existing[0]->ID : 0;
+                }
+                if (
+                    $known &&
+                    !$preview &&
+                    get_post_status($known) === "publish"
+                ) {
+                    // Preserve the live page; proposed replacement is a separate review draft.
+                    $published = $known;
+                    $known = (int) get_post_meta(
+                        $published,
+                        "_vp_replacement_draft",
+                        true,
+                    );
+                } else {
+                    $published = 0;
+                }
+                $content = $item["content"];
+                $post = [
+                    "post_type" => "page",
+                    "post_name" => $published
+                        ? "valon-review-" . $published
+                        : $item["slug"],
+                    "post_title" => $item["title"],
+                    "post_content" => $content,
+                    "post_status" => $preview ? "publish" : "draft",
+                ];
+                if ($known) {
+                    $post["ID"] = $known;
+                }
+                $id = wp_insert_post(wp_slash($post), true);
+                if (is_wp_error($id)) {
+                    $this->fail($id->get_error_message());
+                }
+                update_post_meta($id, "_valon_route", $route);
+                update_post_meta($id, "_vp_requires_review", "1");
+                update_post_meta(
+                    $id,
+                    "_yoast_wpseo_metadesc",
+                    $item["description"],
+                );
+                if ($published) {
+                    update_post_meta($published, "_vp_replacement_draft", $id);
+                    update_post_meta($id, "_vp_replaces", $published);
+                    $map[$lang][$route] = $published;
+                } else {
+                    $map[$lang][$route] = $id;
+                }
+                pll_set_post_language($id, $lang);
+                $translations[$lang] = $id;
+            }
+            pll_save_post_translations($translations);
+        }
+        update_option("valon_pages", $map);
+        if ($preview) {
+            update_option("show_on_front", "page");
+            update_option("page_on_front", $map["en"]["home"]);
+            update_option("blogname", "Valon Asani");
+            update_option("blogdescription", "Ideas for a life of your own.");
+            update_option("blog_public", 0);
+            update_option("permalink_structure", "/%postname%/");
+            update_option("vp_editorial_owner", 1);
+            wp_update_user(["ID" => 1, "display_name" => "Valon Asani"]);
+        }
+        foreach (vp_migration_topics() as $slug => $labels) {
+            $translation = [];
+            foreach (["en", "sq", "de"] as $lang) {
+                $s = $slug . ($lang === "en" ? "" : "-" . $lang);
+                $term = get_term_by("slug", $s, "category");
+                $id = $term
+                    ? $term->term_id
+                    : wp_insert_term(
+                        $labels[array_search($lang, ["en", "sq", "de"], true)],
+                        "category",
+                        ["slug" => $s],
+                    )["term_id"];
+                pll_set_term_language($id, $lang);
+                $translation[$lang] = $id;
+            }
+            pll_save_term_translations($translation);
+        }
+        flush_rewrite_rules();
+        $this->report(
+            $preview
+                ? "Local multilingual preview pages ready; all article translations remain drafts."
+                : "New and replacement pages are staged as drafts. Existing published pages are unchanged.",
+        );
+    }
+    /** Create eight reviewed-source translation drafts, never publish. */
+    function translations($args, $assoc)
+    {
+        $rows = $this->content("translations", $assoc);
+        $created = 0;
+        foreach ($rows as $row) {
+            $source = get_posts([
+                "post_type" => "post",
+                "name" => $row["source_slug"],
+                "numberposts" => 1,
+                "lang" => "en",
+            ]);
+            if (!$source) {
+                $this->report("Missing source: " . $row["source_slug"]);
+                continue;
+            }
+            $source = $source[0];
+            if (pll_get_post($source->ID, "sq")) {
+                continue;
+            }
+            $id = wp_insert_post(
+                wp_slash([
+                    "post_type" => "post",
+                    "post_status" => "draft",
+                    "post_title" => $row["title"],
+                    "post_name" => $row["slug"],
+                    "post_content" => $row["content"],
+                    "meta_input" => [
+                        "_vp_requires_review" => "1",
+                        "_vp_source_article" => $source->ID,
+                        "_vp_editorial_note" => $row["review_note"],
+                    ],
+                ]),
+                true,
+            );
+            if (is_wp_error($id)) {
+                $this->fail($id->get_error_message());
+            }
+            pll_set_post_language($id, "sq");
+            pll_save_post_translations(["en" => $source->ID, "sq" => $id]);
+            $created++;
+        }
+        $this->report(
+            $created . " Albanian article drafts prepared for Valon’s review.",
+        );
+    }
+
+    /** Apply the reviewed topic map; preserves content, slugs and dates. Default is dry run. */
+    function topics($args, $assoc)
+    {
+        $rows = $this->content("topics", $assoc);
+        $count = 0;
+        foreach ($rows as $row) {
+            $source = get_posts([
+                "post_type" => "post",
+                "post_status" => "publish",
+                "name" => $row["slug"],
+                "lang" => "en",
+                "suppress_filters" => false,
+                "numberposts" => 1,
+            ]);
+            if (!$source) {
+                continue;
+            }
+            $post = $source[0];
+            $term = get_term_by("slug", $row["topic"], "category");
+            if (!$term) {
+                $this->fail("Run scaffold to create topic terms first.");
+            }
+            if (isset($assoc["apply"])) {
+                wp_set_post_categories($post->ID, [$term->term_id]);
+                update_post_meta(
+                    $post->ID,
+                    "_valon_featured",
+                    $row["feature"] ? "1" : "0",
+                );
+                $sq = pll_get_post($post->ID, "sq");
+                $sqterm = pll_get_term($term->term_id, "sq");
+                if ($sq && $sqterm) {
+                    wp_set_post_categories($sq, [$sqterm]);
+                }
+            }
+            $count++;
+        }
+        $this->report(
+            $count .
+                " articles " .
+                (isset($assoc["apply"])
+                    ? "assigned to topics."
+                    : "matched. Inspect the private topics.json; pass --apply to assign."),
+        );
+    }
+    /** Apply owner-approved core page drafts, retaining existing published page IDs and slugs. */
+    function promote_pages($args, $assoc)
+    {
+        $owner = (int) get_option("vp_editorial_owner");
+        if (!$owner) {
+            $this->fail(
+                "Set vp_editorial_owner to Valon’s existing admin user ID first.",
+            );
+        }
+        $pages = get_posts([
+            "post_type" => "page",
+            "post_status" => ["draft", "pending"],
+            "numberposts" => 100,
+            "meta_key" => "_valon_route",
+            "suppress_filters" => true,
+        ]);
+        $eligible = [];
+        foreach ($pages as $p) {
+            if (
+                isset($assoc["only"]) &&
+                !in_array($p->ID, $assoc["only"], true)
+            ) {
+                continue;
+            }
+            if (
+                (int) get_post_meta($p->ID, "_vp_approved_by", true) !==
+                    $owner ||
+                get_post_meta($p->ID, "_vp_approved_hash", true) !==
+                    vp_review_hash($p->post_title, $p->post_content)
+            ) {
+                continue;
+            }
+            $eligible[] = $p;
+        }
+        if (!isset($assoc["apply"])) {
+            foreach ($eligible as $p) {
+                $this->report($p->ID . " " . $p->post_title);
+            }
+            $this->report(
+                count($eligible) .
+                    " owner-approved pages ready. Pass --apply after backup.",
+            );
+            return;
+        }
+        $map = get_option("valon_pages", []);
+        foreach ($eligible as $p) {
+            $route = get_post_meta($p->ID, "_valon_route", true);
+            $lang = pll_get_post_language($p->ID);
+            $target =
+                (int) get_post_meta($p->ID, "_vp_replaces", true) ?: $p->ID;
+            if ($target !== $p->ID) {
+                update_post_meta($target, "_vp_requires_review", "1");
+                update_post_meta(
+                    $target,
+                    "_vp_approved_hash",
+                    vp_review_hash($p->post_title, $p->post_content),
+                );
+                update_post_meta($target, "_vp_approved_by", $owner);
+            }
+            $result = wp_update_post(
+                wp_slash([
+                    "ID" => $target,
+                    "post_title" => $p->post_title,
+                    "post_content" => $p->post_content,
+                    "post_status" => "publish",
+                    // Legacy pages may reference templates removed by an earlier theme.
+                    // The new theme resolves core layouts from _valon_route.
+                    "page_template" => "default",
+                ]),
+                true,
+            );
+            if (
+                is_wp_error($result) ||
+                get_post_status($target) !== "publish"
+            ) {
+                if (is_wp_error($result)) {
+                    $this->fail("Could not apply page " . $p->ID . ": " . $result->get_error_message());
+                }
+                $saved = get_post($target);
+                $this->fail("Could not apply page " . $p->ID . " to " . $target .
+                    "; status=" . get_post_status($target) .
+                    "; title=" . ($saved->post_title === $p->post_title ? "unchanged" : "changed") .
+                    "; content=" . ($saved->post_content === $p->post_content ? "unchanged" : "changed") .
+                    "; approved=" . (get_post_meta($target, "_vp_approved_hash", true) === vp_review_hash($saved->post_title, $saved->post_content) ? "yes" : "no"));
+            }
+            update_post_meta($target, "_valon_route", $route);
+            update_post_meta(
+                $target,
+                "_yoast_wpseo_metadesc",
+                get_post_meta($p->ID, "_yoast_wpseo_metadesc", true),
+            );
+            $map[$lang][$route] = $target;
+            if ($target !== $p->ID) {
+                wp_update_post(["ID" => $p->ID, "post_status" => "private"]);
+            }
+        }
+        foreach ($map["en"] ?? [] as $route => $en) {
+            $translations = ["en" => $en];
+            foreach ($map as $lang => $routes) {
+                if (!empty($routes[$route])) {
+                    $translations[$lang] = $routes[$route];
+                }
+            }
+            pll_save_post_translations($translations);
+        }
+        update_option("valon_pages", $map);
+        if (
+            !empty($map["en"]["home"]) &&
+            get_post_status($map["en"]["home"]) === "publish"
+        ) {
+            update_option("show_on_front", "page");
+            update_option("page_on_front", $map["en"]["home"]);
+        }
+        flush_rewrite_rules();
+        $this->report(
+            "Applied " .
+                count($eligible) .
+                " owner-approved core pages. No articles or newsletters were published.",
+        );
+    }
+
+    /** Run the owned-content sync, manually or from a server scheduler. */
+    function sync($args)
+    {
+        if ($args) {
+            $r = VP_Social::sync($args[0], true);
+            if (is_wp_error($r)) {
+                $this->fail($r->get_error_message());
+            }
+            $this->report("Processed " . $r . " items.");
+        } else {
+            VP_Social::sync_all();
+        }
+    }
+    /** Report connection health without printing credentials. */
+    function status()
+    {
+        foreach (["tiktok", "instagram", "facebook"] as $p) {
+            $s = get_option("vp_status_" . $p, []);
+            $c = VP_Social::config($p);
+            $this->report(
+                $p .
+                    ": " .
+                    ($c["token"] && $c["id"]
+                        ? $s["message"] ?? "Configured, unverified"
+                        : "Not connected"),
+            );
+        }
+        $this->report(
+            "Next scheduled sync: " .
+                (wp_next_scheduled("vp_hourly_sync")
+                    ? gmdate("c", wp_next_scheduled("vp_hourly_sync"))
+                    : "MISSING"),
+        );
+    }
+}
+function vp_migration_topics()
+{
+    return [
+        "relationships" => ["Relationships", "Marrëdhëniet", "Beziehungen"],
+        "personal-growth" => [
+            "Personal growth",
+            "Rritja personale",
+            "Persönliche Entwicklung",
+        ],
+        "business-technology" => [
+            "Business & technology",
+            "Biznesi & teknologjia",
+            "Unternehmertum & Technologie",
+        ],
+        "life-between-cultures" => [
+            "Life between cultures",
+            "Jeta mes kulturave",
+            "Leben zwischen Kulturen",
+        ],
+    ];
+}
+if (defined("WP_CLI") && WP_CLI) {
+    WP_CLI::add_command("valon", VP_Migration::class);
+}

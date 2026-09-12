@@ -1,127 +1,64 @@
-# Valon WordPress Theme
+# Valon Asani WordPress rebuild
 
-A minimalist WordPress theme inspired by consciousness, spirituality, and authentic expression. Designed for deep thinkers and soul seekers.
+Custom editorial theme and a separate **Valon Platform** plugin for owned social feeds, editorial review, a bilingual Mailchimp signup journey and personal-brand SEO.
 
-## Description
+This branch is based on the existing `valondua/valon` theme. It does not deploy a website or publish any editorial content by itself.
 
-The Valon theme is crafted for individuals who share profound thoughts, philosophical insights, and spiritual journeys. It emphasizes readability, clean typography, and a distraction-free reading experience that allows your content to shine.
+## Components
 
-## Features
+- Theme at the repository root: Gutenberg pages, article/topic/search templates, accessible mobile navigation, newsletter invitations, deferred social/video players and English/Albanian navigation.
+- `plugins/valon-platform`: private social records, TikTok/Instagram/Facebook adapters, curated LinkedIn/X URLs, encrypted rotating tokens, hourly sync, review controls, Mailchimp double opt-in and Yoast identity integration.
+- `tools`: local setup, mocked integration tests, route audit and release packaging.
+- `docs`: deployment, measurement and validation instructions.
+- `review` (ignored, delivered privately): bilingual core copy, eight article translation drafts, topic mapping, newsletter copy and editorial operations. This content is intentionally absent from the public repository and release ZIPs.
 
-- **Clean, Minimalist Design**: Focus on content without visual clutter
-- **Responsive Layout**: Optimized for all devices and screen sizes
-- **Typography-Focused**: Beautiful typography with Google Fonts (Inter & Playfair Display)
-- **Philosophical Content Support**: Special styling for quotes, pull quotes, and philosophical content
-- **Reading Time Estimates**: Automatically calculates and displays reading time
-- **Customizable Colors**: Easy color customization through WordPress Customizer
-- **SEO Optimized**: Clean, semantic HTML structure
-- **Accessibility Ready**: Proper contrast and semantic markup
-- **Translation Ready**: Prepared for internationalization
+## Local WordPress
 
-## Installation
+Docker Compose binds the preview to **127.0.0.1:8094**, with PHP 8.3, MariaDB 11.4 and a separate scheduler. The database passwords in Compose are local-only.
 
-1. Download the theme files
-2. Upload the `valon` folder to `/wp-content/themes/` directory
-3. Activate the theme through the 'Appearance > Themes' menu in WordPress
-4. Customize the theme through 'Appearance > Customize'
+```sh
+docker compose up -d wordpress scheduler
+docker compose run --rm cli wp core install --url=http://localhost:8094 --title="Valon Asani" --admin_user=valon_preview --prompt=admin_password --admin_email=preview@example.invalid --skip-email
+docker compose run --rm cli wp plugin install polylang wordpress-seo --activate
+docker compose run --rm cli wp plugin activate valon-platform
+docker compose run --rm cli wp theme activate valon
+docker compose run --rm cli wp valon languages
+```
 
-## Customization
+Place the private review bundle at `review/content/`. Public archive snapshots belong in the ignored `.local/source/posts.json` and `.local/source/pages.json`.
 
-### Theme Customizer Options
+```sh
+docker compose run --rm cli wp valon import_public /var/www/html/wp-content/themes/valon/.local/source
+docker compose run --rm cli wp valon scaffold --preview
+docker compose run --rm cli wp valon translations
+docker compose run --rm cli wp valon topics --apply
+docker compose run --rm cli wp eval-file /var/www/html/wp-content/themes/valon/tools/prepare-preview.php
+```
 
-- **Site Tagline**: Customize the tagline displayed under your site title
-- **Accent Color**: Change the primary accent color used throughout the theme
-- **Custom Logo**: Upload your own logo
+`--preview` is restricted to the local environment and publishes core preview pages only. Article translations remain drafts. All nonlocal scaffold runs create review drafts and preserve published pages. On another theme, activate Valon before scaffolding its topic structure.
 
-### Special Content Formatting
+## Verify
 
-The theme includes special formatting for philosophical and spiritual content:
+```sh
+docker compose run --rm cli wp eval-file /var/www/html/wp-content/themes/valon/tools/qa.php
+python3 tools/http-audit.py
+node --check js/site.js
+node --check plugins/valon-platform/assets/platform.js
+python3 tools/package.py
+```
 
-- **Pull Quotes**: Wrap text in `<div class="pull-quote">` for emphasized quotes
-- **Content Separators**: Use `***` in your content to create decorative separators
-- **Blockquotes**: Enhanced styling for regular blockquotes
+The HTTP audit needs the private page manifest and public archive snapshots. The integration suite uses fake provider responses, makes no external requests, sends no email and removes its test records.
 
-### Menu Setup
+See [deployment](docs/DEPLOYMENT.md), [integration setup](docs/INTEGRATIONS.md), [measurement](docs/MEASUREMENT.md) and [validation](docs/VALIDATION.md).
 
-1. Go to 'Appearance > Menus'
-2. Create a new menu
-3. Assign it to the 'Primary Menu' location
+## Editorial approval
 
-## Typography
+Set `vp_editorial_owner` to Valon's existing administrator user ID. The Social queue → Connections & review screen lets that owner approve an exact draft revision. Approval does not publish. Changing approved content invalidates its approval. All new article publications are gated, even when a draft was created outside the social queue.
 
-The theme uses two carefully selected Google Fonts:
+For existing published articles, create a separate draft for substantive editing: editing an approval-gated published article without fresh approval returns it to draft. This behavior deliberately blocks unreviewed changes but should not be used as a revision workflow.
 
-- **Inter**: For body text and navigation (clean, readable sans-serif)
-- **Playfair Display**: For headings and emphasis (elegant serif)
+## Assets and references
 
-## Browser Support
+The homepage uses Valon's existing [public portrait](https://bethe.one/images/be-the-one-ai-personal-growth-app-founder.jpg). Public archive content and its original image URLs are preserved in the local preview; the existing production media library remains the migration source of truth. A configurable portrait is available in the WordPress Customizer.
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Internet Explorer 11+
-
-## Template Files
-
-- `index.php` - Main template file
-- `single.php` - Single post template
-- `page.php` - Page template
-- `archive.php` - Archive template
-- `search.php` - Search results template
-- `404.php` - 404 error page template
-- `header.php` - Header template
-- `footer.php` - Footer template
-- `functions.php` - Theme functions
-- `style.css` - Main stylesheet
-- `comments.php` - Comments template
-- `searchform.php` - Search form template
-
-## Template Parts
-
-- `template-parts/content.php` - Post content template
-- `template-parts/content-search.php` - Search result content template
-- `template-parts/content-none.php` - No content found template
-
-## Hooks and Filters
-
-The theme includes several custom hooks and filters for developers:
-
-- Custom excerpt length (40 words)
-- Content filtering for special formatting
-- Custom body classes
-- Security enhancements
-
-## Contributing
-
-This theme is open for contributions. Please feel free to submit issues and enhancement requests.
-
-## License
-
-This theme is licensed under the GPL v2 or later.
-
-## Credits
-
-- **Author**: Valon Asani
-- **Fonts**: Google Fonts (Inter, Playfair Display)
-- **Icons**: Built-in CSS symbols
-
-## Changelog
-
-### Version 1.0
-- Initial release
-- Minimalist design focused on readability
-- Responsive layout
-- Typography optimization
-- Special philosophical content formatting
-- WordPress Customizer integration
-- Reading time estimates
-- SEO optimization
-
-## Support
-
-For support and questions, please visit the theme documentation or contact the theme author.
-
----
-
-*"A journey of consciousness and authentic expression"*
+Keep the current hosting, WordPress, Yoast and Mailchimp. The local preview is not evidence that production access, backups, social app permissions, deliverability or Search Console have been verified.

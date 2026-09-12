@@ -1,0 +1,63 @@
+{
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1240px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "paper",
+          "name": "Cloud",
+          "color": "#fafbfc"
+        },
+        {
+          "slug": "ink",
+          "name": "Navy",
+          "color": "#0b2030"
+        },
+        {
+          "slug": "olive",
+          "name": "Blue",
+          "color": "#246ca8"
+        },
+        {
+          "slug": "sand",
+          "name": "Mist",
+          "color": "#edf2f6"
+        },
+        {
+          "slug": "sky",
+          "name": "Sky",
+          "color": "#a6d5ff"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "sans",
+          "name": "System sans",
+          "fontFamily": "Avenir Next, Avenir, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+        },
+        {
+          "slug": "serif",
+          "name": "Editorial serif",
+          "fontFamily": "Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, serif"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#fafbfc",
+      "text": "#0b2030"
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|sans",
+      "lineHeight": "1.7"
+    }
+  }
+}

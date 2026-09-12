@@ -1,233 +1,275 @@
 <?php
-/**
- * Valon Theme Functions
- * 
- * @package Valon
- * @since 1.0
- */
-
-// Prevent direct access
-if (!defined('ABSPATH')) {
-    exit;
+defined("ABSPATH") || exit();
+function valon_lang()
+{
+    return function_exists("pll_current_language")
+        ? (pll_current_language("slug") ?:
+            "en")
+        : "en";
 }
-
-/**
- * Set up theme defaults and register support for various WordPress features
- */
-function valon_setup() {
-    // Add theme support for various features
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('html5', array(
-        'search-form',
-        'comment-form',
-        'comment-list',
-        'gallery',
-        'caption',
-    ));
-    
-    // Add support for custom logo
-    add_theme_support('custom-logo', array(
-        'height'      => 100,
-        'width'       => 400,
-        'flex-height' => true,
-        'flex-width'  => true,
-    ));
-    
-    // Register navigation menus
-    register_nav_menus(array(
-        'primary' => esc_html__('Primary Menu', 'valon'),
-    ));
-    
-    // Add support for selective refresh for widgets
-    add_theme_support('customize-selective-refresh-widgets');
+function valon_text($en, $sq, $language = "")
+{
+    $language = $language ?: valon_lang();
+    if ($language === "de") {
+        static $de;
+        $de ??= require get_template_directory() . "/assets/strings-de.php";
+        return $de[$en] ?? $en;
+    }
+    return $language === "sq" ? $sq : $en;
 }
-add_action('after_setup_theme', 'valon_setup');
-
-/**
- * Enqueue scripts and styles
- */
-function valon_scripts() {
-    // Enqueue main stylesheet
-    wp_enqueue_style('valon-style', get_stylesheet_uri(), array(), '1.1');
-    
-    // Enqueue Google Fonts
-    wp_enqueue_style('valon-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap', array(), null);
-    
-    // Enqueue header scroll script
-    wp_enqueue_script('valon-header-scroll', get_template_directory_uri() . '/js/header-scroll.js', array(), '1.0', true);
-    
-    // Enqueue comment reply script on singular posts/pages
-    if (is_singular() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply');
+function valon_url($route = "home", $lang = "")
+{
+    $lang = $lang ?: valon_lang();
+    $pages = get_option("valon_pages", []);
+    if (
+        !empty($pages[$lang][$route]) &&
+        get_post_status($pages[$lang][$route]) === "publish"
+    ) {
+        return get_permalink($pages[$lang][$route]);
+    }
+    return home_url(
+        ($lang === "en" ? "" : "/" . $lang) .
+            ($route === "home" ? "/" : "/" . $route . "/"),
+    );
+}
+add_action("after_setup_theme", function () {
+    foreach (
+        [
+            "title-tag",
+            "post-thumbnails",
+            "responsive-embeds",
+            "wp-block-styles",
+            "align-wide",
+            "editor-styles",
+            "automatic-feed-links",
+        ]
+        as $f
+    ) {
+        add_theme_support($f);
+    }
+    add_theme_support("html5", [
+        "search-form",
+        "comment-form",
+        "comment-list",
+        "gallery",
+        "caption",
+        "style",
+        "script",
+    ]);
+    register_nav_menus(["primary" => "Primary navigation"]);
+    add_editor_style("style.css");
+    add_image_size("valon-card", 840, 620, true);
+});
+add_action("wp_enqueue_scripts", function () {
+    wp_enqueue_style(
+        "valon-style",
+        get_stylesheet_uri(),
+        [],
+        filemtime(get_template_directory() . "/style.css"),
+    );
+    wp_enqueue_style(
+        "valon-editorial",
+        get_template_directory_uri() . "/assets/editorial.css",
+        ["valon-style"],
+        filemtime(get_template_directory() . "/assets/editorial.css"),
+    );
+    wp_enqueue_script(
+        "valon-site",
+        get_template_directory_uri() . "/js/site.js",
+        [],
+        filemtime(get_template_directory() . "/js/site.js"),
+        true,
+    );
+});
+function valon_nav()
+{
+    foreach (
+        [
+            "start" => ["Start here", "Fillo këtu"],
+            "writing" => ["Writing", "Shkrime"],
+            "watch" => ["Watch", "Shiko"],
+            "about" => ["About", "Rreth meje"],
+        ]
+        as $r => $label
+    ) {
+        echo '<a href="' .
+            esc_url(valon_url($r)) .
+            '">' .
+            esc_html(valon_text(...$label)) .
+            "</a>";
+    }
+    echo '<a class="mobile-newsletter" href="' .
+        esc_url(valon_url("newsletter")) .
+        '">' .
+        esc_html(valon_text("Free newsletter", "Letra falas")) .
+        "</a>";
+}
+function valon_languages()
+{
+    foreach (["en" => "EN", "sq" => "SQ", "de" => "DE"] as $code => $label) {
+        $target =
+            function_exists("pll_get_post") && is_singular()
+                ? pll_get_post(get_queried_object_id(), $code)
+                : 0;
+        $url =
+            $target && get_post_status($target) === "publish"
+                ? get_permalink($target)
+                : valon_url("home", $code);
+        echo '<a href="' .
+            esc_url($url) .
+            '" lang="' .
+            $code .
+            '" aria-label="' .
+            ["en" => "English", "sq" => "Shqip", "de" => "Deutsch"][$code] .
+            '"' .
+            (valon_lang() === $code ? ' aria-current="true"' : "") .
+            ">" .
+            $label .
+            "</a>";
     }
 }
-add_action('wp_enqueue_scripts', 'valon_scripts');
-
-/**
- * Custom excerpt length
- */
-function valon_excerpt_length($length) {
-    return 40;
+function valon_topics()
+{
+    return [
+        "relationships" => [
+            "Relationships",
+            "Marrëdhëniet",
+            "Love, connection & the people we choose.",
+            "Dashnia, lidhjet dhe njerëzit që zgjedhim.",
+        ],
+        "personal-growth" => [
+            "Personal growth",
+            "Rritja personale",
+            "Becoming a little more yourself.",
+            "Me u ba çdo ditë pak ma shumë vetvetja.",
+        ],
+        "business-technology" => [
+            "Business & technology",
+            "Biznesi & teknologjia",
+            "Building things. Learning as I go.",
+            "Tue ndërtu e tue mësu gjatë rrugës.",
+        ],
+        "life-between-cultures" => [
+            "Life between cultures",
+            "Jeta mes kulturave",
+            "Kosovo, Switzerland & everything between.",
+            "Kosova, Zvicra dhe krejt çka ka mes tyne.",
+        ],
+    ];
 }
-add_filter('excerpt_length', 'valon_excerpt_length');
-
-/**
- * Custom excerpt more text
- */
-function valon_excerpt_more($more) {
-    return '...';
+function valon_topic_url($slug)
+{
+    $term = get_term_by(
+        "slug",
+        $slug . (valon_lang() === "en" ? "" : "-" . valon_lang()),
+        "category",
+    );
+    return $term ? get_term_link($term) : valon_url("writing");
 }
-add_filter('excerpt_more', 'valon_excerpt_more');
-
-/**
- * Add custom body classes
- */
-function valon_body_classes($classes) {
-    // Add a class for the theme
-    $classes[] = 'valon-theme';
-    
-    // Add class if no sidebar
-    if (!is_active_sidebar('sidebar-1')) {
-        $classes[] = 'no-sidebar';
+function valon_reading_time($content = "")
+{
+    preg_match_all(
+        "/[\p{L}\p{N}]+/u",
+        wp_strip_all_tags($content ?: get_the_content()),
+        $words,
+    );
+    return max(1, (int) ceil(count($words[0]) / 220)) .
+        valon_text(" min read", " min lexim");
+}
+function valon_posts($limit = 3, $featured = false)
+{
+    $args = [
+        "post_type" => "post",
+        "post_status" => "publish",
+        "posts_per_page" => $limit,
+        "ignore_sticky_posts" => true,
+        "lang" => valon_lang(),
+    ];
+    if ($featured) {
+        $args["meta_key"] = "_valon_featured";
+        $args["meta_value"] = "1";
     }
-    
-    return $classes;
+    $q = new WP_Query($args);
+    if (!$q->have_posts() && $featured) {
+        unset($args["meta_key"], $args["meta_value"]);
+        $q = new WP_Query($args);
+    }
+    if (!$q->have_posts() && valon_lang() !== "en") {
+        $args["lang"] = "en";
+        if ($featured) {
+            $args["meta_key"] = "_valon_featured";
+            $args["meta_value"] = "1";
+        }
+        $q = new WP_Query($args);
+        if (!$q->have_posts() && $featured) {
+            unset($args["meta_key"], $args["meta_value"]);
+            $q = new WP_Query($args);
+        }
+        if ($q->have_posts()) {
+            echo '<p class="muted archive-language-note">' .
+                esc_html(
+                    valon_text(
+                        "From the English archive. Translations are being prepared.",
+                        "Prej arkivit, në anglisht. Shkrimet shqip po përgatiten.",
+                    ),
+                ) .
+                "</p>";
+        }
+    }
+    if (!$q->have_posts()) {
+        echo '<p class="muted">' .
+            esc_html(
+                valon_text(
+                    "New writing is on its way.",
+                    "Shkrime të reja së shpejti.",
+                ),
+            ) .
+            "</p>";
+    }
+    while ($q->have_posts()) {
+        $q->the_post();
+        get_template_part("template-parts/card");
+    }
+    wp_reset_postdata();
 }
-add_filter('body_class', 'valon_body_classes');
-
-/**
- * Register widget area
- */
-function valon_widgets_init() {
-    register_sidebar(array(
-        'name'          => esc_html__('Sidebar', 'valon'),
-        'id'            => 'sidebar-1',
-        'description'   => esc_html__('Add widgets here.', 'valon'),
-        'before_widget' => '<section id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</section>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-}
-add_action('widgets_init', 'valon_widgets_init');
-
-/**
- * Customizer additions
- */
-function valon_customize_register($wp_customize) {
-    // Add a setting for the site tagline
-    $wp_customize->add_setting('valon_tagline', array(
-        'default'           => 'A journey of consciousness and authentic expression',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    
-    $wp_customize->add_control('valon_tagline', array(
-        'label'   => __('Site Tagline', 'valon'),
-        'section' => 'title_tagline',
-        'type'    => 'text',
-    ));
-    
-    // Add color options
-    $wp_customize->add_section('valon_colors', array(
-        'title'    => __('Valon Colors', 'valon'),
-        'priority' => 30,
-    ));
-    
-    $wp_customize->add_setting('valon_accent_color', array(
-        'default'           => '#2c5aa0',
-        'sanitize_callback' => 'sanitize_hex_color',
-    ));
-    
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'valon_accent_color', array(
-        'label'   => __('Accent Color', 'valon'),
-        'section' => 'valon_colors',
-    )));
-}
-add_action('customize_register', 'valon_customize_register');
-
-/**
- * Output custom CSS for customizer options
- */
-function valon_customizer_css() {
-    $accent_color = get_theme_mod('valon_accent_color', '#2c5aa0');
-    
-    if ($accent_color !== '#2c5aa0') {
-        echo '<style type="text/css">';
-        echo 'a, .main-navigation a:hover, .pull-quote, blockquote { color: ' . esc_attr($accent_color) . '; }';
-        echo 'blockquote { border-left-color: ' . esc_attr($accent_color) . '; }';
-        echo 'blockquote::before { color: ' . esc_attr($accent_color) . '; }';
-        echo '</style>';
+function valon_newsletter($placement = "inline")
+{
+    if (function_exists("vp_newsletter_form")) {
+        echo vp_newsletter_form($placement, valon_lang());
+    } else {
+        echo "<p>" .
+            esc_html(
+                valon_text(
+                    "Letters from Valon. Coming soon.",
+                    "Letra nga Valoni. Së shpejti.",
+                ),
+            ) .
+            "</p>";
     }
 }
-add_action('wp_head', 'valon_customizer_css');
-
-/**
- * Filter content to add philosophical formatting
- */
-function valon_content_filter($content) {
-    // Wrap quotes in special styling
-    $content = preg_replace('/^"([^"]+)"$/m', '<div class="pull-quote">"$1"</div>', $content);
-    
-    // Add content separators
-    $content = str_replace('***', '<div class="content-separator">∗ ∗ ∗</div>', $content);
-    
-    return $content;
+function valon_social_links()
+{
+    return [
+        "Instagram" => "https://www.instagram.com/valonasanidua/",
+        "TikTok" => "https://www.tiktok.com/@valon_asani",
+        "Facebook" => "https://www.facebook.com/valonasanidua",
+        "LinkedIn" => "https://www.linkedin.com/in/valon-asani/",
+        "X" => "https://x.com/ValonAsaniDua",
+    ];
 }
-add_filter('the_content', 'valon_content_filter');
-
-/**
- * Custom post navigation
- */
-function valon_post_navigation() {
-    the_post_navigation(array(
-        'prev_text' => '<span class="nav-subtitle">' . esc_html__('Previous:', 'valon') . '</span> <span class="nav-title">%title</span>',
-        'next_text' => '<span class="nav-subtitle">' . esc_html__('Next:', 'valon') . '</span> <span class="nav-title">%title</span>',
-    ));
+function valon_post_navigation()
+{
+    the_post_navigation(["prev_text" => "← %title", "next_text" => "%title →"]);
 }
-
-/**
- * Add reading time estimate
- */
-function valon_reading_time($content = '') {
-    if (empty($content)) {
-        $content = get_the_content();
-    }
-    
-    $word_count = str_word_count(strip_tags($content));
-    $reading_time = ceil($word_count / 200); // Average reading speed
-    
-    return $reading_time . ' min read';
-}
-
-/**
- * Default menu fallback
- */
-function valon_default_menu() {
-    echo '<ul>';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">' . esc_html__('Home', 'valon') . '</a></li>';
-    if (get_option('show_on_front') == 'page') {
-        echo '<li><a href="' . esc_url(get_permalink(get_option('page_for_posts'))) . '">' . esc_html__('Blog', 'valon') . '</a></li>';
-    }
-    wp_list_pages(array(
-        'title_li' => '',
-        'depth' => 1,
-        'number' => 5
-    ));
-    echo '</ul>';
-}
-
-/**
- * Security enhancements
- */
-function valon_security() {
-    // Remove WordPress version from head
-    remove_action('wp_head', 'wp_generator');
-    
-    // Hide WP version from RSS feeds
-    function valon_remove_version() {
-        return '';
-    }
-    add_filter('the_generator', 'valon_remove_version');
-}
-add_action('init', 'valon_security');
+add_filter("excerpt_length", fn() => 24);
+add_filter("excerpt_more", fn() => "…");
+add_action("customize_register", function ($c) {
+    $c->add_setting("valon_portrait", ["sanitize_callback" => "absint"]);
+    $c->add_control(
+        new WP_Customize_Media_Control($c, "valon_portrait", [
+            "label" => "Homepage portrait",
+            "section" => "title_tagline",
+            "mime_type" => "image",
+        ]),
+    );
+});

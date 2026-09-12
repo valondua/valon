@@ -1,100 +1,30 @@
-<?php
-/**
- * Template for displaying single posts
- *
- * @package Valon
- */
-
-get_header(); ?>
-
-<main id="primary" class="site-main">
-    <div class="container">
-
-        <?php
-        while (have_posts()) :
-            the_post();
-        ?>
-
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="article-header">
-                <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-                
-                <div class="entry-meta">
-                    <?php
-                    echo '<time class="entry-date" datetime="' . esc_attr(get_the_date('c')) . '">';
-                    echo get_the_date();
-                    echo '</time>';
-                    
-                    // Add reading time
-                    echo ' • ' . valon_reading_time();
-                    
-                    // Add categories
-                    $categories = get_the_category();
-                    if (!empty($categories)) {
-                        echo ' • ';
-                        foreach ($categories as $category) {
-                            echo '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>';
-                            if ($category !== end($categories)) {
-                                echo ', ';
-                            }
-                        }
-                    }
-                    ?>
-                </div>
-            </header>
-
-            <div class="entry-content">
-                <?php
-                the_content(sprintf(
-                    wp_kses(
-                        /* translators: %s: Name of current post. Only visible to screen readers */
-                        __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'valon'),
-                        array(
-                            'span' => array(
-                                'class' => array(),
-                            ),
-                        )
-                    ),
-                    get_the_title()
-                ));
-
-                wp_link_pages(array(
-                    'before' => '<div class="page-links">' . esc_html__('Pages:', 'valon'),
-                    'after'  => '</div>',
-                ));
-                ?>
-            </div>
-
-            <footer class="entry-footer">
-                <?php
-                // Tags
-                $tags = get_the_tags();
-                if ($tags) {
-                    echo '<div class="entry-tags">';
-                    echo '<span class="tags-label">' . esc_html__('Tags:', 'valon') . '</span> ';
-                    foreach ($tags as $tag) {
-                        echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">#' . esc_html($tag->name) . '</a> ';
-                    }
-                    echo '</div>';
-                }
-                ?>
-            </footer>
-        </article>
-
-        <?php
-        // Post navigation
-        valon_post_navigation();
-
-        // If comments are open or we have at least one comment, load up the comment template.
-        if (comments_open() || get_comments_number()) :
-            comments_template();
-        endif;
-
-        endwhile; // End of the loop.
-        ?>
-
-    </div>
-</main><!-- #primary -->
-
-<?php
+<?php get_header(); ?><main id="main" class="container article-main"><?php while (
+    have_posts()
+):
+    the_post(); ?><header class="article-heading"><p class="eyebrow"><?php
+$cats = get_the_category();
+echo esc_html($cats ? $cats[0]->name : "Writing");
+?></p><h1><?php the_title(); ?></h1><p class="card-meta">Valon Asani <span>·</span> <time datetime="<?php echo esc_attr(
+    get_the_date("c"),
+); ?>"><?php echo esc_html(
+    get_the_date("F j, Y"),
+); ?></time> <span>·</span> <?php echo esc_html(
+    valon_reading_time(),
+); ?></p><?php if (
+    get_post_meta(get_the_ID(), "_valon_substantive_update", true)
+): ?><p class="muted"><?php echo esc_html(
+    valon_text("Updated ", "Përditësuar ") . get_the_modified_date(),
+); ?></p><?php endif; ?></header><?php if (has_post_thumbnail()) {
+    the_post_thumbnail("large", ["class" => "article-cover"]);
+} ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
+the_content();
+wp_link_pages();
+?></article><div class="prose"><?php valon_post_navigation(); ?></div><?php
+endwhile; ?><section class="section"><h2><?php echo esc_html(
+    valon_text("Keep exploring.", "Vazhdo me zbulu."),
+); ?></h2><div class="card-grid"><?php valon_posts(
+    3,
+); ?></div></section></main><?php
+get_template_part("template-parts/newsletter");
 get_footer();
+?>

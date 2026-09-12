@@ -1,0 +1,1056 @@
+{
+  "base": "http://localhost:8094",
+  "assertions": 262,
+  "passed": 262,
+  "failures": [],
+  "checks": [
+    {
+      "check": "Core route /",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /",
+      "passed": true
+    },
+    {
+      "check": "Description /",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /",
+      "passed": true
+    },
+    {
+      "check": "Players deferred /",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /sq/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /sq/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /sq/",
+      "passed": true
+    },
+    {
+      "check": "Description /sq/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /sq/",
+      "passed": true
+    },
+    {
+      "check": "Players deferred /sq/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /de/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /de/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /de/",
+      "passed": true
+    },
+    {
+      "check": "Description /de/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /de/",
+      "passed": true
+    },
+    {
+      "check": "Players deferred /de/",
+      "passed": true
+    },
+    {
+      "check": "Core route /start/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /start/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /start/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/fillo/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/fillo/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/fillo/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/hier-starten/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/hier-starten/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/hier-starten/",
+      "passed": true
+    },
+    {
+      "check": "Core route /writing/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /writing/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /writing/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/shkrime/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/shkrime/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/shkrime/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/texte/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/texte/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/texte/",
+      "passed": true
+    },
+    {
+      "check": "Core route /watch/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /watch/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /watch/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/shiko/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/shiko/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/shiko/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/videos/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/videos/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/videos/",
+      "passed": true
+    },
+    {
+      "check": "Core route /about/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /about/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /about/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /about/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /about/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /about/",
+      "passed": true
+    },
+    {
+      "check": "Description /about/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /about/",
+      "passed": true
+    },
+    {
+      "check": "ProfilePage /about/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Description /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "ProfilePage /sq/rreth-meje/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Description /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "ProfilePage /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Core route /newsletter/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /newsletter/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /newsletter/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/letrat/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/letrat/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/letrat/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/briefe/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/briefe/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/briefe/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sample-letter/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sample-letter/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sample-letter/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/leter-shembull/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/leter-shembull/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/leter-shembull/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/beispielbrief/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/beispielbrief/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/beispielbrief/",
+      "passed": true
+    },
+    {
+      "check": "Core route /now/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /now/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /now/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/tani/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/tani/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/tani/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/aktuell/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/aktuell/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/aktuell/",
+      "passed": true
+    },
+    {
+      "check": "Core route /media/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /media/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /media/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/media-sq/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/media-sq/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/media-sq/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/medien/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/medien/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/medien/",
+      "passed": true
+    },
+    {
+      "check": "Core route /contact/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /contact/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /contact/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/kontakt/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/kontakt/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/kontakt/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/kontaktieren/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/kontaktieren/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/kontaktieren/",
+      "passed": true
+    },
+    {
+      "check": "Core route /privacy-policy/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /privacy-policy/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /privacy-policy/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/privatesia/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/privatesia/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/privatesia/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/datenschutz/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/datenschutz/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/datenschutz/",
+      "passed": true
+    },
+    {
+      "check": "Core route /check-inbox/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /check-inbox/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /check-inbox/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/kontrollo-emailin/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/kontrollo-emailin/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/kontrollo-emailin/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/postfach-pruefen/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/postfach-pruefen/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/postfach-pruefen/",
+      "passed": true
+    },
+    {
+      "check": "Core route /welcome/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /welcome/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /welcome/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/mire-se-erdhe/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/mire-se-erdhe/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/mire-se-erdhe/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/willkommen/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/willkommen/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/willkommen/",
+      "passed": true
+    },
+    {
+      "check": "Core route /unsubscribed/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /unsubscribed/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /unsubscribed/",
+      "passed": true
+    },
+    {
+      "check": "Core route /sq/cregjistrimi/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /sq/cregjistrimi/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /sq/cregjistrimi/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/abmelden/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/abmelden/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/abmelden/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /building-in-public-get-ready-for-the-energy-vampires/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /tomorrow-is-a-lie-and-things-are-not-like-they-seem/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /three-ways-to-define-the-present-moment-and-one-way-to-really-understand-it/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /conversation-with-grok-about-god/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /albanians-we-are-born-warriors-awaken-break-the-chains-and-remember-who-you-are/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /time-to-get-yourself-back/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /design-to-win-programmed-to-fail/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /why-not-eating-a-croissant-every-morning-can-change-your-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /remember-who-you-are-and-most-importantly-who-you-are-not/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /you-are-not-the-master-mind-i-am-the-mastermind/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /break-the-pact-you-are-worthy/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /life-is-a-perfectly-designed-and-coded-game/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /learn-from-worldchampion-saban-trstena/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-do-you-fill-your-calendar/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /average-mediocre-are-the-enemies-of-great/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /heart-soul-or-mind/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-to-build-a-successful-product/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /get-your-shit-together-thats-all/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-most-entertaining-outcome-is-the-the-most-likely-one/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /its-not-about-you/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /dont-go-all-in-with-someone-who-isnt-all-in-with-you/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /listen-to-michael-saylor-lex-fridman-about-bitcoin-inflation/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /realize-that-you-create-your-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /dream-relationship-creator-deep-connection/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /if-you-really-really-want-it/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /truth-and-self-love-challenge/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-7-principles-of-the-universe/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /why-you-are-here/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /gratefulness/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /33-principles-for-my-33rd/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /be-ready-to-be-tested-by-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /what-others-think-doesnt-matter/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /you-have-the-freedom-to-change-at-any-time/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /gamification-of-your-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /love-is-the-goal-to-aspire/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /dont/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /just-in-case-you-needed-to-be-reminded/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /lemon-detox/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /what-i-saw-when-i-could-see-clear/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /what-chapter-are-you-writing-today/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /try-me/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /you-must-be-the-master-of-your-own-kingdom/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-point-when-its-just-the-same/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /clean-up-and-focus/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /a-way-to-find-yourself/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-would-you-have-lived-your-life-differently-if-you-had-a-chance/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /benefits-of-social-interaction-at-work/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-goal-is-not/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /my-biggest-challenge-sleep/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /dont-take-yourself-too-seriously-thats-why/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /it-never-ends/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /three-steps-to-exceptional-results-2/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /go-from-smartphone-to-stupid-phone-and-you-become-smart/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-universe-is-amazing/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /health-detox-product-i-recommend-to-anyone/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /the-earthing-movie/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /i-challenge-you-to-be-an-athlete/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /everything-is-connected/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /connecting-the-dots/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /its-about-building-community-before-building-a-product/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-i-use-email/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-to-help-xhepa-in-5min/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /simplify-your-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /when-you-find-your-love/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /words-i-didnt-remember/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /three-ways-to-find-your-dream-job/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /yes-and-no/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /you-cant-escape-reality/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /you-vs-them/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /path-to-become-it/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /easy-level-up/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /believe/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /why-are-we-so-disciplined-with-our-bad-habits/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /lessons-from-the-alchemist/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /focus-to-work-with-long-term-people/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /consistency-is-the-key-to-success-in-life/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /how-to-be-free/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /my-6-golden-rules-to-become-a-more-successful-entrepreneur/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /relationship-expert/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /books/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /media/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /privacy-policy/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /no-coffee-time/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /blog/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /nolav/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /about/",
+      "passed": true
+    },
+    {
+      "check": "Preserved legacy URL /contact/",
+      "passed": true
+    },
+    {
+      "check": "Broken legacy Now redirects to /now/",
+      "passed": true
+    },
+    {
+      "check": "Useful 404 retains 404 HTTP status",
+      "passed": true
+    },
+    {
+      "check": "Archive route /writing/page/2/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /category/relationships/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /category/personal-growth/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /category/business-technology/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /category/life-between-cultures/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /sq/category/relationships-sq/",
+      "passed": true
+    },
+    {
+      "check": "Archive route /de/category/relationships-de/",
+      "passed": true
+    },
+    {
+      "check": "Private/dev payload unavailable /wp-content/themes/valon/review/content/translations.json",
+      "passed": true
+    },
+    {
+      "check": "Private/dev payload unavailable /wp-content/themes/valon/.env.example",
+      "passed": true
+    },
+    {
+      "check": "Private/dev payload unavailable /wp-content/themes/valon/tools/qa.php",
+      "passed": true
+    },
+    {
+      "check": "Private/dev payload unavailable /wp-content/plugins/valon-platform/content/translations.json",
+      "passed": true
+    }
+  ]
+}
