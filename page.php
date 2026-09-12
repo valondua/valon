@@ -6,6 +6,10 @@
     $route =
         get_post_meta(get_the_ID(), "_valon_route", true) ?:
         get_post_field("post_name");
+    if ($route === "media") {
+        get_template_part("template-parts/media");
+        continue;
+    }
     get_template_part("template-parts/page-intro", null, ["route" => $route]);
     if ($route === "about") {
         get_template_part("template-parts/photo-journal");
@@ -96,6 +100,9 @@ if (!$q->have_posts() && valon_lang() !== "en") {
         "</a>";
 } ?></nav><?php echo vp_render_feed($platform, 24);
 endif; ?>
+<?php if (in_array($route, ["watch", "start", "contact"], true)) {
+    get_template_part("template-parts/connect");
+} ?>
 <?php if (
     $route === "start"
 ): ?><div class="page-signup"><?php valon_newsletter(

@@ -1,5 +1,6 @@
 <?php
 defined("ABSPATH") || exit();
+require_once __DIR__ . "/includes/editorial.php";
 function valon_lang()
 {
     return function_exists("pll_current_language")
