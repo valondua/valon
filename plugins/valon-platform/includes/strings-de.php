@@ -7,6 +7,8 @@ return [
     "Email address" => "E-Mail-Adresse",
     "Your email address" => "Deine E-Mail-Adresse",
     "Get the free letters" => "Briefe gratis erhalten",
+    "Continue to my signup form on Mailchimp. The form is currently in English." =>
+        "Weiter zu meinem Anmeldeformular bei Mailchimp. Das Formular ist zurzeit auf Englisch.",
     "Read in" => "Lesen auf",
     "Send me Letters from Valon every two weeks." =>
         "Ich möchte alle zwei Wochen Briefe von Valon erhalten.",

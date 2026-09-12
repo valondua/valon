@@ -2,6 +2,21 @@
 defined("ABSPATH") || exit();
 function vp_newsletter_form($placement = "inline", $lang = "en")
 {
+    // Use the owner's verified public form until the server-side connection is configured.
+    // Never invite visitors to enter an address into a form known to return 503.
+    if (
+        wp_get_environment_type() !== "local" &&
+        (!vp_secret("VP_MAILCHIMP_API_KEY") || !vp_secret("VP_MAILCHIMP_LIST_ID"))
+    ) {
+        return '<div class="newsletter-hosted"><p><a class="button" href="https://eepurl.com/h-inUL">' .
+            esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)) .
+            '</a></p><p class="form-note">' .
+            esc_html(vp_text(
+                "Continue to my signup form on Mailchimp. The form is currently in English.",
+                "Vazhdo te formulari im në Mailchimp. Formulari për momentin është në anglisht.",
+                $lang,
+            )) . '</p></div>';
+    }
     $id = wp_unique_id("letter-");
     ob_start();
     ?>

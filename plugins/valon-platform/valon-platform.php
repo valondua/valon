@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Valon Platform
  * Description: Owned social feeds, editorial review, Mailchimp double opt-in and personal identity.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires PHP: 8.1
  */
 defined("ABSPATH") || exit();
