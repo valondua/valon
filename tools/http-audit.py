@@ -66,7 +66,10 @@ if INDEXABLE:
  status,_,_,xml=get('/post-sitemap.xml');check(status==200,'Article sitemap available')
  if status==200:
   locs=[n.text for n in ET.fromstring(xml).findall('{*}url/{*}loc')]
-  check(len(locs)==78 and all(u.startswith(BASE+'/') for u in locs),'Sitemap includes 78 original articles on the current host')
+  article_urls={BASE+urlparse(p['link']).path for p in json.loads(Path('.local/source/posts.json').read_text())}
+  legacy_page_urls={BASE+urlparse(p['link']).path for p in json.loads(Path('.local/source/pages.json').read_text())}
+  # Yoast can include WordPress's designated posts page in the post sitemap.
+  check(len(article_urls)==78 and article_urls.issubset(locs) and set(locs).issubset(article_urls|legacy_page_urls),'Sitemap retains all 78 original articles and only known archive pages')
   draft_slugs=[p['slug'] for p in json.loads(Path('review/content/translations.json').read_text())]
   check(not any(s in u for s in draft_slugs for u in locs),'Unapproved translations absent from sitemap')
 

@@ -1,7 +1,7 @@
 {
-  "base": "http://localhost:8095",
-  "assertions": 211,
-  "passed": 211,
+  "base": "https://www.valonasani.com",
+  "assertions": 266,
+  "passed": 266,
   "failures": [],
   "checks": [
     {
@@ -77,6 +77,42 @@
       "passed": true
     },
     {
+      "check": "Core route /de/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /de/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /de/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /de/",
+      "passed": true
+    },
+    {
+      "check": "Description /de/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /de/",
+      "passed": true
+    },
+    {
+      "check": "Players deferred /de/",
+      "passed": true
+    },
+    {
       "check": "Core route /start/",
       "passed": true
     },
@@ -98,6 +134,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/fillo/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/hier-starten/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/hier-starten/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/hier-starten/",
       "passed": true
     },
     {
@@ -125,6 +173,18 @@
       "passed": true
     },
     {
+      "check": "Core route /de/texte/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/texte/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/texte/",
+      "passed": true
+    },
+    {
       "check": "Core route /watch/",
       "passed": true
     },
@@ -146,6 +206,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/shiko/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/videos/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/videos/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/videos/",
       "passed": true
     },
     {
@@ -221,6 +293,42 @@
       "passed": true
     },
     {
+      "check": "Core route /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Canonical output /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Real language alternates /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Expected indexability /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "Description /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "One consistent Person identity /de/ueber-mich/",
+      "passed": true
+    },
+    {
+      "check": "ProfilePage /de/ueber-mich/",
+      "passed": true
+    },
+    {
       "check": "Core route /newsletter/",
       "passed": true
     },
@@ -242,6 +350,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/letrat/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/briefe/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/briefe/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/briefe/",
       "passed": true
     },
     {
@@ -269,6 +389,18 @@
       "passed": true
     },
     {
+      "check": "Core route /de/beispielbrief/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/beispielbrief/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/beispielbrief/",
+      "passed": true
+    },
+    {
       "check": "Core route /now/",
       "passed": true
     },
@@ -290,6 +422,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/tani/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/aktuell/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/aktuell/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/aktuell/",
       "passed": true
     },
     {
@@ -317,6 +461,18 @@
       "passed": true
     },
     {
+      "check": "Core route /de/medien/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/medien/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/medien/",
+      "passed": true
+    },
+    {
       "check": "Core route /contact/",
       "passed": true
     },
@@ -338,6 +494,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/kontakt/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/kontaktieren/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/kontaktieren/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/kontaktieren/",
       "passed": true
     },
     {
@@ -365,6 +533,18 @@
       "passed": true
     },
     {
+      "check": "Core route /de/datenschutz/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/datenschutz/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/datenschutz/",
+      "passed": true
+    },
+    {
       "check": "Core route /check-inbox/",
       "passed": true
     },
@@ -386,6 +566,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/kontrollo-emailin/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/postfach-pruefen/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/postfach-pruefen/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/postfach-pruefen/",
       "passed": true
     },
     {
@@ -413,6 +605,18 @@
       "passed": true
     },
     {
+      "check": "Core route /de/willkommen/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/willkommen/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/willkommen/",
+      "passed": true
+    },
+    {
       "check": "Core route /unsubscribed/",
       "passed": true
     },
@@ -434,6 +638,18 @@
     },
     {
       "check": "Unique DOM IDs /sq/cregjistrimi/",
+      "passed": true
+    },
+    {
+      "check": "Core route /de/abmelden/",
+      "passed": true
+    },
+    {
+      "check": "Single H1 /de/abmelden/",
+      "passed": true
+    },
+    {
+      "check": "Unique DOM IDs /de/abmelden/",
       "passed": true
     },
     {
@@ -817,6 +1033,10 @@
       "passed": true
     },
     {
+      "check": "Archive route /de/category/relationships-de/",
+      "passed": true
+    },
+    {
       "check": "Private/dev payload unavailable /wp-content/themes/valon/review/content/translations.json",
       "passed": true
     },
@@ -841,7 +1061,7 @@
       "passed": true
     },
     {
-      "check": "Sitemap includes 78 original articles on the current host",
+      "check": "Sitemap retains all 78 original articles and only known archive pages",
       "passed": true
     },
     {
