@@ -57,6 +57,12 @@ try {
         "Anonymous import rejected",
     );
     wp_set_current_user(1);
+    $bad = $fixture;
+    $bad[0]["source_type"] = "photo";
+    $check(is_wp_error(vp_validate_video_batch($bad)), "Reject a source type and URL mismatch");
+    $bad = $fixture;
+    $bad[0]["audio_language"] = "invented";
+    $check(is_wp_error(vp_validate_video_batch($bad)), "Reject unsupported audio labels");
     $r = vp_import_video_drafts($fixture);
     $check(!is_wp_error($r) && count($r) === 3, "Create three editions");
     $created = array_column($r, "id");
@@ -158,6 +164,31 @@ try {
         count(pll_get_post_translations($r3[0]["id"])) === 3,
         "Retry repairs an interrupted translation group",
     );
+    $photo = $fixture;
+    $photo[0]["video_id"] = "9999999999999999998";
+    $photo[0]["source_type"] = "photo";
+    $photo[0]["audio_language"] = "unknown";
+    $photo[0]["source_url"] = "https://www.tiktok.com/@valon_asani/photo/9999999999999999998";
+    $photos = vp_import_video_drafts($photo);
+    $check(!is_wp_error($photos) && count($photos) === 3, "Import all photo article editions");
+    $created = array_merge($created, array_column($photos, "id"));
+    foreach ($photos as $entry) {
+        $markup = vp_video_article_player($entry["id"]);
+        $check(substr_count($markup, "<iframe") === 1 && str_contains($markup, "/photo/9999999999999999998") && str_contains($markup, "muted=1") && !str_contains($markup, "autoplay="), "Photo article has the official gallery, muted audio and correct source: " . $entry["language"]);
+        $check(get_post_status($entry["id"]) === "draft", "Photo edition is private until approval: " . $entry["language"]);
+    }
+    $english = $fixture;
+    $english[0]["video_id"] = "9999999999999999997";
+    $english[0]["source_url"] = "https://www.tiktok.com/@valon_asani/video/9999999999999999997";
+    $english[0]["audio_language"] = "en";
+    $english_posts = vp_import_video_drafts($english);
+    $created = array_merge($created, array_column($english_posts, "id"));
+    $expected = ["en" => "in English.", "sq" => "në anglisht.", "de" => "auf Englisch."];
+    foreach ($english_posts as $entry) {
+        $check(str_contains(vp_video_article_player($entry["id"]), $expected[$entry["language"]]), "Audio language is accurate: " . $entry["language"]);
+        update_post_meta($entry["id"], "_vp_audio_language", "unknown");
+        $check(!str_contains(vp_video_article_player($entry["id"]), $expected[$entry["language"]]), "Unverified audio language is not guessed: " . $entry["language"]);
+    }
 } finally {
     delete_option("vp_video_import_lock");
     foreach ($created as $id) {
