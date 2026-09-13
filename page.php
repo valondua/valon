@@ -10,6 +10,10 @@
         get_template_part("template-parts/media");
         continue;
     }
+    if ($route === "newsletter") {
+        get_template_part("template-parts/letter-landing");
+        continue;
+    }
     get_template_part("template-parts/page-intro", null, ["route" => $route]);
     if ($route === "about") {
         get_template_part("template-parts/photo-journal");
