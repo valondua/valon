@@ -1,5 +1,10 @@
 <?php
 defined("ABSPATH") || exit();
+// YARPP's supported per-post filter: the video journey has its own localized next step.
+add_filter("noyarpp", function ($disabled) {
+    return $disabled ||
+        (function_exists("vp_video_id") && vp_video_id(get_the_ID()));
+});
 add_filter("body_class", function ($classes) {
     if (
         is_page() &&

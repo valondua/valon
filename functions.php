@@ -116,6 +116,9 @@ function valon_languages()
             $target && get_post_status($target) === "publish"
                 ? get_permalink($target)
                 : valon_url("home", $code);
+        if ($target && is_preview() && current_user_can("edit_post", $target)) {
+            $url = get_preview_post_link($target);
+        }
         echo '<a href="' .
             esc_url($url) .
             '" lang="' .

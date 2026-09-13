@@ -37,3 +37,13 @@ Ebook content and delivery, TikTok API authorization and automatic historical im
 ## Rollback
 
 Revert this release's Git merge and update the existing theme/plugin through WP Pusher. The new draft posts can remain private; existing public article prose and legacy URLs are unchanged. No destructive migration is performed.
+
+## Production verification and preview polish
+
+- Theme 2.4.1 keeps draft-language navigation within the actual translated previews for authorized editors; anonymous visitors do not receive draft links.
+- Video pages use a localized newsletter destination after the article. YARPP's supported `noyarpp` filter suppresses its unrelated or English fallback block only on these video articles. The regular article archive is unchanged.
+- Nine production drafts: 2443–2451, arranged EN/SQ/DE for each of the three sources above. All were verified as draft in Tools → Video article drafts.
+- The first actual TikTok embed loaded its original cover/caption and played (153.6 seconds total duration). Article prose is still caption-based; playback verification is not a transcript review.
+- All three landing pages were inspected in 390px iframe viewports as well as desktop. Browser-level viewport overrides were ineffective and were reset; the actual 390px layouts were checked in the local review harness.
+- 31 draft-workflow checks now pass, including preview access control and suppressing unlocalized related content.
+- Production HTTP/SEO audit: 266 of 266 passed after the main release.

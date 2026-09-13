@@ -60,6 +60,38 @@ try {
     $r = vp_import_video_drafts($fixture);
     $check(!is_wp_error($r) && count($r) === 3, "Create three editions");
     $created = array_column($r, "id");
+    $old_query = $GLOBALS["wp_query"];
+    $old_post = $GLOBALS["post"] ?? null;
+    $GLOBALS["wp_query"] = new WP_Query([
+        "p" => $created[0],
+        "post_type" => "post",
+        "post_status" => "draft",
+        "lang" => "",
+    ]);
+    $GLOBALS["wp_query"]->is_preview = true;
+    $GLOBALS["post"] = get_post($created[0]);
+    ob_start();
+    valon_languages();
+    $preview_nav = ob_get_clean();
+    $check(
+        substr_count($preview_nav, "preview=true") === 3,
+        "Authorized preview navigation links all draft editions",
+    );
+    $check(
+        apply_filters("noyarpp", false) === true,
+        "Video journey suppresses the unlocalized related-post block",
+    );
+    wp_set_current_user(0);
+    ob_start();
+    valon_languages();
+    $public_nav = ob_get_clean();
+    $check(
+        !str_contains($public_nav, "preview=true"),
+        "Anonymous navigation never exposes draft previews",
+    );
+    wp_set_current_user(1);
+    $GLOBALS["wp_query"] = $old_query;
+    $GLOBALS["post"] = $old_post;
     foreach ($r as $entry) {
         $id = $entry["id"];
         $check(
