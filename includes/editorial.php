@@ -133,6 +133,17 @@ function valon_render_article_image($post_id, $card = false)
     }
 }
 
+// Yoast's URL filter runs only when its image collection contains an image.
+// Seed empty collections for posts whose cover comes from the theme manifest.
+add_action("wpseo_add_opengraph_additional_images", function ($images) {
+    if (!is_singular("post") || $images->has_images()) {
+        return;
+    }
+    $id = get_queried_object_id();
+    $explicit = get_post_meta($id, "_yoast_wpseo_opengraph-image", true);
+    $images->add_image_by_url($explicit ?: valon_article_image($id)["url"]);
+});
+
 // Give shared links the same cover readers see, while respecting manually set Yoast images.
 foreach (["wpseo_opengraph_image", "wpseo_twitter_image"] as $filter) {
     add_filter($filter, function ($url) {

@@ -52,6 +52,26 @@ try {
         "meta_input" => ["_vp_source_article" => $source[0]->ID],
     ]);
     $ids[] = $id;
+    $previous_query = $GLOBALS["wp_query"];
+    try {
+        $GLOBALS["wp_query"] = new WP_Query([
+            "p" => $id,
+            "post_type" => "post",
+            "post_status" => "draft",
+            "lang" => "",
+        ]);
+        $presentation = YoastSEO()->meta->for_post($id);
+        $check(
+            in_array(
+                valon_article_image($id)["url"],
+                array_column($presentation->open_graph_images, "url"),
+                true,
+            ),
+            "Yoast emits a cover for an article without a featured or inline image",
+        );
+    } finally {
+        $GLOBALS["wp_query"] = $previous_query;
+    }
     $check(
         valon_article_image($id)["url"] ===
             valon_article_image($source[0]->ID)["url"],
