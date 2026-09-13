@@ -17,30 +17,62 @@ function vp_video_id($post_id)
     return is_string($id) && preg_match('/^\d{19}$/D', $id) ? $id : "";
 }
 
+function vp_tiktok_source_type($post_id)
+{
+    return get_post_meta($post_id, "_vp_source_type", true) === "photo"
+        ? "photo"
+        : "video";
+}
+
+function vp_tiktok_source_url($post_id)
+{
+    $id = vp_video_id($post_id);
+    return $id
+        ? "https://www.tiktok.com/@valon_asani/" . vp_tiktok_source_type($post_id) . "/" . $id
+        : "";
+}
+
 function vp_video_article_player($post_id)
 {
     $id = vp_video_id($post_id);
     if (!$id) {
         return "";
     }
-    $source = "https://www.tiktok.com/@valon_asani/video/" . $id;
+    $source = vp_tiktok_source_url($post_id);
+    $is_photo = vp_tiktok_source_type($post_id) === "photo";
     $label = vp_video_copy(
         "Watch the original video",
         "Shiko videon origjinale",
         "Originalvideo ansehen",
         $post_id,
     );
-    $language = vp_video_copy(
-        "Original video in Albanian. The written article below is available in English, Albanian and German.",
-        "Videoja origjinale është në shqip. Artikulli poshtë është në anglisht, shqip dhe gjermanisht.",
-        "Originalvideo auf Albanisch. Den Text darunter gibt es auf Englisch, Albanisch und Deutsch.",
+    if ($is_photo) {
+        $label = vp_video_copy("View the original photo post", "Shiko postimin origjinal me foto", "Originalen Fotobeitrag ansehen", $post_id);
+    }
+    // Old reviewed batches were Albanian; new sources explicitly use unknown until verified.
+    $audio = get_post_meta($post_id, "_vp_audio_language", true) ?: "sq";
+    $audio_labels = [
+        "sq" => ["Original video in Albanian.", "Videoja origjinale është në shqip.", "Originalvideo auf Albanisch."],
+        "en" => ["Original video in English.", "Videoja origjinale është në anglisht.", "Originalvideo auf Englisch."],
+        "de" => ["Original video in German.", "Videoja origjinale është në gjermanisht.", "Originalvideo auf Deutsch."],
+        "unknown" => ["Original video.", "Videoja origjinale.", "Originalvideo."],
+    ];
+    $audio_label = $audio_labels[$audio] ?? $audio_labels["unknown"];
+    $language = ($is_photo ? "" : vp_video_copy($audio_label[0], $audio_label[1], $audio_label[2], $post_id) . " ") . vp_video_copy(
+        "The written article below is available in English, Albanian and German.",
+        "Artikulli poshtë është në anglisht, shqip dhe gjermanisht.",
+        "Den Text darunter gibt es auf Englisch, Albanisch und Deutsch.",
         $post_id,
     );
+    // TikTok's official player supports image galleries as well as video posts.
+    $parameters = $is_photo
+        ? "description=1&amp;music_info=0&amp;muted=1"
+        : "description=1&amp;music_info=0&amp;rel=0&amp;autoplay=0";
     // The main article player is present in HTML, with no click required for discovery.
     // Collection-page players continue to load on interaction.
     return '<figure class="video-article-player"><iframe src="https://www.tiktok.com/player/v1/' .
         esc_attr($id) .
-        '?description=1&amp;music_info=0&amp;rel=0&amp;autoplay=0" title="' .
+        '?' . $parameters . '" title="' .
         esc_attr($label . ": " . get_the_title($post_id)) .
         '" width="360" height="640" allow="fullscreen; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><figcaption><strong>' .
         esc_html($label) .
@@ -79,13 +111,20 @@ function vp_validate_video_batch($batch)
             );
         }
         $seen[$group["video_id"]] = true;
+        $source_type = $group["source_type"] ?? "video";
+        if (!in_array($source_type, ["video", "photo"], true)) {
+            return new WP_Error("source_type", "Choose a video or photo source.");
+        }
+        if (!in_array($group["audio_language"] ?? "sq", ["en", "sq", "de", "unknown"], true)) {
+            return new WP_Error("audio_language", "Choose a verified audio language or unknown.");
+        }
         if (
             ($group["source_url"] ?? "") !==
-            "https://www.tiktok.com/@valon_asani/video/" . $group["video_id"]
+            "https://www.tiktok.com/@valon_asani/" . $source_type . "/" . $group["video_id"]
         ) {
             return new WP_Error(
                 "owner",
-                "Only the owner’s TikTok video URLs are accepted.",
+                "Only the owner’s matching TikTok source URLs are accepted.",
             );
         }
         if (
@@ -266,12 +305,14 @@ function vp_import_video_drafts($batch)
                             "_vp_requires_review" => "1",
                             "_vp_video_key" => $key,
                             "_vp_video_id" => $group["video_id"],
+                            "_vp_source_type" => $group["source_type"] ?? "video",
+                            "_vp_audio_language" => $group["audio_language"] ?? "sq",
                             "_vp_video_caption" => sanitize_textarea_field(
                                 $group["caption"],
                             ),
                             "_vp_video_cover" => $group["cover"],
                             "_vp_video_review_note" =>
-                                "Caption-based editorial draft. Review the recording and all factual claims before approving. Original upload date, duration and a stable video thumbnail still need verification; no VideoObject is emitted.",
+                                "Caption-based editorial draft. Review the original post, audio language and all factual claims before approving. The editorial cover is an owned website image, not a verified TikTok thumbnail. No VideoObject is emitted.",
                             "_yoast_wpseo_metadesc" => sanitize_textarea_field(
                                 $edition["excerpt"],
                             ),
@@ -394,9 +435,9 @@ add_action("add_meta_boxes_post", function ($post) {
                 esc_html(
                     get_post_meta($post->ID, "_vp_video_review_note", true),
                 ) .
-                '</p><p><a href="https://www.tiktok.com/@valon_asani/video/' .
-                esc_attr(vp_video_id($post->ID)) .
-                '" target="_blank" rel="noopener">Original TikTok video ↗</a></p><h4>Original Albanian caption</h4><p>' .
+                '</p><p><a href="' .
+                esc_url(vp_tiktok_source_url($post->ID)) .
+                '" target="_blank" rel="noopener">Original TikTok post ↗</a></p><h4>Original caption</h4><p>' .
                 nl2br(
                     esc_html(
                         get_post_meta($post->ID, "_vp_video_caption", true),
