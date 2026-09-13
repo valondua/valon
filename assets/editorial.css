@@ -1733,3 +1733,14 @@ select:focus-visible {
     gap: 20px;
   }
 }
+.video-next {
+  margin: 54px auto 20px;
+  padding: 32px;
+  background: #edf3f7;
+}
+.video-next .button {
+  color: #fff;
+  font-family: var(--sans, sans-serif);
+  text-decoration: none;
+  font-size: 16px;
+}
