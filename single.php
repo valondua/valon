@@ -14,9 +14,14 @@ echo esc_html($cats ? $cats[0]->name : "Writing");
     get_post_meta(get_the_ID(), "_valon_substantive_update", true)
 ): ?><p class="muted"><?php echo esc_html(
     valon_text("Updated ", "Përditësuar ") . get_the_modified_date(),
-); ?></p><?php endif; ?></header><?php valon_render_article_image(
-    get_the_ID(),
-); ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
+); ?></p><?php endif; ?></header><?php if (
+    function_exists("vp_video_id") &&
+    vp_video_id(get_the_ID())
+) {
+    echo vp_video_article_player(get_the_ID());
+} else {
+    valon_render_article_image(get_the_ID());
+} ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
 the_content();
 wp_link_pages();
 ?></article><div class="prose"><?php valon_post_navigation(); ?></div><?php
@@ -27,5 +32,6 @@ endwhile; ?><section class="section"><h2><?php echo esc_html(
 ); ?></div></section></main><?php
 get_template_part("template-parts/newsletter");
 get_footer();
+
 
 ?>

@@ -1,5 +1,15 @@
 <?php
 defined("ABSPATH") || exit();
+add_filter("body_class", function ($classes) {
+    if (
+        is_page() &&
+        get_post_meta(get_queried_object_id(), "_valon_route", true) ===
+            "newsletter"
+    ) {
+        $classes[] = "valon-letter-landing";
+    }
+    return $classes;
+});
 
 /** All three editions use the same editorial data, with reviewed UI copy. */
 function valon_localized($copy, $language = "")
@@ -28,6 +38,24 @@ function valon_article_image($post_id)
                 ];
             }
         }
+    }
+    $video_cover = get_post_meta($post_id, "_vp_video_cover", true);
+    if (
+        in_array(
+            $video_cover,
+            ["valon-reading", "valon-travel", "valon-dua", "valon-portrait"],
+            true,
+        )
+    ) {
+        return [
+            "url" =>
+                get_template_directory_uri() .
+                "/assets/" .
+                $video_cover .
+                ".jpeg",
+            "attachment" => 0,
+            "kind" => "portrait",
+        ];
     }
     foreach (array_unique([$post_id, $source_id]) as $candidate) {
         $legacy = get_post_meta($candidate, "_valon_legacy_image", true);
