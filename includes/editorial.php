@@ -44,6 +44,24 @@ function valon_article_image($post_id)
             }
         }
     }
+    // Source-specific, locally stored thumbnails are shared across translations.
+    // Never call TikTok or depend on its expiring CDN URLs while rendering a page.
+    static $video_covers;
+    $video_covers ??= json_decode(
+        file_get_contents(get_template_directory() . "/assets/video-covers.json"),
+        true,
+    ) ?: [];
+    $video_id = get_post_meta($post_id, "_vp_video_id", true);
+    $source_cover = $video_covers[$video_id] ?? null;
+    if ($source_cover && is_file(get_template_directory() . "/" . $source_cover["path"])) {
+        return [
+            "url" => get_template_directory_uri() . "/" . $source_cover["path"],
+            "attachment" => 0,
+            "kind" => "original",
+            "width" => (int) $source_cover["width"],
+            "height" => (int) $source_cover["height"],
+        ];
+    }
     $video_cover = get_post_meta($post_id, "_vp_video_cover", true);
     if (
         in_array(
@@ -124,11 +142,13 @@ function valon_render_article_image($post_id, $card = false)
         );
     } else {
         printf(
-            '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="1200" height="750">',
+            '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="%d" height="%d">',
             esc_url($cover["url"]),
             esc_attr($alt),
             esc_attr($attrs["class"]),
             esc_attr($attrs["loading"]),
+            (int) ($cover["width"] ?? 1200),
+            (int) ($cover["height"] ?? 750),
         );
     }
 }
