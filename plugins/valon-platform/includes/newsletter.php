@@ -8,7 +8,7 @@ function vp_newsletter_form($placement = "inline", $lang = "en")
         wp_get_environment_type() !== "local" &&
         (!vp_secret("VP_MAILCHIMP_API_KEY") || !vp_secret("VP_MAILCHIMP_LIST_ID"))
     ) {
-        return '<div class="newsletter-hosted"><p><a class="button" href="https://eepurl.com/h-inUL">' .
+        return '<div class="newsletter-hosted" data-placement="' . esc_attr($placement) . '" data-lang="' . esc_attr($lang) . '"><p><a class="button" href="https://eepurl.com/h-inUL">' .
             esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)) .
             '</a></p><p class="form-note">' .
             esc_html(vp_text(

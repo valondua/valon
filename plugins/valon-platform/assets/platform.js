@@ -40,13 +40,47 @@
   const pageLanguage = document.documentElement.lang.split("-")[0];
   const message = (key, language = pageLanguage) =>
     (messages[language] || messages.en)[key];
+  const consentListeners = new Set();
+  let analyticsConsent = false;
+  const hasStatisticsConsent = () => {
+    try {
+      const prefix = window.consent_api?.cookie_prefix;
+      // wp_has_consent alone also permits unset consent in opt-out regions.
+      // Custom events require the visitor's explicit statistics choice.
+      return (
+        typeof prefix === "string" &&
+        prefix.length > 0 &&
+        typeof window.consent_api_get_cookie === "function" &&
+        typeof window.wp_has_consent === "function" &&
+        window.consent_api_get_cookie(prefix + "_statistics") === "allow" &&
+        window.wp_has_consent("statistics") === true
+      );
+    } catch {
+      return false;
+    }
+  };
+  const syncConsent = () => {
+    const next = hasStatisticsConsent();
+    window.valonAnalyticsConsent = next;
+    if (next !== analyticsConsent) {
+      analyticsConsent = next;
+      consentListeners.forEach((listener) => listener(next));
+    }
+    return next;
+  };
+  document.addEventListener("wp_listen_for_consent_change", syncConsent);
+  document.addEventListener("wp_consent_type_defined", syncConsent);
+  window.addEventListener("load", syncConsent);
+  syncConsent();
   const track = (name, params = {}) => {
-    // The consent manager may dispatch this event after consent. No new GA tag is installed.
-    if (
-      window.valonAnalyticsConsent === true &&
-      typeof window.gtag === "function"
-    )
+    // Never queue pre-consent interactions or install another Google tag.
+    if (!syncConsent() || typeof window.gtag !== "function") return false;
+    try {
       window.gtag("event", name, params);
+      return true;
+    } catch {
+      return false;
+    }
   };
   const allowed = [
     "tiktok",
@@ -57,11 +91,40 @@
     "newsletter",
   ];
   const source = new URL(location.href).searchParams.get("utm_source");
-  if (allowed.includes(source)) {
+  const rememberSource = (consented) => {
     try {
-      sessionStorage.setItem("valon_source", source);
+      if (!consented) sessionStorage.removeItem("valon_source");
+      else if (allowed.includes(source))
+        sessionStorage.setItem("valon_source", source);
     } catch {}
-  }
+  };
+  consentListeners.add(rememberSource);
+  rememberSource(analyticsConsent);
+  const newsletterSource = () => {
+    // An explicit source in this URL needs no browser storage.
+    if (allowed.includes(source)) return source;
+    if (syncConsent()) {
+      try {
+        const stored = sessionStorage.getItem("valon_source");
+        if (allowed.includes(stored)) return stored;
+      } catch {}
+    }
+    return "website";
+  };
+  const newsletterPlacement = (element) => {
+    const placement =
+      element?.dataset.placement ||
+      element?.closest(".newsletter-hosted")?.dataset.placement;
+    if (["hero", "footer", "landing", "newsletter", "inline"].includes(placement))
+      return placement;
+    if (element?.closest(".hero-newsletter")) return "hero";
+    if (element?.closest(".newsletter-band")) return "footer";
+    if (element?.closest(".letter-signup")) return "landing";
+    if (element?.closest(".page-signup")) return "newsletter";
+    return "inline";
+  };
+  const newsletterLanguage = (language) =>
+    ["en", "sq", "de"].includes(language) ? language : "en";
   document.querySelectorAll(".newsletter-form").forEach((form) => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -69,11 +132,7 @@
       const button = form.querySelector("button"),
         status = form.querySelector(".form-status");
       const data = new FormData(form);
-      let stored = "website";
-      try {
-        stored = sessionStorage.getItem("valon_source") || "website";
-        if (!allowed.includes(stored)) stored = "website";
-      } catch {}
+      const stored = newsletterSource();
       const payload = {
         email: data.get("email"),
         language: data.get("language"),
@@ -94,11 +153,12 @@
         status.textContent =
           result.message || message("retry", payload.language);
         if (r.ok) {
-          track("newsletter_submit", {
-            language: payload.language,
-            placement: form.dataset.placement,
-            source: stored,
-          });
+          if (!payload.website)
+            track("newsletter_submit", {
+              language: newsletterLanguage(payload.language),
+              placement: newsletterPlacement(form),
+              source: stored,
+            });
           form.reset();
         }
       } catch {
@@ -110,6 +170,25 @@
   });
   let dialog;
   document.addEventListener("click", async (e) => {
+    const signupLink = e.target.closest("a[href]");
+    if (signupLink) {
+      let url;
+      try {
+        url = new URL(signupLink.href, location.href);
+      } catch {}
+      // This owned form link is a signup intention, never a subscription.
+      if (
+        url?.protocol === "https:" &&
+        url.hostname === "eepurl.com" &&
+        url.pathname.replace(/\/$/, "") === "/h-inUL"
+      ) {
+        track("newsletter_signup_click", {
+          language: newsletterLanguage(pageLanguage),
+          placement: newsletterPlacement(signupLink),
+          source: newsletterSource(),
+        });
+      }
+    }
     const legacy = e.target.closest("[data-legacy-embed]");
     if (legacy) {
       const iframe = document.createElement("iframe");
@@ -206,31 +285,63 @@
   if (article) {
     let sent = false,
       visibleMs = 0,
-      last = Date.now();
+      last = performance.now(),
+      wasReading = false,
+      timer;
+    const articlePosition = () => {
+      const rect = article.getBoundingClientRect();
+      return {
+        visible:
+          document.visibilityState === "visible" &&
+          rect.height > 0 &&
+          rect.bottom > 0 &&
+          rect.top < window.innerHeight,
+        reached:
+          rect.height > 0 &&
+          window.innerHeight >= rect.top + rect.height * 0.75,
+      };
+    };
+    const resetReading = () => {
+      visibleMs = 0;
+      last = performance.now();
+      wasReading = analyticsConsent && articlePosition().visible;
+    };
+    consentListeners.add(resetReading);
+    resetReading();
     const check = () => {
-      const now = Date.now();
-      if (document.visibilityState === "visible") visibleMs += now - last;
+      const consented = syncConsent();
+      const now = performance.now();
+      if (consented && wasReading) visibleMs += Math.max(0, now - last);
       last = now;
+      const position = articlePosition();
+      wasReading = consented && position.visible;
       if (
         !sent &&
+        wasReading &&
         visibleMs >= 30000 &&
-        window.scrollY + window.innerHeight >=
-          article.offsetTop + article.offsetHeight * 0.75
+        position.reached
       ) {
-        sent = true;
-        track("article_engaged", {
+        sent = track("article_engaged", {
           article_id: article.dataset.article,
-          language: document.documentElement.lang,
+          language: newsletterLanguage(pageLanguage),
         });
       }
     };
-    const timer = setInterval(check, 1000);
-    window.addEventListener("pagehide", () => clearInterval(timer), {
-      once: true,
+    const start = () => {
+      syncConsent();
+      resetReading();
+      if (timer === undefined) timer = setInterval(check, 1000);
+    };
+    start();
+    window.addEventListener("pagehide", () => {
+      clearInterval(timer);
+      timer = undefined;
+      resetReading();
     });
-    document.addEventListener("visibilitychange", () => {
-      last = Date.now();
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) start();
     });
+    document.addEventListener("visibilitychange", check);
     window.addEventListener("scroll", check, { passive: true });
   }
   if (document.querySelector("[data-page-error]"))
