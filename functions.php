@@ -62,18 +62,32 @@ add_action("after_setup_theme", function () {
     add_image_size("valon-card", 840, 620, true);
 });
 add_action("wp_enqueue_scripts", function () {
-    wp_enqueue_style(
-        "valon-style",
-        get_stylesheet_uri(),
-        [],
-        filemtime(get_template_directory() . "/style.css"),
-    );
-    wp_enqueue_style(
-        "valon-editorial",
-        get_template_directory_uri() . "/assets/editorial.css",
-        ["valon-style"],
-        filemtime(get_template_directory() . "/assets/editorial.css"),
-    );
+    $styles = [
+        "valon-style" => [
+            get_stylesheet_directory() . "/style.css",
+            get_stylesheet_uri(),
+            [],
+        ],
+        "valon-editorial" => [
+            get_template_directory() . "/assets/editorial.css",
+            get_template_directory_uri() . "/assets/editorial.css",
+            ["valon-style"],
+        ],
+    ];
+    foreach ($styles as $handle => [$path, $url, $dependencies]) {
+        // The homepage's small stylesheets should not delay its first paint.
+        // Other routes retain independently cacheable, versioned stylesheets.
+        $css = is_front_page() && is_readable($path)
+            ? file_get_contents($path)
+            : false;
+        if ($css !== false) {
+            wp_register_style($handle, false, $dependencies);
+            wp_add_inline_style($handle, $css);
+            wp_enqueue_style($handle);
+        } else {
+            wp_enqueue_style($handle, $url, $dependencies, filemtime($path));
+        }
+    }
     wp_enqueue_script(
         "valon-site",
         get_template_directory_uri() . "/js/site.js",
@@ -82,6 +96,32 @@ add_action("wp_enqueue_scripts", function () {
         true,
     );
 });
+function valon_home_portrait_sources()
+{
+    $base = get_template_directory_uri() . "/assets/valon-hero";
+    return [
+        "base" => $base,
+        "srcset" => implode(", ", array_map(
+            static fn($width) => $base . "-" . $width . ".webp " . $width . "w",
+            [480, 768, 1024, 1586],
+        )),
+        // Account for object-fit: cover in the desktop hero's minimum height.
+        "sizes" => "(max-width: 780px) 100vw, (max-width: 1085px) 640px, 59vw",
+    ];
+}
+add_action("wp_head", function () {
+    if (!is_front_page() || get_theme_mod("valon_portrait")) {
+        return;
+    }
+    $portrait = valon_home_portrait_sources();
+    // Match the picture source exactly; omit href to avoid an extra download
+    // in browsers without responsive-preload support.
+    printf(
+        '<link rel="preload" as="image" type="image/webp" imagesrcset="%s" imagesizes="%s" fetchpriority="high">' . "\n",
+        esc_attr($portrait["srcset"]),
+        esc_attr($portrait["sizes"]),
+    );
+}, 1);
 function valon_nav()
 {
     foreach (
