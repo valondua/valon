@@ -2,17 +2,35 @@
 <main id="main">
 <section class="home-hero" aria-labelledby="hero-title">
     <figure class="home-portrait">
-        <?php if ($portrait = get_theme_mod("valon_portrait")) {
+        <?php
+        // Account for object-fit: cover in the desktop hero's 800px minimum height.
+        $portrait_sizes = "(max-width: 780px) 100vw, (max-width: 1085px) 640px, 59vw";
+        if ($portrait = get_theme_mod("valon_portrait")) {
             echo wp_get_attachment_image($portrait, "full", false, [
                 "fetchpriority" => "high",
                 "loading" => "eager",
                 "alt" => "Valon Asani",
+                "sizes" => $portrait_sizes,
             ]);
         } else {
-             ?>
-            <img src="<?php echo esc_url(
-                get_template_directory_uri() . "/assets/valon-hero.jpeg",
-            ); ?>" width="1586" height="1983" alt="Valon Asani" fetchpriority="high" loading="eager">
+            $portrait_base = get_template_directory_uri() . "/assets/valon-hero";
+            $portrait_srcset = implode(
+                ", ",
+                array_map(
+                    static fn($width) =>
+                        $portrait_base . "-" . $width . ".webp " . $width . "w",
+                    [480, 768, 1024, 1586],
+                ),
+            );
+            ?>
+            <picture>
+                <source type="image/webp" srcset="<?php echo esc_attr(
+                    $portrait_srcset,
+                ); ?>" sizes="<?php echo esc_attr($portrait_sizes); ?>">
+                <img src="<?php echo esc_url(
+                    $portrait_base . ".jpeg",
+                ); ?>" width="1586" height="1983" alt="Valon Asani" fetchpriority="high" loading="eager">
+            </picture>
         <?php
         } ?>
         <figcaption>Prishtina & Zürich</figcaption>
