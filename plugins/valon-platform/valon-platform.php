@@ -45,7 +45,7 @@ add_action("wp_enqueue_scripts", function () {
     wp_enqueue_script(
         "valon-platform",
         plugins_url("assets/platform.js", __FILE__),
-        [],
+        wp_script_is("wp-consent-api", "registered") ? ["wp-consent-api"] : [],
         filemtime(VP_DIR . "/assets/platform.js"),
         true,
     );
@@ -58,3 +58,5 @@ add_action("wp_enqueue_scripts", function () {
 require_once VP_DIR . "/includes/cli.php";
 require_once VP_DIR . "/includes/deployment.php";
 require_once VP_DIR . "/includes/video-articles.php";
+
+require_once VP_DIR . "/includes/consent.php";
