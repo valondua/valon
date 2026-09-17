@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!wordpress.conf
+!uploads.ini
+!entrypoint.sh
+!imagick-3.8.1.tgz
