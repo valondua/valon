@@ -1,5 +1,6 @@
 <?php
 defined("ABSPATH") || exit();
+require_once __DIR__ . "/includes/static-images.php";
 require_once __DIR__ . "/includes/editorial.php";
 function valon_lang()
 {
@@ -105,6 +106,10 @@ function valon_home_portrait_sources()
             static fn($width) => $base . "-" . $width . ".webp " . $width . "w",
             [480, 768, 1024, 1586],
         )),
+        "avif_srcset" => implode(", ", array_map(
+            static fn($width) => $base . "-" . $width . ".avif " . $width . "w",
+            [480, 768, 1024, 1586],
+        )),
         // Account for object-fit: cover in the desktop hero's minimum height.
         "sizes" => "(max-width: 780px) 100vw, (max-width: 1085px) 640px, 59vw",
     ];
@@ -114,11 +119,12 @@ add_action("wp_head", function () {
         return;
     }
     $portrait = valon_home_portrait_sources();
-    // Match the picture source exactly; omit href to avoid an extra download
-    // in browsers without responsive-preload support.
+    // Preload only the preferred format: preloading both AVIF and WebP would
+    // download two portraits in browsers that support both. Older browsers
+    // discover the WebP/JPEG fallback from the picture element as usual.
     printf(
-        '<link rel="preload" as="image" type="image/webp" imagesrcset="%s" imagesizes="%s" fetchpriority="high">' . "\n",
-        esc_attr($portrait["srcset"]),
+        '<link rel="preload" as="image" type="image/avif" imagesrcset="%s" imagesizes="%s" fetchpriority="high">' . "\n",
+        esc_attr($portrait["avif_srcset"]),
         esc_attr($portrait["sizes"]),
     );
 }, 1);

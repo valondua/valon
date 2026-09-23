@@ -359,6 +359,12 @@
   overflow: hidden;
   background: #e6ecf0;
 }
+.article-card .card-image picture,
+.about-portrait picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .article-card .card-image img {
   width: 100%;
   height: 100%;
