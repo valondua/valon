@@ -141,6 +141,23 @@ function valon_render_article_image($post_id, $card = false)
             $attrs,
         );
     } else {
+        $asset_url = get_template_directory_uri() . "/assets/";
+        if (
+            $card &&
+            str_starts_with($cover["url"], $asset_url) &&
+            str_ends_with($cover["url"], ".jpeg")
+        ) {
+            $basename = substr($cover["url"], strlen($asset_url), -5);
+            $image = valon_static_image(
+                $basename,
+                $attrs,
+                "(max-width: 780px) calc(100vw - 44px), (max-width: 1100px) calc((100vw - 120px) / 3), (max-width: 1360px) calc((100vw - 176px) / 3), 395px",
+            );
+            if ($image) {
+                echo $image;
+                return;
+            }
+        }
         printf(
             '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="%d" height="%d">',
             esc_url($cover["url"]),

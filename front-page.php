@@ -14,6 +14,9 @@
         } else {
             ?>
             <picture>
+                <source type="image/avif" srcset="<?php echo esc_attr(
+                    $portrait_sources["avif_srcset"],
+                ); ?>" sizes="<?php echo esc_attr($portrait_sources["sizes"]); ?>">
                 <source type="image/webp" srcset="<?php echo esc_attr(
                     $portrait_sources["srcset"],
                 ); ?>" sizes="<?php echo esc_attr($portrait_sources["sizes"]); ?>">
@@ -199,11 +202,11 @@
 </section>
 
 <section class="home-about"><div class="container home-about-grid">
-    <figure class="about-portrait"><img src="<?php echo esc_url(
-        get_template_directory_uri() . "/assets/valon-portrait.jpeg",
-    ); ?>" width="879" height="894" alt="<?php echo esc_attr(
-    valon_text("Valon Asani", "Valon Asani"),
-); ?>" loading="lazy"></figure>
+    <figure class="about-portrait"><?php echo valon_static_image(
+        "valon-portrait",
+        ["alt" => "Valon Asani", "loading" => "lazy", "decoding" => "async"],
+        "(max-width: 780px) 100vw, 560px",
+    ); ?></figure>
     <div><p class="about-label"><?php echo esc_html(
         valon_text("About Valon", "Rreth Valonit"),
     ); ?></p><h2><?php echo esc_html(
