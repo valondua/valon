@@ -30,6 +30,7 @@ require_once VP_DIR . "/includes/social.php";
 require_once VP_DIR . "/includes/admin.php";
 require_once VP_DIR . "/includes/newsletter.php";
 require_once VP_DIR . "/includes/seo.php";
+require_once VP_DIR . "/includes/yoast-content.php";
 add_action("init", ["VP_Social", "register"]);
 add_action("vp_hourly_sync", ["VP_Social", "sync_all"]);
 register_activation_hook(__FILE__, function () {
