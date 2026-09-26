@@ -2,6 +2,7 @@
 // Requires sharp 0.35.4 (Node.js build-time tool only).
 // Example: npm install --prefix /tmp/valon-image-tools sharp@0.35.4
 // NODE_PATH=/tmp/valon-image-tools/node_modules node tools/generate-modern-images.cjs
+// Pass image names to rebuild only those sources, for example: valon-travel valon-reading.
 // Hero WebP fallbacks are rebuilt separately by generate-hero-images.sh.
 const sharp = require('sharp');
 const path = require('node:path');
@@ -12,11 +13,19 @@ const images = {
     'valon-self-respect': [480, 768, 1024],
     'valon-dua': [480, 768, 1024],
     'valon-portrait': [480, 768, 879],
+    'valon-travel': [480, 768],
+    'valon-reading': [480, 768, 792],
+    'valon-friends': [480, 768, 1024],
 };
 const assets = path.resolve(__dirname, '../assets');
 
 async function main() {
+    const requested = process.argv.slice(2);
+    for (const name of requested) {
+        if (!Object.hasOwn(images, name)) throw new Error(`Unknown bundled image: ${name}`);
+    }
     for (const [name, widths] of Object.entries(images)) {
+        if (requested.length && !requested.includes(name)) continue;
         const source = path.join(assets, `${name}.jpeg`);
         const metadata = await sharp(source).metadata();
         for (const width of widths) {
