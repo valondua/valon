@@ -11,6 +11,7 @@ function is_singular($type) { return $GLOBALS["single"] && $type === "post"; }
 function plugins_url($path) { return "https://example.test/wp-content/plugins" . $path; }
 function wp_parse_url($url, $part) { return parse_url($url, $part); }
 function add_filter(...$arguments) {}
+function add_action(...$arguments) {}
 function esc_attr($value) { return htmlspecialchars($value, ENT_QUOTES); }
 function check($condition, $message) {
     if (!$condition) { throw new RuntimeException($message); }

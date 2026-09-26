@@ -32,6 +32,7 @@ function wp_parse_url($url, $component = -1) { return parse_url($url, $component
 function add_action($hook, $callback, ...$args) { $GLOBALS["actions"][$hook][] = $callback; }
 function add_filter($hook, $callback, ...$args) { $GLOBALS["filters"][$hook][] = $callback; }
 function is_front_page() { return $GLOBALS["front_page"]; }
+function is_singular($type = "") { return false; }
 function get_theme_mod($name) { return false; }
 function get_post_meta($id, $key, $single) { return $GLOBALS["post_meta"][$id][$key] ?? ""; }
 function get_post_thumbnail_id($id) { return $GLOBALS["thumbnail_ids"][$id] ?? 0; }
