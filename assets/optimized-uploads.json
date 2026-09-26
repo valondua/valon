@@ -1,0 +1,23 @@
+{
+  "2025/06/image-1.png": {
+    "basename": "valon-energy-boundaries",
+    "width": 1024,
+    "height": 1024,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "f886c027c4b8058315171dada18375a441b90370fd37d6d66f0388c54dc0e977"
+  },
+  "2025/06/image.png": {
+    "basename": "valon-energy-vampires",
+    "width": 736,
+    "height": 736,
+    "widths": [
+      480,
+      736
+    ],
+    "sha256": "11769aa94a22832e29c5d86e48f663bf9594fb71903ad3adcecdfcc6d16f798c"
+  }
+}

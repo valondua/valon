@@ -27,6 +27,75 @@ function valon_article_cover_sizes($width = 0, $height = 0)
     return "(max-width: 780px) $mobile, (max-width: 964px) $tablet, {$maximum}px";
 }
 
+/** Add modern sources for reviewed uploads while preserving the original image HTML. */
+function valon_upload_picture($url, $fallback_html, $sizes)
+{
+    if (!is_string($url) || strpbrk($url, "?#") !== false) {
+        return $fallback_html;
+    }
+    $uploads = wp_get_upload_dir();
+    $relative = null;
+    foreach (array_unique([
+        "https://www.valonasani.com/wp-content/uploads/",
+        rtrim($uploads["baseurl"], "/") . "/",
+    ]) as $root) {
+        if (str_starts_with($url, $root)) {
+            $relative = substr($url, strlen($root));
+            break;
+        }
+    }
+    if ($relative === null || preg_match('/\.gif$/i', $relative)) {
+        return $fallback_html;
+    }
+    static $manifest;
+    if ($manifest === null) {
+        $file = get_template_directory() . "/assets/optimized-uploads.json";
+        $manifest = is_readable($file) ? (json_decode(file_get_contents($file), true) ?: []) : [];
+    }
+    $image = $manifest[$relative] ?? null;
+    if (
+        !is_array($image) || !is_string($image["basename"] ?? null) ||
+        !preg_match('/^[a-z0-9][a-z0-9-]*$/D', $image["basename"]) ||
+        empty($image["width"]) || empty($image["height"]) ||
+        empty($image["widths"]) || !is_array($image["widths"])
+    ) {
+        return $fallback_html;
+    }
+    // Only wrap an actual matching IMG, never an existing picture or another image.
+    $tag = new WP_HTML_Tag_Processor($fallback_html);
+    if (!$tag->next_tag() || $tag->get_tag() !== "IMG" || $tag->get_attribute("src") !== $url) {
+        return $fallback_html;
+    }
+    $previous = 0;
+    foreach ($image["widths"] as $width) {
+        if (!is_int($width) || $width <= $previous || $width > (int) $image["width"]) {
+            return $fallback_html;
+        }
+        $previous = $width;
+    }
+    $sources_html = "";
+    foreach (["avif" => "image/avif", "webp" => "image/webp"] as $extension => $type) {
+        $sources = [];
+        foreach ($image["widths"] as $width) {
+            $path = "assets/" . $image["basename"] . "-$width.$extension";
+            if (!is_file(get_template_directory() . "/" . $path)) {
+                $sources = [];
+                break;
+            }
+            $sources[] = valon_asset_url($path) . " {$width}w";
+        }
+        if ($sources) {
+            $sources_html .= sprintf(
+                '<source type="%s" srcset="%s" sizes="%s">',
+                esc_attr($type),
+                esc_attr(implode(", ", $sources)),
+                esc_attr($sizes ?: "100vw"),
+            );
+        }
+    }
+    return $sources_html ? "<picture>" . $sources_html . $fallback_html . "</picture>" : $fallback_html;
+}
+
 /** Render optimized sources for bundled photos, with a JPEG fallback. */
 function valon_static_image($basename, $attributes = [], $sizes = "100vw", $preserve_aspect_ratio = false)
 {
