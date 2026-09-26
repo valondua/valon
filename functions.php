@@ -2,6 +2,7 @@
 defined("ABSPATH") || exit();
 require_once __DIR__ . "/includes/static-images.php";
 require_once __DIR__ . "/includes/editorial.php";
+require_once __DIR__ . "/includes/performance.php";
 function valon_lang()
 {
     return function_exists("pll_current_language")
@@ -76,11 +77,15 @@ add_action("wp_enqueue_scripts", function () {
         ],
     ];
     foreach ($styles as $handle => [$path, $url, $dependencies]) {
-        // The homepage's small stylesheets should not delay its first paint.
+        // Supply article styles with the HTML, avoiding two first-paint requests.
         // Other routes retain independently cacheable, versioned stylesheets.
-        $css = is_front_page() && is_readable($path)
+        $css = (is_front_page() || is_singular("post")) && is_readable($path)
             ? file_get_contents($path)
             : false;
+        // A future relative asset reference needs the stylesheet's original URL.
+        if ($css !== false && is_singular("post") && preg_match('/url\s*\(|@import/i', $css)) {
+            $css = false;
+        }
         if ($css !== false) {
             wp_register_style($handle, false, $dependencies);
             wp_add_inline_style($handle, $css);

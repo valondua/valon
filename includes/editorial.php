@@ -116,6 +116,75 @@ function valon_article_image($post_id)
     return ["url" => $url, "attachment" => 0, "kind" => $cover["kind"]];
 }
 
+/** Reuse existing upload sizes only after proving they belong to this exact cover. */
+function valon_uploaded_cover_sources($url)
+{
+    static $resolved = [];
+    if (array_key_exists($url, $resolved)) {
+        return $resolved[$url];
+    }
+    $resolved[$url] = false;
+    $uploads = wp_get_upload_dir();
+    $roots = array_unique([
+        "https://www.valonasani.com/wp-content/uploads/",
+        rtrim($uploads["baseurl"], "/") . "/",
+    ]);
+    $root = "";
+    foreach ($roots as $candidate) {
+        if (str_starts_with($url, $candidate)) {
+            $root = $candidate;
+            break;
+        }
+    }
+    // Preserve animated GIFs: WordPress intermediate GIF sizes may be flattened.
+    $path = wp_parse_url($url, PHP_URL_PATH) ?: "";
+    if (!$root || preg_match('/\.gif$/i', $path)) {
+        return false;
+    }
+    $relative = substr(strtok($url, "?#"), strlen($root));
+    $original = preg_replace('/-\d+x\d+(?=\.[^.]+$)/', "", $relative);
+    $candidates = array_unique([
+        $relative,
+        $original,
+        preg_replace('/(?=\.[^.]+$)/', "-scaled", $original),
+    ]);
+    foreach ($candidates as $candidate) {
+        // Map production URLs onto the local uploads origin when previewing a copy.
+        $id = attachment_url_to_postid(rtrim($uploads["baseurl"], "/") . "/" . $candidate);
+        $meta = $id ? wp_get_attachment_metadata($id) : false;
+        if (!$meta || empty($meta["file"]) || empty($meta["width"]) || empty($meta["height"]) || get_post_mime_type($id) === "image/gif") {
+            continue;
+        }
+        if (dirname($meta["file"]) !== dirname($relative)) {
+            continue;
+        }
+        $sizes = array_merge([
+            ["file" => basename($meta["file"]), "width" => $meta["width"], "height" => $meta["height"]],
+        ], array_values($meta["sizes"] ?? []));
+        foreach ($sizes as $size) {
+            if (($size["file"] ?? "") !== basename($relative) || empty($size["width"]) || empty($size["height"])) {
+                continue;
+            }
+            $width = (int) $size["width"];
+            $height = (int) $size["height"];
+            $srcset = wp_calculate_image_srcset([$width, $height], $url, $meta, $id);
+            $sources = [];
+            foreach (explode(", ", $srcset ?: "") as $source) {
+                // Never promote a legacy 1024px cover to a larger, heavier original.
+                if (preg_match('/ ([0-9]+)w$/', $source, $match) && (int) $match[1] <= $width) {
+                    $sources[] = str_replace(rtrim($uploads["baseurl"], "/") . "/", $root, $source);
+                }
+            }
+            return $resolved[$url] = [
+                "width" => $width,
+                "height" => $height,
+                "srcset" => count($sources) > 1 ? implode(", ", $sources) : "",
+            ];
+        }
+    }
+    return false;
+}
+
 function valon_render_article_image($post_id, $card = false)
 {
     $cover = valon_article_image($post_id);
@@ -129,7 +198,18 @@ function valon_render_article_image($post_id, $card = false)
         "class" => $card ? "" : "article-cover",
         "loading" => $card ? "lazy" : "eager",
     ];
+    $sizes = $card
+        ? "(max-width: 780px) calc(100vw - 44px), (max-width: 1100px) calc((100vw - 120px) / 3), (max-width: 1360px) calc((100vw - 176px) / 3), 395px"
+        : valon_article_cover_sizes();
+    if (!$card) {
+        $attrs["fetchpriority"] = "high";
+        $attrs["sizes"] = $sizes;
+    }
     if ($cover["attachment"]) {
+        if (!$card) {
+            $attachment = wp_get_attachment_image_src($cover["attachment"], "large");
+            $attrs["sizes"] = valon_article_cover_sizes($attachment[1] ?? 0, $attachment[2] ?? 0);
+        }
         echo wp_get_attachment_image(
             $cover["attachment"],
             $card ? "valon-card" : "large",
@@ -148,9 +228,7 @@ function valon_render_article_image($post_id, $card = false)
             $image = valon_static_image(
                 $basename,
                 $attrs,
-                $card
-                    ? "(max-width: 780px) calc(100vw - 44px), (max-width: 1100px) calc((100vw - 120px) / 3), (max-width: 1360px) calc((100vw - 176px) / 3), 395px"
-                    : "(max-width: 780px) calc(100vw - 44px), (max-width: 964px) calc(100vw - 64px), 900px",
+                $sizes,
                 !$card,
             );
             if ($image) {
@@ -158,14 +236,20 @@ function valon_render_article_image($post_id, $card = false)
                 return;
             }
         }
+        if (!$card && ($sources = valon_uploaded_cover_sources($cover["url"]))) {
+            $cover = array_merge($cover, $sources);
+            $sizes = valon_article_cover_sizes($cover["width"], $cover["height"]);
+        }
         printf(
-            '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="%d" height="%d">',
+            '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="%d" height="%d"%s%s>',
             esc_url($cover["url"]),
             esc_attr($alt),
             esc_attr($attrs["class"]),
             esc_attr($attrs["loading"]),
             (int) ($cover["width"] ?? 1200),
             (int) ($cover["height"] ?? 750),
+            $card ? "" : ' fetchpriority="high"',
+            empty($cover["srcset"]) ? "" : sprintf(' srcset="%s" sizes="%s"', esc_attr($cover["srcset"]), esc_attr($sizes)),
         );
     }
 }

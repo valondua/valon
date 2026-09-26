@@ -12,7 +12,22 @@ function valon_asset_url($path)
         : $url;
 }
 
-/** Render optimized sources for a small set of bundled photos, with a JPEG fallback. */
+/** Match the article's 900px column and 640px-high, contained image. */
+function valon_article_cover_sizes($width = 0, $height = 0)
+{
+    $maximum = $width > 0 && $height > 0
+        ? min(900, (int) floor(640 * $width / $height))
+        : 900;
+    $mobile = "calc(100vw - 44px)";
+    $tablet = "calc(100vw - 64px)";
+    if ($maximum < 900) {
+        $mobile = "min($mobile, {$maximum}px)";
+        $tablet = "min($tablet, {$maximum}px)";
+    }
+    return "(max-width: 780px) $mobile, (max-width: 964px) $tablet, {$maximum}px";
+}
+
+/** Render optimized sources for bundled photos, with a JPEG fallback. */
 function valon_static_image($basename, $attributes = [], $sizes = "100vw", $preserve_aspect_ratio = false)
 {
     $images = [
@@ -20,11 +35,17 @@ function valon_static_image($basename, $attributes = [], $sizes = "100vw", $pres
         "valon-self-respect" => [1024, 767, [480, 768, 1024]],
         "valon-dua" => [1024, 766, [480, 768, 1024]],
         "valon-portrait" => [879, 894, [480, 768, 879]],
+        "valon-travel" => [768, 1024, [480, 768]],
+        "valon-reading" => [792, 990, [480, 768, 792]],
+        "valon-friends" => [1024, 768, [480, 768, 1024]],
     ];
     if (!isset($images[$basename])) {
         return "";
     }
     [$width, $height, $widths] = $images[$basename];
+    if ($preserve_aspect_ratio) {
+        $sizes = valon_article_cover_sizes($width, $height);
+    }
     $asset_dir = get_template_directory() . "/assets/";
     $html = "<picture>";
     foreach (["avif" => "image/avif", "webp" => "image/webp"] as $extension => $type) {
