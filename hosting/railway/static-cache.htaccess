@@ -1,0 +1,13 @@
+# BEGIN Valon Static Cache
+# Only real public assets receive browser caching. WordPress routes, PHP,
+# redirects and errors keep their existing policies. Preserve ETag/Last-Modified.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(?i:css|js|avif|webp|jpe?g|png|gif|svg|ico|woff2?)$">
+        Header onsuccess unset Cache-Control "expr=-f %{REQUEST_FILENAME} && %{REQUEST_URI} =~ m#^/(?:wp-content/(?:themes|plugins|uploads)|wp-includes)/# && %{REQUEST_METHOD} =~ /^(GET|HEAD)$/ && %{REQUEST_STATUS} =~ /^(200|206|304)$/"
+        Header always set Cache-Control "public, max-age=86400" "expr=-f %{REQUEST_FILENAME} && %{REQUEST_URI} =~ m#^/(?:wp-content/(?:themes|plugins|uploads)|wp-includes)/# && %{REQUEST_METHOD} =~ /^(GET|HEAD)$/ && %{REQUEST_STATUS} =~ /^(200|206|304)$/"
+        # WordPress and Valon use version parameters when these files change.
+        # No immutable directive: old versions may still be revalidated.
+        Header always set Cache-Control "public, max-age=2592000" "expr=-f %{REQUEST_FILENAME} && %{REQUEST_URI} =~ m#^/(?:wp-content/(?:themes|plugins|uploads)|wp-includes)/# && %{REQUEST_METHOD} =~ /^(GET|HEAD)$/ && %{REQUEST_STATUS} =~ /^(200|206|304)$/ && %{QUERY_STRING} =~ /(?:^|&)ver=[A-Za-z0-9._-]+(?:&|$)/"
+    </FilesMatch>
+</IfModule>
+# END Valon Static Cache

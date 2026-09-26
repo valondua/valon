@@ -55,7 +55,7 @@ function valon_article_image($post_id)
     $source_cover = $video_covers[$video_id] ?? null;
     if ($source_cover && is_file(get_template_directory() . "/" . $source_cover["path"])) {
         return [
-            "url" => get_template_directory_uri() . "/" . $source_cover["path"],
+            "url" => valon_asset_url($source_cover["path"]),
             "attachment" => 0,
             "kind" => "original",
             "width" => (int) $source_cover["width"],
@@ -71,11 +71,7 @@ function valon_article_image($post_id)
         )
     ) {
         return [
-            "url" =>
-                get_template_directory_uri() .
-                "/assets/" .
-                $video_cover .
-                ".jpeg",
+            "url" => valon_asset_url("assets/" . $video_cover . ".jpeg"),
             "attachment" => 0,
             "kind" => "portrait",
         ];
@@ -116,7 +112,7 @@ function valon_article_image($post_id)
         "https://www.valonasani.com/wp-content/uploads/",
     )
         ? $cover["path"]
-        : get_template_directory_uri() . "/" . ltrim($cover["path"], "/");
+        : valon_asset_url($cover["path"]);
     return ["url" => $url, "attachment" => 0, "kind" => $cover["kind"]];
 }
 
@@ -142,16 +138,20 @@ function valon_render_article_image($post_id, $card = false)
         );
     } else {
         $asset_url = get_template_directory_uri() . "/assets/";
+        $asset_path = wp_parse_url($asset_url, PHP_URL_PATH);
+        $cover_path = wp_parse_url($cover["url"], PHP_URL_PATH) ?: "";
         if (
-            $card &&
             str_starts_with($cover["url"], $asset_url) &&
-            str_ends_with($cover["url"], ".jpeg")
+            str_ends_with($cover_path, ".jpeg")
         ) {
-            $basename = substr($cover["url"], strlen($asset_url), -5);
+            $basename = substr($cover_path, strlen($asset_path), -5);
             $image = valon_static_image(
                 $basename,
                 $attrs,
-                "(max-width: 780px) calc(100vw - 44px), (max-width: 1100px) calc((100vw - 120px) / 3), (max-width: 1360px) calc((100vw - 176px) / 3), 395px",
+                $card
+                    ? "(max-width: 780px) calc(100vw - 44px), (max-width: 1100px) calc((100vw - 120px) / 3), (max-width: 1360px) calc((100vw - 176px) / 3), 395px"
+                    : "(max-width: 780px) calc(100vw - 44px), (max-width: 964px) calc(100vw - 64px), 900px",
+                !$card,
             );
             if ($image) {
                 echo $image;

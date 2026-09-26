@@ -37,7 +37,7 @@ $t = fn($en, $sq, $de) => valon_localized(compact("en", "sq", "de"));
 ); ?> ↓</a>
 </div>
 <figure class="letter-portrait"><img src="<?php echo esc_url(
-    get_template_directory_uri() . "/assets/valon-reading.jpeg",
+    valon_asset_url("assets/valon-reading.jpeg"),
 ); ?>" alt="Valon Asani" width="1586" height="1983" fetchpriority="high"><figcaption><?php echo esc_html(
     $t(
         "Still learning. Still building. — Valon",

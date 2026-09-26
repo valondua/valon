@@ -1,8 +1,19 @@
 <?php
 defined("ABSPATH") || exit();
 
+/** Give bundled assets a new browser-cache URL whenever their file changes. */
+function valon_asset_url($path)
+{
+    $path = ltrim($path, "/");
+    $file = get_template_directory() . "/" . $path;
+    $url = get_template_directory_uri() . "/" . $path;
+    return is_file($file)
+        ? add_query_arg("ver", (string) filemtime($file), $url)
+        : $url;
+}
+
 /** Render optimized sources for a small set of bundled photos, with a JPEG fallback. */
-function valon_static_image($basename, $attributes = [], $sizes = "100vw")
+function valon_static_image($basename, $attributes = [], $sizes = "100vw", $preserve_aspect_ratio = false)
 {
     $images = [
         "valon-candid" => [360, 540, [360]],
@@ -15,7 +26,6 @@ function valon_static_image($basename, $attributes = [], $sizes = "100vw")
     }
     [$width, $height, $widths] = $images[$basename];
     $asset_dir = get_template_directory() . "/assets/";
-    $asset_url = get_template_directory_uri() . "/assets/";
     $html = "<picture>";
     foreach (["avif" => "image/avif", "webp" => "image/webp"] as $extension => $type) {
         $sources = [];
@@ -26,7 +36,7 @@ function valon_static_image($basename, $attributes = [], $sizes = "100vw")
                 $sources = [];
                 break;
             }
-            $sources[] = $asset_url . $filename . " " . $source_width . "w";
+            $sources[] = valon_asset_url("assets/" . $filename) . " " . $source_width . "w";
         }
         if ($sources) {
             $html .= sprintf(
@@ -43,10 +53,14 @@ function valon_static_image($basename, $attributes = [], $sizes = "100vw")
     );
     $html .= sprintf(
         '<img src="%s" width="%d" height="%d"',
-        esc_url($asset_url . $basename . ".jpeg"),
+        esc_url(valon_asset_url("assets/" . $basename . ".jpeg")),
         $width,
         $height,
     );
+    if ($preserve_aspect_ratio) {
+        // Resized candidates round pixel heights; retain the original cover box.
+        $html .= sprintf(' style="aspect-ratio: %d / %d"', $width, $height);
+    }
     foreach (["alt", "class", "loading", "decoding", "fetchpriority"] as $attribute) {
         if (isset($attributes[$attribute])) {
             $html .= sprintf(' %s="%s"', $attribute, esc_attr($attributes[$attribute]));

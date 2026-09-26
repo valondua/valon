@@ -17,7 +17,7 @@ foreach ($posts as $post) {
     $video = get_post_meta($post->ID, '_vp_video_id', true);
     if (!isset($manifest[$video])) { continue; }
     $cover = valon_article_image($post->ID);
-    if (!get_post_thumbnail_id($post->ID) && !str_ends_with($cover['url'], $manifest[$video]['path'])) { WP_CLI::error('Wrong source cover: ' . $post->ID); }
+    if (!get_post_thumbnail_id($post->ID) && !str_ends_with(wp_parse_url($cover['url'], PHP_URL_PATH), $manifest[$video]['path'])) { WP_CLI::error('Wrong source cover: ' . $post->ID); }
     ob_start(); valon_render_article_image($post->ID, true); $html = ob_get_clean();
     if (!str_contains($html, 'loading="lazy"') || !str_contains($html, 'alt=""')) { WP_CLI::error('Card accessibility/loading regression.'); }
     $count++;

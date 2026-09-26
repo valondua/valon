@@ -14,7 +14,7 @@ $languages = [
 <div class="media-page">
 <section class="media-hero" aria-labelledby="media-title">
     <figure><img src="<?php echo esc_url(
-        get_template_directory_uri() . "/assets/valon-portrait.jpeg",
+        valon_asset_url("assets/valon-portrait.jpeg"),
     ); ?>" width="879" height="894" alt="Valon Asani" fetchpriority="high"><figcaption>Zürich ↔ Prishtina</figcaption></figure>
     <div class="media-hero-copy"><p class="eyebrow"><?php echo esc_html(
         $t(
