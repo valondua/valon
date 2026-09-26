@@ -27,11 +27,64 @@ function valon_inline_related_styles($html, $handle, $href, $media)
 }
 add_filter("style_loader_tag", "valon_inline_related_styles", 10, 4);
 
-function valon_is_article_body_context()
+/** Discover the local consent placeholder before Complianz builds its player wrapper. */
+function valon_video_placeholder_url()
+{
+    if (!is_singular("post") || !function_exists("vp_video_article_player") ||
+        !function_exists("cmplz_placeholder") || !function_exists("cmplz_use_placeholder")) {
+        return "";
+    }
+    $player = new WP_HTML_Tag_Processor(vp_video_article_player(get_queried_object_id()));
+    if (!$player->next_tag("IFRAME")) {
+        return "";
+    }
+    $src = $player->get_attribute("src");
+    if (!is_string($src) || wp_parse_url($src, PHP_URL_HOST) !== "www.tiktok.com" ||
+        !cmplz_use_placeholder($src)) {
+        return "";
+    }
+    // Resolve through Complianz so its selected style and custom placeholder filters apply.
+    $url = cmplz_placeholder("tiktok", $src);
+    $parts = is_string($url) ? wp_parse_url($url) : false;
+    $home = wp_parse_url(home_url("/"));
+    // A filtered third-party image must never be contacted before consent.
+    if (!$parts || !in_array($parts["scheme"] ?? "", ["http", "https"], true) ||
+        isset($parts["user"]) || isset($parts["pass"])) {
+        return "";
+    }
+    foreach (["scheme", "host", "port"] as $component) {
+        if (($parts[$component] ?? null) !== ($home[$component] ?? null)) {
+            return "";
+        }
+    }
+    return $url;
+}
+function valon_preload_video_placeholder()
+{
+    $url = valon_video_placeholder_url();
+    if ($url !== "") {
+        printf('<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n", esc_url($url));
+    }
+}
+add_action("wp_head", "valon_preload_video_placeholder", 1);
+
+/** Let WordPress retain dependency order and fall back when a script cannot be deferred. */
+function valon_defer_article_scripts()
+{
+    if (!is_singular("post")) {
+        return;
+    }
+    foreach (["valon-site", "valon-platform"] as $handle) {
+        wp_script_add_data($handle, "strategy", "defer");
+    }
+}
+add_action("wp_enqueue_scripts", "valon_defer_article_scripts", 100);
+
+function valon_is_article_body_context($include_video = false)
 {
     return is_singular("post") && in_the_loop() && is_main_query() &&
         get_the_ID() === get_queried_object_id() &&
-        !(function_exists("vp_video_id") && vp_video_id(get_the_ID()));
+        ($include_video || !(function_exists("vp_video_id") && vp_video_id(get_the_ID())));
 }
 
 /** The template cover is the priority image; body illustrations follow it. */
@@ -52,17 +105,16 @@ add_filter("wp_content_img_tag", "valon_article_body_image_loading", 20, 2);
 /** Wrap standalone body images after WordPress has supplied their responsive attributes. */
 function valon_article_body_pictures($html)
 {
-    if (!valon_is_article_body_context() || stripos($html, "<img") === false) {
+    if (!valon_is_article_body_context(true) || stripos($html, "<img") === false) {
         return $html;
     }
-    $sizes = "(max-width: 780px) min(calc(100vw - 44px), 720px), min(calc(100vw - 64px), 720px)";
     $marker = "data-valon-upload-token";
     while (stripos($html, $marker) !== false) {
         $marker .= "-x";
     }
     $tags = new WP_HTML_Tag_Processor($html);
     $picture_depth = 0;
-    $urls = [];
+    $pictures = [];
     while ($tags->next_tag(["tag_closers" => "visit"])) {
         if ($tags->get_tag() === "PICTURE") {
             $picture_depth = max(0, $picture_depth + ($tags->is_tag_closer() ? -1 : 1));
@@ -75,32 +127,35 @@ function valon_article_body_pictures($html)
         if (!is_string($url)) {
             continue;
         }
+        $width = (string) $tags->get_attribute("width");
+        $maximum = ctype_digit($width) && (int) $width > 0 ? min(720, (int) $width) : 720;
+        $sizes = "(max-width: 780px) min(calc(100vw - 44px), {$maximum}px), min(calc(100vw - 64px), {$maximum}px)";
         $probe = '<img src="' . esc_url($url) . '">';
         if (valon_upload_picture($url, $probe, $sizes) === $probe) {
             continue;
         }
-        $id = (string) count($urls);
-        $urls[$id] = $url;
+        $id = (string) count($pictures);
+        $pictures[$id] = ["url" => $url, "sizes" => $sizes];
         $tags->set_attribute($marker, $id);
     }
-    if (!$urls) {
+    if (!$pictures) {
         return $html;
     }
     // Temporary markers locate raw tags without reserializing the document or attributes.
     // The full HTML parser above supplies context, including pictures, comments and scripts.
     $result = preg_replace_callback(
         '~<img\b(?:[^>\'"]|"[^"]*"|\'[^\']*\')*>~i',
-        function ($match) use ($marker, $urls, $sizes) {
+        function ($match) use ($marker, $pictures) {
             $tag = new WP_HTML_Tag_Processor($match[0]);
             if (!$tag->next_tag("IMG")) {
                 return $match[0];
             }
             $id = $tag->get_attribute($marker);
-            if (!is_string($id) || !isset($urls[$id])) {
+            if (!is_string($id) || !isset($pictures[$id])) {
                 return $match[0];
             }
             $original = str_replace(' ' . $marker . '="' . $id . '"', "", $match[0]);
-            return valon_upload_picture($urls[$id], $original, $sizes);
+            return valon_upload_picture($pictures[$id]["url"], $original, $pictures[$id]["sizes"]);
         },
         $tags->get_updated_html(),
     );

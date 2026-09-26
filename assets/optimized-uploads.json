@@ -19,5 +19,506 @@
       736
     ],
     "sha256": "11769aa94a22832e29c5d86e48f663bf9594fb71903ad3adcecdfcc6d16f798c"
+  },
+  "2025/01/image.png": {
+    "basename": "valon-upload-b5cdba7c09f5",
+    "width": 1024,
+    "height": 1024,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "b5cdba7c09f5962e2dd5b9628de8992021b60762529ccf509aac14559cb47f10"
+  },
+  "2025/01/image-9.png": {
+    "basename": "valon-upload-0bc971c6a59f",
+    "width": 1024,
+    "height": 826,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "0bc971c6a59f1b7fe40db499612de0b6f99356f30c23896b28208c7801a9728a"
+  },
+  "2025/01/image-20-1024x795.png": {
+    "basename": "valon-upload-9b158ed4ddff",
+    "width": 1024,
+    "height": 795,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "9b158ed4ddff2fd3a906ee89d11c6318d0778c2ed94da0d900f320818b4d2a37"
+  },
+  "2025/01/image-16.png": {
+    "basename": "valon-upload-f2c7cd21eca0",
+    "width": 791,
+    "height": 616,
+    "widths": [
+      480,
+      768,
+      791
+    ],
+    "sha256": "f2c7cd21eca0921e1c8a9c5c0fefff1d579fcc9dba1a8dccae94ac1f214d5e3a"
+  },
+  "2021/09/image-9.png": {
+    "basename": "valon-upload-38c199df21cd",
+    "width": 976,
+    "height": 722,
+    "widths": [
+      480,
+      768,
+      976
+    ],
+    "sha256": "38c199df21cdd1517d6a2178e68194081365fcee9122ac6c21bea158d0b42c84"
+  },
+  "2025/03/image-3-667x1024.png": {
+    "basename": "valon-upload-4cda2b31318f",
+    "width": 667,
+    "height": 1024,
+    "widths": [
+      480,
+      667
+    ],
+    "sha256": "4cda2b31318fabfa77469ef8d9f789ec60e5fd450e542a38b94b8740c464af3d"
+  },
+  "2025/01/image-23-1024x585.png": {
+    "basename": "valon-upload-8e9e20c716b4",
+    "width": 1024,
+    "height": 585,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "8e9e20c716b4bda8680a8a94effaf576ccaa269932a9743d10b016d08d09e032"
+  },
+  "2025/01/image-7.png": {
+    "basename": "valon-upload-afdde1799b2c",
+    "width": 860,
+    "height": 550,
+    "widths": [
+      480,
+      768,
+      860
+    ],
+    "sha256": "afdde1799b2cd396384189cfbd8d87462931e192a5b5ca3c4295356aa3314d0e"
+  },
+  "2025/01/image-17.png": {
+    "basename": "valon-upload-5f8ce5b26c52",
+    "width": 960,
+    "height": 539,
+    "widths": [
+      480,
+      768,
+      960
+    ],
+    "sha256": "5f8ce5b26c52368d6256923913e13eb22d1f260e3e99277155e6d0c436e5401b"
+  },
+  "2025/03/image-1-1024x580.png": {
+    "basename": "valon-upload-9f4726a213be",
+    "width": 1024,
+    "height": 580,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "9f4726a213becd4c358179dedd4a93a9dccbf9b76e1a77fc7d12f76ff63b17e7"
+  },
+  "2021/08/image-3-1024x637.png": {
+    "basename": "valon-upload-3f4831afa7db",
+    "width": 1024,
+    "height": 637,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "3f4831afa7db89ae76d2b0999dbdc83f243a07e05947b58245b3509a67c55642"
+  },
+  "2025/01/image-13-1024x594.png": {
+    "basename": "valon-upload-f21aa4957b9e",
+    "width": 1024,
+    "height": 594,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "f21aa4957b9e2d881a75a8c58d2de3d6a4a9c7b7511c118618bf0288e815ea5a"
+  },
+  "2025/01/image-22.png": {
+    "basename": "valon-upload-7313cfcc3f5b",
+    "width": 755,
+    "height": 736,
+    "widths": [
+      480,
+      755
+    ],
+    "sha256": "7313cfcc3f5b52eb096e8e08db5b3abf4fcede36a2dbdcd064a20ef80d9db492"
+  },
+  "theme:assets/video-covers/7597539248341847317.jpg": {
+    "basename": "valon-video-7597539248341847317",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "b55f81074b6caa34008e2f9aa731d90d7da59293611b90199160f3033b025c07"
+  },
+  "2025/01/image-3.png": {
+    "basename": "valon-upload-c1f9f89bc844",
+    "width": 852,
+    "height": 610,
+    "widths": [
+      480,
+      768,
+      852
+    ],
+    "sha256": "c1f9f89bc8446d49941ca359c7d05c02b8e01e484878c03c90ec3a454b434b12"
+  },
+  "2025/01/image-8.png": {
+    "basename": "valon-upload-f4338ee673ce",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "f4338ee673ced99e94be1d0656c7f78d3254ae259ac95bdddd000b4f1922d9c7"
+  },
+  "2023/02/image-640x1024.png": {
+    "basename": "valon-upload-21e4e30111c2",
+    "width": 640,
+    "height": 1024,
+    "widths": [
+      480,
+      640
+    ],
+    "sha256": "21e4e30111c250dd88f5c3371637a33a6d4780427b6af7d999eb21c272edc327"
+  },
+  "2025/03/image-2-1024x576.png": {
+    "basename": "valon-upload-cfeff5f447fc",
+    "width": 1024,
+    "height": 576,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "cfeff5f447fc5f8513e2db0c608576899f377d495f860dd2b7cdb7c5e03a2cb0"
+  },
+  "2021/09/image-10.png": {
+    "basename": "valon-upload-54ad31914b2f",
+    "width": 546,
+    "height": 476,
+    "widths": [
+      480,
+      546
+    ],
+    "sha256": "54ad31914b2f60b1fd09a90d64a3fe6cc8f1e4c348ddb60589f0df550f8d3e19"
+  },
+  "theme:assets/video-covers/7685506673531784449.jpg": {
+    "basename": "valon-video-7685506673531784449",
+    "width": 3240,
+    "height": 2160,
+    "widths": [
+      480,
+      768,
+      1024,
+      1440
+    ],
+    "sha256": "dbfd09f0dd9bf3e2a5e2af61e94614d690f238d52172b8131630add04aa9ad4a"
+  },
+  "2022/09/image-4-1024x524.png": {
+    "basename": "valon-upload-abbe78a4a1c2",
+    "width": 1024,
+    "height": 524,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "abbe78a4a1c272ed8513a7089aa20d4f3f4d321520a16339ee0ea4ab82bfc82b"
+  },
+  "2025/01/image-5.png": {
+    "basename": "valon-upload-d6ac020e9311",
+    "width": 780,
+    "height": 439,
+    "widths": [
+      480,
+      768,
+      780
+    ],
+    "sha256": "d6ac020e93113e867799ea7ef1661a6846904f0e1e3dd7ef066a010d157a5671"
+  },
+  "2022/10/image-1.png": {
+    "basename": "valon-upload-b2a5035ed51c",
+    "width": 560,
+    "height": 515,
+    "widths": [
+      480,
+      560
+    ],
+    "sha256": "b2a5035ed51c150b45436972f1df0cb19b4b72cf5627509195a582d96f3ab61e"
+  },
+  "2026/09/valon-social-7689551686389468468-scaled.jpg": {
+    "basename": "valon-upload-7c3e26b43328",
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      480,
+      768,
+      1024,
+      1440
+    ],
+    "sha256": "7c3e26b4332824bac80733d9781afd858400dfc629bfa86a349748605dc67c1d"
+  },
+  "2025/01/image-4-546x1024.png": {
+    "basename": "valon-upload-4449173092ed",
+    "width": 546,
+    "height": 1024,
+    "widths": [
+      480,
+      546
+    ],
+    "sha256": "4449173092edf617f5ddba25b2e181591ba4b0ff231c958cb3c5fa0c98a94b49"
+  },
+  "2022/10/image-648x1024.png": {
+    "basename": "valon-upload-dcde0c636935",
+    "width": 648,
+    "height": 1024,
+    "widths": [
+      480,
+      648
+    ],
+    "sha256": "dcde0c636935e74ae3384218fa4b474034c8b5939b23c1a2b5f6857234bf9c2c"
+  },
+  "2025/01/image-10.png": {
+    "basename": "valon-upload-3244259a8dbb",
+    "width": 668,
+    "height": 600,
+    "widths": [
+      480,
+      668
+    ],
+    "sha256": "3244259a8dbb9698e345bd4aa6a1e248149e9addb824977c75f8bc3688131a94"
+  },
+  "2026/09/valon-social-7689123591756975361.jpg": {
+    "basename": "valon-upload-59b247c9c5fc",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "59b247c9c5fc7292714b91226bc1cc181e2c31c4fb31ded3708f38ac5ed0dc46"
+  },
+  "theme:assets/video-covers/7684259488060214529.jpg": {
+    "basename": "valon-video-7684259488060214529",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "4502f643f2a1a0f29e2283097f1bf1fb5c635d98c4de6eca2c80f884688a483e"
+  },
+  "2021/08/hedonic.png": {
+    "basename": "valon-upload-cbe424d6f2ce",
+    "width": 783,
+    "height": 541,
+    "widths": [
+      480,
+      768,
+      783
+    ],
+    "sha256": "cbe424d6f2ce3364e85897af78494684beacced207604b821911f86bd184dde2"
+  },
+  "2025/01/image-2.png": {
+    "basename": "valon-upload-02f2efe23c4f",
+    "width": 800,
+    "height": 447,
+    "widths": [
+      480,
+      768,
+      800
+    ],
+    "sha256": "02f2efe23c4f40723285e74ebee5c5243b208af583618a468003960ff87238b8"
+  },
+  "2021/08/PU-Challenge.png": {
+    "basename": "valon-upload-6552da3a64c4",
+    "width": 1291,
+    "height": 1109,
+    "widths": [
+      480,
+      768,
+      1024,
+      1291
+    ],
+    "sha256": "6552da3a64c447cd0f8398ba31bed164547d5885ce9669173937600b23129543"
+  },
+  "theme:assets/video-covers/7684727821083626753.jpg": {
+    "basename": "valon-video-7684727821083626753",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "a4bfe25fa9196bb05fedddbdf868578154f077fe77079c8d1c18a6f6cfb162ad"
+  },
+  "2022/11/Screenshot-2022-11-26-at-19.35.41-1024x977.png": {
+    "basename": "valon-upload-40c71a27ecf9",
+    "width": 1024,
+    "height": 977,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "40c71a27ecf9e5a7644b6cde54faf476ec84f9d2cd025bbea5c4784bb072e7e0"
+  },
+  "theme:assets/video-covers/7593291276695391496.jpg": {
+    "basename": "valon-video-7593291276695391496",
+    "width": 1170,
+    "height": 2080,
+    "widths": [
+      480,
+      768,
+      1024,
+      1170
+    ],
+    "sha256": "afd654a69ce84ba7d39ec2e915b023666a2e7eb10e7b0a8ec025cc6c4eef43a0"
+  },
+  "2021/08/Nokia-3310.jpg": {
+    "basename": "valon-upload-8d2f12e8c1ed",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      768,
+      1000
+    ],
+    "sha256": "8d2f12e8c1ed8d1dfdcda2b78c80b034854d2147669c659660593c3d28fc35e0"
+  },
+  "2022/08/image-1024x364.png": {
+    "basename": "valon-upload-fdbd10b7b96f",
+    "width": 1024,
+    "height": 364,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "fdbd10b7b96f019b8789bc0249ad1f5bab0cafc9ad7ea42b75dde8da15b2e9e6"
+  },
+  "2021/08/image.png": {
+    "basename": "valon-upload-70be6ed7dee5",
+    "width": 593,
+    "height": 436,
+    "widths": [
+      480,
+      593
+    ],
+    "sha256": "70be6ed7dee58be6088a5ff893f3bbe405d733fffa803bb08924db42eaafd81b"
+  },
+  "2025/01/skenderbeu-1024x738.jpg": {
+    "basename": "valon-upload-0423fa78a1d4",
+    "width": 1024,
+    "height": 738,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "0423fa78a1d40888498448e7d96ad8a6e3735de6978bdd0008915cfef193cfd4"
+  },
+  "theme:assets/video-covers/7679065840163097857.jpg": {
+    "basename": "valon-video-7679065840163097857",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "063940a840dbcddfe8b6e7002a4326223a264395af4aaa5a6c8f7a025504a201"
+  },
+  "2026/09/valon-social-7689078634417622292.jpg": {
+    "basename": "valon-upload-40be87a34d05",
+    "width": 1080,
+    "height": 1920,
+    "widths": [
+      480,
+      768,
+      1024,
+      1080
+    ],
+    "sha256": "40be87a34d05c3dbff1b4232299bc1ec98d464ab9a69510eb87802fa90d4ec21"
+  },
+  "2021/09/image-8.png": {
+    "basename": "valon-upload-902ac08ca62b",
+    "width": 910,
+    "height": 635,
+    "widths": [
+      480,
+      768,
+      910
+    ],
+    "sha256": "902ac08ca62bf6a2b1a3cf64216de8a874c17ad5ef5150f3e53d74686999ffe5"
+  },
+  "2025/03/image-1024x370.png": {
+    "basename": "valon-upload-7ccf03ee3d0a",
+    "width": 1024,
+    "height": 370,
+    "widths": [
+      480,
+      768,
+      1024
+    ],
+    "sha256": "7ccf03ee3d0a2684597adff47f84d05b5180bf37ab9775317d20cff5adc6113f"
+  },
+  "2021/08/image-4.png": {
+    "basename": "valon-upload-e513b47bc903",
+    "width": 247,
+    "height": 359,
+    "widths": [
+      247
+    ],
+    "sha256": "e513b47bc903db95ae5f6bb0634824e7226939b54f977c6074242f80040780ca"
+  },
+  "2021/08/avg-screen-time.png": {
+    "basename": "valon-upload-f441ad4cb8ac",
+    "width": 760,
+    "height": 430,
+    "widths": [
+      480,
+      760
+    ],
+    "sha256": "f441ad4cb8ac1598fe943cefd590108c801f84b03a2a22151ef7b61bcb128577"
+  },
+  "2021/08/why-we-sleep.jpg": {
+    "basename": "valon-upload-1f9c28ba7120",
+    "width": 399,
+    "height": 598,
+    "widths": [
+      399
+    ],
+    "sha256": "1f9c28ba712080d0eebfe97a607a4705899f254c793ed3257ac9da55223e6023"
   }
 }

@@ -27,20 +27,28 @@ function valon_article_cover_sizes($width = 0, $height = 0)
     return "(max-width: 780px) $mobile, (max-width: 964px) $tablet, {$maximum}px";
 }
 
-/** Add modern sources for reviewed uploads while preserving the original image HTML. */
+/** Add modern sources for reviewed first-party images, retaining the original HTML. */
 function valon_upload_picture($url, $fallback_html, $sizes)
 {
+    if (function_exists("valon_animated_picture")) {
+        $animated = valon_animated_picture($url, $fallback_html, $sizes);
+        if ($animated !== $fallback_html) {
+            return $animated;
+        }
+    }
     if (!is_string($url) || strpbrk($url, "?#") !== false) {
         return $fallback_html;
     }
     $uploads = wp_get_upload_dir();
     $relative = null;
-    foreach (array_unique([
-        "https://www.valonasani.com/wp-content/uploads/",
-        rtrim($uploads["baseurl"], "/") . "/",
-    ]) as $root) {
+    foreach ([
+        ["https://www.valonasani.com/wp-content/uploads/", ""],
+        [rtrim($uploads["baseurl"], "/") . "/", ""],
+        ["https://www.valonasani.com/wp-content/themes/valon/", "theme:"],
+        [rtrim(get_template_directory_uri(), "/") . "/", "theme:"],
+    ] as [$root, $prefix]) {
         if (str_starts_with($url, $root)) {
-            $relative = substr($url, strlen($root));
+            $relative = $prefix . substr($url, strlen($root));
             break;
         }
     }
@@ -66,6 +74,17 @@ function valon_upload_picture($url, $fallback_html, $sizes)
     if (!$tag->next_tag() || $tag->get_tag() !== "IMG" || $tag->get_attribute("src") !== $url) {
         return $fallback_html;
     }
+    // Keep the IMG's declared box, including body illustrations narrower than the prose.
+    $dimensions = "";
+    $width_attribute = $tag->get_attribute("width");
+    $height_attribute = $tag->get_attribute("height");
+    if (
+        is_string($width_attribute) && is_string($height_attribute) &&
+        ctype_digit($width_attribute) && ctype_digit($height_attribute) &&
+        (int) $width_attribute > 0 && (int) $height_attribute > 0
+    ) {
+        $dimensions = sprintf(' width="%d" height="%d"', (int) $width_attribute, (int) $height_attribute);
+    }
     $previous = 0;
     foreach ($image["widths"] as $width) {
         if (!is_int($width) || $width <= $previous || $width > (int) $image["width"]) {
@@ -86,10 +105,11 @@ function valon_upload_picture($url, $fallback_html, $sizes)
         }
         if ($sources) {
             $sources_html .= sprintf(
-                '<source type="%s" srcset="%s" sizes="%s">',
+                '<source type="%s" srcset="%s" sizes="%s"%s>',
                 esc_attr($type),
                 esc_attr(implode(", ", $sources)),
                 esc_attr($sizes ?: "100vw"),
+                $dimensions,
             );
         }
     }

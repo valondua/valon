@@ -68,7 +68,7 @@ try {
         "https://cdn.example.test/wp-content/uploads/2025/06/image-1.png",
         "https://www.valonasani.com.evil.test/wp-content/uploads/2025/06/image-1.png",
         $root . "2024/06/image-1.png", $root . "2025/06/image-1-768x768.png",
-        $root . "2025/06/image-1-e1234567890123.png", $root . "2021/08/try-me.gif",
+        $root . "2025/06/image-1-e1234567890123.png", $root . "2021/08/unknown-animation.gif",
         $url . "?ver=123", $url . "#preview",
     ] as $other_url) {
         $other = '<img src="' . esc_url($other_url) . '" alt="Untouched">';
