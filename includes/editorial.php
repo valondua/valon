@@ -210,12 +210,13 @@ function valon_render_article_image($post_id, $card = false)
             $attachment = wp_get_attachment_image_src($cover["attachment"], "large");
             $attrs["sizes"] = valon_article_cover_sizes($attachment[1] ?? 0, $attachment[2] ?? 0);
         }
-        echo wp_get_attachment_image(
+        $image = wp_get_attachment_image(
             $cover["attachment"],
             $card ? "valon-card" : "large",
             false,
             $attrs,
         );
+        echo $card ? $image : valon_upload_picture($cover["url"], $image, $attrs["sizes"]);
     } else {
         $asset_url = get_template_directory_uri() . "/assets/";
         $asset_path = wp_parse_url($asset_url, PHP_URL_PATH);
@@ -240,7 +241,7 @@ function valon_render_article_image($post_id, $card = false)
             $cover = array_merge($cover, $sources);
             $sizes = valon_article_cover_sizes($cover["width"], $cover["height"]);
         }
-        printf(
+        $image = sprintf(
             '<img src="%s" alt="%s" class="%s" loading="%s" decoding="async" width="%d" height="%d"%s%s>',
             esc_url($cover["url"]),
             esc_attr($alt),
@@ -251,6 +252,7 @@ function valon_render_article_image($post_id, $card = false)
             $card ? "" : ' fetchpriority="high"',
             empty($cover["srcset"]) ? "" : sprintf(' srcset="%s" sizes="%s"', esc_attr($cover["srcset"]), esc_attr($sizes)),
         );
+        echo $card ? $image : valon_upload_picture($cover["url"], $image, $sizes);
     }
 }
 
