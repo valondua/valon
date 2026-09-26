@@ -39,6 +39,59 @@ function valon_defer_article_scripts()
 }
 add_action("wp_enqueue_scripts", "valon_defer_article_scripts", 100);
 
+/** Defer the inspected Site Kit listener bundle only before the recognized deferred CMP. */
+function valon_defer_article_consent_listener($handles)
+{
+    if (!is_singular("post") || !doing_action("wp_print_footer_scripts")) {
+        return $handles;
+    }
+    $scripts = wp_scripts();
+    // Pin the tested bundle: a Site Kit update falls back to its own loading policy.
+    $sources = [
+        "googlesitekit-consent-mode" => "/google-site-kit/dist/assets/js/googlesitekit-consent-mode-755f1678e260138d789e.js",
+        "wp-consent-api" => "/wp-consent-api/assets/js/wp-consent-api.min.js",
+        "cmplz-cookiebanner" => "/complianz-gdpr/cookiebanner/js/complianz.min.js",
+    ];
+    $previous = -1;
+    foreach ($sources as $handle => $relative) {
+        $position = array_search($handle, $handles, true);
+        $script = $scripts->registered[$handle] ?? null;
+        if ($position === false || $position <= $previous || !$script ||
+            !$scripts->query($handle, "enqueued") || in_array($handle, $scripts->done, true) ||
+            $scripts->get_data($handle, "group") !== 1 || ($scripts->groups[$handle] ?? null) !== 1 ||
+            $script->deps || $scripts->get_data($handle, "strategy") ||
+            $scripts->get_data($handle, "before") || $scripts->get_data($handle, "after")) {
+            return $handles;
+        }
+        $expected = plugins_url($relative);
+        foreach ([PHP_URL_HOST, PHP_URL_PORT, PHP_URL_PATH] as $component) {
+            if (wp_parse_url($script->src, $component) !== wp_parse_url($expected, $component)) {
+                return $handles;
+            }
+        }
+        $previous = $position;
+    }
+    // Complianz currently adds defer through this pure tag callback, not WP strategy data.
+    $callbacks = $GLOBALS["wp_filter"]["script_loader_tag"]->callbacks[10] ?? [];
+    foreach ($callbacks as $registration) {
+        $callback = $registration["function"];
+        if (!is_array($callback) || !is_object($callback[0]) ||
+            get_class($callback[0]) !== "cmplz_banner_loader" ||
+            $callback[1] !== "add_asyncdefer_attribute" || $registration["accepted_args"] !== 2) {
+            continue;
+        }
+        $tag = new WP_HTML_Tag_Processor($callback('<script src="consent-check.js"></script>', "cmplz-cookiebanner"));
+        if ($tag->next_tag("SCRIPT") && $tag->get_attribute("defer") !== null && $tag->get_attribute("async") === null) {
+            // The API stays parser-blocking; Site Kit listeners run before the later CMP.
+            // Native WP eligibility still falls back for blocking dependents or inline-after code.
+            wp_script_add_data("googlesitekit-consent-mode", "strategy", "defer");
+        }
+        break;
+    }
+    return $handles;
+}
+add_filter("print_scripts_array", "valon_defer_article_consent_listener", 100);
+
 function valon_is_article_body_context($include_video = false)
 {
     return is_singular("post") && in_the_loop() && is_main_query() &&

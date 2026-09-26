@@ -27,9 +27,60 @@ function valon_article_cover_sizes($width = 0, $height = 0)
     return "(max-width: 780px) $mobile, (max-width: 964px) $tablet, {$maximum}px";
 }
 
-/** Add modern sources for reviewed first-party images, retaining the original HTML. */
+/** Exact reviewed remote originals only; native-size sources retain intrinsic IMG layout. */
+function valon_remote_picture($url, $fallback_html)
+{
+    if (!is_string($url) || strpbrk($url, "?#") !== false) {
+        return $fallback_html;
+    }
+    static $manifests = [];
+    $directory = get_template_directory();
+    if (!isset($manifests[$directory])) {
+        $file = $directory . "/assets/optimized-remote-images.json";
+        $manifests[$directory] = is_readable($file) ? (json_decode(file_get_contents($file), true) ?: []) : [];
+    }
+    $image = $manifests[$directory][$url] ?? null;
+    if (!is_array($image) || !is_string($image["basename"] ?? null) ||
+        !preg_match('/^valon-remote-[a-f0-9]{12}$/D', $image["basename"]) ||
+        !is_string($image["sha256"] ?? null) || !preg_match('/^[a-f0-9]{64}$/D', $image["sha256"]) ||
+        $image["basename"] !== "valon-remote-" . substr($image["sha256"], 0, 12) ||
+        !is_int($image["width"] ?? null) || $image["width"] < 1 ||
+        !is_int($image["height"] ?? null) || $image["height"] < 1) {
+        return $fallback_html;
+    }
+    $tag = new WP_HTML_Tag_Processor($fallback_html);
+    if (!$tag->next_tag() || $tag->get_tag() !== "IMG" || $tag->get_attribute("src") !== $url) {
+        return $fallback_html;
+    }
+    $dimensions = "";
+    $width = $tag->get_attribute("width");
+    $height = $tag->get_attribute("height");
+    if (is_string($width) && is_string($height) && ctype_digit($width) && ctype_digit($height) &&
+        (int) $width > 0 && (int) $height > 0) {
+        $dimensions = sprintf(' width="%d" height="%d"', (int) $width, (int) $height);
+    }
+    if ($tag->next_tag()) {
+        return $fallback_html;
+    }
+    $sources = "";
+    foreach (["avif" => "image/avif", "webp" => "image/webp"] as $extension => $type) {
+        $path = "assets/" . $image["basename"] . ".$extension";
+        if (is_file($directory . "/" . $path)) {
+            // No width descriptor: an IMG without dimensions keeps its original natural size.
+            $sources .= sprintf('<source type="%s" srcset="%s"%s>',
+                esc_attr($type), esc_attr(valon_asset_url($path)), $dimensions);
+        }
+    }
+    return $sources ? "<picture>" . $sources . $fallback_html . "</picture>" : $fallback_html;
+}
+
+/** Add modern sources for reviewed originals, retaining the original HTML. */
 function valon_upload_picture($url, $fallback_html, $sizes)
 {
+    $remote = valon_remote_picture($url, $fallback_html);
+    if ($remote !== $fallback_html) {
+        return $remote;
+    }
     if (function_exists("valon_animated_picture")) {
         $animated = valon_animated_picture($url, $fallback_html, $sizes);
         if ($animated !== $fallback_html) {
