@@ -11,42 +11,34 @@ $original_query = $GLOBALS["wp_query"];
 $original_main = $GLOBALS["wp_the_query"];
 $original_post = $GLOBALS["post"] ?? null;
 $original_scripts = $GLOBALS["wp_scripts"] ?? null;
+$original_server_name = $_SERVER["SERVER_NAME"] ?? null;
 $video = get_posts(["post_type" => "post", "posts_per_page" => 1, "fields" => "ids", "meta_key" => "_vp_video_id", "meta_compare" => "EXISTS"]);
 $check((bool) $video, "Representative video article exists");
 $query = new WP_Query(["p" => $video[0], "post_type" => "post"]);
 $GLOBALS["wp_query"] = $GLOBALS["wp_the_query"] = $query;
 $query->the_post();
 try {
-    $check(valon_video_placeholder_url() === "", "Inactive consent plugin produces no preload");
-    $GLOBALS["valon_qa_placeholder_enabled"] = true;
+    // Emulate an enabled same-origin placeholder so restoring the old preload hook fails this check.
     $GLOBALS["valon_qa_placeholder_url"] = home_url("/wp-content/plugins/complianz-gdpr/assets/images/placeholders/tiktok-minimal.jpg");
-    // These stand-ins exercise the theme boundary using WordPress's real HTML parser.
     if (!function_exists("cmplz_placeholder")) {
-        function cmplz_placeholder($type, $src) {
-            $GLOBALS["valon_qa_placeholder_args"] = [$type, $src];
-            return $GLOBALS["valon_qa_placeholder_url"];
-        }
-        function cmplz_use_placeholder($src) { return $GLOBALS["valon_qa_placeholder_enabled"]; }
+        function cmplz_placeholder($type, $src) { return $GLOBALS["valon_qa_placeholder_url"]; }
+        function cmplz_use_placeholder($src) { return true; }
     }
-    $expected = $GLOBALS["valon_qa_placeholder_url"];
-    $check(valon_video_placeholder_url() === $expected, "Video preload uses the plugin-resolved same-origin image");
     $player = vp_video_article_player($video[0]);
     $iframe = new WP_HTML_Tag_Processor($player);
-    $iframe->next_tag("IFRAME");
-    $check($GLOBALS["valon_qa_placeholder_args"] === ["tiktok", $iframe->get_attribute("src")], "Placeholder resolution receives the exact rendered player URL");
+    $check($iframe->next_tag("IFRAME") && wp_parse_url($iframe->get_attribute("src"), PHP_URL_HOST) === "www.tiktok.com", "Video article retains its TikTok player URL");
+    $_SERVER["SERVER_NAME"] = wp_parse_url(home_url("/"), PHP_URL_HOST);
     ob_start();
-    valon_preload_video_placeholder();
-    $preload = ob_get_clean();
-    $check(str_contains($preload, 'rel="preload" as="image"') && str_contains($preload, 'fetchpriority="high"') && str_contains($preload, esc_url($expected)), "Placeholder is discoverable in HTML at high priority");
-    $GLOBALS["valon_qa_placeholder_enabled"] = false;
-    $check(valon_video_placeholder_url() === "", "Disabled placeholders preserve the plugin fallback");
-    $GLOBALS["valon_qa_placeholder_enabled"] = true;
-    foreach (["https://external.test/image.jpg", "//external.test/image.jpg", "data:image/gif;base64,AA", "javascript:alert(1)", "", false, str_replace("://", "://user:password@", home_url("/image.jpg"))] as $invalid) {
-        $GLOBALS["valon_qa_placeholder_url"] = $invalid;
-        $check(valon_video_placeholder_url() === "", "Unsafe or external placeholder is not preloaded");
+    do_action("wp_head");
+    $head = new WP_HTML_Tag_Processor(ob_get_clean());
+    $placeholder_preloaded = false;
+    while ($head->next_tag("LINK")) {
+        if ($head->get_attribute("rel") === "preload" && $head->get_attribute("as") === "image" &&
+            $head->get_attribute("href") === $GLOBALS["valon_qa_placeholder_url"]) {
+            $placeholder_preloaded = true;
+        }
     }
-    $GLOBALS["valon_qa_placeholder_url"] = home_url("/custom-consent-image.webp?style=light&v=2");
-    $check(valon_video_placeholder_url() === $GLOBALS["valon_qa_placeholder_url"], "Same-origin custom placeholders retain their exact URL");
+    $check(!$placeholder_preloaded, "wp_head leaves consent-placeholder loading to Complianz without a theme image preload");
     $image = '<img src="https://www.valonasani.com/wp-content/uploads/2025/06/image-1.png" width="360" height="360" loading="eager" fetchpriority="high" alt="Fixture">';
     $picture = valon_article_body_pictures($image);
     $check(str_starts_with($picture, "<picture>") && str_contains($picture, "360px"), "Allowlisted video body images use a source sized to their original width");
@@ -80,14 +72,20 @@ try {
     $query = new WP_Query(["post_type" => "post", "name" => "building-in-public-get-ready-for-the-energy-vampires", "posts_per_page" => 1]);
     $GLOBALS["wp_query"] = $GLOBALS["wp_the_query"] = $query;
     $query->the_post();
-    $check(valon_video_placeholder_url() === "", "Ordinary articles do not preload the video placeholder");
+    valon_defer_article_scripts();
+    $check(wp_scripts()->get_data("valon-site", "strategy") === "defer" && wp_scripts()->get_data("valon-platform", "strategy") === "defer", "Ordinary articles retain deferred owned scripts");
     $GLOBALS["wp_query"] = $GLOBALS["wp_the_query"] = new WP_Query(["post_type" => "page", "posts_per_page" => 1]);
     wp_script_add_data("valon-site", "strategy", "async");
     valon_defer_article_scripts();
-    $check(wp_scripts()->get_data("valon-site", "strategy") === "async" && valon_video_placeholder_url() === "", "Other page types keep their existing script and image loading");
+    $check(wp_scripts()->get_data("valon-site", "strategy") === "async", "Other page types keep their existing script loading");
 } finally {
     $GLOBALS["wp_query"] = $original_query;
     $GLOBALS["wp_the_query"] = $original_main;
     $GLOBALS["post"] = $original_post;
     $GLOBALS["wp_scripts"] = $original_scripts;
+    if ($original_server_name === null) {
+        unset($_SERVER["SERVER_NAME"]);
+    } else {
+        $_SERVER["SERVER_NAME"] = $original_server_name;
+    }
 }

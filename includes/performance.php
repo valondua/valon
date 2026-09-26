@@ -27,47 +27,6 @@ function valon_inline_related_styles($html, $handle, $href, $media)
 }
 add_filter("style_loader_tag", "valon_inline_related_styles", 10, 4);
 
-/** Discover the local consent placeholder before Complianz builds its player wrapper. */
-function valon_video_placeholder_url()
-{
-    if (!is_singular("post") || !function_exists("vp_video_article_player") ||
-        !function_exists("cmplz_placeholder") || !function_exists("cmplz_use_placeholder")) {
-        return "";
-    }
-    $player = new WP_HTML_Tag_Processor(vp_video_article_player(get_queried_object_id()));
-    if (!$player->next_tag("IFRAME")) {
-        return "";
-    }
-    $src = $player->get_attribute("src");
-    if (!is_string($src) || wp_parse_url($src, PHP_URL_HOST) !== "www.tiktok.com" ||
-        !cmplz_use_placeholder($src)) {
-        return "";
-    }
-    // Resolve through Complianz so its selected style and custom placeholder filters apply.
-    $url = cmplz_placeholder("tiktok", $src);
-    $parts = is_string($url) ? wp_parse_url($url) : false;
-    $home = wp_parse_url(home_url("/"));
-    // A filtered third-party image must never be contacted before consent.
-    if (!$parts || !in_array($parts["scheme"] ?? "", ["http", "https"], true) ||
-        isset($parts["user"]) || isset($parts["pass"])) {
-        return "";
-    }
-    foreach (["scheme", "host", "port"] as $component) {
-        if (($parts[$component] ?? null) !== ($home[$component] ?? null)) {
-            return "";
-        }
-    }
-    return $url;
-}
-function valon_preload_video_placeholder()
-{
-    $url = valon_video_placeholder_url();
-    if ($url !== "") {
-        printf('<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n", esc_url($url));
-    }
-}
-add_action("wp_head", "valon_preload_video_placeholder", 1);
-
 /** Let WordPress retain dependency order and fall back when a script cannot be deferred. */
 function valon_defer_article_scripts()
 {
