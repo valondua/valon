@@ -25,6 +25,20 @@ Changing a Railway volume mount path triggered an immediate automatic redeployme
 - `valon-cache-maintenance.php` is installed in `wp-content/mu-plugins`. It clears public page caches after WP Pusher theme/plugin updates, normal software updates, and theme switches.
 - Keep existing WordPress cron behavior unless a separate scheduler has been configured and verified.
 
+### Browser caching without a runtime deployment
+
+`static-cache.htaccess` is a separately managed block in the persistent WordPress root `.htaccess`, outside the WordPress rewrite markers. It caches real public CSS, JavaScript, images and fonts for one day, or 30 days when the URL has a `ver` parameter. Bundled theme images, styles and scripts use file modification times for cache invalidation. Validators remain enabled; no `immutable` policy is applied. HTML, PHP, REST, redirects, errors and non-GET/HEAD responses retain their existing policies.
+
+Run the installer as the existing `.htaccess` owner. It defaults to a dry run, preserves other rules, verifies ownership/source contents before atomic replacement, and requires a private recovery directory outside the web root when applying:
+
+```sh
+php tools/install-static-cache.php --root=/var/www/html
+php tools/install-static-cache.php --root=/var/www/html --backup-dir=/data/PRIVATE_RELEASE_DIRECTORY --apply
+python3 tools/static-cache-qa.py https://www.valonasani.com
+```
+
+This is a file update in the existing volume: it requires neither a container redeployment nor a mount change. Apache reads `.htaccess` on each request. Test the policy in an isolated Apache/WordPress environment first because `apache2ctl -t` alone does not validate per-directory `.htaccess` files. On a failed public smoke check, restore the saved `.htaccess` atomically with its previous owner/mode. Re-run the installer to verify idempotency after applying; keep the same managed block if WordPress refreshes its own rewrite section.
+
 ## Verification and recovery
 
 After a runtime deployment, check Site Health, all three homepages (`/`, `/sq/`, `/de/`), an article, search, REST, sitemap, media, and the authenticated dashboard. Confirm a second anonymous request is served from page cache and object-cache data survives a separate PHP process. Confirm `wp-config.php` and private migration paths return HTTP 403.

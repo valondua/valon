@@ -97,17 +97,22 @@ add_action("wp_enqueue_scripts", function () {
         true,
     );
 });
+// The homepage has its own article cards and does not render YARPP related posts.
+add_filter("yarpp_enqueue_related_style", function ($enqueue) {
+    return is_front_page() ? false : $enqueue;
+});
 function valon_home_portrait_sources()
 {
-    $base = get_template_directory_uri() . "/assets/valon-hero";
     return [
-        "base" => $base,
+        // Keep older templates usable during an incremental theme update.
+        "base" => get_template_directory_uri() . "/assets/valon-hero",
+        "src" => valon_asset_url("assets/valon-hero.jpeg"),
         "srcset" => implode(", ", array_map(
-            static fn($width) => $base . "-" . $width . ".webp " . $width . "w",
+            static fn($width) => valon_asset_url("assets/valon-hero-" . $width . ".webp") . " " . $width . "w",
             [480, 768, 1024, 1586],
         )),
         "avif_srcset" => implode(", ", array_map(
-            static fn($width) => $base . "-" . $width . ".avif " . $width . "w",
+            static fn($width) => valon_asset_url("assets/valon-hero-" . $width . ".avif") . " " . $width . "w",
             [480, 768, 1024, 1586],
         )),
         // Account for object-fit: cover in the desktop hero's minimum height.

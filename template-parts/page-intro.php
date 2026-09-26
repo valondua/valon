@@ -60,7 +60,7 @@ $has_photo = $photo || has_post_thumbnail();
             else:
                  ?>
                 <img src="<?php echo esc_url(
-                    get_template_directory_uri() . "/assets/" . $photo[0],
+                    valon_asset_url("assets/" . $photo[0]),
                 ); ?>" width="<?php echo esc_attr(
     $photo[1],
 ); ?>" height="<?php echo esc_attr($photo[2]); ?>" alt="<?php echo esc_attr(
