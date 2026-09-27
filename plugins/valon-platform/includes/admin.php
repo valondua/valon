@@ -269,7 +269,7 @@ function vp_make_draft($id)
             "post_content" =>
                 '<!-- wp:paragraph --><p>Source: <a href="' .
                 esc_url($url) .
-                '">Original social post</a></p><!-- /wp:paragraph -->\n<!-- wp:paragraph --><p>Editorial brief: add Valon’s original recording, reviewed transcript or notes. Develop the idea in his voice, verify factual claims, and request approval before publishing.</p><!-- /wp:paragraph -->',
+                '">Original social post</a></p><!-- /wp:paragraph -->\n<!-- wp:paragraph --><p>Editorial brief: use Valon’s original recording, reviewed transcript or notes; a caption is not a transcript. Choose the relevant path: love with respect, values lived in action, or Albanian roots carried forward. Start with a real moment, distinguish experience and opinion from sourced fact, and end with a useful choice. Criticise specific harmful actions or claims, never an ethnicity or faith as a whole. Prepare reviewed English, Albanian and Swiss Standard German editions where the source supports them, then request approval before publishing.</p><!-- /wp:paragraph -->',
             "meta_input" => [
                 "_vp_requires_review" => "1",
                 "_vp_source_social" => $id,
