@@ -28,6 +28,7 @@ function vp_secret($name)
 }
 require_once VP_DIR . "/includes/social.php";
 require_once VP_DIR . "/includes/admin.php";
+require_once VP_DIR . "/includes/article-revisions.php";
 require_once VP_DIR . "/includes/newsletter.php";
 require_once VP_DIR . "/includes/seo.php";
 require_once VP_DIR . "/includes/yoast-content.php";
