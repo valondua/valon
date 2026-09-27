@@ -43,13 +43,13 @@
             } else {
                  ?>
                 <h1 id="hero-title"><?php echo valon_text(
-                    "Build something.<br>Start with yourself.",
-                    "Ndërto diçka.<br>Fillo me veten.",
+                    "Be the one.<br>Know your roots.",
+                    "Bëhu ma i miri i vetes.<br>Njihe rrënjët.",
                 ); ?></h1>
                 <p class="hero-intro"><?php echo esc_html(
                     valon_text(
-                        "I’m Valon. I build companies and share what the journey teaches me about relationships, ambition and a life of your own.",
-                        "Jam Valoni. Ndërtoj kompani dhe ndaj çka po më mëson kjo rrugë për marrëdhëniet, ambicien dhe jetën që e zgjedh vetë.",
+                        "I’m Valon. I believe we become stronger when we keep our word, love with respect and carry our Albanian roots forward.",
+                        "Jam Valoni. Besoj që bahemi ma të fortë kur e mbajmë fjalën, duam me respekt dhe i çojmë rrënjët tona shqiptare përpara.",
                     ),
                 ); ?></p>
             <?php
@@ -61,8 +61,8 @@
                 ); ?></h2>
                 <p><?php echo esc_html(
                     valon_text(
-                        "One honest story. One useful idea. One thing to try. In your inbox every two weeks.",
-                        "Një histori e sinqertë. Një ide e dobishme. Diçka me provu. Në emailin tand çdo dy javë.",
+                        "One honest story about love, lived values or our roots—and one thing to try. Every two weeks.",
+                        "Një histori për dashninë, vlerat që i jetojmë ose rrënjët tona—dhe diçka me provu. Çdo dy javë.",
                     ),
                 ); ?></p>
                 <?php valon_newsletter("hero"); ?>
@@ -103,7 +103,7 @@
     valon_text("Explore the essentials", "Zbulo shkrimet e zgjedhura"),
 ); ?> <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="card-grid featured-grid"><?php valon_posts(3, true); ?></div>
+    <div class="card-grid featured-grid"><?php valon_brand_starters(); ?></div>
 </section>
 
 <section class="interview-section">
@@ -165,19 +165,20 @@
 </section>
 
 <section class="home-topics container">
-    <h2><?php echo esc_html(
-        valon_text("What’s on your mind?", "Çka po të sillet në mendje?"),
-    ); ?></h2>
-    <div class="home-topic-links"><?php foreach (
-        valon_topics()
-        as $slug => $topic
-    ) { ?>
-        <a href="<?php echo esc_url(
-            valon_topic_url($slug),
-        ); ?>"><?php echo esc_html(
-    valon_text($topic[0], $topic[1]),
-); ?> <span aria-hidden="true">↗</span></a>
-    <?php } ?></div>
+    <h2><?php echo esc_html(valon_text("Three ways in.", "Tri rrugë për me fillu.")); ?></h2>
+    <p class="home-topics-intro"><?php echo esc_html(valon_text(
+        "Love well. Live your values. Carry our roots forward. My stories begin with Albanian life and speak to anyone asking similar questions.",
+        "Duaj me respekt. Jetoji vlerat. Çoji rrënjët tona përpara. Historitë e mia nisin prej jetës shqiptare, po pyetjet mund t’i vlejnë kujtdo.",
+    )); ?></p>
+    <div class="home-topic-links">
+        <a href="<?php echo esc_url(valon_topic_url("relationships")); ?>"><?php echo esc_html(valon_text("Love well", "Duaj me respekt")); ?> <span aria-hidden="true">↗</span></a>
+        <a href="<?php echo esc_url(valon_topic_url("personal-growth")); ?>"><?php echo esc_html(valon_text("Live your values", "Jetoji vlerat")); ?> <span aria-hidden="true">↗</span></a>
+        <a href="<?php echo esc_url(valon_topic_url("life-between-cultures")); ?>"><?php echo esc_html(valon_text("Carry our roots forward", "Çoji rrënjët përpara")); ?> <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="home-topics-note"><?php echo esc_html(valon_text(
+        "What I challenge: disrespect, broken promises and pride that never becomes care or action.",
+        "Çka kundërshtoj: mosrespektin, fjalën e thyeme dhe krenarinë që nuk bahet kujdes a veprim.",
+    )); ?></p>
 </section>
 
 <section class="section container social-section home-social">
@@ -211,13 +212,13 @@
         valon_text("About Valon", "Rreth Valonit"),
     ); ?></p><h2><?php echo esc_html(
     valon_text(
-        "Building companies. Learning about life.",
-        "Tue ndërtu kompani. Tue mësu për jetën.",
+        "Love well. Keep your word. Know your roots.",
+        "Duaj me respekt. Mbaje fjalën. Njihe prejardhjen.",
     ),
 ); ?></h2><p><?php echo esc_html(
     valon_text(
-        "I’m a Swiss-Albanian founder living and working between Zürich and Prishtina. I founded dua.com and MIK Group. Today, I’m also building bethe.one and working with Spotted.",
-        "Jam themelues shqiptaro-zviceran dhe jetoj e punoj mes Zürichut dhe Prishtinës. Kam themelu dua.com dhe MIK Group. Sot po ndërtoj edhe bethe.one dhe po punoj me Spotted.",
+        "I’m a Swiss-Albanian founder between Zürich and Prishtina. I build ways for people to connect and grow. I want our values to show in how we love, build and care for the next generation.",
+        "Jam themelues shqiptaro-zviceran mes Zürichut e Prishtinës. Ndërtoj mënyra që njerëzit me u lidhë e me u rritë. Dua që vlerat tona me u pa te dashnia, puna dhe kujdesi për brezin tjetër.",
     ),
 ); ?></p><a class="text-link" href="<?php echo esc_url(
     valon_url("about"),

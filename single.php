@@ -23,7 +23,7 @@ echo esc_html($cats ? $cats[0]->name : "Writing");
 } ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
 the_content();
 wp_link_pages();
-?></article><?php
+?></article><?php get_template_part("template-parts/brand-trail"); ?><?php
 $video_article = function_exists("vp_video_id") && vp_video_id(get_the_ID());
 if ($video_article) {
     get_template_part("template-parts/video-next");

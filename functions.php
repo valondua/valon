@@ -293,6 +293,43 @@ function valon_posts($limit = 3, $featured = false)
     }
     wp_reset_postdata();
 }
+
+/** One reviewed starting article for each brand pillar, in the reader's language. */
+function valon_brand_starters()
+{
+    global $post;
+    $original_post = $post;
+    $slugs = [
+        "hamburg-love-locks-still-talking",
+        "whose-advice-build-your-life",
+        "koncentrohu-prishtina-podcast-mission-2",
+    ];
+    $rendered = 0;
+    foreach ($slugs as $slug) {
+        $source = get_page_by_path($slug, OBJECT, "post");
+        if (!$source || get_post_status($source->ID) !== "publish") {
+            continue;
+        }
+        $id = $source->ID;
+        if (valon_lang() !== "en" && function_exists("pll_get_post")) {
+            $translated = pll_get_post($id, valon_lang());
+            if ($translated && get_post_status($translated) === "publish") {
+                $id = $translated;
+            }
+        }
+        $post = get_post($id);
+        if ($post) {
+            setup_postdata($post);
+            get_template_part("template-parts/card");
+            $rendered++;
+        }
+    }
+    $post = $original_post;
+    wp_reset_postdata();
+    if (!$rendered) {
+        valon_posts(3, true);
+    }
+}
 function valon_newsletter($placement = "inline")
 {
     if (function_exists("vp_newsletter_form")) {
@@ -316,6 +353,7 @@ function valon_social_links()
         "Facebook" => "https://www.facebook.com/valonasanidua",
         "LinkedIn" => "https://www.linkedin.com/in/valon-asani/",
         "X" => "https://x.com/ValonAsaniDua",
+        "YouTube" => "https://www.youtube.com/@valondua",
     ];
 }
 function valon_post_navigation()

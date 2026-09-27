@@ -307,7 +307,7 @@ function vp_launch_run($step, $bundle = null)
             );
         }
         update_option("blogname", "Valon Asani");
-        update_option("blogdescription", "Ideas for a life of your own.");
+        update_option("blogdescription", "Be the one. Know your roots. Build what comes next.");
         update_option("vp_launch_completed", gmdate("c"), false);
         delete_option("vp_launch_staged_ids");
         delete_option("vp_launch_staged_hashes");

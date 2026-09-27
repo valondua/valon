@@ -10,16 +10,16 @@ $t = fn($en, $sq, $de) => valon_localized(compact("en", "sq", "de"));
 ); ?></p>
 <h1 id="letter-title"><?php echo esc_html(
     $t(
-        "A little less scrolling. A little more living.",
-        "Pak ma pak scroll. Pak ma shumë jetë.",
-        "Weniger scrollen. Mehr leben.",
+        "Love well. Live your values. Keep your roots.",
+        "Duaj me respekt. Jetoji vlerat. Ruaji rrënjët.",
+        "Liebe mit Respekt. Lebe deine Werte. Bewahre deine Wurzeln.",
     ),
 ); ?></h1>
 <p class="letter-intro"><?php echo esc_html(
     $t(
-        "Honest thoughts on relationships, building things, and becoming the person you want to be. From my life to your inbox.",
-        "Mendime të sinqerta për lidhjet, për me ndërtu diçka dhe për me u ba njeriu që don me qenë. Prej jetës tem, drejt në emailin tand.",
-        "Ehrliche Gedanken über Beziehungen, eigene Projekte und den Menschen, der du werden möchtest. Aus meinem Leben direkt in dein Postfach.",
+        "Every two weeks, one honest story about loving well, living your values or carrying Albanian roots forward—and one thing to try.",
+        "Çdo dy javë, një histori e sinqertë për dashninë me respekt, vlerat që i jetojmë ose rrënjët shqiptare—dhe diçka me e provu.",
+        "Alle zwei Wochen eine ehrliche Geschichte über respektvolle Liebe, gelebte Werte oder albanische Wurzeln – mit einer Idee zum Ausprobieren.",
     ),
 ); ?></p>
 <div id="join-letters" class="letter-signup"><?php valon_newsletter(
@@ -65,33 +65,33 @@ $t = fn($en, $sq, $de) => valon_localized(compact("en", "sq", "de"));
 $benefits = [
     [
         "01",
-        $t("Live with intention", "Jeto me qëllim", "Bewusster leben"),
+        $t("Love well", "Duaj me respekt", "Respektvoll lieben"),
         $t(
-            "Relationships, self-respect and the questions we often avoid. Space to reflect on what matters to you.",
-            "Lidhjet, respekti për veten dhe pyetjet që shpesh i shmangim. Hapësirë me mendu për atë që ka rëndësi për ty.",
-            "Beziehungen, Selbstachtung und die Fragen, denen wir oft ausweichen. Raum für das, was dir wichtig ist.",
+            "Relationships, boundaries and strong families built on mutual respect.",
+            "Marrëdhënie, kufij të qartë dhe familje të forta me respekt të ndërsjellë.",
+            "Beziehungen, Grenzen und starke Familien mit gegenseitigem Respekt.",
         ),
     ],
     [
         "02",
         $t(
-            "Build something real",
-            "Ndërto diçka të vërtetë",
-            "Etwas Eigenes aufbauen",
+            "Live your values",
+            "Jetoji vlerat",
+            "Werte leben",
         ),
         $t(
-            "Notes from building companies, exploring AI and learning through doing. Ideas you can put to work.",
-            "Shënime prej ndërtimit të kompanive, eksplorimit të AI-së dhe mësimit përmes veprimit. Ide që mundesh me i përdorë.",
-            "Notizen aus dem Unternehmensalltag, Gedanken zu KI und Erfahrungen beim Ausprobieren. Ideen zum Anwenden.",
+            "Besa, discipline and small promises kept in real life, not only in public.",
+            "Besa, disiplina dhe premtime të vogla që i mban në jetë, jo veç para të tjerëve.",
+            "Besa, Disziplin und kleine Versprechen, die auch im Alltag gelten.",
         ),
     ],
     [
         "03",
-        $t("Keep your curiosity", "Ruaje kureshtjen", "Neugierig bleiben"),
+        $t("Carry our roots forward", "Çoji rrënjët përpara", "Unsere Wurzeln weitertragen"),
         $t(
-            "Books, personal experiments and life between Kosovo and Switzerland. A reason to see things differently.",
-            "Libra, eksperimente personale dhe jeta mes Kosovës e Zvicrës. Një arsye me i pa gjanat ndryshe.",
-            "Bücher, persönliche Experimente und das Leben zwischen dem Kosovo und der Schweiz. Neue Perspektiven für deinen Alltag.",
+            "Albanian language, family stories, diaspora life and the opportunity to build across borders.",
+            "Gjuha shqipe, historitë e familjes, jeta në diasporë dhe mundësia me ndërtu përtej kufijve.",
+            "Albanische Sprache, Familiengeschichten, Diaspora und Chancen über Grenzen hinweg.",
         ),
     ],
 ];

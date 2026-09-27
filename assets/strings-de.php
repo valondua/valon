@@ -26,6 +26,12 @@ return [
     "Valon Asani" => "Valon Asani",
     "Valon Asani · Founder of dua.com & MIK Group" =>
         "Valon Asani · Gründer von dua.com & MIK Group",
+    "Be the one.<br>Know your roots." =>
+        "Werde, wer du sein willst.<br>Kenne deine Wurzeln.",
+    "I’m Valon. I believe we become stronger when we keep our word, love with respect and carry our Albanian roots forward." =>
+        "Ich bin Valon. Ich glaube, wir werden stärker, wenn wir unser Wort halten, einander mit Respekt begegnen und unsere albanischen Wurzeln weitertragen.",
+    "One honest story about love, lived values or our roots—and one thing to try. Every two weeks." =>
+        "Alle zwei Wochen eine ehrliche Geschichte über Liebe, gelebte Werte oder unsere Wurzeln – mit einer Idee zum Ausprobieren.",
     "Build something.<br>Start with yourself." =>
         "Bau etwas auf.<br>Fang bei dir an.",
     "I’m Valon. I build companies and share what the journey teaches me about relationships, ambition and a life of your own." =>
@@ -43,6 +49,14 @@ return [
     "In the media" => "In den Medien",
     "All interviews" => "Alle Interviews",
     "Ideas worth your time." => "Ideen, die deine Zeit wert sind.",
+    "Three ways in." => "Drei Wege zum Einstieg.",
+    "Love well. Live your values. Carry our roots forward. My stories begin with Albanian life and speak to anyone asking similar questions." =>
+        "Respektvoll lieben. Werte leben. Unsere Wurzeln weitertragen. Meine Geschichten beginnen im albanischen Leben und sprechen alle an, die ähnliche Fragen haben.",
+    "Love well" => "Respektvoll lieben",
+    "Live your values" => "Werte leben",
+    "Carry our roots forward" => "Unsere Wurzeln weitertragen",
+    "What I challenge: disrespect, broken promises and pride that never becomes care or action." =>
+        "Was ich hinterfrage: Respektlosigkeit, gebrochene Versprechen und Stolz ohne Fürsorge oder Taten.",
     "Explore the essentials" => "Ausgewählte Texte entdecken",
     "Conversations that go deeper." => "Gespräche, die tiefer gehen.",
     "On building companies, connecting people and life between cultures." =>
@@ -71,6 +85,14 @@ return [
     "About Valon" => "Über Valon",
     "Building companies. Learning about life." =>
         "Unternehmen aufbauen. Über das Leben lernen.",
+    "Love well. Keep your word. Know your roots." =>
+        "Liebe mit Respekt. Halte dein Wort. Kenne deine Wurzeln.",
+    "I’m a Swiss-Albanian founder between Zürich and Prishtina. I build ways for people to connect and grow. I want our values to show in how we love, build and care for the next generation." =>
+        "Ich bin schweizerisch-albanischer Gründer zwischen Zürich und Prishtina. Ich schaffe Wege, auf denen Menschen sich verbinden und wachsen können. Unsere Werte sollen sich darin zeigen, wie wir lieben, aufbauen und für die nächste Generation sorgen.",
+    "Love well. Live your values.<br>Carry our roots forward." =>
+        "Respektvoll lieben. Werte leben.<br>Unsere Wurzeln weitertragen.",
+    "One honest story and one useful action every two weeks. Read Letters from Valon in English, Albanian or German." =>
+        "Alle zwei Wochen eine ehrliche Geschichte und ein konkreter Schritt. Lies Briefe von Valon auf Deutsch, Albanisch oder Englisch.",
     "I’m a Swiss-Albanian founder living and working between Zürich and Prishtina. I founded dua.com and MIK Group. Today, I’m also building bethe.one and working with Spotted." =>
         "Ich bin schweizerisch-albanischer Unternehmer und lebe und arbeite zwischen Zürich und Prishtina. Ich habe dua.com und MIK Group gegründet. Heute baue ich auch bethe.one auf und arbeite mit Spotted.",
     "Read my story" => "Meine Geschichte lesen",
@@ -80,6 +102,8 @@ return [
     "Making connections." => "Verbindungen schaffen.",
     "A life of your own. A work in progress." =>
         "Dein eigenes Leben. Immer in Entwicklung.",
+    "Be the one. Know your roots. Build what comes next." =>
+        "Werde, wer du sein willst. Kenne deine Wurzeln. Gestalte, was kommt.",
     "Explore the archive" => "Das Archiv entdecken",
     "Writing & reflections." => "Texte & Gedanken.",
     "Reflections" => "Gedanken",

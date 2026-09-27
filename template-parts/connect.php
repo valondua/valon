@@ -27,6 +27,11 @@ $descriptions = [
         "Mendime të shkurta dhe biseda të momentit.",
         "Kurze Gedanken und aktuelle Gespräche.",
     ),
+    "YouTube" => $t(
+        "Short videos and longer conversations about people, work and identity.",
+        "Video të shkurta dhe biseda ma të gjata për njerëzit, punën e identitetin.",
+        "Kurze Videos und längere Gespräche über Menschen, Arbeit und Identität.",
+    ),
 ];
 ?>
 <section class="section connect-section"><div class="section-heading"><div><p class="eyebrow"><?php echo esc_html(

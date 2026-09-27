@@ -2,8 +2,8 @@
     valon_url(),
 ); ?>">valon asani<span class="brand-dot">.</span></a><p><?php echo esc_html(
     valon_text(
-        "A life of your own. A work in progress.",
-        "Jeta jote. Gjithmonë tue u ndërtu.",
+        "Be the one. Know your roots. Build what comes next.",
+        "Bëhu ma i miri i vetes. Njihe prejardhjen. Ndërto çka vjen.",
     ),
 ); ?></p></div>
 <div class="footer-links"><div><?php foreach (

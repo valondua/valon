@@ -21,10 +21,7 @@
     ?>
 <?php if (
     $route === "start"
-): ?><section class="section"><div class="card-grid"><?php valon_posts(
-    3,
-    true,
-); ?></div></section><?php endif; ?>
+): ?><section class="section"><div class="card-grid"><?php valon_brand_starters(); ?></div></section><?php endif; ?>
 <?php if (
     $route === "writing"
 ): ?><div class="topic-filter"><a href="<?php echo esc_url(
