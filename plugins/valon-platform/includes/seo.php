@@ -61,6 +61,9 @@ add_filter("wpseo_schema_graph", function ($graph) {
         ) {
             $node["about"] = ["@id" => $person_id];
         }
+        if (in_array("WebPage", $types, true) && isset($node["name"])) {
+            $node["name"] = vp_current_seo_title($node["name"]);
+        }
         $out[] = $node;
     }
     $out[] = $person;
@@ -206,21 +209,50 @@ add_filter(
     100,
 );
 
+// A stored SEO title can describe the wrong article: one saved before an approved revision
+// replaced the body, or an English title copied onto a translation. Curated titles stay.
+function vp_stale_seo_title($post_id)
+{
+    $stored = (string) get_post_meta($post_id, "_yoast_wpseo_title", true);
+    if ($stored === "" || get_post_type($post_id) !== "post") {
+        return false;
+    }
+    // 954, 2146 and 2234 are the production essays revised on 27 September 2026, before
+    // revisions recorded _valon_substantive_update or synced their SEO titles.
+    if (
+        (in_array((int) $post_id, [954, 2146, 2234], true) ||
+            get_post_meta($post_id, "_valon_substantive_update", true) === "1") &&
+        get_post_meta($post_id, "_vp_seo_title_synced", true) !== "1"
+    ) {
+        return true;
+    }
+    if (!function_exists("pll_get_post") || !function_exists("pll_get_post_language")) {
+        return false;
+    }
+    $english = (int) pll_get_post($post_id, "en");
+    return pll_get_post_language($post_id) !== "en" &&
+        $english && $english !== (int) $post_id &&
+        $stored === (string) get_post_meta($english, "_yoast_wpseo_title", true);
+}
+function vp_current_seo_title($title)
+{
+    if (!is_singular("post") || !vp_stale_seo_title(get_queried_object_id())) {
+        return $title;
+    }
+    $post = get_post(get_queried_object_id());
+    $template = class_exists("WPSEO_Options") ? WPSEO_Options::get("title-post") : "";
+    return $template && function_exists("wpseo_replace_vars")
+        ? trim(preg_replace("/\s+/", " ", wpseo_replace_vars($template, $post)))
+        : get_the_title($post) . " - Valon Asani";
+}
 add_filter("wpseo_title", function ($title) {
     if (is_front_page()) {
         return get_the_title(get_queried_object_id());
     }
-    if (is_singular("post")) {
-        $post_id = get_queried_object_id();
-        if (
-            get_post_meta($post_id, "_vp_requires_review", true) === "1" &&
-            get_post_meta($post_id, "_vp_approved_hash", true)
-        ) {
-            return get_the_title($post_id) . " | Valon Asani";
-        }
-    }
-    return $title;
+    return vp_current_seo_title($title);
 });
+add_filter("wpseo_opengraph_title", "vp_current_seo_title");
+add_filter("wpseo_twitter_title", "vp_current_seo_title");
 add_action("wpseo_add_opengraph_images", function ($images) {
     if (is_front_page() || is_page("about")) {
         $images->add_image(

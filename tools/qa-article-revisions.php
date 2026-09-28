@@ -18,6 +18,7 @@ try {
         "post_name" => "revision-qa-original",
         "post_content" => "Original copy",
         "post_date" => "2025-01-18 12:00:00",
+        "meta_input" => ["_yoast_wpseo_title" => "Old SEO title", "_yoast_wpseo_opengraph-title" => "Old social title"],
     ]);
     unset($GLOBALS["vp_archive_import"]);
     $draft_id = wp_insert_post([
@@ -25,6 +26,7 @@ try {
         "post_status" => "draft",
         "post_title" => "Reviewed article",
         "post_content" => "New copy with evidence.",
+        "meta_input" => ["_yoast_wpseo_title" => "Reviewed SEO title"],
     ]);
     if (function_exists("pll_set_post_language")) {
         pll_set_post_language($source_id, "en");
@@ -51,11 +53,14 @@ try {
         $result->post_title !== "Reviewed article" ||
         $result->post_content !== "New copy with evidence." ||
         get_post_meta($source_id, "_valon_substantive_update", true) !== "1" ||
-        get_post_status($draft_id) !== "private"
+        get_post_status($draft_id) !== "private" ||
+        get_post_meta($source_id, "_yoast_wpseo_title", true) !== "Reviewed SEO title" ||
+        get_post_meta($source_id, "_yoast_wpseo_opengraph-title", true) !== "" ||
+        get_post_meta($source_id, "_vp_seo_title_synced", true) !== "1"
     ) {
-        throw new RuntimeException("Revision did not preserve publication identity and archive the draft.");
+        throw new RuntimeException("Revision did not preserve publication identity, sync SEO titles and archive the draft.");
     }
-    WP_CLI::success("Article revision approval, URL/date preservation and draft retirement passed.");
+    WP_CLI::success("Article revision approval, URL/date preservation, SEO title sync and draft retirement passed.");
 } finally {
     if ($draft_id) {
         wp_delete_post($draft_id, true);

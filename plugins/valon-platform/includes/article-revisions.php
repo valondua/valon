@@ -72,6 +72,12 @@ function vp_apply_article_revision($source_id, $draft_id)
     update_post_meta($source_id, "_vp_requires_review", "1");
     update_post_meta($source_id, "_vp_approved_hash", $hash);
     update_post_meta($source_id, "_vp_approved_by", get_current_user_id());
+    // The old SEO titles describe the old article; take the draft's or fall back to the site pattern.
+    foreach (["_yoast_wpseo_title", "_yoast_wpseo_opengraph-title", "_yoast_wpseo_twitter-title"] as $key) {
+        $value = get_post_meta($draft_id, $key, true);
+        $value ? update_post_meta($source_id, $key, $value) : delete_post_meta($source_id, $key);
+    }
+    update_post_meta($source_id, "_vp_seo_title_synced", "1");
     $result = wp_update_post(
         wp_slash([
             "ID" => $source_id,
