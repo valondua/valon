@@ -28,7 +28,8 @@ $archive_review = [
     1002 => "health", 1017 => "health", 1022 => "health", 1232 => "health",
     1498 => "health", 2196 => "health", 1912 => "finance", 1960 => "finance",
 ][get_the_ID()] ?? "";
-if ($archive_review): ?>
+// The notice stays only until the owner-approved revision of the article is applied.
+if ($archive_review && get_post_meta(get_the_ID(), "_valon_substantive_update", true) !== "1"): ?>
 <aside class="article-archive-context" aria-label="<?php echo esc_attr(valon_localized([
     "en" => "Archive context", "sq" => "Konteksti i arkivit", "de" => "Hinweis zum Archiv",
 ])); ?>">

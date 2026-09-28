@@ -31,8 +31,81 @@ function vp_article_revisions_page()
     echo '<p><label><input type="checkbox" name="reviewed" value="1" required> I have reviewed this exact draft against the published article.</label></p>';
     echo '<p><label><input type="checkbox" name="backup" value="1" required> A complete backup of the published article and site is available.</label></p>';
     submit_button("Apply approved revision");
+    echo "</form>";
+    echo '<h2>Link a reviewed translation draft</h2><p>Sets the draft\'s language, links it to the published article and gives it the article\'s categories in that language. The draft still needs its own approval before it can be published.</p>';
+    echo '<form method="post" action="' . esc_url(admin_url("admin-post.php")) . '">';
+    echo '<input type="hidden" name="action" value="vp_link_article_translation">';
+    wp_nonce_field("vp_link_article_translation");
+    echo '<p><label>Published article ID <input type="number" min="1" required name="source_id"></label></p>';
+    echo '<p><label>Translation draft ID <input type="number" min="1" required name="draft_id"></label></p>';
+    echo '<p><label>Language <select name="lang"><option value="sq">Shqip</option><option value="de">Deutsch</option><option value="en">English</option></select></label></p>';
+    submit_button("Link translation draft", "secondary");
     echo "</form></div>";
 }
+
+/** Link a reviewed translation draft to a published article, with the article's categories in that language. */
+function vp_link_article_translation($source_id, $draft_id, $lang)
+{
+    if (!vp_can_approve()) {
+        return new WP_Error("owner", "Editorial owner access required.");
+    }
+    if (!function_exists("pll_save_post_translations")) {
+        return new WP_Error("polylang", "Polylang is required to link translations.");
+    }
+    $source = get_post($source_id);
+    $draft = get_post($draft_id);
+    if (
+        !$source || !$draft ||
+        $source->post_type !== "post" ||
+        $source->post_status !== "publish" ||
+        $draft->post_type !== "post" ||
+        $draft->post_status !== "draft" ||
+        !in_array($lang, ["en", "sq", "de"], true) ||
+        $lang === pll_get_post_language($source_id) ||
+        !current_user_can("edit_post", $source_id) ||
+        !current_user_can("edit_post", $draft_id)
+    ) {
+        return new WP_Error("posts", "Choose a published article and a draft for another language.");
+    }
+    $translations = pll_get_post_translations($source_id);
+    if (!empty($translations[$lang]) && (int) $translations[$lang] !== $draft_id) {
+        return new WP_Error("exists", "The article already has a translation in that language.");
+    }
+    if (array_diff(array_map("intval", pll_get_post_translations($draft_id)), [$draft_id])) {
+        return new WP_Error("linked", "The draft already belongs to another article.");
+    }
+    $categories = [];
+    foreach (wp_get_post_categories($source_id) as $category) {
+        $translated = pll_get_term($category, $lang);
+        if (!$translated) {
+            return new WP_Error("category", "An article category has no translation in that language.");
+        }
+        $categories[] = (int) $translated;
+    }
+    pll_set_post_language($draft_id, $lang);
+    $translations[$lang] = $draft_id;
+    pll_save_post_translations($translations);
+    wp_set_post_categories($draft_id, $categories);
+    return $draft_id;
+}
+
+add_action("admin_post_vp_link_article_translation", function () {
+    if (!vp_can_approve()) {
+        wp_die("Editorial owner access required.", "", ["response" => 403]);
+    }
+    check_admin_referer("vp_link_article_translation");
+    $result = vp_link_article_translation(
+        absint($_POST["source_id"] ?? 0),
+        absint($_POST["draft_id"] ?? 0),
+        sanitize_key($_POST["lang"] ?? ""),
+    );
+    $notice = is_wp_error($result)
+        ? "Translation not linked: " . $result->get_error_message()
+        : "Translation draft " . $result . " linked. Approve it before publishing.";
+    set_transient("vp_article_revision_notice_" . get_current_user_id(), $notice, HOUR_IN_SECONDS);
+    wp_safe_redirect(admin_url("tools.php?page=valon-article-revisions"));
+    exit();
+});
 
 function vp_apply_article_revision($source_id, $draft_id)
 {
@@ -96,7 +169,8 @@ function vp_apply_article_revision($source_id, $draft_id)
         return new WP_Error("apply", "The revision could not be applied; inspect the published post and restore the previous revision if needed.");
     }
     update_post_meta($source_id, "_valon_substantive_update", "1");
-    $description = get_post_meta($draft_id, "_yoast_wpseo_metadesc", true);
+    // The reviewed excerpt is the fallback, so a stale description never outlives the revision.
+    $description = get_post_meta($draft_id, "_yoast_wpseo_metadesc", true) ?: sanitize_text_field($draft->post_excerpt);
     if ($description) {
         update_post_meta($source_id, "_yoast_wpseo_metadesc", $description);
     }
