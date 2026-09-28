@@ -545,6 +545,16 @@
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
+.article-archive-context {
+  max-width: 760px;
+  margin: 1.5rem auto 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid #377bb4;
+  background: #f0f5f8;
+  color: #24394a;
+  line-height: 1.55;
+}
+.article-archive-context p { margin: .4rem 0 0; }
 .article-brand-trail > p:not(.eyebrow) {
   margin: 8px 0 18px;
   font-size: clamp(19px, 2.5vw, 25px);

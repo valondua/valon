@@ -20,7 +20,29 @@ echo esc_html($cats ? $cats[0]->name : "Writing");
     echo vp_video_article_player(get_the_ID());
 } else {
     valon_render_article_image(get_the_ID());
-} ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
+} ?><?php
+$archive_review = [
+    1002 => "health", 1017 => "health", 1022 => "health", 1232 => "health",
+    1498 => "health", 2196 => "health", 1912 => "finance", 1960 => "finance",
+][get_the_ID()] ?? "";
+if ($archive_review): ?>
+<aside class="article-archive-context" aria-label="<?php echo esc_attr(valon_localized([
+    "en" => "Archive context", "sq" => "Konteksti i arkivit", "de" => "Hinweis zum Archiv",
+])); ?>">
+    <strong><?php echo esc_html(valon_localized([
+        "en" => "From the archive", "sq" => "Prej arkivit", "de" => "Aus dem Archiv",
+    ])); ?></strong>
+    <p><?php echo esc_html($archive_review === "health" ? valon_localized([
+        "en" => "I wrote this from personal experience. I am reviewing its health claims; read it as a record of what I tried, not a current recommendation.",
+        "sq" => "Këtë e shkrova prej përvojës teme. Po i rishikoj pretendimet për shëndetin; lexoje si shënim të asaj që provova, jo si këshillë të sotme.",
+        "de" => "Ich schrieb dies aus eigener Erfahrung. Die Gesundheitsbehauptungen prüfe ich erneut; lies es als Bericht über meinen Versuch, nicht als aktuelle Empfehlung.",
+    ]) : valon_localized([
+        "en" => "This reflects my view when I wrote it. I am reviewing its figures and financial claims; read it as an older opinion, not current guidance.",
+        "sq" => "Ky ishte mendimi im kur e shkrova. Po i rishikoj shifrat dhe pretendimet financiare; lexoje si mendim të mëhershëm, jo si këshillë të sotme.",
+        "de" => "Das war meine Sicht zur Zeit der Veröffentlichung. Zahlen und Finanzbehauptungen prüfe ich erneut; lies es als ältere Meinung, nicht als aktuelle Empfehlung.",
+    ])); ?></p>
+</aside>
+<?php endif; ?><article class="prose" data-article="<?php the_ID(); ?>"><?php
 the_content();
 wp_link_pages();
 ?></article><?php get_template_part("template-parts/brand-trail"); ?><?php
