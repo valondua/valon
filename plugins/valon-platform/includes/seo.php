@@ -69,8 +69,24 @@ add_filter("wpseo_schema_graph", function ($graph) {
     $out[] = $person;
     return $out;
 });
+function vp_excerpt_description()
+{
+    return wp_trim_words(
+        wp_strip_all_tags(
+            get_the_excerpt() ?:
+            get_post_field("post_content", get_queried_object_id()),
+        ),
+        28,
+        "…",
+    );
+}
+function vp_copied_description()
+{
+    return is_singular("post") &&
+        vp_copied_english_seo(get_queried_object_id(), "_yoast_wpseo_metadesc");
+}
 add_filter("wpseo_metadesc", function ($description) {
-    if ($description) {
+    if ($description && !vp_copied_description()) {
         return $description;
     }
     if (is_front_page()) {
@@ -80,16 +96,12 @@ add_filter("wpseo_metadesc", function ($description) {
         );
     }
     if (is_singular()) {
-        return wp_trim_words(
-            wp_strip_all_tags(
-                get_the_excerpt() ?:
-                get_post_field("post_content", get_queried_object_id()),
-            ),
-            28,
-            "…",
-        );
+        return vp_excerpt_description();
     }
     return $description;
+});
+add_filter("wpseo_opengraph_desc", function ($description) {
+    return vp_copied_description() ? vp_excerpt_description() : $description;
 });
 add_filter("wpseo_canonical", function ($url) {
     if (
@@ -209,6 +221,19 @@ add_filter(
     100,
 );
 
+// Creating a translation can copy the English Yoast fields; English SEO copy is never right there.
+function vp_copied_english_seo($post_id, $key)
+{
+    if (!function_exists("pll_get_post") || !function_exists("pll_get_post_language")) {
+        return false;
+    }
+    $stored = (string) get_post_meta($post_id, $key, true);
+    $english = (int) pll_get_post($post_id, "en");
+    return $stored !== "" &&
+        pll_get_post_language($post_id) !== "en" &&
+        $english && $english !== (int) $post_id &&
+        $stored === (string) get_post_meta($english, $key, true);
+}
 // A stored SEO title can describe the wrong article: one saved before an approved revision
 // replaced the body, or an English title copied onto a translation. Curated titles stay.
 function vp_stale_seo_title($post_id)
@@ -226,13 +251,7 @@ function vp_stale_seo_title($post_id)
     ) {
         return true;
     }
-    if (!function_exists("pll_get_post") || !function_exists("pll_get_post_language")) {
-        return false;
-    }
-    $english = (int) pll_get_post($post_id, "en");
-    return pll_get_post_language($post_id) !== "en" &&
-        $english && $english !== (int) $post_id &&
-        $stored === (string) get_post_meta($english, "_yoast_wpseo_title", true);
+    return vp_copied_english_seo($post_id, "_yoast_wpseo_title");
 }
 function vp_current_seo_title($title)
 {
