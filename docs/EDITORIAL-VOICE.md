@@ -23,4 +23,4 @@ Business and technology stories belong to one of these paths when they show what
 
 ## Priority in the existing archive
 
-The private article audit records 190 English originals and their language coverage. First revise the long Albanian identity essay to remove unsupported DNA and national-psychology claims; then the Xhepa article's broad regional generalisation and the self-discovery article's science/family framing. Review the remaining legacy pieces individually. The 112 video-source originals should stay honest about what their captions and source links can establish.
+The private article audit records 190 English originals and their language coverage. The Albanian identity, Xhepa mentoring and self-discovery essays were substantively revised in English and given reviewed Albanian and German editions on 28 September 2026. Eight older health/finance posts retain visible archive context while their claims await individual review. Review the remaining legacy pieces individually. The 112 video-source originals should stay honest about what their captions and source links can establish.

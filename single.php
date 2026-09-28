@@ -9,10 +9,13 @@ echo esc_html($cats ? $cats[0]->name : "Writing");
     get_the_date(valon_lang() === "en" ? "F j, Y" : "d.m.Y"),
 ); ?></time> <span>·</span> <?php echo esc_html(
     valon_reading_time(),
-); ?></p><?php if (
-    get_post_meta(get_the_ID(), "_valon_substantive_update", true)
-): ?><p class="muted"><?php echo esc_html(
-    valon_text("Updated ", "Përditësuar ") . get_the_modified_date(),
+); ?></p><?php
+$recent_revision = get_post_meta(get_the_ID(), "_vp_requires_review", true) === "1" &&
+    get_post_meta(get_the_ID(), "_vp_approved_hash", true) &&
+    (get_post_modified_time("U") - get_post_time("U")) > 30 * DAY_IN_SECONDS;
+if (get_post_meta(get_the_ID(), "_valon_substantive_update", true) || $recent_revision):
+?><p class="muted"><?php echo esc_html(
+    valon_text("Updated ", "Përditësuar ") . get_the_modified_date(valon_lang() === "en" ? "F j, Y" : "d.m.Y"),
 ); ?></p><?php endif; ?></header><?php if (
     function_exists("vp_video_id") &&
     vp_video_id(get_the_ID())

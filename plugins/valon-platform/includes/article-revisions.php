@@ -89,6 +89,7 @@ function vp_apply_article_revision($source_id, $draft_id)
     ) {
         return new WP_Error("apply", "The revision could not be applied; inspect the published post and restore the previous revision if needed.");
     }
+    update_post_meta($source_id, "_valon_substantive_update", "1");
     $description = get_post_meta($draft_id, "_yoast_wpseo_metadesc", true);
     if ($description) {
         update_post_meta($source_id, "_yoast_wpseo_metadesc", $description);

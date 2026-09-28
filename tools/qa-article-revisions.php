@@ -50,6 +50,7 @@ try {
         $result->post_date !== $original->post_date ||
         $result->post_title !== "Reviewed article" ||
         $result->post_content !== "New copy with evidence." ||
+        get_post_meta($source_id, "_valon_substantive_update", true) !== "1" ||
         get_post_status($draft_id) !== "private"
     ) {
         throw new RuntimeException("Revision did not preserve publication identity and archive the draft.");
