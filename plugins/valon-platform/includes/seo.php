@@ -207,7 +207,19 @@ add_filter(
 );
 
 add_filter("wpseo_title", function ($title) {
-    return is_front_page() ? get_the_title(get_queried_object_id()) : $title;
+    if (is_front_page()) {
+        return get_the_title(get_queried_object_id());
+    }
+    if (is_singular("post")) {
+        $post_id = get_queried_object_id();
+        if (
+            get_post_meta($post_id, "_vp_requires_review", true) === "1" &&
+            get_post_meta($post_id, "_vp_approved_hash", true)
+        ) {
+            return get_the_title($post_id) . " | Valon Asani";
+        }
+    }
+    return $title;
 });
 add_action("wpseo_add_opengraph_images", function ($images) {
     if (is_front_page() || is_page("about")) {
