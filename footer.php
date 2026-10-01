@@ -13,6 +13,7 @@
     echo '<a href="' . esc_url($url) . '" rel="me">' . esc_html($name) . "</a>";
 } ?></div><div><?php foreach (
     [
+        "newsletter" => ["Free newsletter", "Letra falas"],
         "media" => ["Media", "Media"],
         "now" => ["Now", "Tash"],
         "contact" => ["Contact", "Kontakti"],
@@ -20,7 +21,7 @@
     ]
     as $r => $label
 ) {
-    echo '<a href="' .
+    echo '<a ' . ($r === "newsletter" ? 'data-newsletter-open ' : '') . 'href="' .
         esc_url(valon_url($r)) .
         '">' .
         esc_html(valon_text(...$label)) .
@@ -28,4 +29,4 @@
 } ?></div></div>
 <div class="footer-bottom"><span>© <?php echo esc_html(
     wp_date("Y"),
-); ?> Valon Asani</span><span>Prishtina ↔ Zürich</span></div></div></footer><?php wp_footer(); ?></body></html>
+); ?> Valon Asani</span><span>Prishtina ↔ Zürich</span></div></div></footer><?php get_template_part("template-parts/newsletter-popup"); wp_footer(); ?></body></html>

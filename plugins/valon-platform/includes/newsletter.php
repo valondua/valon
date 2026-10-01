@@ -2,20 +2,8 @@
 defined("ABSPATH") || exit();
 function vp_newsletter_form($placement = "inline", $lang = "en")
 {
-    // Use the owner's verified public form until the server-side connection is configured.
-    // Never invite visitors to enter an address into a form known to return 503.
-    if (
-        wp_get_environment_type() !== "local" &&
-        (!vp_secret("VP_MAILCHIMP_API_KEY") || !vp_secret("VP_MAILCHIMP_LIST_ID"))
-    ) {
-        return '<div class="newsletter-hosted" data-placement="' . esc_attr($placement) . '" data-lang="' . esc_attr($lang) . '"><p><a class="button" href="https://eepurl.com/h-inUL">' .
-            esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)) .
-            '</a></p><p class="form-note">' .
-            esc_html(vp_text(
-                "Continue to my signup form on Mailchimp. The form is currently in English.",
-                "Vazhdo te formulari im në Mailchimp. Formulari për momentin është në anglisht.",
-                $lang,
-            )) . '</p></div>';
+    if (!vp_secret("VP_MAILCHIMP_API_KEY") || !vp_secret("VP_MAILCHIMP_LIST_ID")) {
+        return vp_newsletter_hosted_form($placement, $lang);
     }
     $id = wp_unique_id("letter-");
     ob_start();
@@ -53,6 +41,25 @@ function vp_newsletter_form($placement = "inline", $lang = "en")
  ); ?></p></noscript></form>
  <?php return ob_get_clean();
 }
+/** Public embed identifiers from the existing eepurl.com/h-inUL audience. No API secret. */
+function vp_newsletter_hosted_form($placement, $lang)
+{
+    $id = wp_unique_id("letter-");
+    $copy = fn($en, $sq, $de) => ["en" => $en, "sq" => $sq, "de" => $de][$lang] ?? $en;
+    ob_start(); ?>
+    <form class="newsletter-form" data-hosted="true" data-placement="<?php echo esc_attr($placement); ?>" data-lang="<?php echo esc_attr($lang); ?>" action="https://valonasani.us1.list-manage.com/subscribe/post?u=c37037a826fe84a19f2ad26d1&amp;id=293f2ca94d" method="post">
+        <label class="newsletter-email-label" for="<?php echo esc_attr($id); ?>"><?php echo esc_html(vp_text("Email address", "Adresa e emailit", $lang)); ?></label>
+        <div class="form-row">
+            <input id="<?php echo esc_attr($id); ?>" name="EMAIL" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254">
+            <button type="submit"><?php echo esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)); ?></button>
+        </div>
+        <label class="form-consent"><input type="checkbox" required value="1" name="valon_consent"><span><?php echo esc_html(vp_text("Send me Letters from Valon every two weeks.", "Dua me marrë Letra nga Valoni çdo dy javë.", $lang)); ?></span></label>
+        <div class="honey" aria-hidden="true"><label>Leave empty<input name="b_c37037a826fe84a19f2ad26d1_293f2ca94d" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form-note"><?php echo esc_html($copy("Free. Unsubscribe anytime. Continue securely to Mailchimp to finish signing up.", "Falas. Çregjistrohu kur të duash. Vazhdo në Mailchimp për ta përfunduar regjistrimin.", "Kostenlos. Jederzeit abmelden. Schliesse deine Anmeldung sicher bei Mailchimp ab.")); ?> <a href="<?php echo esc_url(function_exists("valon_url") ? valon_url("privacy-policy", $lang) : home_url("/privacy-policy/")); ?>"><?php echo esc_html(vp_text("Privacy", "Privatësia", $lang)); ?></a></p>
+    </form>
+    <?php return ob_get_clean();
+}
+
 function vp_subscribe($request)
 {
     $requested_language = $request->get_param("language");

@@ -22,6 +22,11 @@ $t = fn($en, $sq, $de) => valon_localized(compact("en", "sq", "de"));
         "Alle zwei Wochen eine ehrliche Geschichte über respektvolle Liebe, gelebte Werte oder albanische Wurzeln – mit einer Idee zum Ausprobieren.",
     ),
 ); ?></p>
+<ol class="letter-steps" aria-label="<?php echo esc_attr($t("How to join", "Si me u bashku", "So meldest du dich an")); ?>">
+<li><span>01</span> <?php echo esc_html($t("Your email", "Emaili yt", "Deine E-Mail")); ?></li>
+<li><span>02</span> <?php echo esc_html($t("Finish signup", "Përfundo regjistrimin", "Anmeldung abschliessen")); ?></li>
+<li><span>03</span> <?php echo esc_html($t("Stay inspired", "Gjej frymëzim", "Inspiriert bleiben")); ?></li>
+</ol>
 <div id="join-letters" class="letter-signup"><?php valon_newsletter(
     "landing",
 ); ?></div>

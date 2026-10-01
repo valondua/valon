@@ -115,7 +115,7 @@
     const placement =
       element?.dataset.placement ||
       element?.closest(".newsletter-hosted")?.dataset.placement;
-    if (["hero", "footer", "landing", "newsletter", "inline"].includes(placement))
+    if (["hero", "footer", "landing", "newsletter", "inline", "popup"].includes(placement))
       return placement;
     if (element?.closest(".hero-newsletter")) return "hero";
     if (element?.closest(".newsletter-band")) return "footer";
@@ -126,6 +126,16 @@
   const newsletterLanguage = (language) =>
     ["en", "sq", "de"].includes(language) ? language : "en";
   document.querySelectorAll(".newsletter-form").forEach((form) => {
+    if (form.dataset.hosted === "true") {
+      form.addEventListener("submit", () => {
+        if (form.checkValidity()) track("newsletter_signup_click", {
+          language: newsletterLanguage(form.dataset.lang),
+          placement: newsletterPlacement(form),
+          source: newsletterSource(),
+        });
+      });
+      return;
+    }
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
@@ -160,6 +170,7 @@
               source: stored,
             });
           form.reset();
+          form.dispatchEvent?.(new CustomEvent("newsletter:submitted", { bubbles: true }));
         }
       } catch {
         status.textContent = message("offline", payload.language);
