@@ -8,7 +8,7 @@ const sharp = require('sharp');
 const path = require('node:path');
 
 const images = {
-    'valon-hero': [480, 768, 1024, 1586],
+    'valon-hero': [480, 768, 1024, 1448],
     'valon-candid': [360],
     'valon-self-respect': [480, 768, 1024],
     'valon-dua': [480, 768, 1024],

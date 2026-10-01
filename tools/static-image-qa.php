@@ -100,7 +100,7 @@ try {
         foreach ([480, 768, 879] as $width) {
             $files[] = "valon-portrait-$width.$extension";
         }
-        foreach ([480, 768, 1024, 1586] as $width) {
+        foreach ([480, 768, 1024, 1448] as $width) {
             $files[] = "valon-hero-$width.$extension";
         }
     }
@@ -132,8 +132,8 @@ try {
     check(valon_asset_url("assets/valon-portrait.jpeg") !== $portrait_url, "Changed file timestamp produces a fresh browser-cache URL");
 
     $hero = valon_home_portrait_sources();
-    check_srcset($hero["srcset"], [480, 768, 1024, 1586]);
-    check_srcset($hero["avif_srcset"], [480, 768, 1024, 1586]);
+    check_srcset($hero["srcset"], [480, 768, 1024, 1448]);
+    check_srcset($hero["avif_srcset"], [480, 768, 1024, 1448]);
     check(str_ends_with($hero["src"], "valon-hero.jpeg?ver=1700000000"), "Hero JPEG fallback is versioned");
     ob_start();
     foreach ($actions["wp_head"] as $callback) { $callback(); }

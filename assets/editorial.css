@@ -990,7 +990,7 @@ select:focus-visible {
     height: 390px;
   }
   .home-portrait img {
-    object-position: center 14%;
+    object-position: center top;
   }
   .home-portrait::after {
     background:

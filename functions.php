@@ -115,11 +115,11 @@ function valon_home_portrait_sources()
         "src" => valon_asset_url("assets/valon-hero.jpeg"),
         "srcset" => implode(", ", array_map(
             static fn($width) => valon_asset_url("assets/valon-hero-" . $width . ".webp") . " " . $width . "w",
-            [480, 768, 1024, 1586],
+            [480, 768, 1024, 1448],
         )),
         "avif_srcset" => implode(", ", array_map(
             static fn($width) => valon_asset_url("assets/valon-hero-" . $width . ".avif") . " " . $width . "w",
-            [480, 768, 1024, 1586],
+            [480, 768, 1024, 1448],
         )),
         // Account for object-fit: cover in the desktop hero's minimum height.
         "sizes" => "(max-width: 780px) 100vw, (max-width: 1085px) 640px, 59vw",

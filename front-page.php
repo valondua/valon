@@ -22,7 +22,7 @@
                 ); ?>" sizes="<?php echo esc_attr($portrait_sources["sizes"]); ?>">
                 <img src="<?php echo esc_url(
                     $portrait_sources["src"],
-                ); ?>" width="1586" height="1983" alt="Valon Asani" fetchpriority="high" loading="eager">
+                ); ?>" width="1448" height="2172" alt="Valon Asani" fetchpriority="high" loading="eager">
             </picture>
         <?php
         } ?>
