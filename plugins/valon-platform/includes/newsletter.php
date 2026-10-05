@@ -53,7 +53,8 @@ function vp_newsletter_hosted_form($placement, $lang)
             <input id="<?php echo esc_attr($id); ?>" name="EMAIL" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254">
             <button type="submit"><?php echo esc_html(vp_text("Get the free letters", "Merri letrat falas", $lang)); ?></button>
         </div>
-        <label class="form-consent"><input type="checkbox" required value="1" name="valon_consent"><span><?php echo esc_html(vp_text("Send me Letters from Valon every two weeks.", "Dua me marrë Letra nga Valoni çdo dy javë.", $lang)); ?></span></label>
+        <label class="form-consent"><input type="checkbox" required value="1" name="group[393415][1]"><span><?php echo esc_html(vp_text("Send me Letters from Valon every two weeks.", "Dua me marrë Letra nga Valoni çdo dy javë.", $lang)); ?></span></label>
+        <input type="hidden" name="MERGE6" value="<?php echo esc_attr(in_array($lang, ["en", "sq", "de"], true) ? $lang : "en"); ?>">
         <div class="honey" aria-hidden="true"><label>Leave empty<input name="b_c37037a826fe84a19f2ad26d1_293f2ca94d" type="text" tabindex="-1" autocomplete="off"></label></div>
         <p class="form-note"><?php echo esc_html($copy("Free. Unsubscribe anytime. Continue securely to Mailchimp to finish signing up.", "Falas. Çregjistrohu kur të duash. Vazhdo në Mailchimp për ta përfunduar regjistrimin.", "Kostenlos. Jederzeit abmelden. Schliesse deine Anmeldung sicher bei Mailchimp ab.")); ?> <a href="<?php echo esc_url(function_exists("valon_url") ? valon_url("privacy-policy", $lang) : home_url("/privacy-policy/")); ?>"><?php echo esc_html(vp_text("Privacy", "Privatësia", $lang)); ?></a></p>
     </form>
@@ -156,7 +157,8 @@ function vp_subscribe($request)
     $body = [
         "email_address" => $email,
         "status" => "pending",
-        "merge_fields" => ["VLANG" => $lang, "VSOURCE" => $source],
+        "merge_fields" => ["VLANG" => $lang],
+        "interests" => ["7885454f88" => true],
     ];
     $r = wp_remote_post($base, [
         "timeout" => 15,
