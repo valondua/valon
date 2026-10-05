@@ -158,6 +158,23 @@ add_filter("wp_sitemaps_post_types", function ($types) {
     unset($types["valon_social"]);
     return $types;
 });
+// Newsletter flow pages are intentionally noindex; do not invite Google to index them.
+add_filter("wpseo_exclude_from_sitemap_by_post_ids", function ($excluded) {
+    $utility_pages = get_posts([
+        "post_type" => "page",
+        "post_status" => "publish",
+        "numberposts" => -1,
+        "fields" => "ids",
+        "lang" => "", // Include every Polylang translation during sitemap requests.
+        "suppress_filters" => true,
+        "meta_query" => [[
+            "key" => "_valon_route",
+            "value" => ["check-inbox", "welcome", "unsubscribed"],
+            "compare" => "IN",
+        ]],
+    ]);
+    return array_values(array_unique(array_merge($excluded, $utility_pages)));
+});
 add_filter(
     "wpseo_sitemap_exclude_post_type",
     fn($exclude, $type) => $type === "valon_social" ? true : $exclude,
