@@ -30,6 +30,7 @@ require_once VP_DIR . "/includes/social.php";
 require_once VP_DIR . "/includes/admin.php";
 require_once VP_DIR . "/includes/article-revisions.php";
 require_once VP_DIR . "/includes/newsletter.php";
+require_once VP_DIR . "/includes/newsletter-measurement.php";
 require_once VP_DIR . "/includes/seo.php";
 require_once VP_DIR . "/includes/yoast-content.php";
 add_action("init", ["VP_Social", "register"]);
@@ -51,8 +52,11 @@ add_action("wp_enqueue_scripts", function () {
         filemtime(VP_DIR . "/assets/platform.js"),
         true,
     );
+    wp_enqueue_script("valon-newsletter-measurement", plugins_url("assets/newsletter-measurement.js", __FILE__), ["valon-platform"], filemtime(VP_DIR . "/assets/newsletter-measurement.js"), true);
     wp_localize_script("valon-platform", "valonPlatform", [
         "subscribe" => rest_url("valon/v1/subscribe"),
+        "newsletterIntent" => rest_url("valon/v1/newsletter-intent"),
+        "newsletterConfirmation" => rest_url("valon/v1/newsletter-confirmation"),
         "embed" => rest_url("valon/v1/embed/"),
         "isLocal" => wp_get_environment_type() === "local",
     ]);
