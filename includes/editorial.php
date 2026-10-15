@@ -62,6 +62,9 @@ function valon_article_image($post_id)
             "height" => (int) $source_cover["height"],
         ];
     }
+    if (get_post_meta($post_id, "_vp_no_generic_cover", true) === "1") {
+        return ["url" => "", "attachment" => 0, "kind" => "original"];
+    }
     $video_cover = get_post_meta($post_id, "_vp_video_cover", true);
     if (
         in_array(
@@ -188,6 +191,9 @@ function valon_uploaded_cover_sources($url)
 function valon_render_article_image($post_id, $card = false)
 {
     $cover = valon_article_image($post_id);
+    if (empty($cover["url"])) {
+        return;
+    }
     $alt = $card
         ? ""
         : ($cover["kind"] === "portrait"

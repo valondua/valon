@@ -17,6 +17,29 @@ function vp_video_id($post_id)
     return is_string($id) && preg_match('/^\d{19}$/D', $id) ? $id : "";
 }
 
+/** Optional YouTube mirror of the same owner-sourced clip. */
+function vp_youtube_id($post_id)
+{
+    $id = get_post_meta($post_id, "_vp_youtube_id", true);
+    return is_string($id) && preg_match('/^[A-Za-z0-9_-]{11}$/D', $id) ? $id : "";
+}
+
+/** Only provider-generated public embed endpoints are accepted. */
+function vp_source_embed_url($post_id)
+{
+    $url = get_post_meta($post_id, "_vp_embed_url", true);
+    return is_string($url) && preg_match('~^https://(?:www\.instagram\.com/p/[A-Za-z0-9_-]+/embed/|www\.facebook\.com/plugins/(?:video|post)\.php\?[^<>\s]+)$~D', $url) ? $url : "";
+}
+function vp_local_video_url($post_id)
+{
+    $id = (int) get_post_meta($post_id, "_vp_local_video", true);
+    return $id && get_post_mime_type($id) === "video/mp4" ? (wp_get_attachment_url($id) ?: "") : "";
+}
+function vp_has_article_player($post_id)
+{
+    return vp_local_video_url($post_id) || vp_youtube_id($post_id) || vp_source_embed_url($post_id) || vp_video_id($post_id);
+}
+
 function vp_tiktok_source_type($post_id)
 {
     return get_post_meta($post_id, "_vp_source_type", true) === "photo"
@@ -34,6 +57,21 @@ function vp_tiktok_source_url($post_id)
 
 function vp_video_article_player($post_id)
 {
+    if ($video = vp_local_video_url($post_id)) {
+        $label = vp_video_copy("Watch the original video", "Shiko videon origjinale", "Originalvideo ansehen", $post_id);
+        $poster = get_the_post_thumbnail_url($post_id, "large") ?: "";
+        return '<figure class="video-article-player"><video controls playsinline preload="metadata" width="360" height="640" poster="' . esc_url($poster) . '" aria-label="' . esc_attr($label . ': ' . get_the_title($post_id)) . '"><source src="' . esc_url($video) . '" type="video/mp4"><a href="' . esc_url($video) . '">' . esc_html($label) . '</a></video><figcaption><strong>' . esc_html($label) . '</strong><p>' . esc_html(vp_video_copy("Original recording. Read the article below in your selected language.", "Regjistrimi origjinal. Lexoje artikullin poshtë në gjuhën e zgjedhur.", "Originalaufnahme. Lies den Artikel darunter in deiner gewählten Sprache.", $post_id)) . '</p></figcaption></figure>';
+    }
+    if (!vp_youtube_id($post_id) && ($embed = vp_source_embed_url($post_id))) {
+        $label = vp_video_copy("Original social post", "Postimi origjinal", "Originalbeitrag", $post_id);
+        $source = get_post_meta($post_id, "_vp_source_url", true);
+        return '<figure class="video-article-player"><iframe src="' . esc_url($embed) . '" title="' . esc_attr($label . ': ' . get_the_title($post_id)) . '" width="360" height="640" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><figcaption><strong>' . esc_html($label) . '</strong><p>' . esc_html(vp_video_copy("If the post does not load, open the original below.", "Nëse postimi nuk ngarkohet, hape origjinalin poshtë.", "Falls der Beitrag nicht lädt, öffne unten das Original.", $post_id)) . '</p><a href="' . esc_url($source) . '" target="_blank" rel="noopener">' . esc_html($label) . ' ↗</a></figcaption></figure>';
+    }
+    if ($youtube = vp_youtube_id($post_id)) {
+        $label = vp_video_copy("Watch the original video", "Shiko videon origjinale", "Originalvideo ansehen", $post_id);
+        $note = vp_video_copy("Original recording. Read the article below in your selected language.", "Regjistrimi origjinal. Lexoje artikullin poshtë në gjuhën e zgjedhur.", "Originalaufnahme. Lies den Artikel darunter in deiner gewählten Sprache.", $post_id);
+        return '<figure class="video-article-player"><iframe src="https://www.youtube-nocookie.com/embed/' . esc_attr($youtube) . '?rel=0" title="' . esc_attr($label . ': ' . get_the_title($post_id)) . '" width="360" height="640" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><figcaption><strong>' . esc_html($label) . '</strong><p>' . esc_html($note) . '</p><a href="https://www.youtube.com/watch?v=' . esc_attr($youtube) . '" target="_blank" rel="noopener">YouTube ↗</a></figcaption></figure>';
+    }
     $id = vp_video_id($post_id);
     if (!$id) {
         return "";

@@ -17,8 +17,8 @@ if (get_post_meta(get_the_ID(), "_valon_substantive_update", true) || $recent_re
 ?><p class="muted"><?php echo esc_html(
     valon_text("Updated ", "Përditësuar ") . get_the_modified_date(valon_lang() === "en" ? "F j, Y" : "d.m.Y"),
 ); ?></p><?php endif; ?></header><?php if (
-    function_exists("vp_video_id") &&
-    vp_video_id(get_the_ID())
+    function_exists("vp_has_article_player") &&
+    vp_has_article_player(get_the_ID())
 ) {
     echo vp_video_article_player(get_the_ID());
 } else {
@@ -50,7 +50,7 @@ if ($archive_review && get_post_meta(get_the_ID(), "_valon_substantive_update", 
 the_content();
 wp_link_pages();
 ?></article><?php get_template_part("template-parts/brand-trail"); ?><?php
-$video_article = function_exists("vp_video_id") && vp_video_id(get_the_ID());
+$video_article = function_exists("vp_has_article_player") && vp_has_article_player(get_the_ID());
 if ($video_article) {
     get_template_part("template-parts/video-next");
 } else {
