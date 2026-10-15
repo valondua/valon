@@ -32,7 +32,7 @@ This custom-event rule is separate from Site Kit's Google tag behavior. Consent 
 
 Never add email, Mailchimp member hash, IP address, token, raw form data or free text as analytics parameters. The public response contains a localized generic message only.
 
-There is **no confirmed-subscription GA event** in this implementation. Hosted Mailchimp form completion happens off-site and is not established by the outbound click. Use Mailchimp subscriber status and opt-in records for subscriber reporting; a subscribed status alone does not prove a completed double opt-in flow.
+Confirmed-subscription measurement was added on 15 October 2026; see the confirmation section below. Hosted outbound clicks remain intentions only.
 
 ## Mailchimp status
 
@@ -75,4 +75,18 @@ The local tests cover explicit consent, delayed consent, withdrawal, visible rea
 
 These simulations alone do **not** prove actual browser behavior or Google network delivery. Separate live checks on 17 September verified Google's denied initial consent state in Tag Assistant, a saved statistics-only browser choice, and the ability to reopen the banner and reject optional cookies. A consented anonymous article visit and newsletter-link click each appeared once in GA4 Realtime as `article_engaged` and `newsletter_signup_click`. A second newsletter click after rejecting optional cookies left the signup-click count unchanged during the subsequent realtime check. Those two events are deliberate setup-test traffic, not organic reader activity. The on-site form's accepted-request event is covered by tests; production currently uses the hosted Mailchimp form.
 
-Confirmed Mailchimp subscriptions must be assessed in Mailchimp, independently of GA events. A new end-to-end email confirmation test remains dependent on the owner resolving the account sending-capacity prerequisite.
+At the September verification, confirmed subscriptions were assessed in Mailchimp independently of GA events, and a sending-capacity prerequisite blocked a fresh email test. The October implementation and its current validation status are described below.
+
+## Confirmed subscriptions — 15 October 2026
+
+Mailchimp now delivers signed, contact-originated subscribe/unsubscribe/cleaned notifications to the owned WordPress endpoint. Admin additions and API additions are excluded in webhook configuration. Only events with the Letters from Valon interest (or later unsubscribe/cleaned events for a previously observed member) enter the ledger. Existing subscribers changing newsletter preferences are not counted as new subscriptions. No historical audience total is inferred.
+
+The endpoint requires its private random route token plus a valid `X-Mailchimp-Signature` HMAC-SHA256 signature over the timestamp and exact raw body, within five minutes. Secrets live in a non-autoloaded private WordPress option, never in source or browser configuration. It verifies the audience ID and records keyed member hashes, bounded attribution and timestamps, without raw addresses, IPs or payload logging. A unique event hash makes delivery retries idempotent. Known owner test hashes are excluded from reporting and browser confirmation claims.
+
+With explicit statistics consent, a hosted-form submit records a short-lived signup intent on the same site. The server hashes the address, and the browser keeps only an opaque random receipt for up to 30 days. Signup proceeds if measurement fails or times out. A valid signed confirmation matches the latest preceding intent; otherwise source/placement remain unknown. Consent withdrawal clears the browser receipt. Expired intents are deleted on the existing hourly sync; ledger rows expire after 400 days.
+
+`newsletter_confirmed` is configured as a GA4 key event. It fires only after a matching signed notification and a consented same-browser return within 30 days. Atomic server claiming prevents repeated sends. GA remains a subset: no return, different browser, storage loss, delivery failure or consent withdrawal can reduce GA counts. The server ledger is the confirmation source of truth. No email, member hash or receipt token is sent to Google. The existing Site Kit Google tag remains the only tag owner.
+
+**WordPress → Tools → Newsletter confirmations** shows the last 30 days, excluding tests. `wp valon newsletter-report` and the administrator-only `/wp-json/valon/v1/newsletter-report` expose the same aggregate report. Distinct contacts per row are not additive; resubscriptions may produce additional events.
+
+Validation: 17 temporary-table PHP assertions cover signature tampering/expiry, audience filtering, replay protection, test exclusion, attribution, one-time claims and unsubscribe handling. Six browser-script tests cover consent, failure-safe submission, confirmation gating and expiry. The pre-existing 11 consent tests also pass. A synthetic signed HTTP callback for the owner test address was accepted once and its retry deduplicated, while unsigned delivery was rejected; the test is excluded from totals. This verifies deployed transport/processing, not an actual new Mailchimp double-opt-in delivery. A first real confirmation is still required for end-to-end provider delivery and GA reporting validation.
