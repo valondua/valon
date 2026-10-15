@@ -1724,7 +1724,8 @@ select:focus-visible {
   gap: 36px;
   align-items: center;
 }
-.video-article-player iframe {
+.video-article-player iframe,
+.video-article-player video {
   width: 100%;
   height: auto;
   aspect-ratio: 9/16;
