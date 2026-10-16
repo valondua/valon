@@ -9,3 +9,5 @@ node_modules/
 
 /review/
 /WEBSITE-REBUILD-PLAN.md
+
+/tools/article-voice/__pycache__/
