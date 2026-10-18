@@ -1,0 +1,74 @@
+[
+  {
+    "file": "Public distribution/Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "Albanian",
+    "pages": 108,
+    "sha256": "08bf4ca3fbab8239bf108c0811a7b7fc944586bd8b4d22f2f7c1a28e955a25c5",
+    "bytes": 12647550,
+    "code": "sq",
+    "filename": "sami-frasheri-shqiperia-sq-2026.pdf"
+  },
+  {
+    "file": "Public distribution/Gheg Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "Gheg Albanian",
+    "pages": 110,
+    "sha256": "68ee124223ec19adea0f4800a2bf0b624ff1113606f7246ea189d869113b3bd5",
+    "bytes": 12647225,
+    "code": "gheg",
+    "filename": "sami-frasheri-shqiperia-gheg-2026.pdf"
+  },
+  {
+    "file": "Public distribution/English - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "English",
+    "pages": 114,
+    "sha256": "151dd382815e2b1546f593288d0415d13cf5e1ca80800339555e191985ec0773",
+    "bytes": 12646991,
+    "code": "en",
+    "filename": "sami-frasheri-shqiperia-en-2026.pdf"
+  },
+  {
+    "file": "Public distribution/German - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "German",
+    "pages": 130,
+    "sha256": "237e21917c63b698f93d3a8c24e65c1d5852bf0c04caa7a097a06bd0658bbda3",
+    "bytes": 12677436,
+    "code": "de",
+    "filename": "sami-frasheri-shqiperia-de-2026.pdf"
+  },
+  {
+    "file": "Public distribution/Italian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "Italian",
+    "pages": 116,
+    "sha256": "955f7960e513f54e452406022a46ea19e59a2fbe77711a88fbad158722ed0df3",
+    "bytes": 12655208,
+    "code": "it",
+    "filename": "sami-frasheri-shqiperia-it-2026.pdf"
+  },
+  {
+    "file": "Public distribution/French - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "French",
+    "pages": 121,
+    "sha256": "de0ae42916276f698e1d3740917c3d8b111a9fae8b2584ad2c2b6c40e0d6242f",
+    "bytes": 12669266,
+    "code": "fr",
+    "filename": "sami-frasheri-shqiperia-fr-2026.pdf"
+  },
+  {
+    "file": "Public distribution/Turkish - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "Turkish",
+    "pages": 108,
+    "sha256": "e029b5dc68801a8c18ed4e1af9fb5d4ecace4620aebf741993fdfd87e0277fb4",
+    "bytes": 12649425,
+    "code": "tr",
+    "filename": "sami-frasheri-shqiperia-tr-2026.pdf"
+  },
+  {
+    "file": "Public distribution/Croatian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "language": "Croatian",
+    "pages": 104,
+    "sha256": "b963a6362fc943b35aea4c4cefd13acda9b0da0e84f173072f60ea75339c42b2",
+    "bytes": 12636198,
+    "code": "hr",
+    "filename": "sami-frasheri-shqiperia-hr-2026.pdf"
+  }
+]
