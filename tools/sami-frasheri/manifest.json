@@ -1,74 +1,98 @@
 [
   {
-    "file": "Public distribution/Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "Albanian",
     "pages": 108,
-    "sha256": "08bf4ca3fbab8239bf108c0811a7b7fc944586bd8b4d22f2f7c1a28e955a25c5",
-    "bytes": 12647550,
+    "sha256": "96f50d08dd0da4f3235f3038d4ea226e89e50e59ca6a274b9a1506208bb6b4c9",
+    "bytes": 12711761,
     "code": "sq",
-    "filename": "sami-frasheri-shqiperia-sq-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-sq-2026.pdf",
+    "original_sha256": "08bf4ca3fbab8239bf108c0811a7b7fc944586bd8b4d22f2f7c1a28e955a25c5",
+    "source_file": "Public distribution/Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-sq-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/Gheg Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "Gheg Albanian",
     "pages": 110,
-    "sha256": "68ee124223ec19adea0f4800a2bf0b624ff1113606f7246ea189d869113b3bd5",
-    "bytes": 12647225,
+    "sha256": "091e3251522bd16958243d14b8a4965bd6c962effface7e6eed37456484d051a",
+    "bytes": 12711634,
     "code": "gheg",
-    "filename": "sami-frasheri-shqiperia-gheg-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-gheg-2026.pdf",
+    "original_sha256": "68ee124223ec19adea0f4800a2bf0b624ff1113606f7246ea189d869113b3bd5",
+    "source_file": "Public distribution/Gheg Albanian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-gheg-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/English - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "English",
     "pages": 114,
-    "sha256": "151dd382815e2b1546f593288d0415d13cf5e1ca80800339555e191985ec0773",
-    "bytes": 12646991,
+    "sha256": "aa789dd60c30e9658bbd739140ea48deeb49865bcdcacfab8d30478b2265d2a4",
+    "bytes": 12710301,
     "code": "en",
-    "filename": "sami-frasheri-shqiperia-en-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-en-2026.pdf",
+    "original_sha256": "151dd382815e2b1546f593288d0415d13cf5e1ca80800339555e191985ec0773",
+    "source_file": "Public distribution/English - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-en-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/German - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "German",
     "pages": 130,
-    "sha256": "237e21917c63b698f93d3a8c24e65c1d5852bf0c04caa7a097a06bd0658bbda3",
-    "bytes": 12677436,
+    "sha256": "d515e4c6ee012d45465abcb1eeafc93ea50289364ceb89044f019003a017136c",
+    "bytes": 12741888,
     "code": "de",
-    "filename": "sami-frasheri-shqiperia-de-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-de-2026.pdf",
+    "original_sha256": "237e21917c63b698f93d3a8c24e65c1d5852bf0c04caa7a097a06bd0658bbda3",
+    "source_file": "Public distribution/German - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-de-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/Italian - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "Italian",
     "pages": 116,
-    "sha256": "955f7960e513f54e452406022a46ea19e59a2fbe77711a88fbad158722ed0df3",
-    "bytes": 12655208,
+    "sha256": "0fed2bf739401a44399e28de1445aa0d423336e6189c618513345cb31f7572a9",
+    "bytes": 12718901,
     "code": "it",
-    "filename": "sami-frasheri-shqiperia-it-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-it-2026.pdf",
+    "original_sha256": "955f7960e513f54e452406022a46ea19e59a2fbe77711a88fbad158722ed0df3",
+    "source_file": "Public distribution/Italian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-it-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/French - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "French",
     "pages": 121,
-    "sha256": "de0ae42916276f698e1d3740917c3d8b111a9fae8b2584ad2c2b6c40e0d6242f",
-    "bytes": 12669266,
+    "sha256": "36a99ee3c26a950cbdf37df4e361b6b38a17eea19b5f8514f72f03a24004be8c",
+    "bytes": 12734137,
     "code": "fr",
-    "filename": "sami-frasheri-shqiperia-fr-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-fr-2026.pdf",
+    "original_sha256": "de0ae42916276f698e1d3740917c3d8b111a9fae8b2584ad2c2b6c40e0d6242f",
+    "source_file": "Public distribution/French - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-fr-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/Turkish - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "Turkish",
     "pages": 108,
-    "sha256": "e029b5dc68801a8c18ed4e1af9fb5d4ecace4620aebf741993fdfd87e0277fb4",
-    "bytes": 12649425,
+    "sha256": "3663adf63b50a3f688631b27fd587d070d999deaf84426a093a224c29a4a4dc8",
+    "bytes": 12715303,
     "code": "tr",
-    "filename": "sami-frasheri-shqiperia-tr-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-tr-2026.pdf",
+    "original_sha256": "e029b5dc68801a8c18ed4e1af9fb5d4ecace4620aebf741993fdfd87e0277fb4",
+    "source_file": "Public distribution/Turkish - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-tr-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   },
   {
-    "file": "Public distribution/Croatian - Sami Frashëri - Public illustrated reading edition.pdf",
     "language": "Croatian",
     "pages": 104,
-    "sha256": "b963a6362fc943b35aea4c4cefd13acda9b0da0e84f173072f60ea75339c42b2",
-    "bytes": 12636198,
+    "sha256": "65b9157792e6ee4dae9d4384802a932d552152df80be8d6137249c9295806823",
+    "bytes": 12701881,
     "code": "hr",
-    "filename": "sami-frasheri-shqiperia-hr-2026.pdf"
+    "filename": "sami-frasheri-shqiperia-hr-2026.pdf",
+    "original_sha256": "b963a6362fc943b35aea4c4cefd13acda9b0da0e84f173072f60ea75339c42b2",
+    "source_file": "Public distribution/Croatian - Sami Frashëri - Public illustrated reading edition.pdf",
+    "file": "sami-frasheri-shqiperia-hr-2026.pdf",
+    "revision": "2026-10-18 publisher, source and qualified rights notice"
   }
 ]

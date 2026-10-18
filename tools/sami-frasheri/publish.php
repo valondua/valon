@@ -1,5 +1,6 @@
 <?php
 // Run with the existing authenticated production CLI after installing this template and verified assets.
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('CLI only'); }
 require '/var/www/html/wp-load.php';
 if (home_url() !== 'https://www.valonasani.com') { throw new Exception('Wrong website'); }
 $slug = 'sami-frasheri-shqiperia';
