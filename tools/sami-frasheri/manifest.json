@@ -117,5 +117,20 @@
     "source_blocks": 221,
     "table_rows": 42,
     "illustrations": 9
+  },
+  {
+    "language": "Macedonian",
+    "pages": 112,
+    "sha256": "5944376d024b01e227d7593c43d590d3da6db412063c8a3ed7653557fccb9087",
+    "bytes": 12667025,
+    "code": "mk",
+    "filename": "sami-frasheri-shqiperia-mk-2026.pdf",
+    "file": "sami-frasheri-shqiperia-mk-2026.pdf",
+    "revision": "2026-10-18 complete AI-generated translation, publisher and qualified rights notices",
+    "source_url": "https://fletoret.com/sami-frasheri/shqiperia/",
+    "source_sections": 36,
+    "source_blocks": 221,
+    "table_rows": 42,
+    "illustrations": 9
   }
 ]
