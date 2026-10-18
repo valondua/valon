@@ -21,6 +21,6 @@ if (is_wp_error($id)) { throw new Exception($id->get_error_message()); }
 if (function_exists('pll_set_post_language')) { pll_set_post_language($id, 'sq'); }
 $meta = ['_wp_page_template'=>'page-sami-frasheri.php', '_yoast_wpseo_title'=>'Sami Frashëri: Shqipëria — PDF në 8 botime | Valon Asani', '_yoast_wpseo_metadesc'=>$description, '_yoast_wpseo_opengraph-title'=>$title, '_yoast_wpseo_opengraph-description'=>$description, '_yoast_wpseo_opengraph-image'=>set_url_scheme(get_template_directory_uri(), 'https').'/assets/sami-frasheri/sami-frasheri-1896.jpg', '_yoast_wpseo_twitter-title'=>$title, '_yoast_wpseo_twitter-description'=>$description, '_yoast_wpseo_twitter-image'=>set_url_scheme(get_template_directory_uri(), 'https').'/assets/sami-frasheri/sami-frasheri-1896.jpg', '_vp_sami_publication'=>'2026-10-18'];
 foreach ($meta as $key=>$value) { update_post_meta($id, $key, $value); }
-$r=wp_update_post(['ID'=>$id, 'post_status'=>'publish'], true);
+$r=wp_update_post(['ID'=>$id, 'post_status'=>'publish', 'page_template'=>'page-sami-frasheri.php'], true);
 if (is_wp_error($r) || get_post_status($id)!=='publish') { throw new Exception('Publication failed: inspect draft '.$id); }
 echo json_encode(['id'=>$id,'url'=>get_permalink($id),'status'=>get_post_status($id)], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
