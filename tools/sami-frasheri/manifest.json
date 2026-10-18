@@ -102,5 +102,20 @@
     "file": "sami-frasheri-shqiperia-hr-2026.pdf",
     "revision": "2026-10-18 cover publisher and qualified copyright notice; full page 4 notice preserved",
     "page4_revision_sha256": "65b9157792e6ee4dae9d4384802a932d552152df80be8d6137249c9295806823"
+  },
+  {
+    "language": "Greek",
+    "pages": 115,
+    "sha256": "c938bc4c1e21ff7f49d19db726b1cfecc105d6dab3e7fba087511c4114432100",
+    "bytes": 12693842,
+    "code": "el",
+    "filename": "sami-frasheri-shqiperia-el-2026.pdf",
+    "file": "sami-frasheri-shqiperia-el-2026.pdf",
+    "revision": "2026-10-18 complete AI-generated translation, publisher and qualified rights notices",
+    "source_url": "https://fletoret.com/sami-frasheri/shqiperia/",
+    "source_sections": 36,
+    "source_blocks": 221,
+    "table_rows": 42,
+    "illustrations": 9
   }
 ]

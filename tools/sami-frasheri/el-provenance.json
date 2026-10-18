@@ -1,0 +1,16 @@
+{
+  "source_epub_sha256": "7f224339a9f5cdab2ead4c22006a6651f8c5879a68d3e846ae1f1941779e5e57",
+  "translation_sha256": "7b8c8ca3de0a3a52868539ac40f37476d38b36b93f34b42a00391f6ef0081c4e",
+  "source_reconciliation": {
+    "source_epub_sha256": "7f224339a9f5cdab2ead4c22006a6651f8c5879a68d3e846ae1f1941779e5e57",
+    "existing_sq_pdf_sha256": "9a31ad677ef3a25b88efa708e260c879b03d7b8303a9beaf9a49f9dc2c10acc6",
+    "sections": 36,
+    "blocks": 221,
+    "table_rows": 42,
+    "paragraphs": 220,
+    "matched": 220,
+    "unmatched": []
+  },
+  "pdf_sha256": "c938bc4c1e21ff7f49d19db726b1cfecc105d6dab3e7fba087511c4114432100",
+  "translation_type": "AI-generated translation (2026); no specialist human review"
+}
