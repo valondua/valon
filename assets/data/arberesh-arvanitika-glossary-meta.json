@@ -1,8 +1,8 @@
 {
   "title": "Fjalorth historik arbëresh dhe arvanitas → shqip",
-  "version": "2026-10-18.2",
-  "reviewed_count": 349,
-  "candidate_count": 26,
+  "version": "2026-10-18.3",
+  "reviewed_count": 481,
+  "candidate_count": 37,
   "source_records": 56,
   "extracted_sources": 3,
   "reviewed_definition": "Transkriptim dhe kontroll pamor nga AI, me shpjegim të ri në shqip. Nuk është validim nga folës vendas ose botim kritik.",
@@ -12,18 +12,19 @@
   "sources": [
     {
       "id": "reinhold",
-      "reviewed": 166,
-      "candidates": 15
+      "reviewed": 238,
+      "candidates": 18
     },
     {
       "id": "librandi",
-      "reviewed": 180,
-      "candidates": 8
+      "reviewed": 236,
+      "candidates": 14
     },
     {
       "id": "koupitoris-prayer",
-      "reviewed": 3,
-      "candidates": 3
+      "reviewed": 7,
+      "candidates": 5
     }
-  ]
+  ],
+  "locality_key_note": "Reinhold fq.80: Ἀλ. = Spetses; Καλ. = Kalauria/Poros; Ὑδρ. = Hydra. Zgjerimet zbatohen te shtesat e reja; etiketat e versionit të mëparshëm ruhen për gjurmueshmëri."
 }
