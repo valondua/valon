@@ -11,3 +11,5 @@ Publisher notice revision (2026-10-18): page 4 in each public PDF now includes a
 Greek edition added: complete 36 sections, 221 source blocks and 42 table rows; nine cleared illustrations; native publisher and qualified copyright notices on cover and page 4. AI-generated translation (2026), not specialist-reviewed.
 
 Macedonian edition added: complete 36 sections, 221 source blocks and 42 table rows; nine cleared illustrations; native publisher and qualified copyright notices on cover and page 4. AI-generated translation (2026), not specialist-reviewed.
+
+Heritage samples are listed separately in samples-manifest.json. They are five-page experimental/research samples, not complete editions; do not add them to the ten-edition manifest or run update-editions.php for them. Public samples contain no images or embedded reference books.
