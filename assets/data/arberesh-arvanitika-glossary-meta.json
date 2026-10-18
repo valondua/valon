@@ -1,13 +1,13 @@
 {
   "title": "Fjalorth historik arbëresh dhe arvanitas → shqip",
-  "version": "2026-10-18.1",
-  "reviewed_count": 285,
-  "candidate_count": 22,
+  "version": "2026-10-18.2",
+  "reviewed_count": 349,
+  "candidate_count": 26,
   "source_records": 56,
   "extracted_sources": 3,
   "reviewed_definition": "Transkriptim dhe kontroll pamor nga AI, me shpjegim të ri në shqip. Nuk është validim nga folës vendas ose botim kritik.",
   "count_unit": "Dëshmi formë–burim–faqe, jo numër lemash të pavarura. Variantet dhe trajtat e eptuara numërohen veçmas.",
-  "scope": "Version i parë i përzgjedhur; nuk është fjalor shterues, as nxjerrje e plotë e 56 burimeve.",
+  "scope": "Version i zgjeruar i përzgjedhur; nuk është fjalor shterues, as nxjerrje e plotë e 56 burimeve.",
   "normalization": "Çelësit për kërkim ruhen veç; shkronjat greke dhe diakritikat në format e dëshmuara nuk zëvendësohen me standardin shqip. Përafrime tipografike Unicode mund të mbeten.",
   "sources": [
     {
@@ -17,8 +17,8 @@
     },
     {
       "id": "librandi",
-      "reviewed": 116,
-      "candidates": 4
+      "reviewed": 180,
+      "candidates": 8
     },
     {
       "id": "koupitoris-prayer",
