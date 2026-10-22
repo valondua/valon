@@ -28,7 +28,7 @@ Në këtë citim, **“ne” i referohet italianëve**, jo hebrenjve apo shqipta
 
 ## Pretendimi tjetër: kush i themeloi Orikumin dhe Finiqin?
 
-Në fjalimin e Jerusalem-it Rama tregoi një rrëfim për rreth 3,000 hebrenj që, sipas tij, erdhën pas ngjarjeve romake të shekullit I dhe themeluan Orikumin e Finiqin. Ky pretendim bie ndesh me kronologjinë arkeologjike: të dy vendbanimet janë shumë më të vjetra. Prania historike e komuniteteve hebreje në rajon, përfshirë sinagogën e vonë antike në Sarandë, nuk provon themelimin e këtyre qyteteve.
+Saktësim i atribuimit pas kontrollit të transkriptit zyrtar më 22 tetor 2026: Rama tregoi një rrëfim për rreth 3,000 hebrenj dhe përmendi emra vendesh, përfshirë Fionike dhe Orikum. Transkripti nuk thotë shprehimisht se ata i themeluan këto qytete; formulimi i mëparshëm i kësaj dosjeje ishte tepër i fortë. Studimi arkeologjik i lidhur më poshtë e daton zhvillimin e Phoinikes në shekullin IV p.e.s., shumë përpara shekullit I e.s. Prania historike e komuniteteve hebreje në rajon, përfshirë sinagogën e vonë antike në Sarandë, nuk provon themelimin e këtyre qyteteve.
 
 ## Lidhja me dosjen e protestave
 
