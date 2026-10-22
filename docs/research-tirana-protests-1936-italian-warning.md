@@ -42,3 +42,51 @@ Ky është një **rast studimor për kontekstin e videove politike, verifikimin 
 4. [Koment kritik mbi rrëfimet historike për hebrenjtë në Shqipëri](https://blogs.timesofisrael.com/truths-and-constructed-myths-regarding-the-jewish-presence-in-albania/)
 
 **Shënim redaksional:** Për citimet e gjata fjalë për fjalë, lidhu me transkriptin origjinal. Mos e paraqit parafrazimin si transkript.
+
+## Hetim i zgjeruar: Shteti Bektashi, Sazani, Zvërneci dhe ndikimi ndërkombëtar
+
+**Parimi metodologjik:** Ndajmë vendimet e dokumentuara nga hipotezat. Përkatësia fetare apo etnike e investitorëve nuk është provë për një plan territorial. Nuk ka prova të paraqitura këtu për krijimin e një “shteti hebre” në Shqipëri.
+
+### 1. Propozimi për shtetin sovran Bektashi
+
+Në shtator 2024 Edi Rama propozoi një entitet të ngjashëm me Vatikanin për Kryegjyshatën Botërore Bektashiane në Tiranë. Në janar 2025 ai foli për një qendër shpirtërore pa ushtri, polici apo taksa. Sipas raportimit të Reuters, propozimi kërkon miratim parlamentar. Rama ka argumentuar se nuk bëhet fjalë për copëtim territori; kritikët dhe studiuesit juridikë ngrenë pyetje për laicitetin, barazinë e bashkësive fetare dhe kushtetutshmërinë.
+
+**Statusi i verifikimit (tetor 2026):** Një inventar publik burimesh deri më 2 tetor 2026 nuk gjeti ligj themelues, vendim përfundimtar apo kufij të publikuar. Kjo nuk është provë absolute se asnjë dokument tjetër nuk ekziston.
+
+**Pyetje:** A ka projektligj, ndryshim kushtetues, hartë kadastrale, konsultim publik, opinion të Komisionit të Venecias apo vendim parlamentar? Çfarë statusi juridik do të kishin qytetarët, territori dhe marrëveshjet diplomatike?
+
+Burime: [Reuters, 25.01.2025](https://www.reuters.com/world/europe/albania-create-vatican-style-bektashi-state-tirana-2025-01-25/); [studim juridik, Utrecht University, 2026](https://research-portal.uu.nl/en/publications/albanias-proposed-sovereign-state-of-the-bektashi-order-a-microst/); [inventari i dokumenteve deri 02.10.2026](https://mariuscomper.uk/bektashi/en/).
+
+### 2. Sazani dhe investimi i lidhur me Jared Kushner
+
+Më 30 dhjetor 2024 Komiteti i Investimeve Strategjike miratoi statusin e investitorit strategjik për një projekt të lidhur me Kushner në Sazan, me vlerë të planifikuar rreth 1.4 miliardë euro dhe sipërfaqe zhvillimi rreth 45 hektarë. Statusi i investitorit strategjik nuk do të thotë krijim shteti të pavarur, as transferim sovraniteti. Qeveria deklaroi në qershor 2026 se leja e zhvillimit nuk ishte leje ndërtimi dhe se kërkohej vlerësim i thelluar i ndikimit mjedisor.
+
+**Pyetje:** Kush janë pronarët përfitues të secilës kompani? A ka marrëveshje me Korporatën Shqiptare të Investimeve? Çfarë të drejtash jepen mbi tokën dhe për sa vjet? Cilat janë garancitë e shtetit, përjashtimet fiskale, procesverbalet, lejet dhe kontratat? Cili është statusi aktual i VNM-së?
+
+Burime: [Reuters për miratimin e projektit](https://www.investing.com/news/world-news/albania-approves-luxury-resort-project-linked-to-jared-kushners-company-3816659); [sqarimi i qeverisë për Sazanin dhe Zvërnecin](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/).
+
+### 3. Zvërneci, protestat dhe hetimet
+
+Projekte të lidhura me zhvillimin turistik në zonën Zvërnec–Vjosë-Nartë shkaktuan protesta mjedisore në qershor 2026. Raportimet tregojnë se SPAK nisi hetim për fonde të përdorura në transaksione pronash; kjo nuk provon fajësi të investitorëve dhe nuk duhet ngatërruar automatikisht çdo parcelë me projektin e Sazanit.
+
+**Pyetje:** Cilat parcela janë publike/private, si u fituan titujt, a u ndryshua statusi i mbrojtjes mjedisore, kush ka përfituar dhe çfarë ka konstatuar SPAK?
+
+Burime: [Al Jazeera, 4 qershor 2026](https://www.aljazeera.com/news/2026/6/4/thousands-protest-kushner-linked-coastal-resort-project-in-albania); [Al Jazeera, 5 qershor 2026](https://www.aljazeera.com/news/2026/6/5/why-the-kushners-plan-to-build-an-albanian-resort-has-sparked-protests).
+
+### 4. A ekziston lidhje me idenë e një “shteti hebre”?
+
+**Hipotezë e paprovuar.** Fjalimi i vitit 2022 për historinë hebraike, propozimi i shtetit Bektashi dhe projekti privat i Sazanit janë ngjarje reale, por nuk provojnë një plan të përbashkët. Nuk është identifikuar akt ligjor, propozim zyrtar, hartë, kontratë apo deklaratë e Ramës për krijimin e një shteti sovran hebre në Shqipëri. Edhe statusi i Bektashinjve mbetet propozim, jo precedent juridik i përfunduar.
+
+**Standardi i provës:** Një lidhje shkakësore kërkon dokumente, komunikime, vendime, financime ose dëshmi të pavarura, jo vetëm afërsi kohore, marrëdhënie politike apo identitet fetar.
+
+### 5. Matrica e hetimit
+
+| Tema | E dokumentuar | Ende për t'u verifikuar |
+| --- | --- | --- |
+| Shteti Bektashi | Propozimi publik i Ramës | Akti themelues, kushtetutshmëria, kufijtë, statusi |
+| Sazani | Status investitori strategjik dhe plan investimi | Kontratat, pronësia përfituese, lejet finale, ndikimi mjedisor |
+| Zvërneci | Protesta dhe raportime për hetim pronash | Parcelat, transaksionet, rezultatet e hetimit |
+| Historia hebraike | Fjalimi i Ramës në 2022 dhe citimi i 1936 | Dokumenti origjinal italian dhe konteksti i plotë |
+| “Shtet hebre” | Asnjë plan zyrtar i identifikuar | Çdo provë primare për ekzistencën e një propozimi të tillë |
+
+**Kujdes editorial:** Të gjitha këto çështje mund të hetohen si transparencë, sovranitet, pronë publike dhe ndikim politik. Mos i paraqit si komplot të provuar dhe mos ia atribuo veprimet e investitorëve privatë një bashkësie fetare ose etnike.
