@@ -20,12 +20,14 @@ add_action('wp_enqueue_scripts', static function () {
     wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
 }, 999);
 ?>
-<!doctype html><html lang="en"><head><meta charset="<?php bloginfo('charset'); ?>"><meta name="viewport" content="width=device-width,initial-scale=1"><?php wp_head(); ?></head>
+<!doctype html><html lang="<?php echo valon_albania_is_sq() ? 'sq' : 'en'; ?>"><head><meta charset="<?php bloginfo('charset'); ?>"><meta name="viewport" content="width=device-width,initial-scale=1"><?php wp_head(); ?></head>
 <body <?php body_class('albania-investigation'); ?>><?php wp_body_open(); ?>
 <?php
 // Both fragments are versioned, reviewed local HTML; no visitor input is interpolated.
-echo str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->'],
-    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html')],
+$content = str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->', 'ALBANIA_SUBMIT_URL', '<!-- ALBANIA_LANGUAGE_SWITCH -->'],
+    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'), esc_url(valon_albania_submit_url()), valon_albania_language_switch()],
     file_get_contents(__DIR__ . '/template-parts/albania-investigation.html'));
+echo valon_albania_localize_html($content);
+if(valon_albania_is_sq())echo '<p class="wrap" style="padding:1rem 0;font-size:.8rem">Përkthimi në shqip është asistuar nga Google Translate; terminologjia e provave është rishikuar. Për formulimin e saktë të dokumenteve dhe citimeve, shihni burimet origjinale të lidhura. Korrigjimet janë të mirëpritura.</p>';
 ?>
 <?php wp_footer(); ?></body></html>

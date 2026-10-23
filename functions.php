@@ -1,6 +1,8 @@
 <?php
 defined("ABSPATH") || exit();
 require_once __DIR__ . "/includes/dashboard.php";
+require_once __DIR__ . "/includes/albania-submissions.php";
+require_once __DIR__ . "/includes/albania-language.php";
 require_once __DIR__ . "/includes/static-images.php";
 require_once __DIR__ . "/includes/animated-images.php";
 require_once __DIR__ . "/includes/editorial.php";
@@ -157,7 +159,7 @@ function valon_nav()
             esc_html(valon_text(...$label)) .
             "</a>";
     }
-    echo '<a href="' . esc_url(home_url('/albania/')) . '" hreflang="en">' . esc_html(valon_text('Investigation', 'Hulumtimi')) . '</a>';
+    echo '<a href="' . esc_url(valon_albania_url(valon_lang()==='sq')) . '" hreflang="' . (valon_lang()==='sq'?'sq':'en') . '">' . esc_html(valon_text('Investigation', 'Hulumtimi')) . '</a>';
     echo '<a class="mobile-newsletter" href="' .
         esc_url(valon_url("newsletter")) .
         '">' .
