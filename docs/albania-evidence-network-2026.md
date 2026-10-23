@@ -322,3 +322,44 @@ Sulmi kibernetik i vitit 2022 ka një **zinxhir të verifikueshëm teknik** (FBI
 - [Qeveria shqiptare: Sazani dhe Zvërneci](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/)
 - [Autoriteti Portual Durrës: memorandumi i projektit Durrës Yachts & Marina](https://durresport.al/durres-yachts-and-marina-signing-ceremony-of-the-memorandum-of-understanding-10-august-2022/)
 - [Swiss Federal Department of Foreign Affairs: neutrality](https://www.eda.admin.ch/eda/en/fdfa/foreign-policy/international-law/neutrality.html)
+
+
+## Ndikimi amerikan dhe izraelit: pse lindin dyshimet, dhe çfarë provohet? (23 tetor 2026)
+
+**Status editorial:** Analizë e interesit kombëtar dhe perceptimit publik. Ky kapitull nuk pretendon se Rama “kontrollohet” nga një shtet i huaj, se bashkësitë hebreje veprojnë si një organizatë e vetme, apo se të gjitha vendimet kanë një komandë të përbashkët.
+
+### Argumenti publik që kërkon hetim
+
+Pse Shqipëria, pa konflikt territorial ose historik të drejtpërdrejtë me Iranin, u përfshi në një përplasje të rëndë diplomatike dhe të sigurisë? Çfarë përfitimesh dhe rreziqesh solli vendimi për të pranuar anëtarët e MEK-ut, i nisur gjatë qeverisë Berisha me mbështetje të SHBA-së dhe OKB-së dhe i zgjeruar gjatë qeverisë Rama? A u diskutuan dhe u matën kostot afatgjata?
+
+Në të njëjtën kohë, Rama ka kultivuar marrëdhënie të afërta me Izraelin, ka mbajtur fjalime në Jerusalem dhe ka mbështetur promovimin e historisë hebraike. Investitorë privatë të lidhur me politikën amerikane, përfshirë Jared Kushner, kanë propozuar projekte të mëdha në Shqipëri. Këto zhvillime janë të rëndësishme për transparencën e politikës së jashtme, por **nuk provojnë vetvetiu kontroll të fshehtë nga Izraeli ose SHBA-ja**.
+
+### Matrica e lidhjeve
+
+| Ngjarja | Çfarë dokumentohet | Çfarë nuk provohet | Burim fillestar |
+| --- | --- | --- | --- |
+| MEK dhe Shqipëria | Nisma e zhvendosjes nga Iraku u mbështet nga SHBA/OKB; oferta e parë u bë nga qeveria Berisha në 2013, me zgjerim gjatë Ramës | Që Izraeli urdhëroi zhvendosjen; marrëveshje të fshehta pa dokumente | [US State Department, 2013](https://2009-2017.state.gov/r/pa/prs/ps/2013/03/206319.htm) |
+| Sulmet kibernetike | FBI/CISA dokumentuan dhe atribuuan sulmet e 2022 aktorëve iranianë | Që MEK ishte shkaku i vetëm; që Irani organizoi protestat e tetorit 2026 | [FBI/CISA AA22-264A](https://www.cisa.gov/sites/default/files/publications/aa22-264a-iranian-cyber-actors-conduct-cyber-operations-against-the-government-of-albania.pdf) |
+| Marrëdhëniet me Izraelin | Vizita, fjalime, nderime shtetërore dhe bashkëpunim diplomatik/sigurie | Që diplomacia dëshmon kontroll të politikës së brendshme shqiptare | [Kryeministria, Jerusalem](https://www.kryeministria.al/newsroom/jerusalem-izrael-kryeministri-rama-zhvillon-takime-dhe-merr-pjese-ne-ceremonine-ku-u-vleresua-shqiperia-dhe-historia-e-saj-e-arte-e-shpetimit-te-hebrenjve-gjate-luftes-se-dyte-boterore/) |
+| Sazani | Projekt investimi privat i lidhur publikisht me Jared Kushner dhe partnerë të tjerë | Që projekti është operacion i qeverisë izraelite; që afërsia familjare me presidentin amerikan provon favorizim të paligjshëm | [Regjistri dhe burimet e investimit strategjik — shih dosjen Sazan më sipër](https://aida.gov.al/) |
+| Trashëgimia hebraike / muzeu | Nisma kulturore që duhen identifikuar sipas emrit, financuesit, kontratës dhe autoritetit përgjegjës | Që muzeu i trashëgimisë hebraike është automatikisht projekt i shtetit të Izraelit | **Kërkohet dokumenti i projektit dhe financimit para çdo lidhjeje financiare** |
+| Propozimi Bektashi | Propozim publik për një entitet sovran fetar | Që është precedent juridik për një “shtet hebre” ose pjesë e një marrëveshjeje të përbashkët | [Dosja e shtetit Bektashi në këtë raport](https://www.reuters.com/world/europe/albania-create-vatican-style-bektashi-state-tirana-2025-01-25/) |
+
+### Pse lindin teoritë?
+
+Kur vendime të mëdha ndërkombëtare shoqërohen me marrëveshje pak të kuptueshme, transparencë të kufizuar mbi pronësinë, vizita diplomatike dhe kosto të dukshme sigurie, krijohet hapësirë për mosbesim. **Ky është shpjegim i perceptimit publik, jo vërtetim i një komploti.** Duhet dalluar ndikimi i hapur diplomatik, interesat ekonomike, bashkëpunimi i sigurisë dhe kontrolli i fshehtë i pretenduar.
+
+### Pyetjet e interesit kombëtar
+
+1. Kush e mori secilin vendim, në çfarë date dhe me cilin mandat ligjor?
+2. A pati analizë të publikuar të rrezikut, diskutim në Kuvend dhe konsultim me qytetarët?
+3. Çfarë përfitimi ekonomik, humanitar, diplomatik ose të sigurisë mori Shqipëria?
+4. Çfarë kostosh publike, rreziqesh kibernetike dhe detyrimesh afatgjata u krijuan?
+5. Kush janë palët kontraktuese dhe pronarët përfitues të projekteve, sipas dokumenteve?
+6. A kishte alternativa me më pak rrezik? Si do të ndryshonte politika nën një qasje më të afërt me neutralitetin zviceran, duke pasur parasysh se Shqipëria është anëtare e NATO-s?
+
+### Kufijtë e përfundimit
+
+Marrëdhëniet e ngushta me SHBA-në dhe Izraelin janë të dokumentuara; **kontrolli i fshehtë i Ramës nga këto shtete nuk është provuar**. Shtetësia, feja ose prejardhja e investitorëve nuk janë provë e koordinimit shtetëror. Pretendimet duhen mbështetur me dokumente vendimmarrjeje, kontrata, pagesa ose komunikime të verifikueshme.
+
+**Metoda e kërkimit:** Vetëm burime publike. Nuk kontaktohen persona, kompani apo institucione dhe nuk dërgohen kërkesa për dokumente pa autorizim të ri.
