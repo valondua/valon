@@ -1,1 +1,24 @@
 (()=>{'use strict';const data=window.albaniaStory,topic=document.getElementById('evidenceTopic'),select=document.getElementById('evidenceRecord'),panel=document.getElementById('evidenceDetails');if(!data||!topic)return;let network;const el=(tag,text)=>{const n=document.createElement(tag);n.textContent=text;return n;};function show(id){const r=data.records.find(x=>x.id===id);if(!r)return;select.value=id;panel.replaceChildren();panel.append(el('h3',r.id+' · '+r.title),el('strong',r.grade),el('p',r.body),el('p',r.limit));r.sources.forEach((s,i)=>{const a=el('a','Source '+(i+1)+' ↗');a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';panel.append(a,document.createTextNode(' · '));});}function showEntity(name){const related=data.records.filter(r=>r.connection.slice(0,2).includes(name));panel.replaceChildren(window.albaniaProfiles.header(name));panel.append(el('h4',related.length+' linked evidence records'));related.forEach(r=>{const entry=el('article');entry.className='entry';entry.append(el('strong',r.grade),el('h4',r.connection[0]+' → '+r.connection[1]),el('p',r.connection[2]),el('p',r.body),el('p',r.limit));r.sources.forEach((source,i)=>{const a=el('a','Source '+(i+1)+' ↗');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';entry.append(a,document.createTextNode(' · '));});panel.append(entry);});}function draw(){const records=data.records.filter(r=>r.group===topic.value);select.replaceChildren();records.forEach(r=>{const o=el('option',r.id+' · '+r.subject);o.value=r.id;select.append(o);});if(network)network.destroy();if(window.vis){document.getElementById('evidenceGraph').style.height=Math.max(430,records.length*100)+'px';network=new vis.Network(document.getElementById('evidenceGraph'),{nodes:[...new Map(records.flatMap(r=>r.connection.slice(0,2).map(name=>[name,{id:name,label:name.replace(/(.{18,28})\s/g,'$1\n'),level:records.some(r=>r.connection[0]===name)?0:1,shape:'box',color:'#17324f',font:{color:'#fff'},...window.albaniaProfiles.node(name)}]))).values()],edges:records.map(r=>({id:r.id,from:r.connection[0],to:r.connection[1],label:r.connection[2]+"\n"+r.grade,arrows:'to',dashes:/Verified|Historical/.test(r.grade)?false:/Allegation|Unverified|Unresolved/.test(r.grade)?[2,6]:[8,5],color:/Allegation/.test(r.grade)?'#a12636':'#506b88'}))},{layout:{hierarchical:{enabled:true,direction:'LR',sortMethod:'directed',levelSeparation:430,nodeSpacing:115,treeSpacing:115}},physics:false,interaction:{hover:true},nodes:{margin:12},edges:{font:{size:12,align:'horizontal'},smooth:{type:'cubicBezier',forceDirection:'horizontal',roundness:0.35}}});network.on('click',e=>{if(e.nodes.length)showEntity(e.nodes[0]);else if(e.edges.length)show(e.edges[0]);});network.once('stabilizationIterationsDone',()=>network.setOptions({physics:false}));}else document.getElementById('evidenceGraph').textContent='Use the evidence selector or the full text list below.';show(records[0].id);}topic.addEventListener('change',draw);select.addEventListener('change',()=>show(select.value));draw();const search=document.getElementById('newTimelineSearch'),events=[...document.querySelectorAll('#newTimelineEvents .entry')],count=document.getElementById('newTimelineCount');const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filter(){const terms=norm(search.value).split(/\s+/).filter(Boolean);let n=0;events.forEach(e=>{e.hidden=!terms.every(t=>norm(e.textContent).includes(t));if(!e.hidden)n++;});count.textContent=n+' of '+events.length+' events';}search.addEventListener('input',filter);filter();})();
+
+/* Stable event links work independently of translated labels and active search. */
+(() => {
+  function revealEvent() {
+    if (!location.hash.startsWith('#event-')) return;
+    const event = document.getElementById(location.hash.slice(1));
+    if (!event || !event.closest('#newTimelineEvents')) return;
+    const search = document.getElementById('newTimelineSearch');
+    search.value = '';
+    search.dispatchEvent(new Event('input', {bubbles: true}));
+    event.focus({preventScroll: true});
+    event.scrollIntoView({block: 'start', behavior: 'auto'});
+  }
+  window.addEventListener('hashchange', revealEvent);
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href^="#event-"]');
+    if (link && link.hash === location.hash) { e.preventDefault(); revealEvent(); }
+  });
+  // Wait for the other widgets and translated text before positioning a direct URL.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(revealEvent), {once: true});
+  } else requestAnimationFrame(revealEvent);
+})();

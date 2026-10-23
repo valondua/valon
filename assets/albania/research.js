@@ -32,10 +32,19 @@
     search.value = topic.value = status.value = '';
     filter();
     target.element.querySelector('details').open = true;
-    target.element.scrollIntoView({block: 'start'});
+    target.element.setAttribute('tabindex', '-1');
+    target.element.focus({preventScroll: true});
+    target.element.scrollIntoView({block: 'start', behavior: 'auto'});
   }
   window.addEventListener('hashchange', revealHash);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#r"]');
+    if (link && link.hash === location.hash) { event.preventDefault(); revealHash(); }
+  });
   form.hidden = false;
   filter();
-  revealHash();
+  // Wait for the other widgets and translated text before positioning a direct URL.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(revealHash), {once: true});
+  } else requestAnimationFrame(revealHash);
 })();
