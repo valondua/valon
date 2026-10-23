@@ -8,12 +8,12 @@
 | --- | --- | --- | --- | ---: | --- | --- |
 | G01 | 1990s (aggregate) | Open Society Foundation for Albania | School/kindergarten reconstruction (275 facilities) | >USD 57m | Program expenditure, **not annual grant series** | [OSF factsheet](https://www.opensocietyfoundations.org/uploads/465f70b4-830e-4c0b-ab47-9ca3c0ad4152/factsheet-osf-albania-eng-20170515.pdf) |
 | G02 | 2015 earmark | OSFA | Judicial reform experts, consultation, surveys and events | USD 600,000 | Earmarked program funding; **not verified disbursements to named persons** | [OSF factsheet](https://www.opensocietyfoundations.org/uploads/465f70b4-830e-4c0b-ab47-9ca3c0ad4152/factsheet-osf-albania-eng-20170515.pdf) |
-| G03 | 2020–2021 | Foundation to Promote Open Society | OSFA | USD 4.7m aggregate / 4 grants | Grants reported from US Form 990 data | [990 grant index](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society); requires itemized year and award review |
-| G04 | 2022–2024 | Foundation to Promote Open Society | OSFA | USD 15.7m aggregate / 10 grants | Grants reported from US Form 990 data | [990 grant index](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society); do not allocate to individual years without filing schedules |
+| G03 | 2020–2021 | Foundation to Promote Open Society | OSFA | USD 4.7m / 4 grants claimed in draft — **not reproduced in this review** | Draft index-derived claim; original filing reconciliation pending | [990 grant index](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society); requires itemized year and award review |
+| G04 | 2022–2024 | Foundation to Promote Open Society | OSFA | USD 15.7m / 10 grants claimed in draft — **not reproduced in this review** | Draft index-derived claim; original filing reconciliation pending | [990 grant index](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society); do not allocate to individual years without filing schedules |
 | G05 | 2015–2017 | US Embassy and OSFA | Public opinion surveys and grant-review cooperation | **Amount unverified** | Reported co-funding / consultation | [Judicial Watch FOIA summary](https://www.judicialwatch.org/judicial-watch-doj-records-show-obama-administration-helped-fund-george-soros-left-wing-political-activities-albania/); original documents and exact payment recipients need examination |
 | G06 | 2016 reported | USAID | Justice for All / East-West Management Institute | **USD 9m reported, not independently reconciled** | US foreign assistance, **not automatically an OSFA grant** | [Judicial Watch claim](https://www.judicialwatch.org/judicial-watch-doj-records-show-obama-administration-helped-fund-george-soros-left-wing-political-activities-albania/); verify award ID and actual obligations |
 
-**Do not sum G02, G05 and G06 as if they are independent transfers to OSFA.** G03 and G04 represent grant totals to OSFA from a named US grantmaker, not all money spent in Albania. OSF worldwide 2024 expenditure of $1.2bn is not Albania spending.
+**Do not sum G02, G05 and G06 as if they are independent transfers to OSFA.** G03 and G04 are uncorroborated draft aggregate claims about grants to OSFA from a named US grantmaker, not all money spent in Albania. OSF worldwide 2024 expenditure of $1.2bn is not Albania spending.
 
 ## 2. Year-by-year status (2013–2026)
 
@@ -30,7 +30,7 @@
 | 2021 | Part of G03 aggregate; annual allocation not established | No documented transaction match |
 | 2022 | Part of G04 aggregate; annual allocation not established | No documented transaction match |
 | 2023 | Part of G04 aggregate; annual allocation not established | No documented transaction match |
-| 2024 | Part of G04 aggregate; annual allocation not established | No documented transaction match |
+| 2024 | Two paid entries checked in the filing: $2.56m + $3.347m; G04 aggregate remains uncorroborated | No documented transaction match |
 | 2025 | Not established | No documented transaction match |
 | 2026 | Not established | No documented transaction match |
 
@@ -40,7 +40,7 @@
 
 | ID | Period | Awarding public institution | Contractor / company | Reported value | Nature and case status | Source |
 | --- | --- | --- | --- | --- | --- | --- |
-| C01 | 2016–2022 | Tirana municipal authorities | 5D Construction | Approx. EUR 20m company revenues reported, **not necessarily all contracts or paid amounts** | Former municipal officials allegedly held indirect interests; judicial proceedings, not a Soros-linked payment | [Transparency International case](https://www.transparency.org/en/cepi/cases/5d-case-senior-public-officials-accused-of-embezzling-public-contract-funds) |
+| C01 | 2016–2022 | Tirana municipal authorities | 5D Construction | ALL 2bn (approx. EUR 20m) in contracts reported by TI; **not Treasury payments** | Former municipal officials allegedly held indirect interests; judicial proceedings, not a Soros-linked payment | [Transparency International case](https://www.transparency.org/en/cepi/cases/5d-case-senior-public-officials-accused-of-embezzling-public-contract-funds) |
 | C02 | 2017 | Ministry of Environment | Integrated Energy B.V. / Tirana incinerator | ALL 17.139bn winning concession offer, excl. VAT | Concession award; allegations and court cases must be tracked individually | [Open Procurement Albania](https://openprocurement.al/sq/concession/view/id/5) |
 | C03 | 2021 | Infrastructure Ministry | Llogara Tunnel works tender | ALL 18.968bn ceiling, excl. VAT | Procurement investigated by SPAK; ceiling is not paid contract value | [SPAK, 20 Nov 2025](https://spak.gov.al/njoftim-per-shtyp-date-20-11-2025-2/) |
 
@@ -57,7 +57,7 @@
 
 ## 5. Interpretation and next public-record verification
 
-OSFA acknowledges funding judicial reform, and 990-derived grant records show aggregate grants to OSFA. Public-contract and corruption records document separate payments or awards to construction/concession firms. **There is presently no documentary basis to connect those two financial streams as a single payment network.**
+OSFA acknowledges funding judicial reform, and the 2024 filing records two paid grants to OSFA; draft multi-year aggregates remain unreconciled. Public-contract and corruption records document separate payments or awards to construction/concession firms. **There is presently no documentary basis to connect those two financial streams as a single payment network.**
 
 To improve the ledger without contacting anyone:
 1. Retrieve original Form 990 Schedule I/F grants for 2020–2024, extracting individual grants and annual figures.
@@ -72,15 +72,11 @@ To improve the ledger without contacting anyone:
 
 ## Reconciliation round 2 — verified public filings and Treasury snapshot (23 Oct 2026)
 
-### A. Individual Form 990 grant (stronger than an aggregate)
+### A. Filing correction — 23 October 2026
 
-The Foundation to Promote Open Society (EIN **26-3753801**) filed its **2023 Form 990-PF**, which lists an individual **USD 26,535** grant paid to **Open Society Foundation for Albania**, Tirana. The purpose covers non-lobbying work related to constitutional/electoral reform, gender equality, accountability, Roma advocacy, disability rights and discrimination. This is a **specific 2023 entry** and **must not be added on top of the 2022–2024 $15.7m aggregate**, which may already include it.
+The draft's **$26,535 individual 2023 grant has not been corroborated**. The cited 2023 profile did not reproduce that entry during this review, so it must not be labelled confirmed.
 
-- [IRS 2023 Form 990-PF rendered filing](https://philanthropy.org/990/report/263753801/foundation-to-promote-open-society/2023)
-- [990 grant index, 2020–2024](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society)
-- [2024 filing PDF](https://pdf.guidestar.org/PDF_Images/2024/263/753/2024-263753801-202533199349101193-F.pdf)
-
-**Outstanding:** Extract all other OSFA entries in the original 2023 filing and 2020–2024 annual filings before calling the $26,535 entry the full annual total. Confirm whether the aggregate index includes different spellings or grants to separate OSF legal entities.
+The [2024 Form 990-PF, EIN 26-3753801](https://pdf.guidestar.org/PDF_Images/2024/263/753/2024-263753801-202533199349101193-F.pdf), Part XIV, section 3(a), PDF page 12, lists two general-support payments to **Open Society Foundation for Albania**: **$2,560,000** and **$3,347,000** (sum **$5,907,000**). These are entries in the filer’s “Paid during the year” section, not the later section for future approved payments. This sum is not total OSF spending in Albania, a personal payment to Rama, or evidence of public procurement funding. The draft index aggregates G03/G04 remain unreconciled; do not add them to these entries.
 
 ### B. Treasury payments (executed, not contract awards)
 
@@ -102,7 +98,7 @@ Transparency International's [5D case](https://www.transparency.org/en/cepi/case
 
 | Potential financial edge | Current conclusion |
 | --- | --- |
-| Foundation to Promote Open Society → OSFA | **Confirmed for an individual 2023 grant of $26,535**; other grants/annual totals require original-filing extraction |
+| Foundation to Promote Open Society → OSFA | **Two 2024 paid entries checked: $2.56m and $3.347m**; draft 2023 $26,535 claim uncorroborated |
 | Albanian Treasury → Integrated Energy BV SPV | **Name-based executed payment totals found**, contract-by-contract NIPT matching pending |
 | Albanian Treasury → TIMAK DEFENCE | **Name-based executed payment totals found**, contract-by-contract NIPT matching pending |
 | OSFA → Integrated Energy / TIMAK / 5D | **No verified direct financial edge** in reviewed records |
