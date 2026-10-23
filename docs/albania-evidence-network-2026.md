@@ -44,8 +44,8 @@ flowchart LR
 | S01 | Strategic Investment Committee | Granted strategic investor/special procedure status | Atlantic Incubation Partners LLC, Sazan resort | 30 Dec 2024 | [Decision described and linked at Save Albania](https://savealbania.com/evidence-item.php?id=1) | Official decision referenced by evidence repository; verify full decision and annexes |
 | S02 | Jared Kushner / Affinity Partners | Investor association reported | Sazan / Atlantic Incubation Partners | 16 Jan 2025 | [Citizens.al investigation](https://citizens.al/en/2025/01/16/from-visitor-to-strategic-investor-how-Jared-Kushner-secured-Sazan/) | Secondary reporting; do not infer all ownership percentages |
 | S03 | Elira Kokona | Led state-side negotiating team | Sazan negotiations / Albanian Investment Corporation | Jan–Oct 2025 | [Citizens.al, 3 Mar 2026](https://www.citizens.al/en/2026/03/03/nje-ishull-teresisht-privat-permasat-reale-te-projektit-ne-sazan/) | Investigative report describing official records; obtain minutes and appointments |
-| S04 | National Territorial Council | Approved development permit, not construction permit | Sazan proposal | 30 Mar 2026 | [Albanian government explanatory record](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/) | Government account; distinguish permit types |
-| S05 | Environmental authorities | Required in-depth EIA | Relevant coastal development project described in government's Sazan/Zvërnec account | 15 May 2026 | [Government explanatory record](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/) | Do not conflate Sazan and Zvërnec; verify precise parcel/project in decision |
+| S04 | National Territorial Council | Approved development permit, not construction permit | Zvërnec proposal | 30 Mar 2026 | [Albanian government explanatory record](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/) | Government account; distinguish permit types |
+| S05 | Environmental authorities | Required in-depth EIA | Zvërnec development proposal | 15 May 2026 | [Government explanatory record](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/) | Government description specifically concerns Zvërnec; original decision still to be inspected |
 | L01 | Ministry of Infrastructure and Energy | Published procurement notice REF-98814-06-22-2021 | Llogara Tunnel | 24 Jun 2021 | [Ministry procurement notice](https://www.infrastruktura.gov.al/en/shpallje/) | Primary ministry source; award and contractors require separate records |
 | L02 | SPAK | Prosecuted alleged procurement-equality violation | Belinda Balluku / Llogara tender | 31 Oct 2025 | [SPAK statement reported with proceeding numbers](https://tiranapost.al/english/aktualitet/spak-sqaron-belinda-balluku-u-mor-e-pandehur-per-shkelje-te-barazise--i540809) | Prosecutorial allegation; presumption of innocence |
 | L03 | SPAK | Formally charged on offences involving construction contracts | Belinda Balluku | 20 Oct 2026 | [Reuters](https://www.reuters.com/world/albania-formalises-corruption-charges-against-ex-deputy-pm-balluku-2026-10-20/) | News report of charges; not conviction; defendant denies wrongdoing |
@@ -74,3 +74,38 @@ flowchart LR
 7. Reconcile contradictory government, court and investigative accounts; avoid publishing unsourced accusations.
 
 **Editorial note:** This graph depicts relationships of office, procurement, investment and investigations. It is not a map of criminal associations.
+
+## Primary-source verification round — 23 October 2026
+
+### Corrected geographical attribution
+
+The government’s explanation of the **30 March 2026 development permit** and **15 May 2026 in-depth EIA requirement** concerns **Zvërnec**, not Sazan. Earlier network rows S04/S05 have been corrected. [Government statement](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/).
+
+### Newly verified or strengthened edges
+
+| ID | Source node | Documented relationship | Target node | Date / amount | Source | Confidence and limit |
+| --- | --- | --- | --- | --- | --- | --- |
+| T05 | Council of Ministers | Approved 8% evaluation bonus for proposed concessionaire | Integrated Energy B.V. | 7 Dec 2016 | [Open Procurement Albania, supporting decisions and tender file](https://openprocurement.al/sq/concession/view/id/5) | Strong documentary register; bonus is not itself proof of an offence |
+| T06 | Ministry of Environment | Awarded 30-year concession after one recorded bidder | Integrated Energy B.V. | Award 24 Aug 2017; offer ALL 17,139,106,821 excl. VAT | [Open Procurement Albania](https://openprocurement.al/sq/concession/view/id/5) | Documentary tender register; retrieve signed contract |
+| T07 | Ministry of Environment | Signed concession contract no. 6021 Rep., 2894 Kol. | Tirana waste-treatment project | 31 Aug 2017 | [Open Procurement Albania](https://openprocurement.al/sq/concession/view/id/5) | Contract identified in register |
+| T08 | GeoGenix BV (formerly Integrated Energy B.V.) | Parent company / shareholder reported from company extract | Integrated Energy BV SPV, NUIS L72031013B | Registry updated 29 Jan 2026 | [OpenCorporates Albania, extracts cited](https://opencorporates.al/en/nuis/L72031013B) | Registry-derived; beneficial natural-person owners need separate verification |
+| L04 | SPAK | Identifies Balluku and five procurement-committee officials in proceedings concerning alleged tender interference | Llogara Tunnel | Proceeding no. 136/2025; Llogara fund ceiling ALL 18,967,810,952 excl. VAT | [SPAK, 20 Nov 2025](https://spak.gov.al/njoftim-per-shtyp-date-20-11-2025-2/) | Primary prosecutorial statement; allegations only |
+| S06 | Strategic Investment Committee chaired by Rama | Granted strategic investor status | Atlantic Incubation Partners LLC / Sazan proposal | 30 Dec 2024 | [Reuters, 16 Jan 2025](https://www.reuters.com/business/albania-approves-luxury-resort-project-linked-jared-kushners-company-2025-01-16/); [AIDA decision indexed](https://www.savealbania.com/evidence-item.php?id=1) | Government decision referenced, direct signed original still to be independently inspected |
+| S07 | State negotiation group led by Elira Kokona | Held ten meetings, according to records examined by journalists | Sazan proposal | Jan–Oct 2025 | [Citizens.al, 3 Mar 2026](https://www.citizens.al/en/2026/03/03/nje-ishull-teresisht-privat-permasat-reale-te-projektit-ne-sazan/) | Reported examination of meeting records; obtain minutes for primary verification |
+
+### Important methodological corrections
+
+- The **Llogara construction contract** must not be confused with its **separate supervision procurement** (REF-12982-11-24-2021).
+- The Tirana incinerator’s Dutch parent company is a **corporate relationship**, not identification of all ultimate beneficial owners.
+- The Sazan project and Zvërnec project have distinct land parcels, approval processes and environmental requirements.
+- For the alleged Llogara offences, identify procedural status and defendants' responses before describing guilt.
+- An 8% bid evaluation bonus or single-bidder procurement is a documented feature of a process; neither alone establishes criminal conduct.
+
+### Next document acquisition checklist
+
+- [ ] Download the signed AIDA/KIS Sazan decision 23/2024 and annexes
+- [ ] Obtain QKB certified current and historical extracts for Atlantic Incubation Partners
+- [ ] Obtain the signed Tirana concession and the Dutch company-register chain to natural persons
+- [ ] Obtain the main Llogara works award/contract, excluding the supervision tender
+- [ ] Retrieve the actual Zvërnec permit, environmental screening decision and cadastral parcel list
+- [ ] Reconcile SPAK procedural updates and court judgments against each named official
