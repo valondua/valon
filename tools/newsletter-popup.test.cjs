@@ -6,18 +6,21 @@ const code = fs.readFileSync(require('node:path').join(__dirname, '../js/site.js
 function harness({ stored = 0, blocked = false, typing = false, pointer = true } = {}) {
   const events = {}, popupEvents = {}, timers = [];
   let shows = 0;
+  const form = { dataset: { placement: "popup" } };
   const popup = {
     open: false,
     showModal() { this.open = true; shows++; },
     close() { this.open = false; popupEvents.close(); },
     addEventListener(n, f) { popupEvents[n] = f; },
-    querySelector() { return { addEventListener() {} }; },
+    querySelector(s) { return s === ".newsletter-form" ? form : { addEventListener() {} }; },
   };
   const context = {
+    CustomEvent: class { constructor(type, options) { this.type=type; this.detail=options.detail; } },
     Date, innerHeight: 800, scrollY: 0,
     setTimeout(f) { timers.push(f); },
     localStorage: { getItem() { if (blocked) throw Error(); return stored; }, setItem(k,v) { if (blocked) throw Error(); stored = v; } },
     document: {
+      dispatchEvent(e) { events[e.type]?.(e); },
       visibilityState: 'visible',
       activeElement: { matches() { return typing; } },
       documentElement: { scrollHeight: 2800, classList: { add() {}, remove() {} } },
@@ -28,7 +31,7 @@ function harness({ stored = 0, blocked = false, typing = false, pointer = true }
     window: { matchMedia() { return { matches: pointer }; }, addEventListener(n,f) { events[n] = f; } },
   };
   vm.runInNewContext(code, context);
-  return { popup, events, context, elapsed: () => timers.forEach(f=>f()), shows: () => shows };
+  return { popup, form, events, context, elapsed: () => timers.forEach(f=>f()), shows: () => shows };
 }
 test('waits for both time and reading depth; dismissal prevents reopening', () => {
   const h = harness(); h.elapsed(); assert.equal(h.shows(), 0);
@@ -66,4 +69,26 @@ test('exit ignores touch devices, in-page transitions and side exits', () => {
     blocked.events.mouseout({ relatedTarget: null, clientY: 0 });
     assert.equal(blocked.shows(), 0);
   }
+});
+
+test('opening trigger persists and later exit cannot relabel timed popup', () => {
+  const h=harness(); h.context.scrollY=700; h.elapsed();
+  assert.equal(h.form.dataset.placement,'popup_timed');
+  h.events.mouseout({relatedTarget:null,clientY:0});
+  assert.equal(h.form.dataset.placement,'popup_timed');
+  const e=harness(); e.elapsed(); e.events.mouseout({relatedTarget:null,clientY:0});
+  assert.equal(e.form.dataset.placement,'popup_exit');
+});
+test('manual reopening gets its own attribution', () => {
+  const h=harness(); h.elapsed(); h.events.mouseout({relatedTarget:null,clientY:0}); h.popup.close();
+  h.events.click({target:{closest:()=>({})},preventDefault(){}});
+  assert.equal(h.form.dataset.placement,'popup_manual');
+});
+
+test('exactly one opening notification per actual popup display',()=>{
+  const h=harness(); const seen=[];
+  h.events['newsletter:popup-open']=e=>seen.push(e.detail.form.dataset.placement);
+  h.elapsed(); h.events.mouseout({relatedTarget:null,clientY:0});
+  h.events.mouseout({relatedTarget:null,clientY:0});
+  assert.deepEqual(seen,['popup_exit']);
 });

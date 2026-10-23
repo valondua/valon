@@ -34,6 +34,24 @@
     const timer = setTimeout(() => resolve(null), 600);
     window.gtag("get", cfg.newsletterMeasurementId, field, value => { clearTimeout(timer); resolve(value); });
   });
+  const impressions = new WeakMap();
+  document.addEventListener("newsletter:popup-open", (event) => {
+    const form = event.detail?.form;
+    if (!form) return;
+    impressions.delete(form);
+    const placement = form.dataset.placement;
+    if (!cfg.newsletterImpression || !consented() || document.visibilityState !== "visible" ||
+        !["popup_exit", "popup_timed", "popup_manual"].includes(placement)) return;
+    // Snapshot the actual opening. Never reconstruct past views after late consent.
+    const pending = (async () => {
+      try {
+        const clientId = await gaValue("client_id");
+        if (!consented() || !/^[0-9]{1,20}\.[0-9]{1,20}$/.test(clientId || "")) return null;
+        return await request(cfg.newsletterImpression, {statistics_consent:true, client_id:clientId, placement});
+      } catch { return null; }
+    })();
+    impressions.set(form, pending);
+  });
   const sources = ["tiktok", "instagram", "facebook", "linkedin", "x", "newsletter"];
   document.querySelectorAll(".newsletter-form").forEach((form) => {
     let submitting = false;
@@ -51,7 +69,10 @@
         const [clientId, sessionId] = await Promise.all([gaValue("client_id"), gaValue("session_id")]);
         // Never invent a GA identifier when tagging is blocked or consent is withdrawn.
         if (!consented()) return;
+        const impression = await impressions.get(form);
+        if (!consented()) return;
         const result = await request(cfg.newsletterIntent, {
+          impression_id:impression?.id || "",
           email:data.get(hosted ? "EMAIL" : "email"), statistics_consent:true,
           client_id:typeof clientId === "string" ? clientId : "",
           session_id:sessionId ? String(sessionId) : "",

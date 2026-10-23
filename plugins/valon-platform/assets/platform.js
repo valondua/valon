@@ -115,7 +115,7 @@
     const placement =
       element?.dataset.placement ||
       element?.closest(".newsletter-hosted")?.dataset.placement;
-    if (["hero", "footer", "landing", "newsletter", "inline", "popup"].includes(placement))
+    if (["hero", "footer", "landing", "newsletter", "inline", "popup", "popup_exit", "popup_timed", "popup_manual"].includes(placement))
       return placement;
     if (element?.closest(".hero-newsletter")) return "hero";
     if (element?.closest(".newsletter-band")) return "footer";

@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit();
 
 function vp_newsletter_measurement_install() {
-    if (get_option('vp_newsletter_measurement_version') === '2') return;
+    if (get_option('vp_newsletter_measurement_version') === '3') return;
     global $wpdb;
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
     $charset = $wpdb->get_charset_collate();
@@ -16,6 +16,7 @@ function vp_newsletter_measurement_install() {
         placement varchar(20) NOT NULL,
         confirmed tinyint NOT NULL DEFAULT 0,
         reported tinyint NOT NULL DEFAULT 0,
+        impression_id char(64) NOT NULL DEFAULT '',
         client_id varchar(80) NOT NULL DEFAULT '',
         session_id varchar(20) NOT NULL DEFAULT '',
         analytics_consent varchar(10) NOT NULL DEFAULT '',
@@ -48,7 +49,7 @@ function vp_newsletter_measurement_install() {
     ) $charset;");
     if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_events'))) !== $wpdb->prefix.'vp_newsletter_events' || $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_intents'))) !== $wpdb->prefix.'vp_newsletter_intents') return;
     if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_ga4'))) !== $wpdb->prefix.'vp_newsletter_ga4') return;
-    update_option('vp_newsletter_measurement_version', '2', false);
+    update_option('vp_newsletter_measurement_version', '3', false);
     if (!get_option('vp_newsletter_measurement_started')) update_option('vp_newsletter_measurement_started', gmdate('Y-m-d H:i:s'), false);
 }
 add_action('init', 'vp_newsletter_measurement_install');
@@ -81,7 +82,8 @@ function vp_newsletter_intent($request) {
         'token_hash'=>hash('sha256', $token), 'member_hash'=>vp_newsletter_member_hash($email), 'created_at'=>gmdate('Y-m-d H:i:s'),
         'language'=>vp_newsletter_measurement_choice($request->get_param('language'), ['en','sq','de'], 'en'),
         'source'=>vp_newsletter_measurement_choice($request->get_param('source'), ['website','tiktok','instagram','facebook','linkedin','x','newsletter'], 'website'),
-        'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup'], 'inline'),
+        'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup','popup_exit','popup_timed','popup_manual'], 'inline'),
+        'impression_id'=>vp_newsletter_valid_impression($request),
         'analytics_consent'=>'granted',
         'client_id'=>vp_newsletter_ga_id($request->get_param('client_id')),
         'session_id'=>vp_newsletter_ga_session($request->get_param('session_id')),
@@ -140,6 +142,7 @@ function vp_newsletter_measurement_report() {
     global $wpdb; $table=$wpdb->prefix.'vp_newsletter_events';
     return ['tracking_started_utc'=>get_option('vp_newsletter_measurement_started'), 'days'=>30,
         'note'=>'Signed contact-originated Mailchimp events only. Tests excluded. Unknown source is not attributed to this website. Not a historical audience total. GA requires explicit analytics consent and a valid GA client ID recorded at signup; no browser return is required.',
+        'popup_rates'=>vp_newsletter_popup_report(gmdate('Y-m-d H:i:s',time()-30*DAY_IN_SECONDS),gmdate('Y-m-d H:i:s')),
         'ga4_delivery'=>$wpdb->get_results("SELECT q.status,e.is_test,COUNT(*) AS events FROM {$wpdb->prefix}vp_newsletter_ga4 q JOIN {$wpdb->prefix}vp_newsletter_events e ON e.event_hash=q.event_hash WHERE q.occurred_at >= UTC_TIMESTAMP() - INTERVAL 30 DAY GROUP BY q.status,e.is_test",ARRAY_A),
         'rows'=>$wpdb->get_results($wpdb->prepare("SELECT event_type,language,source,placement,COUNT(*) AS events,COUNT(DISTINCT member_hash) AS unique_contacts FROM $table WHERE is_test=0 AND occurred_at >= %s GROUP BY event_type,language,source,placement",gmdate('Y-m-d H:i:s',time()-30*DAY_IN_SECONDS)),ARRAY_A)];
 }
