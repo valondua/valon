@@ -1172,3 +1172,14 @@ em {
 .prose .legacy-video iframe {
   height: auto;
 }
+
+/* Direct discovery of the public research dossier. */
+.home-investigation { display:flex; align-items:center; gap:40px; padding-top:36px; padding-bottom:36px; border-bottom:1px solid var(--line); }
+.home-investigation-copy { flex:1; border-left:3px solid #94334b; padding-left:24px; }
+.home-investigation-label { color:#94334b; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin:0 0 10px; }
+.home-investigation h2 { font-size:clamp(26px,3vw,38px); line-height:1.15; margin:0 0 12px; }
+.home-investigation-copy > p:last-child { max-width:680px; margin:0; color:var(--muted); font-size:15px; line-height:1.6; }
+.home-investigation-link { font-size:14px; font-weight:600; padding:12px 0; }
+.home-investigation-link small { display:block; margin-top:8px; color:var(--muted); font-size:11px; font-weight:400; }
+.home-investigation a:hover { text-decoration:underline; text-underline-offset:4px; }
+@media(max-width:780px) { .home-investigation { align-items:flex-start; flex-direction:column; gap:14px; } .home-investigation-link { margin-left:27px; } }

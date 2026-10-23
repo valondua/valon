@@ -157,6 +157,7 @@ function valon_nav()
             esc_html(valon_text(...$label)) .
             "</a>";
     }
+    echo '<a href="' . esc_url(home_url('/albania-protests-investigation/')) . '" hreflang="en">' . esc_html(valon_text('Investigation', 'Hulumtimi')) . '</a>';
     echo '<a class="mobile-newsletter" href="' .
         esc_url(valon_url("newsletter")) .
         '">' .

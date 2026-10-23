@@ -2,6 +2,12 @@
 defined("ABSPATH") || exit();
 // Swiss Standard German: de-CH, never Swiss German dialect.
 return [
+    "Investigation" => "Recherche",
+    "Interactive investigation · Albania" => "Interaktive Recherche · Albanien",
+    "Who holds power over Albania?" => "Wer hat die Macht in Albanien?",
+    "Explore the protests, political relationships and coastal projects through an interactive map, timeline and source library." => "Erkunde die Proteste, politischen Beziehungen und Küstenprojekte mit einer interaktiven Karte, einer Zeitleiste und einer Quellensammlung.",
+    "Explore the investigation" => "Recherche entdecken",
+    "English edition · Sources and evidence notes" => "Auf Englisch · Quellen und Hinweise zur Beweislage",
     " min read" => " Min. Lesezeit",
     "Start here" => "Hier starten",
     "Start here." => "Hier starten.",
