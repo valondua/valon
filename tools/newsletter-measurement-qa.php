@@ -78,6 +78,16 @@ try {
     $check($wpdb->get_var($wpdb->prepare("SELECT status FROM {$tables[2]} WHERE event_hash=%s",$ev['event_hash']))==='uncertain','ambiguous outcome exposed');
     $denied=new WP_REST_Request('POST','/');$denied->set_header('origin',home_url());$denied->set_param('statistics_consent',false);$check(is_wp_error(vp_newsletter_intent($denied)),'denied consent cannot create intent');
     $check(vp_newsletter_ga_id('reader@example.invalid')==='' && vp_newsletter_ga_id('123.456')==='123.456','GA identifier allowlist excludes PII');
+    foreach (['popup_exit','popup_timed','popup_manual'] as $placement) {
+        $email=$placement.'@example.invalid';
+        $request=new WP_REST_Request('POST','/');$request->set_header('origin',home_url());
+        foreach (['email'=>$email,'statistics_consent'=>true,'placement'=>$placement,'client_id'=>'123.456'] as $key=>$value) $request->set_param($key,$value);
+        $created=vp_newsletter_intent($request);
+        $check(!is_wp_error($created),'popup intent accepted: '.$placement);
+        $before=count($sent);vp_newsletter_webhook($make($email));
+        $check(count($sent)===$before+1 && end($sent)['events'][0]['params']['placement']===$placement,'confirmed GA payload retains '.$placement);
+        $check($wpdb->get_var($wpdb->prepare("SELECT placement FROM {$tables[0]} WHERE member_hash=%s",vp_newsletter_member_hash($email)))===$placement,'ledger retains '.$placement);
+    }
     echo "$assertions newsletter measurement assertions passed; temporary SQL only, no emails.\n";
 } finally {
     foreach($tables as $table)$wpdb->query("DROP TEMPORARY TABLE IF EXISTS $table");

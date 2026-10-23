@@ -81,7 +81,7 @@ function vp_newsletter_intent($request) {
         'token_hash'=>hash('sha256', $token), 'member_hash'=>vp_newsletter_member_hash($email), 'created_at'=>gmdate('Y-m-d H:i:s'),
         'language'=>vp_newsletter_measurement_choice($request->get_param('language'), ['en','sq','de'], 'en'),
         'source'=>vp_newsletter_measurement_choice($request->get_param('source'), ['website','tiktok','instagram','facebook','linkedin','x','newsletter'], 'website'),
-        'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup'], 'inline'),
+        'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup','popup_exit','popup_timed','popup_manual'], 'inline'),
         'analytics_consent'=>'granted',
         'client_id'=>vp_newsletter_ga_id($request->get_param('client_id')),
         'session_id'=>vp_newsletter_ga_session($request->get_param('session_id')),

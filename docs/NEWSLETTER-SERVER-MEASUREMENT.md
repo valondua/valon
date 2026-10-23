@@ -13,3 +13,14 @@ The administrator newsletter report shows delivery status separately from confir
 GA client/session IDs and receipts are retained with intents for up to 30 days; the confirmation/delivery ledger has a 400-day retention period. The original session ID is included only within 24 hours of that session. The server does not invent website engagement time for an email confirmation.
 
 Validation: `node --test tools/newsletter-measurement.test.cjs tools/analytics-consent.test.cjs tools/newsletter-popup.test.cjs`; run `tools/newsletter-measurement-qa.php` with WordPress loaded. PHP tests use temporary tables and mock all outbound HTTP. For release, validate an allowlisted test payload against Google's `/debug/mp/collect`, then complete an actual Mailchimp double-opt-in and verify the actual event in GA4 with the website tab closed.
+
+## Popup trigger attribution (October 23, 2026)
+
+New openings record `placement=popup_exit` for desktop exit intent, `popup_timed`
+for the existing timed/reading-depth trigger, and `popup_manual` for explicit opens.
+The actual opening trigger persists through the consented submission intent,
+confirmation ledger, and GA4 newsletter_confirmed payload. Later pointer movement
+cannot relabel an open popup. Legacy `popup` remains mixed/unknown; no backfill.
+Consent and test exclusions are unchanged. Compare confirmed counts, not causal
+lift or conversion rates: triggers are not randomized and no impression denominator
+is recorded. Non-consented/unknown attribution stays unknown.

@@ -22,3 +22,10 @@ test('unknown startup consent does not erase a receipt',async()=>{const h=harnes
 test('failed recording never blocks subscription',async()=>{const h=harness();h.response=null;await submit(h);assert.equal(h.submits,1);assert.equal(h.storage.size,0)});
 test('missing GA identifier is not replaced with an invented client',async()=>{const h=harness();h.id=null;await submit(h);assert.equal(h.calls[0].body.client_id,'');assert.equal(h.submits,1)});
 test('failed withdrawal retains receipt for a later retry',async()=>{const h=harness();await submit(h);h.response=null;h.revoke();await h.listeners.wp_listen_for_consent_change();assert.equal(h.storage.size,1);h.response={ok:true};await h.listeners.pageshow();assert.equal(h.storage.size,0)});
+
+test('popup placement is read at submit time after opening',async()=>{
+  for (const placement of ['popup_exit','popup_timed','popup_manual']) {
+    const h=harness(); h.form.dataset.placement=placement; await submit(h);
+    assert.equal(h.calls[0].body.placement,placement);
+  }
+});

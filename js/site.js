@@ -55,11 +55,14 @@
   });
   document.addEventListener("newsletter:submitted", () => remember());
   if (!popup || typeof popup.showModal !== "function") return;
+  const form = popup.querySelector(".newsletter-form");
   let previousFocus;
   document.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-newsletter-open]");
     if (!trigger) return;
     event.preventDefault();
+    if (popup.open) return;
+    if (form) form.dataset.placement = "popup_manual";
     previousFocus = trigger;
     popup.showModal();
     remember();
@@ -86,6 +89,7 @@
     if (!exitIntent && distance > 0 && scrollY < distance * 0.35) return;
     // Do not interrupt typing, an open menu, search or another modal.
     if (document.activeElement?.matches("input, textarea, select, [contenteditable='true']") || document.querySelector('dialog[open], .header-search[open], .menu-toggle[aria-expanded="true"]')) return;
+    if (form) form.dataset.placement = exitIntent ? "popup_exit" : "popup_timed";
     previousFocus = document.activeElement;
     popup.showModal();
     remember();
