@@ -37,7 +37,13 @@
     tiles.on('tileerror', () => { errors++; });
     tiles.on('load', () => { clearTimeout(timer); if (errors) failed(true); else { status.textContent = t('Map loaded. Select a marker to read about the location.'); button.hidden = true; } });
     tiles.addTo(map);
-    sites.forEach(site => { const popup=document.createElement('div'), name=document.createElement('strong'), description=document.createElement('p'); name.textContent=t(site[0]);description.textContent=t(site[3]);popup.append(name,description);L.marker([site[1],site[2]],{title:t(site[0]),alt:t(site[0])}).addTo(map).bindPopup(popup); });
+    sites.forEach((site, index) => { const popup=document.createElement('div'), name=document.createElement('strong'), description=document.createElement('p'); name.textContent=t(site[0]);description.textContent=t(site[3]);popup.append(name,description);
+     const card = document.getElementById('place-' + ['parliament','protests','sazan','zvernec','museum'][index]);
+     if (card) {
+      const context = card.querySelector('.map-place-content').cloneNode(true);
+      popup.className = 'map-place-popup'; popup.append(context);
+     }
+     L.marker([site[1],site[2]],{title:t(site[0]),alt:t(site[0])}).addTo(map).bindPopup(popup, {maxWidth:340, maxHeight:300}); });
    }
    loading(); map.invalidateSize(); map.setView(...views[current]); tiles.redraw();
    button.hidden = true;
