@@ -47,3 +47,48 @@ test('R44 source and rendered text agree and qualify submission verification in 
   assert.match(sq[rendered], /nuk vërteton garanci për privatësinë, sigurinë ose qasjen/);
   assert.doesNotMatch(JSON.stringify(records.R44), /No submission form/);
 });
+
+test('demands are prominent native anchors and fully translated static content', () => {
+  const fragment = read('template-parts/albania-investigation.html');
+  const demands = read('template-parts/albania-demands.html');
+  assert.match(fragment, /class="demands-header" href="#demands">Demands/);
+  assert.match(fragment, /class="demands-hero" href="#demands"/);
+  assert.ok(fragment.indexOf('<!-- ALBANIA_DEMANDS -->') < fragment.indexOf('id="network"'));
+  assert.match(demands, /id="demands" tabindex="-1" aria-labelledby="demands-title"/);
+  assert.equal((demands.match(/class="demand-card"/g) || []).length, 3);
+  assert.equal((demands.match(/Not independently verified/g) || []).length, 3);
+  const texts = [...demands.matchAll(/>([^<>]+)</g)].map(m => m[1].trim()).filter(Boolean);
+  for (const text of texts) {
+    if (['Boldnews','Lapsi','Ora News','OBCT',':','·'].includes(text)) continue;
+    assert.ok(sq[text], `Missing SQ demand translation: ${text}`);
+  }
+  assert.match(demands, /two full or partial prime-ministerial terms/);
+  assert.match(demands, /nonpartisan technical transitional government with a 12-month mandate/);
+  assert.match(demands, /reversal of amendments to protected-area and cultural-heritage laws/);
+  assert.match(demands, /Individual interviews do not establish one agreed student manifesto/);
+  assert.equal((demands.match(/Event \/ platform date/g)||[]).length,3);
+  assert.equal((demands.match(/Reporting date/g)||[]).length,3);
+});
+
+test('language switching carries stable hashes and demands navigation focuses its target', () => {
+  const handlers = {};
+  const focus = [];
+  const link = {href:'https://www.valonasani.com/sq/shqiperia/'};
+  const target = {focus: options => focus.push(options), scrollIntoView: () => focus.push('scroll')};
+  const context = {
+    location:{hash:'#demands',href:'https://www.valonasani.com/albania/#demands'}, URL,
+    requestAnimationFrame: fn => fn(),
+    document: {
+      querySelector:()=>({getBoundingClientRect:()=>({bottom:100})}),
+      getElementById:id=>id==='demands'?target:null,
+      documentElement:{style:{setProperty:()=>{}}},
+      querySelectorAll:()=>[link],readyState:'complete',addEventListener:()=>{}
+    },
+    window:{addEventListener:(name,fn)=>{handlers[name]=fn;}}
+  };
+  vm.runInNewContext(read('assets/albania/demands.js'),context);
+  assert.equal(new URL(link.href).hash,'#demands');
+  assert.equal(focus.length,2);
+  context.location.hash='#evidence-R33';handlers.hashchange();
+  assert.equal(new URL(link.href).hash,'#evidence-R33');
+});
