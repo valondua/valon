@@ -9,6 +9,9 @@ add_action('wp_enqueue_scripts', static function () {
     $base = get_theme_file_uri('/assets/albania/');
     wp_enqueue_style('albania-leaflet', $base . 'vendor/leaflet.css', [], '1.9.4');
     wp_enqueue_style('albania-investigation', $base . 'investigation.css', ['albania-leaflet'], filemtime(__DIR__ . '/assets/albania/investigation.css'));
+    wp_enqueue_style('albania-story', $base . 'story.css', ['albania-investigation'], filemtime(__DIR__ . '/assets/albania/story.css'));
+    wp_enqueue_script('albania-story-data', $base . 'story-data.js', [], filemtime(__DIR__ . '/assets/albania/story-data.js'), true);
+    wp_enqueue_script('albania-story', $base . 'story.js', ['albania-story-data', 'albania-network'], filemtime(__DIR__ . '/assets/albania/story.js'), true);
     wp_enqueue_script('albania-leaflet', $base . 'vendor/leaflet.js', [], '1.9.4', true);
     wp_enqueue_script('albania-network', $base . 'vendor/vis-network.min.js', [], '9.1.9', true);
     wp_enqueue_script('albania-research', $base . 'research.js', [], filemtime(__DIR__ . '/assets/albania/research.js'), true);
@@ -19,8 +22,8 @@ add_action('wp_enqueue_scripts', static function () {
 <body <?php body_class('albania-investigation'); ?>><?php wp_body_open(); ?>
 <?php
 // Both fragments are versioned, reviewed local HTML; no visitor input is interpolated.
-echo str_replace('<!-- ALBANIA_RESEARCH_REGISTER -->',
-    file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'),
+echo str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->'],
+    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html')],
     file_get_contents(__DIR__ . '/template-parts/albania-investigation.html'));
 ?>
 <?php wp_footer(); ?></body></html>

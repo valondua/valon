@@ -1,0 +1,13 @@
+# Albania visual-story release — 23 October 2026
+
+The public investigation now opens with six chronological chapters: the reported 2021 yacht meeting, a later Davos conversation with no invented exact date, the 2023 return visit, Sazan strategic status, the separate 2026 Sazan/Zvërnec decisions, and the protest movement. The yacht account is attributed to Rama’s retrospective interview and the FT account relayed by Politiko; the host’s identity and any financing inference remain unverified.
+
+All 44 reviewed research records are represented in a topic-selectable evidence graph, with sources and limitations preserved verbatim from the reviewed register. Twenty-five additional dated research entries supplement the existing timeline. Undated claims remain in the graph/register rather than receiving fabricated event dates. Topic-only edges are explicitly distinguished from substantive relationships. Verified-record, historical, reporting, official-account and allegation labels remain separate; criminal allegations do not imply guilt.
+
+Three locally hosted, optimized historical photographs provide context with date, author and licence captions. None is represented as a photograph of the yacht meeting. See `assets/albania/images/CREDITS.md`. The editorial hierarchy uses the NBC investigations reference studied through Lazyweb, with independent branding.
+
+Validation: protected WordPress staging rendered six story chapters, both graphs, 44 records and 25 new events. All 13 original sections and anchors are retained. Browser checks covered desktop and 390px mobile layout, image loading, graph edge/record selection, allegation and grant disclosures, empty/search/reset states, original protest timeline filters and no console errors. Static content includes every new timeline entry and all evidence records without JavaScript. PHP and JavaScript syntax checks passed. These checks are not a field Core Web Vitals measurement.
+
+Recovery: the existing full database, WordPress/media and host archives remain outside the web root on the hosting volume. The three prior changed runtime files were saved in a separate release snapshot, restored to a check location and matched by SHA-256. New runtime file paths are in the rollback manifest. These backups are on the same host volume, not an offsite guarantee. No database content migration, credential change, newsletter send or media-library replacement is part of this release.
+
+Production is authorized by the owner. Deploy through the existing WP Pusher mechanism only after staging checks; verify installed release hashes and anonymous public responses afterward. A successful update response alone does not establish a successful deployment.
