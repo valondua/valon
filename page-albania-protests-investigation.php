@@ -18,6 +18,7 @@ add_action('wp_enqueue_scripts', static function () {
     wp_enqueue_script('albania-network', $base . 'vendor/vis-network.min.js', [], '9.1.9', true);
     wp_enqueue_script('albania-demands', $base . 'demands.js', [], filemtime(__DIR__ . '/assets/albania/demands.js'), true);
     wp_enqueue_script('albania-research', $base . 'research.js', [], filemtime(__DIR__ . '/assets/albania/research.js'), true);
+    wp_enqueue_script('albania-navigation-map', $base . 'navigation-map.js', ['albania-leaflet'], filemtime(__DIR__ . '/assets/albania/navigation-map.js'), true);
     wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
 }, 999);
 ?>

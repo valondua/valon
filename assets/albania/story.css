@@ -44,3 +44,17 @@ header .demands-header{margin-left:auto;background:#17324f;color:#fff;padding:12
 .albania-investigation :where(section,article,[id],a,button,input,select,summary){scroll-margin-top:var(--dossier-anchor-offset,180px)}
 @media(max-width:1000px){.demands-grid{grid-template-columns:1fr}.demand-card{padding:24px}.demand-card dl{display:grid;grid-template-columns:1fr 2fr;gap:8px 16px}.demand-card dt{margin:0}.demand-card dd{margin:0}}
 @media(max-width:600px){.albania-investigation>header{padding:8px 16px;gap:8px}.albania-investigation>header>a:first-child{width:100%;font-size:14px}.albania-investigation>header .demands-header{margin:0;flex:1;padding:10px;min-height:48px;justify-content:center}.albania-investigation>header .submit-header{flex:1;min-height:48px;padding:10px;font-size:14px}.demands-section{padding:28px 18px}.demand-card{padding:18px}.demand-card dl{display:block}.demand-card dt{margin-top:12px}.demands-hero{display:flex;justify-content:center;margin-right:0}}
+
+/* Section navigation stays beneath the measured masthead, including translated text. */
+.albania-investigation{--masthead-height:72px;--section-nav-height:62px;--admin-offset:0px}
+body.admin-bar.albania-investigation{--admin-offset:32px}
+.albania-investigation>.section-navigation{position:sticky;top:calc(var(--admin-offset) + var(--masthead-height));z-index:998;background:#fff;padding:6px 5%;gap:14px;overflow:visible;align-items:center;box-shadow:0 3px 6px #0001}
+.section-navigation .section-links{display:flex;gap:22px;overflow-x:auto;min-width:0;align-items:center;scrollbar-width:thin}
+.section-navigation .section-links a{display:inline-flex;align-items:center;min-height:44px;flex-shrink:0}
+.section-navigation select{font:600 14px/1.4 Arial,sans-serif;color:#222;background:#fff;border:1px solid #aaa;min-height:44px;max-width:220px;padding:8px;flex-shrink:0}
+.section-navigation select[hidden]{display:none}
+.albania-investigation :where(section,article,[id],a,button,input,select,summary){scroll-margin-top:calc(var(--admin-offset) + var(--masthead-height) + var(--section-nav-height) + 16px)!important}
+#map[hidden]{display:none}#mapStatus{font-size:14px;line-height:1.5}#geography details{margin-top:18px}#geography details li{margin:10px 0}
+@media(max-width:782px){body.admin-bar.albania-investigation{--admin-offset:46px}}
+@media(max-width:700px){.section-navigation.enhanced .section-links{display:none}.section-navigation select{width:100%;max-width:none}.albania-investigation>.section-navigation{padding:6px 16px}}
+@media(max-width:600px){body.admin-bar.albania-investigation{--admin-offset:0px}}
