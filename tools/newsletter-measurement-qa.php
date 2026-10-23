@@ -3,10 +3,11 @@
 global $wpdb;
 $original_prefix=$wpdb->prefix;
 $wpdb->prefix='vp_qa_'.bin2hex(random_bytes(5)).'_';
-$tables=[$wpdb->prefix.'vp_newsletter_events',$wpdb->prefix.'vp_newsletter_intents',$wpdb->prefix.'vp_newsletter_ga4'];
+$tables=[$wpdb->prefix.'vp_newsletter_events',$wpdb->prefix.'vp_newsletter_intents',$wpdb->prefix.'vp_newsletter_ga4',$wpdb->prefix.'vp_newsletter_impressions'];
 $wpdb->query("CREATE TEMPORARY TABLE {$tables[0]} (event_hash char(64) PRIMARY KEY,member_hash char(64),event_type varchar(20),occurred_at datetime,language varchar(8),source varchar(20),placement varchar(20),is_test tinyint)");
-$wpdb->query("CREATE TEMPORARY TABLE {$tables[1]} (token_hash char(64) PRIMARY KEY,member_hash char(64),created_at datetime,language varchar(8),source varchar(20),placement varchar(20),confirmed tinyint DEFAULT 0,reported tinyint DEFAULT 0,client_id varchar(80) DEFAULT '',session_id varchar(20) DEFAULT '',analytics_consent varchar(10) DEFAULT '')");
+$wpdb->query("CREATE TEMPORARY TABLE {$tables[1]} (token_hash char(64) PRIMARY KEY,member_hash char(64),created_at datetime,language varchar(8),source varchar(20),placement varchar(20),confirmed tinyint DEFAULT 0,reported tinyint DEFAULT 0,impression_id char(64) DEFAULT '',client_id varchar(80) DEFAULT '',session_id varchar(20) DEFAULT '',analytics_consent varchar(10) DEFAULT '')");
 $wpdb->query("CREATE TEMPORARY TABLE {$tables[2]} (event_hash char(64) PRIMARY KEY,token_hash char(64),occurred_at datetime,status varchar(20) DEFAULT 'pending',http_status int DEFAULT 0,updated_at datetime)");
+$wpdb->query("CREATE TEMPORARY TABLE {$tables[3]} (id char(64) PRIMARY KEY,visitor_hash char(64),placement varchar(20),occurred_at datetime)");
 $ga_config=['enabled'=>true,'api_secret'=>'fixture-not-real'];
 $ga_filter=fn()=>$ga_config;add_filter('pre_option_vp_newsletter_ga4_config',$ga_filter);
 $sent=[];$response_code=204;
@@ -88,6 +89,33 @@ try {
         $check(count($sent)===$before+1 && end($sent)['events'][0]['params']['placement']===$placement,'confirmed GA payload retains '.$placement);
         $check($wpdb->get_var($wpdb->prepare("SELECT placement FROM {$tables[0]} WHERE member_hash=%s",vp_newsletter_member_hash($email)))===$placement,'ledger retains '.$placement);
     }
+    $response_code=204;
+    foreach (['popup_exit','popup_timed'] as $placement) {
+        $request=new WP_REST_Request('POST','/');$request->set_header('origin',home_url());
+        foreach (['statistics_consent'=>true,'placement'=>$placement,'client_id'=>'789.123'] as $key=>$value) $request->set_param($key,$value);
+        $view=vp_newsletter_impression($request);$check(!is_wp_error($view),'view accepted');
+        $request->set_param('impression_id',$view->get_data()['id']);
+        $check(vp_newsletter_valid_impression($request)===$view->get_data()['id'],'view linked');
+        $request->set_param('client_id','789.999');$check(vp_newsletter_valid_impression($request)==='','different browser cannot claim view');
+        $request->set_param('client_id','789.123');$request->set_param('email','view-'.$placement.'@example.invalid');
+        vp_newsletter_intent($request);vp_newsletter_webhook($make('view-'.$placement.'@example.invalid'));
+        vp_newsletter_impression($request); // A second view by the same browser.
+        $request->set_param('client_id','555.666');vp_newsletter_impression($request); // Unconverted viewer.
+        $request->set_param('statistics_consent',false);$check(is_wp_error(vp_newsletter_impression($request)),'denied view rejected');
+    }
+    $rates=vp_newsletter_popup_report(gmdate('Y-m-d H:i:s',time()-60),gmdate('Y-m-d H:i:s',time()+1));
+    foreach($rates['rows'] as $rate) {
+        $check((int)$rate['impressions']===3 && (int)$rate['viewers']===2,'repeated exposures deduplicated for viewers');
+        $check((int)$rate['confirmed_viewers']===1 && $rate['confirmed_viewer_rate']===0.5,'matched confirmation rate is 50 percent');
+    }
+    $request->set_param('statistics_consent',true);$request->set_param('client_id','');
+    $check(is_wp_error(vp_newsletter_impression($request)),'missing client rejected');
+    $request->set_param('client_id','555.666');$request->set_header('origin','https://example.invalid');
+    $check(is_wp_error(vp_newsletter_impression($request)),'cross-origin exposure rejected');
+    // Known test browsers must disappear from both sides of the rate.
+    $wpdb->insert($tables[1],['token_hash'=>str_repeat('9',64),'member_hash'=>vp_newsletter_member_hash('owner@example.invalid'),'client_id'=>'555.666']);
+    $rates=vp_newsletter_popup_report(gmdate('Y-m-d H:i:s',time()-60),gmdate('Y-m-d H:i:s',time()+1));
+    foreach($rates['rows'] as $rate) $check((int)$rate['viewers']===1 && $rate['confirmed_viewer_rate']===1,'test browser excluded from denominator');
     echo "$assertions newsletter measurement assertions passed; temporary SQL only, no emails.\n";
 } finally {
     foreach($tables as $table)$wpdb->query("DROP TEMPORARY TABLE IF EXISTS $table");

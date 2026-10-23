@@ -24,3 +24,25 @@ cannot relabel an open popup. Legacy `popup` remains mixed/unknown; no backfill.
 Consent and test exclusions are unchanged. Compare confirmed counts, not causal
 lift or conversion rates: triggers are not randomized and no impression denominator
 is recorded. Non-consented/unknown attribution stays unknown.
+
+## Consented popup exposure cohorts
+
+`newsletter:popup-open` fires after `showModal()` succeeds. A view is recorded only
+when statistics consent is explicitly allowed, the page is visible, and an existing
+valid GA client ID is available. No late-consent backfill. Logged-in users are excluded.
+The server stores a keyed hash of that ID, opening placement, timestamp and random
+receipt in `vp_newsletter_impressions`; it does not store raw client IDs or emails there.
+The form's consented intent references the validated receipt. No extra GA conversion
+is sent for a view; the server ledger supplies the report denominator independently
+of GA report availability. Exposure records expire after 30 days.
+
+`vp_newsletter_popup_report(start_utc,end_utc)` uses a half-open exposure cohort and
+confirmations received by the cutoff. Per trigger it returns impressions, distinct
+browser visitors, matched confirmed browser visitors, confirmed contacts and
+`confirmed_viewer_rate = confirmed_viewers / viewers`. Repeated views and webhook
+retries cannot multiply the numerator. Test browser IDs known from configured test
+contacts are excluded from both numerator and denominator. Unidentified QA browsing
+cannot be recognized automatically; use signed-in admin browsing for manual checks.
+People across devices are not deduplicated. Consent-denied views and missing GA IDs
+are unmeasured, not zero. Legacy unmatched confirmations are totals only. Pending
+confirmations can mature later; this is observational, not a randomized comparison.

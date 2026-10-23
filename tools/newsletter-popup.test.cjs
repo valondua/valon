@@ -15,10 +15,12 @@ function harness({ stored = 0, blocked = false, typing = false, pointer = true }
     querySelector(s) { return s === ".newsletter-form" ? form : { addEventListener() {} }; },
   };
   const context = {
+    CustomEvent: class { constructor(type, options) { this.type=type; this.detail=options.detail; } },
     Date, innerHeight: 800, scrollY: 0,
     setTimeout(f) { timers.push(f); },
     localStorage: { getItem() { if (blocked) throw Error(); return stored; }, setItem(k,v) { if (blocked) throw Error(); stored = v; } },
     document: {
+      dispatchEvent(e) { events[e.type]?.(e); },
       visibilityState: 'visible',
       activeElement: { matches() { return typing; } },
       documentElement: { scrollHeight: 2800, classList: { add() {}, remove() {} } },
@@ -81,4 +83,12 @@ test('manual reopening gets its own attribution', () => {
   const h=harness(); h.elapsed(); h.events.mouseout({relatedTarget:null,clientY:0}); h.popup.close();
   h.events.click({target:{closest:()=>({})},preventDefault(){}});
   assert.equal(h.form.dataset.placement,'popup_manual');
+});
+
+test('exactly one opening notification per actual popup display',()=>{
+  const h=harness(); const seen=[];
+  h.events['newsletter:popup-open']=e=>seen.push(e.detail.form.dataset.placement);
+  h.elapsed(); h.events.mouseout({relatedTarget:null,clientY:0});
+  h.events.mouseout({relatedTarget:null,clientY:0});
+  assert.deepEqual(seen,['popup_exit']);
 });

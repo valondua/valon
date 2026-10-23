@@ -65,6 +65,7 @@
     if (form) form.dataset.placement = "popup_manual";
     previousFocus = trigger;
     popup.showModal();
+    document.dispatchEvent(new CustomEvent("newsletter:popup-open", { detail: { form } }));
     remember();
     document.documentElement.classList.add("newsletter-popup-open");
   });
@@ -92,6 +93,7 @@
     if (form) form.dataset.placement = exitIntent ? "popup_exit" : "popup_timed";
     previousFocus = document.activeElement;
     popup.showModal();
+    document.dispatchEvent(new CustomEvent("newsletter:popup-open", { detail: { form } }));
     remember();
     document.documentElement.classList.add("newsletter-popup-open");
   };
