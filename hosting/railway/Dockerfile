@@ -23,6 +23,7 @@ RUN echo '3a3587c0a524c17d0dad9673a160b90cd776e836838474e173b549ed864352ee  /tmp
 COPY wordpress.conf /etc/apache2/conf-available/wordpress.conf
 COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 COPY entrypoint.sh /usr/local/bin/valon-entrypoint
+COPY cron-loop.php /usr/local/bin/valon-cron-loop.php
 RUN a2dismod mpm_event mpm_worker \
     && a2enmod mpm_prefork rewrite headers \
     && a2enconf wordpress \

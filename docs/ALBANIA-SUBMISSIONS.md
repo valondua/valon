@@ -31,3 +31,11 @@ Email status `accepted` means wp_mail returned success, not confirmed delivery. 
 Synthetic multipart upload, private permissions and storage location, duplicate receipt retries, forged token rejection, cross-origin rejection, required consent, honeypot, disguised file rejection and anonymous download denial passed. Mocked mail confirmed recipient and attachment paths; simulated delivery failure retained the saved submission. No real mail was sent by staging.
 
 Browser QA must cover both languages, desktop/mobile, the timeline filters, network profiles and evidence selectors. Locale data is an external local script so consent-plugin keyword scanning cannot misclassify source-reference strings as tracking code. Static option values are preserved before translating their labels.
+
+## Gmail release validation, 24 October 2026
+
+The free manual Gmail connection is configured in WP Mail SMTP, sending from and to `valon@dua.com`. A synthetic staging form upload was captured through the real delivery function and passed to the production Gmail transport; the message was confirmed in the recipient's inbox and its TXT attachment was read successfully. A public-form test is required after activation.
+
+The Railway entrypoint now starts an independent, serialized WordPress cron worker as `www-data`, once per minute. Its private heartbeat is `/data/.valon-state-v1/cron/status.json`; the worker lock prevents duplicate loops. The same script and entrypoint are installed in the running container, and the Dockerfile includes them for future builds. Keep normal WP cron enabled; WordPress locks arbitrate overlapping triggers.
+
+The host supplies a public gateway address as REMOTE_ADDR; it is not identical to the forwarded client address. Forwarded headers remain untrusted. The conservative 8/hour limit can therefore be shared by visitors routed through a gateway, in addition to the 50/hour site limit. Review actual usage before increasing limits or configuring a documented trusted-proxy address chain.
