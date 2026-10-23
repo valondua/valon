@@ -80,10 +80,10 @@
     if (event.target === popup && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) popup.close();
   });
   let elapsed = false;
-  const maybeOpen = () => {
+  const maybeOpen = (exitIntent = false) => {
     if (!elapsed || popup.open || isSuppressed() || document.visibilityState !== "visible") return;
     const distance = document.documentElement.scrollHeight - innerHeight;
-    if (distance > 0 && scrollY < distance * 0.35) return;
+    if (!exitIntent && distance > 0 && scrollY < distance * 0.35) return;
     // Do not interrupt typing, an open menu, search or another modal.
     if (document.activeElement?.matches("input, textarea, select, [contenteditable='true']") || document.querySelector('dialog[open], .header-search[open], .menu-toggle[aria-expanded="true"]')) return;
     previousFocus = document.activeElement;
@@ -92,6 +92,13 @@
     document.documentElement.classList.add("newsletter-popup-open");
   };
   setTimeout(() => { elapsed = true; maybeOpen(); }, 20000);
-  window.addEventListener("scroll", maybeOpen, { passive: true });
-  document.addEventListener("visibilitychange", maybeOpen);
+  window.addEventListener("scroll", () => maybeOpen(), { passive: true });
+  document.addEventListener("visibilitychange", () => maybeOpen());
+  // Leaving through the top edge suggests browser navigation on pointer devices.
+  // Never intercept navigation or treat touch/side-edge movement as an exit.
+  document.addEventListener("mouseout", (event) => {
+    if (event.relatedTarget !== null || event.clientY > 0 ||
+        !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    maybeOpen(true);
+  });
 })();
