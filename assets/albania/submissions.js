@@ -25,7 +25,7 @@
     try{
       if(Date.now()-tokenTime>7000000)await getToken();
       if(Date.now()<readyAt)await new Promise(resolve=>setTimeout(resolve,readyAt-Date.now()));
-      const response=await fetch(form.action,{method:'POST',body:new FormData(form),credentials:'same-origin'});
+      const response=await fetch(form.getAttribute('action'),{method:'POST',body:new FormData(form),credentials:'same-origin'});
       let json;try{json=await response.json();}catch{throw new Error('No receipt was confirmed. Your text is still here; please try again. Retrying will not create a duplicate if it was already saved.');}
       if(!response.ok||!json.success)throw new Error(json.data?.message||'Your submission could not be saved. Please try again.');
       const receipt=json.data.receipt;
