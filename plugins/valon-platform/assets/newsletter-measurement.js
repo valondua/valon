@@ -1,29 +1,39 @@
 (() => {
   "use strict";
   const cfg = window.valonPlatform;
-  if (!cfg?.newsletterIntent || !cfg?.newsletterConfirmation) return;
+  if (!cfg?.newsletterIntent || !cfg?.newsletterRevoke) return;
   const storageKey = "valon_newsletter_confirmation";
-  const consented = () => {
+  const choice = () => {
     try {
       const prefix = window.consent_api?.cookie_prefix;
-      return typeof prefix === "string" && !!prefix &&
-        window.consent_api_get_cookie?.(prefix + "_statistics") === "allow" &&
-        window.wp_has_consent?.("statistics") === true;
-    } catch { return false; }
+      return prefix ? window.consent_api_get_cookie?.(prefix + "_statistics") : null;
+    } catch { return null; }
   };
+  const consented = () => choice() === "allow" && window.wp_has_consent?.("statistics") === true;
   const clear = () => { try { localStorage.removeItem(storageKey); } catch {} };
   const request = async (url, body) => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 2000);
     try {
-      const response = await fetch(url, {
-        method: "POST", credentials: "same-origin", cache: "no-store",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body), signal: controller.signal,
-      });
+      const response = await fetch(url, {method:"POST", credentials:"same-origin", cache:"no-store", keepalive:true,
+        headers:{"Content-Type":"application/json"}, body:JSON.stringify(body), signal:controller.signal});
       return response.ok ? await response.json() : null;
     } finally { clearTimeout(timeout); }
   };
+  const revoke = async (receipt) => {
+    if (!receipt?.token || !/^[a-f0-9]{64}$/.test(receipt.token)) return;
+    try { if (await request(cfg.newsletterRevoke, {token:receipt.token})) clear(); } catch {}
+  };
+  const checkWithdrawal = async () => {
+    // Unknown/startup consent is not withdrawal. Never send analytics from this script.
+    if (choice() !== "deny") return;
+    try { await revoke(JSON.parse(localStorage.getItem(storageKey) || "null")); } catch {}
+  };
+  const gaValue = (field) => new Promise((resolve) => {
+    if (!consented() || typeof window.gtag !== "function") return resolve(null);
+    const timer = setTimeout(() => resolve(null), 600);
+    window.gtag("get", cfg.newsletterMeasurementId, field, value => { clearTimeout(timer); resolve(value); });
+  });
   const sources = ["tiktok", "instagram", "facebook", "linkedin", "x", "newsletter"];
   document.querySelectorAll(".newsletter-form").forEach((form) => {
     let submitting = false;
@@ -38,53 +48,26 @@
       let source = new URL(location.href).searchParams.get("utm_source");
       try { if (!sources.includes(source)) source = sessionStorage.getItem("valon_source"); } catch {}
       try {
+        const [clientId, sessionId] = await Promise.all([gaValue("client_id"), gaValue("session_id")]);
+        // Never invent a GA identifier when tagging is blocked or consent is withdrawn.
+        if (!consented()) return;
         const result = await request(cfg.newsletterIntent, {
-          email: data.get(hosted ? "EMAIL" : "email"), statistics_consent: true,
-          language: data.get("language") || form.dataset.lang || "en",
-          placement: form.dataset.placement || "inline",
-          source: sources.includes(source) ? source : "website",
+          email:data.get(hosted ? "EMAIL" : "email"), statistics_consent:true,
+          client_id:typeof clientId === "string" ? clientId : "",
+          session_id:sessionId ? String(sessionId) : "",
+          language:data.get("language") || form.dataset.lang || "en", placement:form.dataset.placement || "inline",
+          source:sources.includes(source) ? source : "website",
         });
-        if (consented() && result?.token && /^[a-f0-9]{64}$/.test(result.token)) {
+        if (result?.token && /^[a-f0-9]{64}$/.test(result.token)) {
           try { localStorage.setItem(storageKey, JSON.stringify(result)); } catch {}
+          if (!consented()) await revoke(result);
         }
       } catch { /* Measurement must never prevent subscription. */ }
-      finally {
-        submitting = false;
-        if (hosted) HTMLFormElement.prototype.submit.call(form);
-      }
+      finally { submitting = false; if (hosted) HTMLFormElement.prototype.submit.call(form); }
     });
   });
-  let checking = false;
-  const check = async () => {
-    if (!consented()) { clear(); return; }
-    if (checking || document.visibilityState !== "visible" || typeof window.gtag !== "function") return;
-    let pending;
-    try { pending = JSON.parse(localStorage.getItem(storageKey) || "null"); } catch { clear(); return; }
-    if (!pending) return;
-    if (!/^[a-f0-9]{64}$/.test(pending.token || "") || !(pending.expires > Date.now() / 1000)) { clear(); return; }
-    checking = true;
-    try {
-      const result = await request(cfg.newsletterConfirmation, { token: pending.token });
-      if (result?.confirmed && consented()) {
-        // The server atomically claims this signed confirmation only once.
-        const p = result.parameters || {};
-        window.gtag("event", "newsletter_confirmed", {
-          language: ["en", "sq", "de"].includes(p.language) ? p.language : "en",
-          source: [...sources, "website"].includes(p.source) ? p.source : "website",
-          placement: ["hero", "footer", "landing", "newsletter", "inline", "popup"].includes(p.placement) ? p.placement : "inline",
-          method: "mailchimp_double_opt_in",
-        });
-        clear();
-      } else if (result?.finished) clear();
-    } catch { /* The signed server ledger remains the source of truth. */ }
-    finally { checking = false; }
-  };
-  document.addEventListener("wp_listen_for_consent_change", check);
-  document.addEventListener("wp_consent_type_defined", check);
-  document.addEventListener("visibilitychange", check);
-  window.addEventListener("load", check);
-  window.addEventListener("pageshow", check);
-  // This timer makes no request without consent and an unexpired pending token.
-  setInterval(check, 30000);
-  check();
+  document.addEventListener("wp_listen_for_consent_change", checkWithdrawal);
+  document.addEventListener("wp_consent_type_defined", checkWithdrawal);
+  window.addEventListener("pageshow", checkWithdrawal);
+  checkWithdrawal();
 })();

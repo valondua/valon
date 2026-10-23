@@ -30,6 +30,7 @@ require_once VP_DIR . "/includes/social.php";
 require_once VP_DIR . "/includes/admin.php";
 require_once VP_DIR . "/includes/article-revisions.php";
 require_once VP_DIR . "/includes/newsletter.php";
+require_once VP_DIR . "/includes/newsletter-ga4.php";
 require_once VP_DIR . "/includes/newsletter-measurement.php";
 require_once VP_DIR . "/includes/seo.php";
 require_once VP_DIR . "/includes/yoast-content.php";
@@ -43,6 +44,7 @@ register_activation_hook(__FILE__, function () {
 });
 register_deactivation_hook(__FILE__, function () {
     wp_clear_scheduled_hook("vp_hourly_sync");
+    wp_clear_scheduled_hook("vp_newsletter_ga_dispatch");
 });
 add_action("wp_enqueue_scripts", function () {
     wp_enqueue_script(
@@ -57,6 +59,8 @@ add_action("wp_enqueue_scripts", function () {
         "subscribe" => rest_url("valon/v1/subscribe"),
         "newsletterIntent" => rest_url("valon/v1/newsletter-intent"),
         "newsletterConfirmation" => rest_url("valon/v1/newsletter-confirmation"),
+        "newsletterRevoke" => rest_url("valon/v1/newsletter-revoke"),
+        "newsletterMeasurementId" => "G-9264D19BZD",
         "embed" => rest_url("valon/v1/embed/"),
         "isLocal" => wp_get_environment_type() === "local",
     ]);

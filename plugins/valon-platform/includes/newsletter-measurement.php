@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit();
 
 function vp_newsletter_measurement_install() {
-    if (get_option('vp_newsletter_measurement_version') === '1') return;
+    if (get_option('vp_newsletter_measurement_version') === '2') return;
     global $wpdb;
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
     $charset = $wpdb->get_charset_collate();
@@ -16,6 +16,9 @@ function vp_newsletter_measurement_install() {
         placement varchar(20) NOT NULL,
         confirmed tinyint NOT NULL DEFAULT 0,
         reported tinyint NOT NULL DEFAULT 0,
+        client_id varchar(80) NOT NULL DEFAULT '',
+        session_id varchar(20) NOT NULL DEFAULT '',
+        analytics_consent varchar(10) NOT NULL DEFAULT '',
         PRIMARY KEY  (token_hash),
         KEY member_hash (member_hash),
         KEY created_at (created_at)
@@ -33,8 +36,19 @@ function vp_newsletter_measurement_install() {
         KEY member_hash (member_hash),
         KEY occurred_at (occurred_at)
     ) $charset;");
+    dbDelta("CREATE TABLE {$wpdb->prefix}vp_newsletter_ga4 (
+        event_hash char(64) NOT NULL,
+        token_hash char(64) NOT NULL,
+        occurred_at datetime NOT NULL,
+        status varchar(20) NOT NULL DEFAULT 'pending',
+        http_status int NOT NULL DEFAULT 0,
+        updated_at datetime NOT NULL,
+        PRIMARY KEY  (event_hash),
+        KEY status (status)
+    ) $charset;");
     if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_events'))) !== $wpdb->prefix.'vp_newsletter_events' || $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_intents'))) !== $wpdb->prefix.'vp_newsletter_intents') return;
-    update_option('vp_newsletter_measurement_version', '1', false);
+    if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_ga4'))) !== $wpdb->prefix.'vp_newsletter_ga4') return;
+    update_option('vp_newsletter_measurement_version', '2', false);
     if (!get_option('vp_newsletter_measurement_started')) update_option('vp_newsletter_measurement_started', gmdate('Y-m-d H:i:s'), false);
 }
 add_action('init', 'vp_newsletter_measurement_install');
@@ -68,6 +82,9 @@ function vp_newsletter_intent($request) {
         'language'=>vp_newsletter_measurement_choice($request->get_param('language'), ['en','sq','de'], 'en'),
         'source'=>vp_newsletter_measurement_choice($request->get_param('source'), ['website','tiktok','instagram','facebook','linkedin','x','newsletter'], 'website'),
         'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup'], 'inline'),
+        'analytics_consent'=>'granted',
+        'client_id'=>vp_newsletter_ga_id($request->get_param('client_id')),
+        'session_id'=>vp_newsletter_ga_session($request->get_param('session_id')),
     ]);
     if (!$ok) return new WP_Error('unavailable', 'Unavailable.', ['status'=>503]);
     return new WP_REST_Response(['token'=>$token, 'expires'=>time()+30*DAY_IN_SECONDS], 200, ['Cache-Control'=>'no-store']);
@@ -76,16 +93,8 @@ function vp_newsletter_confirmation_status($request) {
     if (!vp_newsletter_measurement_origin($request)) return new WP_Error('not_allowed', 'Not allowed.', ['status'=>403]);
     $token = $request->get_param('token');
     if (!is_string($token) || !preg_match('/^[a-f0-9]{64}$/', $token)) return new WP_Error('invalid', 'Invalid request.', ['status'=>400]);
-    global $wpdb;
-    $table = $wpdb->prefix . 'vp_newsletter_intents';
-    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE token_hash=%s AND created_at >= %s", hash('sha256',$token), gmdate('Y-m-d H:i:s', time()-30*DAY_IN_SECONDS)), ARRAY_A);
-    $confirmed = false;
-    if ($row && $row['confirmed'] && !$row['reported']) {
-        $confirmed = $wpdb->query($wpdb->prepare("UPDATE $table SET reported=1 WHERE token_hash=%s AND reported=0 AND confirmed=1", $row['token_hash'])) === 1;
-    }
-    $result = ['confirmed'=>$confirmed, 'finished'=>(bool)($row && $row['reported']) || !$row];
-    if ($confirmed) $result['parameters'] = ['language'=>$row['language'], 'source'=>$row['source'], 'placement'=>$row['placement'], 'method'=>'mailchimp_double_opt_in'];
-    return new WP_REST_Response($result, 200, ['Cache-Control'=>'no-store']);
+    // Cached older clients must never claim or send a server-owned conversion.
+    return new WP_REST_Response(['confirmed'=>false, 'finished'=>true], 200, ['Cache-Control'=>'no-store']);
 }
 function vp_newsletter_webhook($request) {
     $config = get_option('vp_newsletter_webhook_config', []);
@@ -116,27 +125,34 @@ function vp_newsletter_webhook($request) {
     $columns = implode(',',array_keys($event));
     $inserted = $wpdb->query($wpdb->prepare("INSERT IGNORE INTO $events ($columns) VALUES (%s,%s,%s,%s,%s,%s,%s,%d)",...array_values($event)));
     if ($inserted === false) return new WP_Error('storage','Retry later.',['status'=>503]);
-    if ($type === 'subscribe' && $inserted === 1 && $intent && !$test) {
+    if ($type === 'subscribe' && $intent) {
         // One browser claim per confirmation; retries and older attempts cannot duplicate it.
         $wpdb->update($intents,['confirmed'=>1],['token_hash'=>$intent['token_hash']]);
+        if (!vp_newsletter_ga_enqueue($event, $intent)) return new WP_Error('storage','Retry later.',['status'=>503]);
     }
-    if ($type !== 'subscribe') $wpdb->update($intents,['confirmed'=>0,'reported'=>1],['member_hash'=>$member]);
+    if ($type !== 'subscribe') {
+        $wpdb->update($intents,['confirmed'=>0,'reported'=>1,'analytics_consent'=>'revoked','client_id'=>'','session_id'=>''],['member_hash'=>$member]);
+    }
+    if ($type === 'subscribe') vp_newsletter_ga_deliver($event['event_hash']);
     return ['ok'=>true];
 }
 function vp_newsletter_measurement_report() {
     global $wpdb; $table=$wpdb->prefix.'vp_newsletter_events';
     return ['tracking_started_utc'=>get_option('vp_newsletter_measurement_started'), 'days'=>30,
-        'note'=>'Signed contact-originated Mailchimp events only. Tests excluded. Unknown source is not attributed to this website. Not a historical audience total; GA requires a consented same-browser return.',
+        'note'=>'Signed contact-originated Mailchimp events only. Tests excluded. Unknown source is not attributed to this website. Not a historical audience total. GA requires explicit analytics consent and a valid GA client ID recorded at signup; no browser return is required.',
+        'ga4_delivery'=>$wpdb->get_results("SELECT q.status,e.is_test,COUNT(*) AS events FROM {$wpdb->prefix}vp_newsletter_ga4 q JOIN {$wpdb->prefix}vp_newsletter_events e ON e.event_hash=q.event_hash WHERE q.occurred_at >= UTC_TIMESTAMP() - INTERVAL 30 DAY GROUP BY q.status,e.is_test",ARRAY_A),
         'rows'=>$wpdb->get_results($wpdb->prepare("SELECT event_type,language,source,placement,COUNT(*) AS events,COUNT(DISTINCT member_hash) AS unique_contacts FROM $table WHERE is_test=0 AND occurred_at >= %s GROUP BY event_type,language,source,placement",gmdate('Y-m-d H:i:s',time()-30*DAY_IN_SECONDS)),ARRAY_A)];
 }
 add_action('rest_api_init',function(){
     register_rest_route('valon/v1','/newsletter-intent',['methods'=>'POST','permission_callback'=>'__return_true','callback'=>'vp_newsletter_intent']);
     register_rest_route('valon/v1','/newsletter-confirmation',['methods'=>'POST','permission_callback'=>'__return_true','callback'=>'vp_newsletter_confirmation_status']);
     register_rest_route('valon/v1','/mailchimp-confirmation/(?P<token>[a-f0-9]{64})',['methods'=>['GET','POST'],'permission_callback'=>'__return_true','callback'=>'vp_newsletter_webhook']);
+    register_rest_route('valon/v1','/newsletter-revoke',['methods'=>'POST','permission_callback'=>'__return_true','callback'=>'vp_newsletter_revoke']);
     register_rest_route('valon/v1','/newsletter-report',['methods'=>'GET','permission_callback'=>fn()=>current_user_can('manage_options'),'callback'=>'vp_newsletter_measurement_report']);
 });
 add_action('vp_hourly_sync',function(){
     global $wpdb;
+    $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}vp_newsletter_ga4 WHERE occurred_at < %s",gmdate('Y-m-d H:i:s',time()-400*DAY_IN_SECONDS)));
     $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}vp_newsletter_intents WHERE created_at < %s",gmdate('Y-m-d H:i:s',time()-30*DAY_IN_SECONDS)));
     $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->prefix}vp_newsletter_events WHERE occurred_at < %s",gmdate('Y-m-d H:i:s',time()-400*DAY_IN_SECONDS)));
 });
@@ -153,6 +169,9 @@ add_action('admin_menu',function(){
         foreach($report['rows'] as $row){echo '<tr>';foreach(['event_type','language','source','placement','events','unique_contacts'] as $key)echo '<td>'.esc_html($row[$key]).'</td>';echo '</tr>';}
         if (!$report['rows']) echo '<tr><td colspan="6">No non-test confirmations received yet.</td></tr>';
         echo '</tbody></table><p>Unknown source means no matching consented website signup attempt. Distinct contacts across rows may overlap. A resubscription is another event, not necessarily a new person.</p>';
-        echo '<p>GA4 newsletter_confirmed is a consented subset: the visitor must return in the same browser within 30 days. Use this server report for confirmation totals and Site Kit for attributed website behaviour.</p></div>';
+        echo '<h2>GA4 delivery</h2><p>Accepted means Google accepted the HTTP request, not independently verified report ingestion. Failed or uncertain submissions require review; they are not automatically resent.</p><ul>';
+        foreach($report['ga4_delivery'] as $delivery) echo '<li>'.esc_html($delivery['status']).(!empty($delivery['is_test'])?' (test)':'').': '.esc_html($delivery['events']).'</li>';
+        echo '</ul>';
+        echo '<p>GA4 newsletter_confirmed is sent from the server for new signups with analytics consent and a valid GA client ID. No browser return is required. Older signups are not backfilled. Use this report for total confirmations; GA4 remains a consented subset.</p></div>';
     });
 });

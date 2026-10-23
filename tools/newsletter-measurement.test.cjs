@@ -2,21 +2,23 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
-const script = fs.readFileSync('plugins/valon-platform/assets/newsletter-measurement.js','utf8');
-function harness(allow=false, pending=null) {
-  const calls=[],events=[],storage=new Map(),listeners={}; let submits=0;
+const script = fs.readFileSync(require('node:path').join(__dirname,'../plugins/valon-platform/assets/newsletter-measurement.js'),'utf8');
+function harness(choice='allow', pending=null) {
+  const calls=[],events=[],storage=new Map(),listeners={}; let submits=0, id='12345.67890';
   if(pending) storage.set('valon_newsletter_confirmation',JSON.stringify(pending));
   const form={dataset:{hosted:'true',lang:'sq',placement:'hero'},checkValidity:()=>true,addEventListener:(n,f)=>listeners['form:'+n]=f};
-  const window={valonPlatform:{newsletterIntent:'/intent',newsletterConfirmation:'/status'},consent_api:{cookie_prefix:'wp'},consent_api_get_cookie:()=>allow?'allow':'deny',wp_has_consent:()=>allow,gtag:(...a)=>events.push(a),addEventListener:(n,f)=>listeners[n]=f};
+  const window={valonPlatform:{newsletterIntent:'/intent',newsletterRevoke:'/revoke',newsletterMeasurementId:'G-9264D19BZD'},consent_api:{cookie_prefix:'wp'},consent_api_get_cookie:()=>choice,wp_has_consent:()=>choice==='allow',gtag:(...a)=>{events.push(a);if(a[0]==='get')a[3](a[2]==='client_id'?id:String(Math.floor(Date.now()/1000)));},addEventListener:(n,f)=>listeners[n]=f};
   let response={token:'a'.repeat(64),expires:Date.now()/1000+3600};
-  const context={window,document:{visibilityState:'visible',querySelectorAll:()=>[form],addEventListener:(n,f)=>listeners[n]=f},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null},location:{href:'https://www.valonasani.com/?utm_source=facebook'},URL,AbortController,Date,JSON,setTimeout,clearTimeout,setInterval:()=>0,FormData:class{get(k){return k==='EMAIL'?'reader@example.invalid':null;}},HTMLFormElement:{prototype:{submit(){submits++;}}},fetch:async(url,o)=>{calls.push({url,body:JSON.parse(o.body)});return {ok:true,json:async()=>response};}};
+  const context={window,document:{querySelectorAll:()=>[form],addEventListener:(n,f)=>listeners[n]=f},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null},location:{href:'https://www.valonasani.com/?utm_source=facebook'},URL,AbortController,Date,JSON,setTimeout,clearTimeout,FormData:class{get(k){return k==='EMAIL'?'reader@example.invalid':null;}},HTMLFormElement:{prototype:{submit(){submits++;}}},fetch:async(url,o)=>{calls.push({url,body:JSON.parse(o.body)});return {ok:true,json:async()=>response};}};
   vm.runInNewContext(script,context);
-  return {calls,events,storage,listeners,form,get submits(){return submits},set response(v){response=v},revoke(){allow=false}};
+  return {calls,events,storage,listeners,form,get submits(){return submits},set response(v){response=v},set id(v){id=v},revoke(){choice='deny'}};
 }
-const flush=()=>new Promise(r=>setImmediate(r));
-test('without consent no tracking requests or storage; normal form continues',async()=>{const h=harness();await h.listeners['form:submit']({preventDefault(){throw Error('blocked without consent')}});assert.equal(h.calls.length,0);assert.equal(h.storage.size,0)});
-test('hosted form records bounded intent then continues; email never goes to GA',async()=>{const h=harness(true);let prevented=false;await h.listeners['form:submit']({preventDefault(){prevented=true}});assert(prevented);assert.equal(h.submits,1);assert.equal(h.calls[0].body.source,'facebook');assert.equal(h.events.length,0);assert(!JSON.stringify([...h.storage]).includes('@'));});
-test('only a server-confirmed result emits a confirmed event',async()=>{const h=harness(true,{token:'a'.repeat(64),expires:Date.now()/1000+3600});await flush();assert.equal(h.events.length,0);h.response={confirmed:true,parameters:{language:'sq',source:'facebook',placement:'hero'}};await h.listeners.pageshow();assert.equal(h.events[0][1],'newsletter_confirmed');assert(!JSON.stringify(h.events).includes('@'));assert.equal(h.storage.size,0);await h.listeners.pageshow();assert.equal(h.events.length,1)});
-test('withdrawal clears pending browser attribution',async()=>{const h=harness(true);await h.listeners['form:submit']({preventDefault(){}});h.revoke();await h.listeners.wp_listen_for_consent_change();assert.equal(h.storage.size,0);assert.equal(h.events.length,0)});
-test('expired tokens never query a confirmation',async()=>{const h=harness(true,{token:'a'.repeat(64),expires:1});await flush();assert.equal(h.calls.length,0);assert.equal(h.storage.size,0)});
-test('failure of intent recording never blocks hosted subscription',async()=>{const h=harness(true);h.response=null;await h.listeners['form:submit']({preventDefault(){}});assert.equal(h.submits,1);assert.equal(h.storage.size,0)});
+const submit=h=>h.listeners['form:submit']({preventDefault(){}});
+test('no consent: no analytics identifiers, tracking requests or storage; signup continues',async()=>{const h=harness('deny');await h.listeners['form:submit']({preventDefault(){throw Error('blocked without consent')}});assert.equal(h.calls.length,0);assert.equal(h.events.length,0);assert.equal(h.storage.size,0)});
+test('consented signup captures existing client and session for server reporting, not email in GA',async()=>{const h=harness();await submit(h);assert.equal(h.submits,1);assert.equal(h.calls[0].body.client_id,'12345.67890');assert.equal(h.calls[0].body.source,'facebook');assert.equal(h.events.filter(e=>e[0]==='event').length,0);assert(!JSON.stringify([...h.storage]).includes('@'));assert(!JSON.stringify(h.events).includes('@'));});
+test('a browser return never emits or claims the server-owned conversion',async()=>{const h=harness('allow',{token:'a'.repeat(64),expires:Date.now()/1000+3600});await h.listeners.pageshow();assert.equal(h.events.length,0);assert.equal(h.calls.length,0)});
+test('withdrawal revokes the pending server receipt before clearing storage',async()=>{const h=harness();await submit(h);h.revoke();await h.listeners.wp_listen_for_consent_change();assert.equal(h.calls[1].url,'/revoke');assert.equal(h.storage.size,0)});
+test('unknown startup consent does not erase a receipt',async()=>{const h=harness(null,{token:'a'.repeat(64),expires:Date.now()/1000+3600});await h.listeners.pageshow();assert.equal(h.calls.length,0);assert.equal(h.storage.size,1)});
+test('failed recording never blocks subscription',async()=>{const h=harness();h.response=null;await submit(h);assert.equal(h.submits,1);assert.equal(h.storage.size,0)});
+test('missing GA identifier is not replaced with an invented client',async()=>{const h=harness();h.id=null;await submit(h);assert.equal(h.calls[0].body.client_id,'');assert.equal(h.submits,1)});
+test('failed withdrawal retains receipt for a later retry',async()=>{const h=harness();await submit(h);h.response=null;h.revoke();await h.listeners.wp_listen_for_consent_change();assert.equal(h.storage.size,1);h.response={ok:true};await h.listeners.pageshow();assert.equal(h.storage.size,0)});
