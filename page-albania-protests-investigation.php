@@ -10,12 +10,14 @@ add_action('wp_enqueue_scripts', static function () {
     wp_enqueue_style('albania-leaflet', $base . 'vendor/leaflet.css', [], '1.9.4');
     wp_enqueue_style('albania-investigation', $base . 'investigation.css', ['albania-leaflet'], filemtime(__DIR__ . '/assets/albania/investigation.css'));
     wp_enqueue_style('albania-story', $base . 'story.css', ['albania-investigation'], filemtime(__DIR__ . '/assets/albania/story.css'));
+    wp_enqueue_script('albania-profiles-data', $base . 'profiles-data.js', [], filemtime(__DIR__ . '/assets/albania/profiles-data.js'), true);
+    wp_enqueue_script('albania-profiles', $base . 'profiles.js', ['albania-profiles-data'], filemtime(__DIR__ . '/assets/albania/profiles.js'), true);
     wp_enqueue_script('albania-story-data', $base . 'story-data.js', [], filemtime(__DIR__ . '/assets/albania/story-data.js'), true);
-    wp_enqueue_script('albania-story', $base . 'story.js', ['albania-story-data', 'albania-network'], filemtime(__DIR__ . '/assets/albania/story.js'), true);
+    wp_enqueue_script('albania-story', $base . 'story.js', ['albania-story-data', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/story.js'), true);
     wp_enqueue_script('albania-leaflet', $base . 'vendor/leaflet.js', [], '1.9.4', true);
     wp_enqueue_script('albania-network', $base . 'vendor/vis-network.min.js', [], '9.1.9', true);
     wp_enqueue_script('albania-research', $base . 'research.js', [], filemtime(__DIR__ . '/assets/albania/research.js'), true);
-    wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
+    wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
 }, 999);
 ?>
 <!doctype html><html lang="en"><head><meta charset="<?php bloginfo('charset'); ?>"><meta name="viewport" content="width=device-width,initial-scale=1"><?php wp_head(); ?></head>

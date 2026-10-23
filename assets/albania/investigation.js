@@ -27,18 +27,33 @@ document.getElementById('protestCards').innerHTML=protestResearch.map(x=>`<artic
 
 const edgeSources={"rama|kushner": "https://apnews.com/article/767df9dc0a359c0357a502b5c49f2aa5", "kushner|affinity": "https://apnews.com/article/767df9dc0a359c0357a502b5c49f2aa5", "affinity|sazan": "https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/", "gov|sazan": "https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/", "affinity|zvernec": "https://www.osw.waw.pl/en/publikacje/analyses/2026-06-23/flamingo-revolution-anti-government-protests-albania?page=1", "rama|roth": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672", "rama|bektashi": "https://kelo.com/2025/01/25/albania-to-create-a-vatican-style-bektashi-state-in-tirana/", "aadf|museum": "https://www.aadf.org/project/albanian-jewish-museum/", "rama|balluku": "https://www.marketscreener.com/news/albania-formalises-corruption-charges-against-ex-deputy-pm-balluku-ce785cd8da8cf72c", "spak|balluku": "https://www.marketscreener.com/news/albania-formalises-corruption-charges-against-ex-deputy-pm-balluku-ce785cd8da8cf72c", "flamingo|students": "https://www.aljazeera.com/news/2026/10/20/horizontal-revolt-why-albanias-young-protesters-want-pm-rama-to-go", "opposition|students": "https://www.aljazeera.com/news/2026/10/20/horizontal-revolt-why-albanias-young-protesters-want-pm-rama-to-go", "qatar|zvernec": "https://www.osw.waw.pl/en/publikacje/analyses/2026-06-23/flamingo-revolution-anti-government-protests-albania?page=1", "police|students": "https://www.aljazeera.com/news/2026/10/20/horizontal-revolt-why-albanias-young-protesters-want-pm-rama-to-go", "media|students": "https://www.aljazeera.com/news/2026/10/20/horizontal-revolt-why-albanias-young-protesters-want-pm-rama-to-go"};
 const relationSelect=document.getElementById('relationSelect');
+const profileUI=window.albaniaProfiles;
+let personNetwork, personNodeData;
 nodes.forEach(n=>{const option=document.createElement('option');option.value=n[0];option.textContent=n[1];relationSelect.append(option)});
-function showRelations(id){
- relationSelect.value=id; const panel=document.getElementById('details');panel.replaceChildren();
- const title=document.createElement('h3');title.textContent=nodes.find(n=>n[0]===id)[1];panel.append(title);
- edges.filter(e=>e[0]===id||e[1]===id).forEach(e=>{const div=document.createElement('div');div.className='entry';
- const p=document.createElement('p');p.textContent=nodes.find(n=>n[0]===(e[0]===id?e[1]:e[0]))[1]+' — '+e[2];
- const source=edgeSources[e[0]+'|'+e[1]];const tag=document.createElement('span');tag.className='tag';tag.textContent=source?(e[0]==='spak'?'Allegation · charges are not a conviction':e[3]==='Reported'?'Reported connection':'Documented connection · see source'):'Research lead · direct citation pending';div.append(tag,p);
- if(source){const a=document.createElement('a');a.href=source;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Read supporting source ↗';div.append(a);}panel.append(div);});
+function showRelations(id,userInitiated=true){
+ const selected=nodes.find(n=>n[0]===id);if(!selected)return;
+ relationSelect.value=id;const panel=document.getElementById('details');panel.replaceChildren();
+ panel.append(profileUI.header(id));
+ const connections=edges.filter(e=>e[0]===id||e[1]===id);panel.append(profileUI.el('h4',connections.length+' connections in this graph'));
+ connections.forEach(e=>{
+  const other=nodes.find(n=>n[0]===(e[0]===id?e[1]:e[0]));const div=profileUI.el('article',null,'entry');
+  const source=edgeSources[e[0]+'|'+e[1]];const grade=!source?'Research lead · direct citation pending':e[0]==='spak'?'Allegation · charges are not a conviction':e[3]==='Reported'?'Reported connection':'Documented connection · see source';
+  div.append(profileUI.el('span',grade,'evidence-label'));
+  const button=profileUI.el('button',other[1]+' →','connection-person');button.type='button';button.addEventListener('click',()=>showRelations(other[0]));
+  div.append(button,profileUI.el('p',nodes.find(n=>n[0]===e[0])[1]+' → '+nodes.find(n=>n[0]===e[1])[1]+' · '+e[2]));
+  if(source){const a=profileUI.el('a','Read supporting source ↗');a.href=source;a.target='_blank';a.rel='noopener noreferrer';div.append(a);}else div.append(profileUI.el('p','This connection remains a lead until a direct source is attached.','story-limit'));
+  panel.append(div);
+ });
+ if(personNetwork){const visible=new Set([id,...connections.flatMap(e=>[e[0],e[1]])]);personNodeData.update(nodes.map(n=>({id:n[0],hidden:!visible.has(n[0])})));personNetwork.selectNodes([id]);personNetwork.fit({nodes:[...visible],animation:false});}panel.scrollTop=0;if(userInitiated&&matchMedia('(max-width:800px)').matches)panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ document.querySelectorAll('#profileGallery button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.person===id)));
 }
-relationSelect.addEventListener('change',()=>showRelations(relationSelect.value));showRelations('rama');
-if(window.vis){const network=new vis.Network(document.getElementById('graph'),{nodes:new vis.DataSet(nodes.map(n=>({id:n[0],label:n[1],shape:'box',margin:10,color:{background:n[0]==='rama'?'#b32643':'#637f8e',border:'#fff'},font:{color:'#fff'}}))),edges:new vis.DataSet(edges.map(e=>({from:e[0],to:e[1],dashes:!edgeSources[e[0]+'|'+e[1]]||e[3]==='Reported',title:e[2],color:'#888'})))},{physics:{enabled:!matchMedia('(prefers-reduced-motion: reduce)').matches,stabilization:{iterations:150}},interaction:{hover:true}});network.on('click',e=>{if(e.nodes.length)showRelations(e.nodes[0])});network.once('stabilizationIterationsDone',()=>network.setOptions({physics:false}));}
-else document.getElementById('graph').textContent='The graph could not load. Use the person selector to read every relationship.';
+const gallery=document.getElementById('profileGallery');
+['rama','kushner','balluku','alex','sazan','zvernec'].forEach(id=>{const p=profileUI.lookup(id),b=profileUI.el('button');b.type='button';b.dataset.person=id;b.setAttribute('aria-label','View '+p.name);b.setAttribute('aria-pressed','false');b.append(profileUI.imageFor(p),profileUI.el('span',p.name));b.addEventListener('click',()=>showRelations(id));gallery.append(b);});
+relationSelect.addEventListener('change',()=>showRelations(relationSelect.value));
+if(window.vis){personNodeData=new vis.DataSet(nodes.map(n=>({id:n[0],label:n[1],shape:'box',margin:10,color:{background:n[0]==='rama'?'#b32643':'#637f8e',border:'#fff'},font:{color:'#fff'},...profileUI.node(n[0])})));personNetwork=new vis.Network(document.getElementById('graph'),{nodes:personNodeData,edges:new vis.DataSet(edges.map((e,i)=>({id:i,from:e[0],to:e[1],dashes:!edgeSources[e[0]+'|'+e[1]]||e[3]==='Reported'||e[0]==='spak',title:e[2],color:e[0]==='spak'?'#a12636':'#888'})))},{physics:{enabled:!matchMedia('(prefers-reduced-motion: reduce)').matches,stabilization:{iterations:180},barnesHut:{avoidOverlap:0.7,springLength:170}},interaction:{hover:true}});personNetwork.on('click',e=>{if(e.nodes.length)showRelations(e.nodes[0]);else if(e.edges.length)showRelations(edges[e.edges[0]][0]);});personNetwork.once('stabilizationIterationsDone',()=>personNetwork.setOptions({physics:false}));}
+else document.getElementById('graph').textContent='The graph could not load. Use the photographs or selector to read every profile and relationship.';
+document.getElementById('showWholeNetwork').addEventListener('click',()=>{if(!personNetwork)return;personNodeData.update(nodes.map(n=>({id:n[0],hidden:false})));personNetwork.fit({animation:false});});
+showRelations('rama',false);
 let map={setView:()=>{}};document.getElementById('loadMap').addEventListener('click',function(){this.hidden=true;if(window.L){map=L.map('map').setView([40.85,19.55],8);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);[['Tirana · Parliament',41.3275,19.8187,'Parliamentary votes and executive decisions'],['Tirana · student protests',41.329,19.822,'Approximate central protest area'],['Sazan Island',40.503,19.282,'Proposed luxury development on state land'],['Zvërnec / Narta',40.515,19.42,'Wetland and coastal development controversy'],['Vlora · Jewish Museum',40.466,19.49,'Approximate historical-center project location']].forEach(x=>L.marker([x[1],x[2]]).addTo(map).bindPopup('<b>'+x[0]+'</b><p>'+x[3]+'</p>'))}else{document.getElementById('map').textContent='Map requires internet access.';map={setView:()=>{}}}
 
 });
