@@ -16,6 +16,7 @@ add_action('wp_enqueue_scripts', static function () {
     wp_enqueue_script('albania-story', $base . 'story.js', ['albania-story-data', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/story.js'), true);
     wp_enqueue_script('albania-leaflet', $base . 'vendor/leaflet.js', [], '1.9.4', true);
     wp_enqueue_script('albania-network', $base . 'vendor/vis-network.min.js', [], '9.1.9', true);
+    wp_enqueue_script('albania-demands', $base . 'demands.js', [], filemtime(__DIR__ . '/assets/albania/demands.js'), true);
     wp_enqueue_script('albania-research', $base . 'research.js', [], filemtime(__DIR__ . '/assets/albania/research.js'), true);
     wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network', 'albania-profiles'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
 }, 999);
@@ -24,8 +25,8 @@ add_action('wp_enqueue_scripts', static function () {
 <body <?php body_class('albania-investigation'); ?>><?php wp_body_open(); ?>
 <?php
 // Both fragments are versioned, reviewed local HTML; no visitor input is interpolated.
-$content = str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->', 'ALBANIA_SUBMIT_URL', '<!-- ALBANIA_LANGUAGE_SWITCH -->'],
-    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'), esc_url(valon_albania_submit_url()), valon_albania_language_switch()],
+$content = str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->', '<!-- ALBANIA_DEMANDS -->', 'ALBANIA_SUBMIT_URL', '<!-- ALBANIA_LANGUAGE_SWITCH -->'],
+    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'), file_get_contents(__DIR__ . '/template-parts/albania-demands.html'), esc_url(valon_albania_submit_url()), valon_albania_language_switch()],
     file_get_contents(__DIR__ . '/template-parts/albania-investigation.html'));
 echo valon_albania_localize_html($content);
 if(valon_albania_is_sq())echo '<p class="wrap" style="padding:1rem 0;font-size:.8rem">Përkthimi në shqip është asistuar nga Google Translate; terminologjia e provave është rishikuar. Për formulimin e saktë të dokumenteve dhe citimeve, shihni burimet origjinale të lidhura. Korrigjimet janë të mirëpritura.</p>';
