@@ -11,10 +11,16 @@ add_action('wp_enqueue_scripts', static function () {
     wp_enqueue_style('albania-investigation', $base . 'investigation.css', ['albania-leaflet'], filemtime(__DIR__ . '/assets/albania/investigation.css'));
     wp_enqueue_script('albania-leaflet', $base . 'vendor/leaflet.js', [], '1.9.4', true);
     wp_enqueue_script('albania-network', $base . 'vendor/vis-network.min.js', [], '9.1.9', true);
+    wp_enqueue_script('albania-research', $base . 'research.js', [], filemtime(__DIR__ . '/assets/albania/research.js'), true);
     wp_enqueue_script('albania-investigation', $base . 'investigation.js', ['albania-leaflet', 'albania-network'], filemtime(__DIR__ . '/assets/albania/investigation.js'), true);
 }, 999);
 ?>
 <!doctype html><html lang="en"><head><meta charset="<?php bloginfo('charset'); ?>"><meta name="viewport" content="width=device-width,initial-scale=1"><?php wp_head(); ?></head>
 <body <?php body_class('albania-investigation'); ?>><?php wp_body_open(); ?>
-<?php readfile(__DIR__ . '/template-parts/albania-investigation.html'); ?>
+<?php
+// Both fragments are versioned, reviewed local HTML; no visitor input is interpolated.
+echo str_replace('<!-- ALBANIA_RESEARCH_REGISTER -->',
+    file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'),
+    file_get_contents(__DIR__ . '/template-parts/albania-investigation.html'));
+?>
 <?php wp_footer(); ?></body></html>
