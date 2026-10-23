@@ -32,3 +32,6 @@ html{scroll-behavior:smooth}body{overflow-wrap:break-word}main section{scroll-ma
 @media(max-width:850px){.research-controls{grid-template-columns:1fr 1fr}.research-field:first-child{grid-column:1/-1}}
 @media(max-width:650px){#research-records{grid-template-columns:1fr}.research-record{padding:20px}.research-controls{grid-template-columns:1fr}.research-field:first-child{grid-column:auto}}
 @media print{#research-filters{display:none!important}#research-records{display:block}.research-record{break-inside:avoid;margin-bottom:20px}}
+
+/* Place context stays readable with or without the tile map. */
+.map-context-list{margin-top:1.5rem}.map-place{border-top:1px solid #ccc;padding:1rem 0}.map-place>summary{font-weight:700;cursor:pointer;min-height:44px}.map-place-content h4{margin:1.25rem 0 .5rem}.map-place-content ul{padding-left:1.2rem}.map-place-content li{margin:.65rem 0}.map-place-content a{overflow-wrap:anywhere;text-decoration:underline}.map-place-popup{font-size:14px;line-height:1.5}.map-place-popup .story-limit{font-size:13px}.map-place-popup .evidence-label{display:inline-block}.map-place-popup details summary{cursor:pointer;padding:.5rem 0}.map-place-popup a{display:inline-block;padding:3px 0}
