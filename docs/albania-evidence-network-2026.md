@@ -109,3 +109,68 @@ The government’s explanation of the **30 March 2026 development permit** and *
 - [ ] Obtain the main Llogara works award/contract, excluding the supervision tender
 - [ ] Retrieve the actual Zvërnec permit, environmental screening decision and cadastral parcel list
 - [ ] Reconcile SPAK procedural updates and court judgments against each named official
+
+
+## Ultimate beneficial ownership investigation — 23 October 2026
+
+**Do not conflate** direct shareholders, ultimate beneficial owners, directors, project promoters, political officials, or beneficial owners at different historical dates. An ownership edge needs an entity number, percentage, effective date and source.
+
+### A. Tirana incinerator — historically documented ownership (10 May 2022)
+
+**Project:** Tirana waste treatment concession. **Albanian concessionaire:** Integrated Energy BV SPV, NUIS **L72031013B**. **Direct parent:** GeoGenix BV, formerly Integrated Energy B.V., Netherlands company no. **66671752**, 100% of the Albanian SPV.
+
+The historical QKB beneficial-ownership extract, reproduced in [OpenCorporates Albania](https://opencorporates.al/en/nuis/L72031013B), records:
+
+| Ultimate person | Historical effective interest | Ownership path | Evidence status |
+| --- | ---: | --- | --- |
+| Alberto Presezzi | 40% | Presezzi → Bruno Presezzi S.p.A. → Franco Tosi Meccanica S.p.A. → GeoGenix BV → Integrated Energy BV SPV | Historical QKB extract, 10 May 2022 |
+| Max Abitbol | 20% | 50% Icare Energy SA → Icare Holding SA (100%) → GeoGenix BV (40%) → SPV | Historical QKB extract, 10 May 2022 |
+| Dominique Marcelle Obadia Abitboll | 20% | 50% Icare Energy SA → Icare Holding SA (100%) → GeoGenix BV (40%) → SPV | Historical QKB extract, 10 May 2022 |
+| Other minority holders | 20% | Not individually identified in cited beneficial-owner extract | **Unknown**, not evidence of illicit ownership |
+
+**Timeline:** Klodian Zoto was formerly an administrator of the Dutch parent in 2016–2018, not thereby established as the current owner. The Albanian concessionaire entered preventive seizure administration in August 2023, and its listed administrator was Indrit Karaj in January 2026. **Seizure and administration do not change the meaning of the historical 2022 share percentages.**
+
+**Official-role connections:** The 2016 company letter was addressed to Environment Minister Lefter Koka and copied to Tirana Mayor Erion Veliaj; the 2017 concession was contracted by the Ministry of Environment. These are **documented official correspondence and institutional decision-making edges**, not proof that those officials owned shares in the concessionaire. [Registry-derived document account](https://opencorporates.al/en/nuis/L72031013B); [procurement file](https://openprocurement.al/sq/concession/view/id/5).
+
+### B. Sazan — strategic-investor applicant versus operating vehicle
+
+**Applicant:** Atlantic Incubation Partners LLC, Delaware, EIN **92-3329707**, received strategic-investor status through Strategic Investment Committee **Decision 23, 30 December 2024** for the proposed €1.4bn Sazan resort. The [Delaware / Albanian registry-derived profile](https://opencorporates.al/en/nipt/7390750) **does not disclose its ultimate owners**. Corporation Service Company is its registered agent/administrator listing, not proof of beneficial ownership. [AIDA strategic investment register](https://aida.gov.al/wp-content/uploads/2026/02/00.-REGJISTRI-AIDA-2025_30112025.pdf).
+
+**Implementation vehicle:** BIRN's April 2026 examination of QKB filings reports that **Sazan Operations**, founded 1 April 2026, is ultimately controlled by **Ramez and Mohamad Al-Khayyat** through a chain of six companies. The report identifies **five unnamed Albanian minority shareholders holding a 24% stake in Blue Industries Investment Holding BV**, one entity in the related structure. **Do not represent that 24% as a direct share of the Sazan resort or of Atlantic Incubation Partners without a complete cap table.** [BIRN investigation republished by Balkanweb](https://www.balkanweb.com/en/Two-Qatari-billionaires-and-a-complex-network-of-companies-behind-the-Sazan-project/).
+
+**Jared Kushner:** Associated with the project and described as a partner by public reporting. The precise personal equity percentage and ownership chain linking his interests to Atlantic Incubation Partners and Sazan Operations remain **unverified**. A [recent Exit investigation](https://exit.al/en/exit-explains/kushners-response-on-albania-what-the-record-shows-i48098) discusses remaining disclosure gaps. His political family connections are not evidence of unlawful benefit.
+
+**Government connections:** The Strategic Investment Committee's approval and the Ministry of Defense's reported assumption of Sazan demining costs (under a December 2025 decision) are governmental actions requiring review of signed annexes, actual budget expenditures and project obligations. The reported transfer of costs should not be described as a completed payment without expenditure records.
+
+### C. Zvërnec — distinct project, not the same land or ownership chain
+
+Reporting links Kushner-associated investors, Qatar-registered Sazan Real Estate Development and Qatari partners to Zvërnec, but the legal entities, land acquisitions, minority interests and approvals must be traced **separately from Sazan**. [Exit Explains](https://exit.al/en/exit-explains/kushners-response-on-albania-what-the-record-shows-i48098).
+
+### D. Llogara — construction vs maintenance contracts
+
+A 2025 **maintenance and safety** tender reportedly went to the A-M / Gjoka Konstruksion consortium for approximately ALL 230m over four years. This is **not** the 2021 construction tender under SPAK investigation. Do not connect maintenance-contract owners to the alleged 2021 procurement interference without additional records. [Tender reporting](https://acp.al/news/26654/230-mln-leke-per-tunelin-e-llogarase-arrsh-shpall-fituesin-per-mirembajtjen-dhe-sigurine/).
+
+### E. Evidence-grade ownership edges for the interactive network
+
+| Edge | Confidence | Source |
+| --- | --- | --- |
+| GeoGenix BV → Integrated Energy BV SPV: 100% direct shareholder | High, registry-derived | OpenCorporates Albania/QKB extract |
+| Presezzi → incinerator SPV: historical 40% indirect | High for 10 May 2022, not necessarily current | QKB historical UBO extract |
+| Max Abitbol → incinerator SPV: historical 20% indirect | High for 10 May 2022 | QKB historical UBO extract |
+| Dominique Obadia Abitboll → incinerator SPV: historical 20% indirect | High for 10 May 2022 | QKB historical UBO extract |
+| Atlantic Incubation Partners → Sazan strategic applicant | High, official decision reproduced in registry | Decision 23/2024 |
+| Al-Khayyat brothers → Sazan Operations control | Medium-high, BIRN reading of QKB filings | BIRN April 2026 |
+| Five unnamed Albanians → 24% of Blue Industries Investment Holding BV | Medium-high, reported filings; **names unknown** | BIRN April 2026 |
+| Kushner → precise shareholding in Atlantic/Sazan Operations | **Not established** | Do not draw ownership edge |
+| Any official → private beneficial ownership of these vehicles | **Not established by the above records** | Do not draw ownership edge |
+
+### Required next evidence acquisitions
+
+1. Obtain **certified current and historical QKB UBO extracts** for all Albanian vehicles, including effective dates and changes after seizure.
+2. Obtain the **Dutch KvK register filings** for GeoGenix BV, Blue Industries Investment Holding BV and intermediate holdings, and distinguish legal shareholders from UBO disclosures.
+3. Obtain **Delaware corporate filings and voluntary ownership disclosures** for Atlantic Incubation Partners LLC; Delaware public searches generally do not identify natural-person owners.
+4. Obtain signed **Sazan decision 23/2024, its annexes and the December 2025 extension**, plus the state-company agreement and Ministry of Defense demining cost authorization.
+5. Identify the **actual 2021 Llogara construction consortium** and retrieve its award/contract, rather than importing the 2025 maintenance consortium.
+6. Seek comment and supporting records from each company and relevant ministry; log denials and corrections alongside claims.
+
+**Interpretation:** The findings establish ownership and institutional decision relationships, not an illicit conspiracy. Unknown beneficial owners remain unknown; do not fill gaps by ethnic, religious or political association.
