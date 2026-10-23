@@ -1563,6 +1563,36 @@
         "US Albanian diaspora",
         "Published statistical context"
       ]
+    },
+    {
+      "id": "R55",
+      "topic": "Population & migration",
+      "status": "Correction",
+      "title": "Population in 2025: decline and net migration are different",
+      "body": "INSTAT estimates 2,335,930 residents on 1 January 2026, compared with 2,363,314 on 1 January 2025: 27,384 fewer residents (1.16%). During 2025, 22,541 births minus 21,394 deaths produced a natural increase of 1,147; net migration was −28,531. Together: +1,147 − 28,531 = −27,384.",
+      "limit": "ACQJ’s 4 June 2026 headline conflates net migration loss with total population decline. Net migration means arrivals minus departures, not gross emigration; INSTAT estimates it mainly from the Labour Force Survey migration module and projection coefficients. Annual estimates are distinct from census counts. ACQJ’s separate policy-audit claims are not independently verified here.",
+      "sources": [
+        {
+          "url": "https://www.instat.gov.al/media/cc0kwohw/popullsia-1-janar-2026.pdf",
+          "label": "INSTAT · 1 January 2026"
+        },
+        {
+          "url": "https://www.instat.gov.al/media/y5diizmw/finale-popullsia-1-janar-2025-dt-12062025.pdf",
+          "label": "INSTAT · 1 January 2025"
+        },
+        {
+          "url": "https://www.acqj.al/en/shqiperia-vazhdon-te-tkurret-humbi-mbi-28-mije-banore-ne-2025/",
+          "label": "ACQJ · 4 June 2026"
+        }
+      ],
+      "subject": "Population in 2025: decline and net migration are different",
+      "grade": "Verified record",
+      "group": "Public claims & accountability",
+      "connection": [
+        "INSTAT",
+        "Annual population estimates",
+        "Published statistical context"
+      ]
     }
   ],
   "events": [
@@ -1644,6 +1674,16 @@
       "status": "Verified record",
       "url": "https://www.instat.gov.al/media/hnmh5ems/diaspora-ne-shifra.pdf",
       "record": "R54",
+      "topic": "Population & migration"
+    },
+    {
+      "date": "2 June 2026 · statistical release",
+      "title": "Population in 2025: decline and net migration are different",
+      "body": "INSTAT estimates 2,335,930 residents on 1 January 2026, compared with 2,363,314 on 1 January 2025: 27,384 fewer residents (1.16%). During 2025, 22,541 births minus 21,394 deaths produced a natural increase of 1,147; net migration was −28,531. Together: +1,147 − 28,531 = −27,384.",
+      "limit": "ACQJ’s 4 June 2026 headline conflates net migration loss with total population decline. Net migration means arrivals minus departures, not gross emigration; INSTAT estimates it mainly from the Labour Force Survey migration module and projection coefficients. Annual estimates are distinct from census counts. ACQJ’s separate policy-audit claims are not independently verified here.",
+      "status": "Verified record",
+      "url": "https://www.instat.gov.al/media/cc0kwohw/popullsia-1-janar-2026.pdf",
+      "record": "R55",
       "topic": "Population & migration"
     },
     {
