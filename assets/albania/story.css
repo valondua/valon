@@ -58,3 +58,18 @@ body.admin-bar.albania-investigation{--admin-offset:32px}
 @media(max-width:782px){body.admin-bar.albania-investigation{--admin-offset:46px}}
 @media(max-width:700px){.section-navigation.enhanced .section-links{display:none}.section-navigation select{width:100%;max-width:none}.albania-investigation>.section-navigation{padding:6px 16px}}
 @media(max-width:600px){body.admin-bar.albania-investigation{--admin-offset:0px}}
+
+/* One source-led context section; native links and all text work without JS. */
+.jewish-context{margin:4rem 0;padding-top:2rem;border-top:2px solid var(--line,#d9d5cc);scroll-margin-top:var(--dossier-anchor-offset,180px)}
+.jewish-context>h2{max-width:25ch;font-size:clamp(1.8rem,4vw,3rem);line-height:1.12}
+.jewish-context>h3{margin:2.5rem 0 1rem;font-size:1.35rem}
+.jewish-context>p{max-width:85ch;line-height:1.65}
+.context-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.context-card{min-width:0;padding:1.3rem;border:1px solid var(--line,#d9d5cc);border-radius:10px;background:var(--paper,#fff);scroll-margin-top:var(--dossier-anchor-offset,180px)}
+.context-card h4{margin:0 0 .8rem;font-size:1.1rem;line-height:1.4}
+.context-card p{font-size:.95rem;line-height:1.65;margin:.8rem 0}
+.context-card blockquote{margin:1rem 0;padding:.8rem 1rem;border-left:3px solid #ad493b;font-size:1.1rem;line-height:1.7}
+.context-sources a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.jewish-context:focus{outline:2px solid #ad493b;outline-offset:6px}
+.jewish-context a:focus-visible{outline:2px solid #ad493b;outline-offset:3px}
+@media(max-width:700px){.context-grid{grid-template-columns:1fr}.context-card{padding:1rem}.jewish-context>h2{max-width:none}}

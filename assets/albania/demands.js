@@ -10,7 +10,9 @@
   if (window.ResizeObserver && header) new ResizeObserver(measureHeader).observe(header);
   window.addEventListener('resize', measureHeader);
   function revealDemands() {
-    if (location.hash !== '#demands') return;
+    if (!['#demands', '#jewish-history-projects'].includes(location.hash)) return;
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target) return;
     measureHeader();
     target.focus({preventScroll: true});
     target.scrollIntoView({block: 'start', behavior: 'instant'});
@@ -25,8 +27,8 @@
   }
   window.addEventListener('hashchange', () => { preserveAnchor(); revealDemands(); });
   document.addEventListener('click', event => {
-    const link = event.target.closest('a[href="#demands"]');
-    if (link && location.hash === '#demands') { event.preventDefault(); revealDemands(); }
+    const link = event.target.closest('a[href="#demands"], a[href="#jewish-history-projects"]');
+    if (link && location.hash === link.getAttribute('href')) { event.preventDefault(); revealDemands(); }
   });
   preserveAnchor();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(revealDemands), {once: true});

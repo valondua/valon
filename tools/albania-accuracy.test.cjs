@@ -80,7 +80,7 @@ test('language switching carries stable hashes and demands navigation focuses it
     requestAnimationFrame: fn => fn(),
     document: {
       querySelector:()=>({getBoundingClientRect:()=>({bottom:100})}),
-      getElementById:id=>id==='demands'?target:null,
+      getElementById:id=>['demands','jewish-history-projects'].includes(id)?target:null,
       documentElement:{style:{setProperty:()=>{}}},
       querySelectorAll:()=>[link],readyState:'complete',addEventListener:()=>{}
     },
@@ -89,6 +89,9 @@ test('language switching carries stable hashes and demands navigation focuses it
   vm.runInNewContext(read('assets/albania/demands.js'),context);
   assert.equal(new URL(link.href).hash,'#demands');
   assert.equal(focus.length,2);
+  context.location.hash='#jewish-history-projects';handlers.hashchange();
+  assert.equal(new URL(link.href).hash,'#jewish-history-projects');
+  assert.equal(focus.length,4);
   context.location.hash='#evidence-R33';handlers.hashchange();
   assert.equal(new URL(link.href).hash,'#evidence-R33');
 });
