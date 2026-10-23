@@ -90,3 +90,50 @@ Burime: [Al Jazeera, 4 qershor 2026](https://www.aljazeera.com/news/2026/6/4/tho
 | “Shtet hebre” | Asnjë plan zyrtar i identifikuar | Çdo provë primare për ekzistencën e një propozimi të tillë |
 
 **Kujdes editorial:** Të gjitha këto çështje mund të hetohen si transparencë, sovranitet, pronë publike dhe ndikim politik. Mos i paraqit si komplot të provuar dhe mos ia atribuo veprimet e investitorëve privatë një bashkësie fetare ose etnike.
+
+
+## Dosje e re: The Albanian Files — arkitektura, prona dhe pushteti
+
+**Status:** Pistë kërkimore, jo konstatim korrupsioni. **Burim fillestar:** [Lars Müller Publishers — The Albanian Files](https://www.lars-mueller-publishers.com/albanian-files). Libri duhet lexuar dhe verifikuar drejtpërdrejt para se të nxirren emra, projekte ose shifra të sakta nga përmbajtja.
+
+### Pse ka rëndësi?
+
+Botimi *The Albanian Files: Freedom and Architecture* paraqet zhvillimin arkitekturor në Shqipëri dhe rolin e studiove ndërkombëtare. Edi Rama ka shkruar parathënien. Për dosjen e protestave, kjo është mundësi për të hetuar **procedurat e përzgjedhjes së arkitektëve, pronësinë e tokës, financimin dhe përfituesit**. Një projekt arkitekturor i përfshirë në libër nuk përbën vetvetiu shkelje ligjore.
+
+### Metodologjia e propozuar: një rresht për çdo projekt
+
+| Fusha | Çfarë duhet mbledhur | Burimi për kontroll |
+| --- | --- | --- |
+| Emri dhe vendndodhja | Projekti, koordinatat, bashkia | Libri, regjistri i lejeve, harta zyrtare |
+| Studio arkitekturore | Autorët, kontratat, procedura e përzgjedhjes | Studio, APP, dokumente kontraktore |
+| Zhvilluesi dhe financuesi | Shoqëritë, kapitali, burimi i financimit | QKB, bilancet, regjistri i pronarëve përfitues |
+| Toka | Pronësi publike/private, ndryshime statusi, qira/koncesion | ASHK, VKM, regjistra pronash |
+| Lejet | Datat, institucionet, ndryshimet urbanistike | KKT/KKTU, bashkitë, AKPT |
+| Mjedisi | VNM, konsultime, zona të mbrojtura | AKM, dokumente të konsultimit publik |
+| Përfitimi publik | Punësimi, taksat, hapësirat publike, kostot | Marrëveshje, buxhete, raportime të audituara |
+| Konfliktet | Ankimime, gjyqe, hetime të konfirmuara | Gjykata, SPAK, KLSH, media me dokumente |
+
+### Pyetjet kryesore
+
+1. Cilat projekte të librit janë ndërtuar, në ndërtim, të miratuara ose vetëm propozime?
+2. Sa projekte u përzgjodhën me garë të hapur dhe sa me ftesë direkte? Kush i dha ftesat?
+3. Cilat projekte përdorin tokë publike ose kanë përfituar status investitori strategjik?
+4. Kush janë pronarët përfitues të kompanive zhvilluese, përfshirë zinxhirët e kompanive jashtë vendit?
+5. Cilat ndryshime në planifikim, mbrojtje mjedisore apo legjislacion u bënë për secilin projekt?
+6. Cilat janë përfitimet dhe kostot e matshme për qytetarët shqiptarë?
+
+### Lidhjet me hetimin ekzistues
+
+- **Rama / vendimmarrja:** parathënia e librit dhe roli i institucioneve në projektet e ndërtimit — duhet dalluar marrëdhënia politike nga vendimet administrative.
+- **Sazan / Zvërnec:** krahasim i procedurave të investimeve strategjike, pronësisë, lejeve dhe ndikimit mjedisor; mos supozo që janë pjesë e librit pa kontrolluar përmbajtjen.
+- **Protestat:** kërkesat për transparencë dhe llogaridhënie në zhvillimin urban, pa e trajtuar librin si provë të organizimit të protestave.
+- **Media:** analizë e mënyrës si janë mbuluar projektet, duke ndarë promovimin, kritikën dhe hetimin me dokumente.
+
+### Detyra të hapura
+
+- Siguro tabelën e përmbajtjes dhe listën e projekteve nga botuesi ose një kopje e ligjshme e librit.
+- Krijo dataset me ID për çdo projekt dhe lidhje me dokumentet primare.
+- Kontrollo pretendimet e raportimit kritik me dokumente dhe kërko koment nga palët e përmendura.
+- Publiko vetëm gjetje të verifikuara, me datë, status, burim dhe mundësi korrigjimi.
+
+**Burime për nisje:** [Botuesi](https://www.lars-mueller-publishers.com/albanian-files); [APP](https://www.app.gov.al/); [QKB](https://qkb.gov.al/); [SPAK](https://spak.gov.al/).
