@@ -41,3 +41,21 @@
 - Support video URLs first; accept file uploads only after secure malware scanning, size limits, privacy and retention rules.
 - Statuses: received, under review, corroborated, disputed, unverified, rejected.
 - No public form or upload backend is confirmed deployed by this research document.
+
+
+## CN-0004 — Facebook comment: Bektashi, Vlorë projects, Vučić and Kosovo
+- Received: 23 October 2026, public Facebook comment screenshot.
+- Claim categories: proposed Bektashi sovereign entity; allegation that Vlorë projects (Zvërnec, Jewish Museum, port, airport) are being handed to Israelis; claims about Rama–Vučić cooperation, Russia sanctions and a genocide-related UN vote.
+- Status: **Mixed: documented policy events and unsupported territorial/ownership conclusions**.
+- **Bektashi:** Rama's proposal is documented, but a proposed entity is not proof of territorial transfer to other groups.
+- **Vlorë projects:** The airport concession's company records list Mabco Constructions SA and 2A Group among participants, with Swiss/Kosovar corporate ties; they do not show a transfer to Israel. [Company profile](https://www.opencorporates.al/en/nuis/m11809002i), [concession record](https://www.opencorporates.al/sq/nuis/M11809002I).
+- **Ron Yeffet airport allegation:** A report describes TIMAK AVIATION with Yeffet and Arjeta Puca, but explicitly says no official takeover decision or contract had been found. [Voxnews report](https://voxnews.al/english/aktualitet/prapaskenat-a-eshte-izraelit-ron-yeffet-njeriu-qe-edi-rama-po-pergati-i122149). **Do not draw an airport-award edge.**
+- **Sazan:** Independent CORRECTIV review found no evidence of land sale to the Israeli state. [Fact-check](https://correctiv.org/faktencheck/hintergrund/2026/07/15/luxushotels-keine-hinweise-dass-albanien-land-an-israel-verkauft/).
+- **Rama–Vučić:** Their Open Balkan cooperation is documented; assess policy outcomes and disagreements with Kosovo separately. [Regional research](https://www.bmlv.gv.at/pdf_pool/publikationen/sgi_rssee_prishtina_web_2025_06.pdf).
+- **Srebrenica UN resolution:** The UN adopted a 2024 resolution designating 11 July as the international day of remembrance. The comment's claim about Albania not voting needs checking against the **UN's recorded roll-call** before classification. [UN resolution context](https://www.un.org/en/node/218908).
+- **Russian sanctions:** The comment's wording is ambiguous (Rama's support for Vučić not imposing sanctions versus Albania's own sanctions). Check dated official statements and EU alignment records rather than presenting the comment as a fact.
+- **Unsubstantiated:** Claim that Israeli people or the Israeli state will take Vlorë or southern Albania.
+- Editorial caution: Do not treat ethnicity or religion of a business owner as evidence of collective intent.
+
+## Community review methodology
+Separate each comment into atomic, falsifiable claims; record primary sources, dates, counter-evidence, status and unresolved questions. Never auto-publish accusations or private identities. All verification uses public sources only.
