@@ -35,3 +35,5 @@ html{scroll-behavior:smooth}body{overflow-wrap:break-word}main section{scroll-ma
 
 /* Place context stays readable with or without the tile map. */
 .map-context-list{margin-top:1.5rem}.map-place{border-top:1px solid #ccc;padding:1rem 0}.map-place>summary{font-weight:700;cursor:pointer;min-height:44px}.map-place-content h4{margin:1.25rem 0 .5rem}.map-place-content ul{padding-left:1.2rem}.map-place-content li{margin:.65rem 0}.map-place-content a{overflow-wrap:anywhere;text-decoration:underline}.map-place-popup{font-size:14px;line-height:1.5}.map-place-popup .story-limit{font-size:13px}.map-place-popup .evidence-label{display:inline-block}.map-place-popup details summary{cursor:pointer;padding:.5rem 0}.map-place-popup a{display:inline-block;padding:3px 0}
+
+#kpiComparison.comparing{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem}#kpiComparison h4{min-height:2.5em;margin:1rem 0 .5rem}.gdp-comparison-note{background:#f8f7f4;padding:1.25rem;margin:1rem 0}.gdp-comparison-note summary{cursor:pointer;padding:1rem 0}@media(max-width:760px){#kpiComparison.comparing{grid-template-columns:minmax(0,1fr)}}
