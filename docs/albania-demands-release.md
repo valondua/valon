@@ -1,6 +1,6 @@
 # Visible demands and bilingual accuracy
 
-This scoped release builds on merged PRs #56–#58. The demands section appears immediately after the opening image and before research graphs, with a hero CTA, a persistent masthead link, and the same `#demands` fragment in both languages. Native links and server-rendered text work without JavaScript. JavaScript transfers focus, measures the sticky masthead offset, and preserves section/record fragments when switching languages.
+This scoped release builds on merged PRs #56–#58 and #60. The demands section appears immediately after the opening image and before research graphs, with a hero CTA, a persistent masthead link, and the same `#demands` fragment in both languages. Native links and server-rendered text work without JavaScript. JavaScript transfers focus, measures the sticky masthead offset, and preserves section/record fragments when switching languages.
 
 ## Source review
 
