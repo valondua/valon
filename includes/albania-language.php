@@ -21,5 +21,5 @@ add_action('wp_enqueue_scripts',function(){
     if(!valon_albania_is_sq()||(!is_page_template('page-albania-protests-investigation.php')&&!is_page_template('page-albania-submit.php')))return;
     $base=get_theme_file_uri('/assets/albania/');wp_enqueue_script('albania-locale-data',$base.'sq.js',[],filemtime(__DIR__.'/../assets/albania/sq.js'),true);wp_enqueue_script('albania-locale',$base.'locale.js',is_page_template('page-albania-protests-investigation.php')?['albania-network','albania-locale-data']:['albania-locale-data'],filemtime(__DIR__.'/../assets/albania/locale.js'),true);
     // Locale is ready before any data-driven widget renders.
-    foreach(['albania-profiles','albania-story','albania-research','albania-investigation','albania-submissions'] as $handle)if(isset(wp_scripts()->registered[$handle]))wp_scripts()->registered[$handle]->deps[]='albania-locale';
+    foreach(['albania-navigation-map','albania-profiles','albania-story','albania-research','albania-investigation','albania-submissions'] as $handle)if(isset(wp_scripts()->registered[$handle]))wp_scripts()->registered[$handle]->deps[]='albania-locale';
 },1001);

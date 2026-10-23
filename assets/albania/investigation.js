@@ -80,11 +80,6 @@ if(window.vis){personNodeData=new vis.DataSet(nodes.map(n=>({id:n[0],label:n[1],
 else document.getElementById('graph').textContent='The graph could not load. Use the photographs or selector to read every profile and relationship.';
 document.getElementById('showWholeNetwork').addEventListener('click',()=>{if(!personNetwork)return;personNodeData.update(nodes.map(n=>({id:n[0],hidden:false})));personNetwork.fit({animation:false});});
 showRelations('rama',false);openLinkedProfile();
-let map={setView:()=>{}};document.getElementById('loadMap').addEventListener('click',function(){this.hidden=true;if(window.L){map=L.map('map').setView([40.85,19.55],8);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);[['Tirana · Parliament',41.3275,19.8187,'Parliamentary votes and executive decisions'],['Tirana · student protests',41.329,19.822,'Approximate central protest area'],['Sazan Island',40.503,19.282,'Proposed luxury development on state land'],['Zvërnec / Narta',40.515,19.42,'Wetland and coastal development controversy'],['Vlora · Jewish Museum',40.466,19.49,'Approximate historical-center project location']].forEach(x=>L.marker([x[1],x[2]]).addTo(map).bindPopup('<b>'+x[0]+'</b><p>'+x[3]+'</p>'))}else{document.getElementById('map').textContent='Map requires internet access.';map={setView:()=>{}}}
-
-});
-
-
 const intelFiles=[
 {type:'event',date:'13 October 2026',title:'Students confront police at Education Ministry',text:'Student organisers cited university conditions, education costs and employment prospects. Police used tear gas and water cannon; protesters threw projectiles.',source:'Al Jazeera / AFP / Reuters',url:'https://www.aljazeera.com/news/2026/10/13/albanian-police-fire-tear-gas-at-protesters-as-education-ministry-attacked',status:'Reported event'},
 {type:'event',date:'14 October 2026',title:'Violence escalates in Tirana',text:'Reuters reported fires at a government building and banks, vandalism and police response. The conduct of violent participants does not establish the conduct of every protester.',source:'Reuters',url:'https://www.reuters.com/world/fire-breaks-out-albanias-education-ministry-during-student-protest-2026-10-14/',status:'Reported event'},
