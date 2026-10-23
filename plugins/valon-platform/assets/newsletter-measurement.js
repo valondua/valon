@@ -10,6 +10,22 @@
     } catch { return null; }
   };
   const consented = () => choice() === "allow" && window.wp_has_consent?.("statistics") === true;
+  const visitorKey = "valon_popup_visitor";
+  let visitor = null;
+  let impressions = new WeakMap();
+  let consentEpoch = 0;
+  const visitorId = () => {
+    if (!consented()) return "";
+    if (visitor?.expires > Date.now()) return visitor.id;
+    try { visitor = JSON.parse(localStorage.getItem(visitorKey) || "null"); } catch {}
+    if (!visitor || !/^[a-f0-9]{32}$/.test(visitor.id) || !Number.isFinite(visitor.expires) || visitor.expires <= Date.now()) {
+      const bytes = new Uint8Array(16);
+      window.crypto.getRandomValues(bytes);
+      visitor = {id:Array.from(bytes, b => b.toString(16).padStart(2,"0")).join(""), expires:Date.now()+30*86400000};
+      try { localStorage.setItem(visitorKey, JSON.stringify(visitor)); } catch {}
+    }
+    return visitor.id;
+  };
   const clear = () => { try { localStorage.removeItem(storageKey); } catch {} };
   const request = async (url, body) => {
     const controller = new AbortController();
@@ -27,6 +43,10 @@
   const checkWithdrawal = async () => {
     // Unknown/startup consent is not withdrawal. Never send analytics from this script.
     if (choice() !== "deny") return;
+    consentEpoch++;
+    visitor = null;
+    impressions = new WeakMap();
+    try { localStorage.removeItem(visitorKey); } catch {}
     try { await revoke(JSON.parse(localStorage.getItem(storageKey) || "null")); } catch {}
   };
   const gaValue = (field) => new Promise((resolve) => {
@@ -34,7 +54,6 @@
     const timer = setTimeout(() => resolve(null), 600);
     window.gtag("get", cfg.newsletterMeasurementId, field, value => { clearTimeout(timer); resolve(value); });
   });
-  const impressions = new WeakMap();
   document.addEventListener("newsletter:popup-open", (event) => {
     const form = event.detail?.form;
     if (!form) return;
@@ -43,11 +62,13 @@
     if (!cfg.newsletterImpression || !consented() || document.visibilityState !== "visible" ||
         !["popup_exit", "popup_timed", "popup_manual"].includes(placement)) return;
     // Snapshot the actual opening. Never reconstruct past views after late consent.
+    const epoch = consentEpoch;
     const pending = (async () => {
       try {
-        const clientId = await gaValue("client_id");
-        if (!consented() || !/^[0-9]{1,20}\.[0-9]{1,20}$/.test(clientId || "")) return null;
-        return await request(cfg.newsletterImpression, {statistics_consent:true, client_id:clientId, placement});
+        const id = visitorId();
+        if (!id || !consented()) return null;
+        const result = await request(cfg.newsletterImpression, {statistics_consent:true, visitor_id:id, placement});
+        return consented() && epoch === consentEpoch && result ? {...result, visitor_id:id} : null;
       } catch { return null; }
     })();
     impressions.set(form, pending);
@@ -73,6 +94,7 @@
         if (!consented()) return;
         const result = await request(cfg.newsletterIntent, {
           impression_id:impression?.id || "",
+          visitor_id:impression?.visitor_id || "",
           email:data.get(hosted ? "EMAIL" : "email"), statistics_consent:true,
           client_id:typeof clientId === "string" ? clientId : "",
           session_id:sessionId ? String(sessionId) : "",

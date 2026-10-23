@@ -7,7 +7,7 @@ function harness(choice='allow', pending=null) {
   const calls=[],events=[],storage=new Map(),listeners={}; let submits=0, id='12345.67890';
   if(pending) storage.set('valon_newsletter_confirmation',JSON.stringify(pending));
   const form={dataset:{hosted:'true',lang:'sq',placement:'hero'},checkValidity:()=>true,addEventListener:(n,f)=>listeners['form:'+n]=f};
-  const window={valonPlatform:{newsletterImpression:'/impression',newsletterIntent:'/intent',newsletterRevoke:'/revoke',newsletterMeasurementId:'G-9264D19BZD'},consent_api:{cookie_prefix:'wp'},consent_api_get_cookie:()=>choice,wp_has_consent:()=>choice==='allow',gtag:(...a)=>{events.push(a);if(a[0]==='get')a[3](a[2]==='client_id'?id:String(Math.floor(Date.now()/1000)));},addEventListener:(n,f)=>listeners[n]=f};
+  const window={crypto:require('node:crypto').webcrypto,valonPlatform:{newsletterImpression:'/impression',newsletterIntent:'/intent',newsletterRevoke:'/revoke',newsletterMeasurementId:'G-9264D19BZD'},consent_api:{cookie_prefix:'wp'},consent_api_get_cookie:()=>choice,wp_has_consent:()=>choice==='allow',gtag:(...a)=>{events.push(a);if(a[0]==='get')a[3](a[2]==='client_id'?id:String(Math.floor(Date.now()/1000)));},addEventListener:(n,f)=>listeners[n]=f};
   let response={token:'a'.repeat(64),expires:Date.now()/1000+3600};
   const context={window,document:{visibilityState:'visible',querySelectorAll:()=>[form],addEventListener:(n,f)=>listeners[n]=f},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},sessionStorage:{getItem:()=>null},location:{href:'https://www.valonasani.com/?utm_source=facebook'},URL,AbortController,Date,JSON,setTimeout,clearTimeout,FormData:class{get(k){return k==='EMAIL'?'reader@example.invalid':null;}},HTMLFormElement:{prototype:{submit(){submits++;}}},fetch:async(url,o)=>{calls.push({url,body:JSON.parse(o.body)});return {ok:true,json:async()=>url==='/impression'?{id:'b'.repeat(64)}:response};}};
   vm.runInNewContext(script,context);
@@ -44,8 +44,16 @@ test('denied or unknown consent records no popup views',async()=>{
   await Promise.resolve();assert.equal(h.calls.length,0);
  }
 });
-test('withdrawal during identifier lookup prevents impression and signup measurement',async()=>{
+test('withdrawal clears first-party identity and does not create a signup intent',async()=>{
  const h=harness();h.form.dataset.placement='popup_timed';
  h.listeners['newsletter:popup-open']({detail:{form:h.form}});h.revoke();
- await Promise.resolve();await Promise.resolve();assert.equal(h.calls.length,0);
+ await h.listeners.wp_listen_for_consent_change(); assert.equal(h.storage.has('valon_popup_visitor'),false);assert.equal(h.calls.filter(c=>c.url==='/intent').length,0);
+});
+
+test('views and linked signups work without GA and never invent a GA ID',async()=>{
+ const h=harness();h.id=null;h.form.dataset.placement='popup_exit';
+ h.listeners['newsletter:popup-open']({detail:{form:h.form}});await submit(h);
+ assert.match(h.calls[0].body.visitor_id,/^[a-f0-9]{32}$/);
+ assert.equal(h.calls[1].body.visitor_id,h.calls[0].body.visitor_id);
+ assert.equal(h.calls[1].body.client_id,'');assert.equal(h.calls[1].body.impression_id,'b'.repeat(64));
 });

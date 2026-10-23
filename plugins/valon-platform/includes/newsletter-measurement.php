@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit();
 
 function vp_newsletter_measurement_install() {
-    if (get_option('vp_newsletter_measurement_version') === '3') return;
+    if (get_option('vp_newsletter_measurement_version') === '4') return;
     global $wpdb;
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
     $charset = $wpdb->get_charset_collate();
@@ -16,6 +16,7 @@ function vp_newsletter_measurement_install() {
         placement varchar(20) NOT NULL,
         confirmed tinyint NOT NULL DEFAULT 0,
         reported tinyint NOT NULL DEFAULT 0,
+        visitor_hash char(64) NOT NULL DEFAULT '',
         impression_id char(64) NOT NULL DEFAULT '',
         client_id varchar(80) NOT NULL DEFAULT '',
         session_id varchar(20) NOT NULL DEFAULT '',
@@ -26,6 +27,7 @@ function vp_newsletter_measurement_install() {
     ) $charset;");
     dbDelta("CREATE TABLE {$wpdb->prefix}vp_newsletter_events (
         event_hash char(64) NOT NULL,
+        intent_token_hash char(64) NOT NULL DEFAULT '',
         member_hash char(64) NOT NULL,
         event_type varchar(20) NOT NULL,
         occurred_at datetime NOT NULL,
@@ -49,7 +51,7 @@ function vp_newsletter_measurement_install() {
     ) $charset;");
     if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_events'))) !== $wpdb->prefix.'vp_newsletter_events' || $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_intents'))) !== $wpdb->prefix.'vp_newsletter_intents') return;
     if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.'vp_newsletter_ga4'))) !== $wpdb->prefix.'vp_newsletter_ga4') return;
-    update_option('vp_newsletter_measurement_version', '3', false);
+    update_option('vp_newsletter_measurement_version', '4', false);
     if (!get_option('vp_newsletter_measurement_started')) update_option('vp_newsletter_measurement_started', gmdate('Y-m-d H:i:s'), false);
 }
 add_action('init', 'vp_newsletter_measurement_install');
@@ -83,6 +85,7 @@ function vp_newsletter_intent($request) {
         'language'=>vp_newsletter_measurement_choice($request->get_param('language'), ['en','sq','de'], 'en'),
         'source'=>vp_newsletter_measurement_choice($request->get_param('source'), ['website','tiktok','instagram','facebook','linkedin','x','newsletter'], 'website'),
         'placement'=>vp_newsletter_measurement_choice($request->get_param('placement'), ['hero','footer','landing','newsletter','inline','popup','popup_exit','popup_timed','popup_manual'], 'inline'),
+        'visitor_hash'=>vp_newsletter_request_viewer($request),
         'impression_id'=>vp_newsletter_valid_impression($request),
         'analytics_consent'=>'granted',
         'client_id'=>vp_newsletter_ga_id($request->get_param('client_id')),
@@ -123,9 +126,9 @@ function vp_newsletter_webhook($request) {
     $test = in_array($member, $config['test_hashes'] ?? [], true);
     $event = ['event_hash'=>hash('sha256',$member.'|'.$type.'|'.$fired),'member_hash'=>$member,'event_type'=>$type,'occurred_at'=>$fired,
         'language'=>$intent['language'] ?? vp_newsletter_measurement_choice($merges['VLANG'] ?? '',['en','sq','de'],'unknown'),
-        'source'=>$intent['source'] ?? 'unknown','placement'=>$intent['placement'] ?? 'unknown','is_test'=>(int)$test];
+        'source'=>$intent['source'] ?? 'unknown','placement'=>$intent['placement'] ?? 'unknown','is_test'=>(int)$test,'intent_token_hash'=>$intent['token_hash'] ?? ''];
     $columns = implode(',',array_keys($event));
-    $inserted = $wpdb->query($wpdb->prepare("INSERT IGNORE INTO $events ($columns) VALUES (%s,%s,%s,%s,%s,%s,%s,%d)",...array_values($event)));
+    $inserted = $wpdb->query($wpdb->prepare("INSERT IGNORE INTO $events ($columns) VALUES (%s,%s,%s,%s,%s,%s,%s,%d,%s)",...array_values($event)));
     if ($inserted === false) return new WP_Error('storage','Retry later.',['status'=>503]);
     if ($type === 'subscribe' && $intent) {
         // One browser claim per confirmation; retries and older attempts cannot duplicate it.
