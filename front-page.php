@@ -76,6 +76,15 @@
     </div>
 </section>
 
+<section class="home-investigation container" aria-labelledby="investigation-title">
+    <div class="home-investigation-copy">
+        <p class="home-investigation-label"><?php echo esc_html(valon_text('Interactive investigation · Albania', 'Hulumtim interaktiv · Shqipëria')); ?></p>
+        <h2 id="investigation-title"><a href="<?php echo esc_url(home_url('/albania-protests-investigation/')); ?>" hreflang="en"><?php echo esc_html(valon_text('Who holds power over Albania?', 'Kush e ka pushtetin në Shqipëri?')); ?></a></h2>
+        <p><?php echo esc_html(valon_text('Explore the protests, political relationships and coastal projects through an interactive map, timeline and source library.', 'Shqyrto protestat, lidhjet politike dhe projektet bregdetare përmes hartës interaktive, kronologjisë dhe burimeve.')); ?></p>
+    </div>
+    <a class="home-investigation-link" href="<?php echo esc_url(home_url('/albania-protests-investigation/')); ?>" hreflang="en"><?php echo esc_html(valon_text('Explore the investigation', 'Lexo hulumtimin')); ?> <span aria-hidden="true">→</span><small><?php echo esc_html(valon_text('English edition · Sources and evidence notes', 'Në anglisht · Burime dhe shënime mbi provat')); ?></small></a>
+</section>
+
 <div class="press-strip container" aria-label="<?php echo esc_attr(
     valon_text("Selected media coverage", "Media të zgjedhura"),
 ); ?>">
