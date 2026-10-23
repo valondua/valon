@@ -137,3 +137,47 @@ Botimi *The Albanian Files: Freedom and Architecture* paraqet zhvillimin arkitek
 - Publiko vetëm gjetje të verifikuara, me datë, status, burim dhe mundësi korrigjimi.
 
 **Burime për nisje:** [Botuesi](https://www.lars-mueller-publishers.com/albanian-files); [APP](https://www.app.gov.al/); [QKB](https://qkb.gov.al/); [SPAK](https://spak.gov.al/).
+
+
+## Dosje burimesh ndërkombëtare: institucionet, WikiLeaks dhe Offshore Leaks (23.10.2026)
+
+**Rregull editorial:** Për secilin burim shëno datën, periudhën që mat, çfarë thotë realisht dhe çfarë **nuk** provon. Raportet për Shqipërinë nuk janë automatikisht akuza personale kundër Edi Ramës; kabllogramet diplomatike pasqyrojnë vlerësime të autorëve dhe mund të përmbajnë pohime të pakonfirmuara.
+
+### Raportet e institucioneve
+
+| Institucioni | Gjetja e dokumentuar | Kufizimi | Burimi |
+| --- | --- | --- | --- |
+| Banka Botërore, Poverty & Equity Brief, tetor 2025 | Varfëria sipas kufirit ndërkombëtar $8.30/ditë (PPP 2021) vlerësohej 23.8% më 2024; rënie nga 48.2% më 2016 | Kufiri ndërkombëtar nuk është identik me kufirin kombëtar të varfërisë | https://documents1.worldbank.org/curated/en/099328104212536745/pdf/IDU-6fcb8050-8dd2-4e73-9b5f-f5abfb7c6884.pdf |
+| Banka Botërore, Macro Poverty Outlook, 2025 | Rritje ekonomike, turizëm/ndërtim dhe ulje borxhi; emigrimi, plakja dhe informaliteti pengojnë produktivitetin | Tregues ekonomikë kombëtarë, jo gjykim mbi fajësinë e politikanëve | https://documents1.worldbank.org/curated/en/099657510072538603/pdf/IDU-43fa2ab3-d9d7-4d20-b358-2153326a9b90.pdf |
+| WHO, profili i Shqipërisë | 66.6% e vdekjeve më 2021 nga sëmundjet jo të transmetueshme | Nuk identifikon përgjegjësi personale politike | https://www.who.int/data/gho/data/countries/country-details/GHO/albania |
+| Transparency International, National Integrity System | Rreziqe korrupsioni, ndikim politik në sektorin publik, media dhe drejtësi; reforma dhe ndjekje penale të zyrtarëve të lartë | Vlerësim sistemik, jo vendim gjyqësor | https://www.transparency.org/en/nis/countries/albania |
+| Transparency International EU, Rule of Law Brief 2025 | CPI 2024: 42/100, vendi 80; strategji antikorrupsion 2024–2030 me boshllëqe në zbatim | CPI mat perceptime, jo numër rastesh të provuara | https://transparency.eu/2025-rule-of-law-brief-albania/ |
+| Freedom House, Freedom in the World 2025 | Zgjedhje konkurruese dhe përgjithësisht liri tubimi, por korrupsion dhe polarizim politik | Raporti mbulon kryesisht 2024 | https://freedomhouse.org/country/albania/freedom-world/2025 |
+| RSF, Press Freedom Index 2026 | Shqipëria 83/180; konflikte interesi politikë–biznes dhe presion ndaj gazetarëve | Renditje dhe analizë e mjedisit mediatik | https://rsf.org/en/country/albania |
+| ACER, Corruption Monitoring System 2025 | 59% e të anketuarve raportojnë pagesë ryshfeti, 54% kërkesë për ryshfet | Duhet verifikuar mostra dhe formulimi i pyetjeve për interpretim të saktë | https://acer.org.al/country-assessment-report-cms-2025-albania/ |
+| EBRD, Transition Report 2025–26 | Përparim në integrim dhe masa kundër pastrimit të parave; probleme në rikuperim asetesh dhe PPP | Vlerësim ekonomik e institucional | https://www.ebrd.com/home/news-and-events/publications/economics/transition-reports/transition-report-2025-26/country-assessments/see.html |
+| CIA World Factbook, arkiv 2021 | Tregues historikë demografikë dhe ekonomikë, ekonomi informale dhe infrastrukturë | Vlerësime të vjetra; jo hetim personal për Ramën | https://www.cia.gov/the-world-factbook/about/archives/2021/static/a56c9b2a088016180ceddd8c88cbc47c/AL-summary.pdf |
+| Komisioni Evropian, Albania Report 2025 | Dokument referencë për drejtësinë, korrupsionin, institucionet dhe të drejtat | Kërkohet nxjerrje e citimeve me faqe | https://enlargement.ec.europa.eu/document/download/fe9138b7-90fe-4277-a12c-3a03f6d1957f_en?filename=albania-report-2025.pdf |
+| Këshilli i Evropës, ECRI, raporti i shtatë 2026 | Raport monitorimi për racizmin, diskriminimin dhe intolerancën | Kërkohet analizë e plotë e rekomandimeve | https://www.coe.int/en/web/european-commission-against-racism-and-intolerance/albania |
+| Amnesty International, State of the World's Human Rights 2025 | Seksioni Shqipëri në raportin botëror, faqet 73–74 | Kërkohet lexim i plotë para parafrazimit | https://www.amnesty.org/en/wp-content/uploads/2025/04/POL1085152025ENGLISH.pdf |
+
+### Arkivat e rrjedhjeve dhe gazetaria investigative
+
+1. **WikiLeaks / Cablegate:** [kërkimi për Shqipërinë](https://search.wikileaks.org/advanced?q=albania) dhe [indeksi i kabllogrameve të Ambasadës së SHBA në Tiranë](https://wikileaks.jcvignoli.com/index.php?offices%5B%5D=198). Një kabllogram i ambasadorit John Withers më 13 nëntor 2009 e quante korrupsionin endemik dhe ngrinte dyshime për administrimin e fondeve të mëdha amerikane. **Periudha ishte qeveria Berisha, para mandatit të Ramës si kryeministër.** [Raportim OCCRP](https://www.occrp.org/en/news/wikileaks-albania-too-corrupt-for-substantial-aid).
+2. **OSCE, raport i brendshëm i rrjedhur:** OCCRP raportoi konfirmimin e autenticitetit të dokumentit me akuza të marra nga raportime mediatike, përfshirë një pretendim për llogari offshore të Ramës. **Autenticiteti i raportit nuk vërteton akuzën për 200 milionë euro**; nuk duhet riprodhuar si fakt. [OCCRP](https://www.occrp.org/en/news/albania-osce-reports-about-government-corruption-allegations-is-authentic).
+3. **ICIJ Panama/Pandora Papers:** [Baza Albania — Panama Papers](https://offshoreleaks.icij.org/investigations/panama-papers?c=ALB&cat=0&e=true), [Pandora Papers Albania](https://offshoreleaks.icij.org/investigations/pandora-papers?c=ALB&cat=Entity&e=true&from=500). Filtri i Pandora Papers tregon 23 hyrje “officers” dhe një “offshore entity” të lidhur me Shqipërinë. **Hyrja në regjistër nuk nënkupton shkelje; emrat e ngjashëm duhen identifikuar me dokumente.**
+4. **ICIJ metodologjia:** [Përshkrimi i Pandora Papers](https://www.icij.org/investigations/pandora-papers/about-pandora-papers-leak-dataset/). Shumë nga dosjet e rrjedhura nuk janë publike; databaza e hapur është vetëm një pjesë e materialit.
+
+### Matrica e kërkimit për çdo person, kompani dhe projekt
+
+- Identiteti i verifikuar dhe periudha e funksionit publik.
+- Përmendja në kabllogram/rrjedhje dhe dokumenti origjinal, me datë.
+- Natyra e pohimit: fakt i regjistruar, vlerësim diplomatik, akuzë mediatike, vendim gjyqësor.
+- Lidhjet e kompanive me regjistrin e pronarëve përfitues dhe kontratat publike.
+- Përgjigjja e palës së përmendur, hetimi ose vendimi gjyqësor, nëse ekziston.
+- Ndarje kohore: para vitit 2013 / qeverisja Rama 2013–2026.
+- Mos publiko grafe “lidhjesh të fshehta” pa dokumente që mbështesin secilën lidhje.
+
+### Hapat e ardhshëm
+
+Lexo raportin e plotë të Komisionit Evropian, Amnesty dhe ECRI; nxirr citime të shkurtra me faqe. Kërko kabllogramet e rëndësishme për Ramën në periudhën kur ishte kryetar bashkie dhe lider opozite; identifiko dhe verifiko hyrjet e ICIJ me QKB, dokumente kontraktore dhe përgjigje nga subjektet. Përfshi edhe rezultate pozitive të matshme dhe kundërargumente të dokumentuara.
