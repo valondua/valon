@@ -1,0 +1,9 @@
+# Photo timeline and reader contributions — 23 October 2026
+
+Adds a six-chapter photographic chronology to the timeline, beginning with the reported 2021 yacht meeting. Dates, evidence labels, limitations and source links reuse the reviewed story register. Historical portraits and place photographs retain attribution and explicitly do not depict the events. Profile links open the selected person's role and connections; without JavaScript they target the static profile entries.
+
+A persistent header button, opening callout, navigation link and timeline prompts lead to a bilingual contribution section welcoming documents, corrections, witnessed experiences and cases of injustice (padrejtësi). The direct email links use the existing published hello@valonasani.com address and an investigation-specific subject. This is ordinary email, not an anonymous submission service; nothing is posted automatically. No messages were sent during testing.
+
+Validation: six cards, 29 static profile targets, unique IDs, valid source/profile anchors, correct email destination, JavaScript syntax and release hashes. Protected staging retains 44 evidence records, 13 original sections and noindex. Desktop profile navigation and the 390px mobile timeline/contribution layout were checked with no horizontal overflow or console errors.
+
+Three previous runtime files were copied to a release-specific backup outside the web root, verified by SHA-256 before staging changes. Deploy via existing WP Pusher, pin the merged commit archive to avoid stale branch archives, and verify installed hashes and the public /albania/ route after deployment. Rollback restores only those three files; no database migration, subscriber or email configuration change is involved. Existing full backup/restore rehearsal remains available on the same hosting volume (not offsite).
