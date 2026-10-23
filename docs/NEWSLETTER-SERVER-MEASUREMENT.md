@@ -46,3 +46,18 @@ cannot be recognized automatically; use signed-in admin browsing for manual chec
 People across devices are not deduplicated. Consent-denied views and missing GA IDs
 are unmeasured, not zero. Legacy unmatched confirmations are totals only. Pending
 confirmations can mature later; this is observational, not a randomized comparison.
+
+## October 24: popup measurement independent of GA
+
+Popup views now use a random 128-bit first-party visitor ID (`valon_popup_visitor`),
+created/read only with explicit statistics consent, with a 30-day expiry. If browser
+storage is unavailable it remains in memory for that page only. Withdrawal clears
+this ID and in-memory view associations and retains the existing receipt-revocation
+flow. The server stores its keyed hash, not the raw ID. No fingerprint or IP is used.
+This ID is never substituted for a GA client ID or sent to Google.
+
+Confirmation events now store their matched intent token hash, so rate calculation
+is independent of the GA queue. Known test visitor hashes are excluded on both sides
+of the rate. Legacy GA-based views remain compatible; missing historical exposures
+are not invented. GA4 itself still requires an actual GA client ID and consent.
+This supersedes the GA-ID requirement in the earlier exposure-cohort section.
