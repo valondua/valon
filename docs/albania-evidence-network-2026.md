@@ -279,3 +279,46 @@ Sulmi kibernetik i vitit 2022 ka një **zinxhir të verifikueshëm teknik** (FBI
 3. Kërko analiza të publikuara nga Meta, Google, TikTok, Microsoft dhe kompani të sigurisë kibernetike për rrjete të koordinuara në Shqipëri.
 4. Ndërto dataset të pretendimeve të rreme, me URL origjinale, datë, verifikim dhe përhapje, pa supozuar autorin.
 5. Mbaj veçmas provat e ndërhyrjes historike, akuzat zyrtare për 2026 dhe rastet e përgënjeshtruara.
+
+
+## Dosje tematike: A i shërbejnë interesit kombëtar? Vendimet e debatueshme të politikës së jashtme dhe zhvillimit (23.10.2026)
+
+**Qëllimi:** Të analizohen vendimet e qeverive shqiptare dhe pasojat e tyre, pa supozuar që të gjitha kanë një organizator të përbashkët. Krahasimi me Zvicrën është alternativë politike, jo provë se Shqipëria ka detyrim juridik neutraliteti.
+
+### Pyetja qendrore
+
+**A po i shërbejnë këto vendime interesit kombëtar të Shqipnisë, apo po e ekspozojnë vendin ndaj rreziqeve që nuk i ka zgjedhë vetë populli?**
+
+### Regjistri i çështjeve
+
+| Çështja | Vendimi / veprimi i dokumentuar | Përfitimi i deklaruar | Rreziku / kritika që duhet matur | Çka mbetet pa u provuar |
+| --- | --- | --- | --- | --- |
+| **MEK / Ashraf-3** | Shqipëria pranoi zhvendosjen e opozitarëve iranianë nga Iraku me mbështetje SHBA/OKB; oferta fillestare e qeverisë Berisha në 2013, zgjerimi gjatë qeverisë Rama | Strehim humanitar, bashkëpunim me SHBA dhe OKB | Siguria kombëtare, kostoja e mbrojtjes kibernetike, tensionet me Iranin, kontrolli i aktiviteteve nga territori shqiptar | Kushtet e plota të marrëveshjes, kostot neto dhe përfitimet, prova e operacioneve të paligjshme të MEK nga Shqipëria |
+| **Sulmet e Iranit** | FBI/CISA atribuuan sulmet ndaj institucioneve shqiptare të vitit 2022 aktorëve iranianë | Mbrojtja e institucioneve dhe bashkëpunimi i sigurisë | Dëmet e sulmit, ekspozimi i qytetarëve dhe kapaciteti i mbrojtjes | Që çdo sulm ishte shkaktuar vetëm nga strehimi i MEK; lidhja me protestat e tetorit 2026 |
+| **Propozimi për shtetin Bektashi** | Rama propozoi një entitet sovran fetar në Tiranë | Njohje e trashëgimisë shpirtërore dhe tolerancës | Kushtetutshmëria, laiciteti, barazia fetare, sovraniteti territorial | Akt themelues i miratuar, përfitime ekonomike të provuara, lidhje me një “shtet hebre” |
+| **Sazani / Kushner dhe partnerët** | Status investitori strategjik për projektin e resortit | Investime, turizëm, vende pune | Të drejta mbi pronën publike, transparencë, mjedis, përfitimi fiskal dhe kosto shtetërore | Pronësia përfituese e plotë, kontratat përfundimtare, përfitimet reale, çdo marrëveshje e paligjshme |
+| **Zvërneci** | Propozime zhvillimi dhe procedura të lejeve, të ndryshme nga Sazani | Zhvillim turistik | Mbrojtja e lagunës, titujt e tokës, konsultimi publik | Statusi i plotë i çdo parcele dhe VNM |
+| **Durrës Marina / Eagle Hills** | Partneritet i raportuar me kompaninë publike Albanian Seaports Development | Investim, transformim portual, turizëm | Vlerësimi i tokës dhe aseteve publike, të drejtat e zhvillimit, kostot dhe përfitimet | Marrëveshja e plotë, kthimi real për publikun, trajtimi fiskal |
+| **Marrëdhëniet me Izraelin dhe SHBA** | Bashkëpunim diplomatik, sigurie dhe investimesh | Partneritete strategjike | Varësia nga aktorët e jashtëm, reputacioni dhe pasojat e politikës së jashtme | Që një shtet i huaj ka urdhëruar çdo vendim të Ramës |
+
+### Krahasimi me Zvicrën: pyetje të politikës publike
+
+- **Zvicra:** neutralitet ushtarak i përhershëm, jo mungesë sanksionesh, marrëdhëniesh me shtete apo strehimi refugjatësh.
+- **Shqipëria:** anëtare e NATO-s që nga 2009, me angazhime të sigurisë kolektive; neutraliteti zviceran nuk mund të kopjohet automatikisht pa ndryshime strategjike dhe juridike.
+- **Testi i vendimmarrjes:** Cili ishte mandati demokratik? Cila analizë rreziku u publikua? Cili ishte përfitimi i matshëm? A u konsultua Kuvendi? Kush paguan kostot? A kishte alternativa më pak të rrezikshme?
+
+### Vlerësim i balancuar
+
+**Argumenti në favor:** Ndihma humanitare për refugjatët, besueshmëria ndaj aleatëve, investimet, vendet e punës dhe pozicionimi diplomatik mund të sjellin përfitime reale.
+
+**Argumenti kritik:** Rreziqet e sigurisë, varësia nga interesa të jashtme, dhënia e të drejtave mbi pasuri publike, dobësia e kontrollit parlamentar dhe mungesa e transparencës mund të krijojnë kosto afatgjata.
+
+**Përfundim metodologjik:** Vlerëso çdo rast më vete me dokumente, shifra, datë dhe kundërargumente. Nuk ka provë në dosjen aktuale që MEK, Bektashinjtë, Sazani, Durrësi dhe marrëdhëniet me Izraelin janë një plan i vetëm.
+
+### Burime fillestare
+
+- [FBI/CISA për sulmet kibernetike ndaj Shqipërisë, 2022](https://www.cisa.gov/sites/default/files/publications/aa22-264a-iranian-cyber-actors-conduct-cyber-operations-against-the-government-of-albania.pdf)
+- [Departamenti amerikan i Shtetit, 18 mars 2013, pranimi fillestar i refugjatëve nga Camp Ashraf](https://2009-2017.state.gov/r/pa/prs/ps/2013/03/206319.htm)
+- [Qeveria shqiptare: Sazani dhe Zvërneci](https://kryeministria.al/en/newsroom/fakte-dhe-informacion-mbi-sazanin-dhe-zvernec/)
+- [Autoriteti Portual Durrës: memorandumi i projektit Durrës Yachts & Marina](https://durresport.al/durres-yachts-and-marina-signing-ceremony-of-the-memorandum-of-understanding-10-august-2022/)
+- [Swiss Federal Department of Foreign Affairs: neutrality](https://www.eda.admin.ch/eda/en/fdfa/foreign-policy/international-law/neutrality.html)
