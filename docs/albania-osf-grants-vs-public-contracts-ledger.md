@@ -68,3 +68,51 @@ To improve the ledger without contacting anyone:
 6. Keep funding from the Swiss development agency for LëvizAlbania separate from Open Society's own funding.
 
 **Publication:** All amounts retain currency, period, source type, and whether they are earmarks, grants, contracts, revenues or payments. Accusations are clearly labeled.
+
+
+## Reconciliation round 2 — verified public filings and Treasury snapshot (23 Oct 2026)
+
+### A. Individual Form 990 grant (stronger than an aggregate)
+
+The Foundation to Promote Open Society (EIN **26-3753801**) filed its **2023 Form 990-PF**, which lists an individual **USD 26,535** grant paid to **Open Society Foundation for Albania**, Tirana. The purpose covers non-lobbying work related to constitutional/electoral reform, gender equality, accountability, Roma advocacy, disability rights and discrimination. This is a **specific 2023 entry** and **must not be added on top of the 2022–2024 $15.7m aggregate**, which may already include it.
+
+- [IRS 2023 Form 990-PF rendered filing](https://philanthropy.org/990/report/263753801/foundation-to-promote-open-society/2023)
+- [990 grant index, 2020–2024](https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society)
+- [2024 filing PDF](https://pdf.guidestar.org/PDF_Images/2024/263/753/2024-263753801-202533199349101193-F.pdf)
+
+**Outstanding:** Extract all other OSFA entries in the original 2023 filing and 2020–2024 annual filings before calling the $26,535 entry the full annual total. Confirm whether the aggregate index includes different spellings or grants to separate OSF legal entities.
+
+### B. Treasury payments (executed, not contract awards)
+
+[Overit Albania Treasury payments](https://overit.al/en/treasury-payments/) displays a Ministry of Finance payment snapshot described as **20 Dec 2024–5 Dec 2025**, including:
+- **Integrated Energy BV SPV:** ALL **1,340 million**, **53 payments**, **6 institutions**; 67% classified under operating materials/services.
+- **TIMAK DEFENCE:** ALL **1,048 million**, **2 payments**, **2 institutions**; 100% classified under equipment/capital asset growth.
+
+**Caveat:** The Treasury source lacks NIPT per payee. These are **name-labelled payments**, not yet individually reconciled to the company's legal identifier and specific contract numbers. Do not imply the totals are illicit or belong to the same program. Verify exact snapshot coverage and transaction-level entries before deriving yearly totals.
+
+[Open Spending Albania](https://spending.data.al/en/transaksione?prokurim=po) publishes a wider 2012–7 Oct 2026 Treasury register with beneficiary filters and a procurement-linked grouping. Its procurement links are based on NIPT where available, but the raw Treasury file is name-based. Use this for transaction-by-transaction reconciliation, avoiding name-only joins.
+
+### C. Procurement identifiers and methodology
+
+The [Open Contracting Data Registry — Albanian Public Procurement Commission](https://data.open-contracting.org/en/publication/134) provides OCDS complaints/decision records (2020–2025) with downloadable JSON/CSV. **These are complaint and decision records, not a comprehensive contract award/payment register**. They may help validate procurement disputes, but cannot alone establish total contracts or actual disbursements.
+
+Transparency International's [5D case](https://www.transparency.org/en/cepi/cases/5d-case-senior-public-officials-accused-of-embezzling-public-contract-funds) reports **ALL 2bn (~€20m) in contracts** and **ALL 200m (~€2m) net profit** associated with the company in the alleged scheme. These measures are **not Treasury paid totals** and must not be equated to one another.
+
+### D. Reconciliation status
+
+| Potential financial edge | Current conclusion |
+| --- | --- |
+| Foundation to Promote Open Society → OSFA | **Confirmed for an individual 2023 grant of $26,535**; other grants/annual totals require original-filing extraction |
+| Albanian Treasury → Integrated Energy BV SPV | **Name-based executed payment totals found**, contract-by-contract NIPT matching pending |
+| Albanian Treasury → TIMAK DEFENCE | **Name-based executed payment totals found**, contract-by-contract NIPT matching pending |
+| OSFA → Integrated Energy / TIMAK / 5D | **No verified direct financial edge** in reviewed records |
+| George/Alex Soros → Edi Rama personally | **No verified payment edge** |
+| Open Society grant → Albanian government tender | **No transaction-level match established** |
+
+### E. Audit notes
+
+- Never add **grant index aggregates** to the individual grants included within them.
+- Preserve year, currency, grantmaker EIN, recipient legal name, payment date, purpose and filing source.
+- Preserve Treasury institution, beneficiary spelling, economic account, execution date and payment amount. Attach a company NIPT only when supported by another record.
+- Do not conflate a public-contract award ceiling, company revenue, Treasury disbursement and personal benefit.
+- The public-source-only constraint remains in force. No outreach, information requests or allegations to individuals.
