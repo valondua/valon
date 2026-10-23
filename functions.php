@@ -157,7 +157,7 @@ function valon_nav()
             esc_html(valon_text(...$label)) .
             "</a>";
     }
-    echo '<a href="' . esc_url(home_url('/albania-protests-investigation/')) . '" hreflang="en">' . esc_html(valon_text('Investigation', 'Hulumtimi')) . '</a>';
+    echo '<a href="' . esc_url(home_url('/albania/')) . '" hreflang="en">' . esc_html(valon_text('Investigation', 'Hulumtimi')) . '</a>';
     echo '<a class="mobile-newsletter" href="' .
         esc_url(valon_url("newsletter")) .
         '">' .
@@ -374,3 +374,13 @@ add_action("customize_register", function ($c) {
         ]),
     );
 });
+
+// Keep published investigation links working after the shorter canonical route.
+add_action('template_redirect', static function () {
+    $path = wp_parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    if (rtrim((string) $path, '/') !== '/albania-protests-investigation') { return; }
+    $page = get_post(5557);
+    if (!$page || $page->post_status !== 'publish' || $page->post_name !== 'albania' || get_page_template_slug(5557) !== 'page-albania-protests-investigation.php') { return; }
+    wp_safe_redirect(get_permalink(5557), 301, 'Valon investigation');
+    exit;
+}, 1);
