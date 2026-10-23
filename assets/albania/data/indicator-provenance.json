@@ -1,0 +1,81 @@
+{
+  "checked": "2026-10-24",
+  "source_updated": "2026-10-08",
+  "indicator": "NY.GDP.PCAP.CD",
+  "country": "ALB",
+  "source": "https://api.worldbank.org/v2/country/ALB/indicator/NY.GDP.PCAP.CD?format=json&date=2010:2025&per_page=100",
+  "values": [
+    [
+      2010,
+      4149.14469936847
+    ],
+    [
+      2011,
+      4465.70914328865
+    ],
+    [
+      2012,
+      4280.93316338873
+    ],
+    [
+      2013,
+      4542.92903556739
+    ],
+    [
+      2014,
+      4793.59751131525
+    ],
+    [
+      2015,
+      4199.53912925398
+    ],
+    [
+      2016,
+      4457.63412207495
+    ],
+    [
+      2017,
+      5006.36012951959
+    ],
+    [
+      2018,
+      5897.65452588774
+    ],
+    [
+      2019,
+      6069.43903131027
+    ],
+    [
+      2020,
+      6027.91350716348
+    ],
+    [
+      2021,
+      7242.45513146613
+    ],
+    [
+      2022,
+      7756.96188744253
+    ],
+    [
+      2023,
+      9740.7023414631
+    ],
+    [
+      2024,
+      11374.0085781236
+    ],
+    [
+      2025,
+      12998.147869552
+    ]
+  ],
+  "pisa_2025": {
+    "Maths": 433,
+    "Reading": 408,
+    "Science": 435,
+    "source": "https://gpseducation.oecd.org/CountryProfile?plotter=h5&primaryCountry=ALB&topic=PI&treshold=10",
+    "caveat_source": "https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/albania_30521d7d-en.html",
+    "connect_to_historical_series": false
+  }
+}
