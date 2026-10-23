@@ -187,5 +187,50 @@
     "name": "Independent journalists",
     "role": "Independent journalists reporting on the movement; coverage is not proof of organising or financing it.",
     "photo": null
+  },
+  "dobrushi": {
+    "name": "Andi Dobrushi",
+    "role": "Listed OSFA legal representative and OSF Western Balkans director; see the dated sources and limitations.",
+    "photo": null
+  },
+  "osfwb": {
+    "name": "OSF Western Balkans",
+    "role": "Regional organisation whose own leadership roster is cited in R46.",
+    "photo": null
+  },
+  "consortium": {
+    "name": "OSFA / Partners Albania / Co-PLAN",
+    "role": "Three distinct organisations named as historical LëvizAlbania implementing partners.",
+    "photo": null
+  },
+  "zoto_mertiri": {
+    "name": "Klodian Zoto / Mirel Mërtiri",
+    "role": "Businessmen named together in the reported 2023 allegation; this grouped node does not duplicate the alleged amount.",
+    "photo": null
+  },
+  "ahmetaj": {
+    "name": "Arben Ahmetaj",
+    "role": "Former deputy prime minister named in the incinerator case; he denied wrongdoing and alleged political revenge.",
+    "photo": null
+  },
+  "milosavljevic": {
+    "name": "Miodrag Milosavljevic",
+    "role": "Deputy director listed by OSF Western Balkans; the source-check date is not an appointment date.",
+    "photo": null
+  },
+  "hyseni": {
+    "name": "Dukagjin Hyseni",
+    "role": "Chief operating officer listed by OSF Western Balkans; see the organisation’s own roster.",
+    "photo": null
+  },
+  "partners_albania": {
+    "name": "Partners Albania",
+    "role": "An organisation named in the historical LëvizAlbania consortium; this is not an ownership link.",
+    "photo": null
+  },
+  "coplan": {
+    "name": "Co-PLAN",
+    "role": "An organisation named in the historical LëvizAlbania consortium; check the dated project sources.",
+    "photo": null
   }
 }
