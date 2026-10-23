@@ -18,3 +18,9 @@ header .submit-header{padding:13px 20px;font-size:16px;min-height:48px;box-sizin
 .reader-callout>a:hover{background:#fff0d1;border-color:#fff0d1;color:#391423}
 .reader-callout>a:focus-visible{outline:3px solid #fff;outline-offset:5px}
 @media(max-width:700px){header .submit-header{font-size:14px;padding:11px 12px}header .logo{display:none}.reader-callout{padding:22px;gap:18px}.reader-callout>a{width:100%}}
+/* Persistent masthead action; mobile touch target stays clear of browser UI. */
+.albania-investigation>header{position:sticky;top:0;z-index:999;box-shadow:0 2px 8px #0001}
+body.admin-bar.albania-investigation>header{top:32px}
+@media(max-width:782px){body.admin-bar.albania-investigation>header{top:46px}}
+@media(max-width:700px){header .submit-header{min-height:52px;font-size:15px}}
+@media(max-width:600px){body.admin-bar.albania-investigation>header{top:0}}
