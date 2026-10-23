@@ -4,7 +4,9 @@
   const totals=key.match(/^(\d+) of (\d+) (research entries|events)$/);if(totals)return totals[1]+' nga '+totals[2]+' '+(totals[3]==='events'?'ngjarje':'zëra kërkimi');
   const source=key.match(/^Source (\d+) ↗$/);if(source)return 'Burimi '+source[1]+' ↗';
   const count=key.match(/^(\d+) (connections in this graph|linked evidence records)$/);if(count)return count[1]+' '+t(count[2]);
-  for(const separator of [' · ',' → ',' — ','\n'])if(raw.includes(separator))return raw.split(separator).map(x=>dictionary[x.trim()]||x).join(separator);
+  if(key.startsWith('View '))return 'Shiko '+t(key.slice(5));
+  if(key.endsWith(' →'))return t(key.slice(0,-2))+' →';
+  for(const separator of [' · ',' → ',' — ','\n'])if(raw.includes(separator))return raw.split(separator).map(x=>t(x)).join(separator);
   return raw;
  }
  window.albaniaTranslate=t;
