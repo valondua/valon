@@ -1183,3 +1183,14 @@ em {
 .home-investigation-link small { display:block; margin-top:8px; color:var(--muted); font-size:11px; font-weight:400; }
 .home-investigation a:hover { text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:780px) { .home-investigation { align-items:flex-start; flex-direction:column; gap:14px; } .home-investigation-link { margin-left:27px; } }
+
+/* Prominent reader-submission invitation above the homepage hero. */
+.home-submit-banner{background:#762338;color:#fff;border-bottom:4px solid #e6bf78}
+.home-submit-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:22px}
+.home-submit-inner strong{display:block;font-size:clamp(20px,2.3vw,28px);line-height:1.25}
+.home-submit-inner p{margin:7px 0 0;color:#fff;font-size:15px;line-height:1.5}
+a.home-submit-button{display:inline-flex;align-items:center;justify-content:center;gap:24px;flex-shrink:0;min-height:52px;padding:14px 24px;background:#ffe0a3;color:#391423;border:2px solid #ffe0a3;font-size:17px;font-weight:750;text-decoration:none;line-height:1.3}
+a.home-submit-button:hover{background:#fff0d1;border-color:#fff0d1;color:#391423}
+a.home-submit-button:focus-visible{outline:3px solid #fff;outline-offset:5px}
+@media(max-width:700px){.home-submit-inner{flex-direction:column;align-items:stretch;gap:16px;padding-top:20px;padding-bottom:20px}.home-submit-button{width:100%;box-sizing:border-box}}
+body.home:has(.home-submit-banner) .site-header{position:relative;inset:auto;background:var(--navy,#0b2030)}
