@@ -232,3 +232,50 @@ We are preparing a documented public-interest investigation into [project], focu
 - Do not use a registered agent as if it were a beneficial owner.
 - Do not present historical percentages as current or a criminal charge as a conviction.
 - Log replies, denials, corrections and document access restrictions.
+
+
+## Ndërhyrjet e huaja dhe protestat: dosje provash (23.10.2026)
+
+**Kufizimi i hulumtimit:** Vetëm burime të disponueshme publikisht. **Nuk do të kontaktohen institucione, kompani, individë apo organizata dhe nuk do të dërgohen kërkesa për informacion pa udhëzim të ri.**
+
+### Standardi i provës
+
+- **E konfirmuar teknikisht:** atribuim i dokumentuar nga hetim teknik, me indikatorë dhe metoda.
+- **Deklaratë zyrtare:** pretendim i qeverisë/policisë, jo automatikisht provë publike.
+- **Raportim i pavarur:** pretendime të verifikuara nga gazetarë/studiues, me kufizimet e tyre.
+- **E pavërtetuar:** mungon identifikimi i operatorit, provat teknike, financimi apo lidhja organizative.
+- **E përgënjeshtruar:** burim i pavarur ka treguar se materiali i caktuar është i manipuluar/i rremë.
+
+### Matrica e aktorëve
+
+| Aktori | Veprimtari historike e dokumentuar | Pretendimi për protestat 2026 | Statusi i provës së lidhjes me protestat | Burimi |
+| --- | --- | --- | --- | --- |
+| **Irani** | FBI/CISA ia atribuuan aktorëve shtetërorë iranianë sulmet shkatërruese ndaj rrjeteve të qeverisë shqiptare në korrik dhe shtator 2022. Përfshihen akses i paautorizuar, nxjerrje e-mailesh, ransomware/wiper dhe propaganda online e “HomeLand Justice”. | Rama pretendoi se llogari/aktorë iranianë iu bashkuan amplifikimit online të protestave, duke thënë shprehimisht se Irani nuk i shpiku protestat | **Sulmet e 2022 të atribuuara me prova teknike; organizimi/amplifikimi i protestave 2026 nuk është provuar publikisht me të njëjtin standard** | [FBI/CISA AA22-264A](https://www.cisa.gov/sites/default/files/publications/aa22-264a-iranian-cyber-actors-conduct-cyber-operations-against-the-government-of-albania.pdf); [Euronews, 12 Jun 2026](https://www.euronews.com/2026/06/12/everything-you-need-to-know-about-the-jared-kushner-resort-protests-in-albania) |
+| **Irani, 2024** | Autoritetet shqiptare ia atribuuan “HomeLand Justice” sulmin ndaj INSTAT më 1 shkurt 2024 | Nuk është paraqitur lidhje teknike me protestat e tetorit 2026 | **Atribuim zyrtar për incident tjetër, jo për protesta** | [AP](https://apnews.com/article/e80780e2d927394589c3d8903e36d066) |
+| **Rusia** | Studimi i NDI identifikon dobësi ndaj narrativave pro-ruse dhe ndërveprime të llogarive nacionaliste me bote pro-ruse | Rama pretendoi për mijëra llogari të rreme dhe fushata ruse rreth protestave mjedisore | **Pretendim publik i Ramës; nuk është paraqitur dataset i verifikueshëm me atribuim shtetëror për protestat e tetorit** | [NDI, 2024](https://www.ndi.org/sites/default/files/2025-04/The-Vulnerability-of-Albanian-Politcs-to-Foreign-Interference-%281%29.pdf); [RTSH, Oct 2026](https://rtsh.al/rti/en/rama-albania-targeted-in-well-coordinated-attack-by-force-designated-terrorist-by-us/) |
+| **Serbia** | Studiuesit identifikojnë narrativa dezinformuese me origjinë serbe, veçanërisht për konflikt të afërt në Kosovë | Në rrjete u pretendua se policë serbë u përdorën kundër protestuesve | **Pretendimi i policëve të huaj u mohua nga Policia; fotografia e përdorur si provë u identifikua si e gjeneruar me AI** | [NDI](https://www.ndi.org/sites/default/files/2025-04/The-Vulnerability-of-Albanian-Politcs-to-Foreign-Interference-%281%29.pdf); [RFE/RL, Oct 2026](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html) |
+| **Greqia** | Marrëdhënie dhe mosmarrëveshje politike/diplomatike rajonale | Qarkulluan pamje të pretenduara të autobusëve nga Greqia në protestat e mëparshme | **Pamjet e raportuara si të manipuluara; asnjë lidhje operative me protestat e tetorit e provuar** | [RFE/RL / Faktoje](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html) |
+| **Organizata fetare dhe rrjete ideologjike** | NDI përshkruan financim opak, lidhje ndërkombëtare dhe mbivendosje të disa narrativave antigjinore me dezinformimin global; studimi thotë se **nuk ka prova të financimit rus të këtyre kauzave në Shqipëri** | Pretendime për islamistë, ekstremistë dhe aktorë të tjerë fetarë | **Nuk ka provë publike të identifikuar që një organizatë fetare e emërtuar organizoi protestat** | [NDI, 2024](https://www.ndi.org/sites/default/files/2025-04/The-Vulnerability-of-Albanian-Politcs-to-Foreign-Interference-%281%29.pdf) |
+| **Izraeli / fluturimet** | Marrëdhënie diplomatike dhe udhëtime normale | Pretendime virale për fluturime të fshehta/shtesë nga Tel Avivi gjatë protestave | **Aeroporti i Tiranës mohoi fluturime shtesë; nuk u paraqitën prova të lidhjes me protestat** | [RFE/RL](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html) |
+| **Antifa / aktorë anti-Izrael / kundërshtarë të Trump** | Lëvizje dhe qëndrime të ndryshme, jo një entitet i vetëm operativ | Rama përdori këto etiketa për disa aktorë dhe narrativa në qershor–tetor | **Nuk ka provë publike për një zinxhir të përbashkët drejtimi/financimi** | [DW, 2026](https://amp.dw.com/en/albanias-flamingo-revolution-whats-behind-the-protests/a-77710991); [RFE/RL](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html) |
+
+### Çfarë thanë institucionet shqiptare për protestat e tetorit?
+
+- **16 tetor 2026:** Drejtori i Sigurisë Publike Dhimitraq Ziu tha se policia kishte identifikuar kanale online me thirrje për dhunë dhe kërcënime ndaj policëve; deklaroi nisjen e procedimeve dhe bashkëpunimin me partnerë ndërkombëtarë për identifikimin e IP-ve. **Nuk identifikoi publikisht një shtet të huaj si operator të kanaleve.** [BIRN i ripublikuar](https://en.panorama.com.al/birn-policia-heton-thirrje-online-per-akte-terroriste-por-nuk-jep-prova-per-nderhyrje-nga-jashte/).
+- **18 tetor 2026:** Rama pretendoi ndërhyrje të huaja, përmendi Iranin dhe Rusinë dhe tha se kishte informacione për veprimtari në rrjetet sociale; nuk publikoi një dosje teknike të verifikueshme për atribuimin. [RFE/RL](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html).
+- **19 tetor 2026:** Rama lidhi radikalizimin e disa protestuesve me ndikim ideologjik “Antifa”; kjo është **interpretim/akuzë politike**, jo provë e një strukture organizative. [RFE/RL](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html).
+- **Pretendimet virale:** Faktoje raportoi për imazhe të gjeneruara me AI të policëve të huaj, ndërsa aeroporti mohoi fluturimet shtesë nga Izraeli. **Fakti që këto pretendime ishin të rreme nuk provon kush i krijoi.** [RFE/RL](https://www.slobodnaevropa.org/a/albanija-protesti-dezinformacije/33879420.html).
+
+### Analizë e dallimit të rëndësishëm
+
+Sulmi kibernetik i vitit 2022 ka një **zinxhir të verifikueshëm teknik** (FBI/CISA, metoda, indikatorë, kohë). Pretendimi për koordinim të protestave kërkon prova **të reja dhe specifike për vitin 2026**: llogari konkrete, të dhëna platformash, pagesa, udhëzime, komunikime, operatorë, kohë dhe verifikim të pavarur. Edhe nëse një shtet amplifikon përmbajtje, kjo nuk provon se ai krijoi protestën ose se kërkesat qytetare janë të pavërteta.
+
+**Nuk duhen bashkuar automatikisht:** protestat mjedisore të qershorit (“flamingo”) dhe protestat studentore/qytetare të tetorit. Çdo ngjarje kërkon atribuim të veçantë.
+
+### Vetëm kërkim publik — detyra të hapura
+
+1. Kërko publikime të AKSK, Policisë, SPAK, Këshillit të Ministrave dhe partnerëve ndërkombëtarë me indikatorë teknikë për fushatat online të 2026.
+2. Arkivo deklaratat origjinale të Ramës me datë dhe citim të saktë; ndaj emrat e vendeve të përmendura nga interpretimet e mediave.
+3. Kërko analiza të publikuara nga Meta, Google, TikTok, Microsoft dhe kompani të sigurisë kibernetike për rrjete të koordinuara në Shqipëri.
+4. Ndërto dataset të pretendimeve të rreme, me URL origjinale, datë, verifikim dhe përhapje, pa supozuar autorin.
+5. Mbaj veçmas provat e ndërhyrjes historike, akuzat zyrtare për 2026 dhe rastet e përgënjeshtruara.
