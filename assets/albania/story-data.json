@@ -1050,9 +1050,9 @@
       "id": "R37",
       "topic": "Grants & public money",
       "status": "Correction",
-      "title": "Draft grant totals have not all survived verification",
-      "body": "The draft’s $26,535 individual 2023 grant could not be corroborated from the cited profile. Its $4.7m/four-grant (2020–2021) and $15.7m/ten-grant (2022–2024) index aggregates also remain unreconciled against original annual schedules.",
-      "limit": "These figures are retained only as explicitly uncorroborated draft claims. Annual funding for the other years from 2013–2026 is not established by this review; unknown does not mean zero. The verified 2024 entries do not validate the other amounts.",
+      "title": "Grant-index totals located; annual reconciliation still open",
+      "body": "The philanthropy.org index lists OSFA recipient aggregates of $4.7m across four grants in 2020–2021 and $15.7m across ten grants in 2022–2024. These index entries are now located, but not reconciled against the original annual schedules. The draft’s separate $26,535 individual 2023 grant remains uncorroborated.",
+      "limit": "These are index-reported aggregates, not verified personal transfers or public tenders. Do not add the separately checked 2024 entries to the overlapping multi-year totals. Funding for other years remains unestablished; unknown does not mean zero.",
       "sources": [
         {
           "url": "https://philanthropy.org/990/grants-by/263753801/foundation-to-promote-open-society",
@@ -1262,7 +1262,7 @@
       "status": "Open question",
       "title": "What is still needed to close the documentary gaps?",
       "body": "The research queue covers certified QKB/KvK ownership histories, Atlantic Incubation Partners disclosures, Sazan decision annexes and negotiation minutes, land valuations and demining payments, the Tirana concession and amendments, Llogara awards, Zvërnec permits and parcels, Durrës guarantees/accounts, and original grant schedules.",
-      "limit": "No outreach or information request was sent. Public comments are leads; private senders and screenshots are excluded. No submission form or upload service is being claimed. Join financial records using legal identifiers and dated documents, never names, photographs, religion or association alone.",
+      "limit": "No outreach or information request was sent during this review. Public comments and private submissions are leads, reviewed before publication. Private senders and screenshots are excluded from the public research. Join financial records using legal identifiers and dated documents, never names, photographs, religion or association alone.",
       "sources": [
         {
           "url": "https://openprocurement.al/sq/concession/view/id/5",
@@ -1293,6 +1293,206 @@
         "R44",
         "Research topic only"
       ]
+    },
+    {
+      "id": "R45",
+      "topic": "Institutions & funding",
+      "status": "Historical record",
+      "title": "OSFA’s legal registration and representative",
+      "body": "OpenCorporates.al lists OSFA as an active nonprofit with identifier J62005011N, formation date 5 August 1996 and legal representative Andi Dobrushi. The listing records a last change on 21 February 2025.",
+      "limit": "This is a registry-derived listing, not a newly certified QKB extract. The linked historical PDF could not be retrieved in this review. Legal formation in 1996 is distinct from the foundation’s account that its Albania work began in 1992.",
+      "sources": [
+        {
+          "url": "https://opencorporates.al/en/nipt/j62005011n",
+          "label": "Source 1"
+        }
+      ],
+      "subject": "OSFA’s legal registration and representative",
+      "grade": "Historical record",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Andi Dobrushi",
+        "OSFA",
+        "Listed legal representative (2025 listing)"
+      ]
+    },
+    {
+      "id": "R46",
+      "topic": "Institutions & funding",
+      "status": "Official account",
+      "title": "Who is listed on OSF Western Balkans leadership?",
+      "body": "The organisation’s roster, checked on 24 October 2026, lists Andi Dobrushi as director, Miodrag Milosavljevic as deputy director and Dukagjin Hyseni as chief operating officer.",
+      "limit": "This is the organisation’s own account. The review date is not an appointment date. A staff role does not establish political control, personal payments or responsibility for an unrelated project.",
+      "sources": [
+        {
+          "url": "https://osfwb.org/who-we-are/",
+          "label": "Source 1"
+        }
+      ],
+      "subject": "Who is listed on OSF Western Balkans leadership?",
+      "grade": "Official account",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Andi Dobrushi",
+        "OSF Western Balkans",
+        "Listed director; roster checked 24 October 2026"
+      ],
+      "connections": [
+        [
+          "Andi Dobrushi",
+          "OSF Western Balkans",
+          "Listed director; roster checked 24 October 2026"
+        ],
+        [
+          "Miodrag Milosavljevic",
+          "OSF Western Balkans",
+          "Listed deputy director; roster checked 24 October 2026"
+        ],
+        [
+          "Dukagjin Hyseni",
+          "OSF Western Balkans",
+          "Listed chief operating officer; roster checked 24 October 2026"
+        ]
+      ]
+    },
+    {
+      "id": "R47",
+      "topic": "Institutions & funding",
+      "status": "Official account",
+      "title": "LëvizAlbania: historical consortium and a 2023 transition",
+      "body": "LëvizAlbania describes a Swiss-funded project implemented by OSFA, Partners Albania for Change and Development, and Co-PLAN. Its site says that from 1 October 2023 the independent LëvizAlbania Center operates outside Swiss development-agency auspices.",
+      "limit": "Swiss government material corroborates the historical consortium. Do not extend that arrangement into the present or infer that OSFA owns the other partners. This source does not establish a later funding contract.",
+      "sources": [
+        {
+          "url": "https://www.levizalbania.al/en/about-us",
+          "label": "Source 1"
+        },
+        {
+          "url": "https://www.eda.admin.ch/dam/countries/countries-content/albania/en/2018/Leviz%20for%20Democracy%20Week%20axhenda%20anglisht.pdf",
+          "label": "Source 2"
+        }
+      ],
+      "subject": "LëvizAlbania: historical consortium and a 2023 transition",
+      "grade": "Official account",
+      "group": "Public claims & accountability",
+      "connection": [
+        "OSFA / Partners Albania / Co-PLAN",
+        "LëvizAlbania",
+        "Historical implementing consortium; check 2023 transition"
+      ],
+      "connections": [
+        [
+          "OSFA",
+          "LëvizAlbania",
+          "Historical implementing consortium; check 2023 transition"
+        ],
+        [
+          "Partners Albania",
+          "LëvizAlbania",
+          "Historical implementing consortium; check 2023 transition"
+        ],
+        [
+          "Co-PLAN",
+          "LëvizAlbania",
+          "Historical implementing consortium; check 2023 transition"
+        ]
+      ]
+    },
+    {
+      "id": "R48",
+      "topic": "Public integrity & organised crime",
+      "status": "Allegation",
+      "title": "Ahmetaj: the reported €491,000 allegation and denial",
+      "body": "BIRN’s 15 July 2023 account of a prosecution file reports alleged benefits of at least €491,000 from businessmen Klodian Zoto and Mirel Mërtiri to Arben Ahmetaj. Transparency International summarises the allegation and records Ahmetaj’s denial and claim of political revenge.",
+      "limit": "These are reported prosecutorial allegations, not proven payments or a final conviction. The amount describes a combined allegation, not a separate payment by each businessman. This historical reporting does not establish the current case outcome or a payment to Edi Rama.",
+      "sources": [
+        {
+          "url": "https://www.reporter.al/2023/07/15/dosja-e-prokurorise-si-u-pagua-arben-ahmetaj-nga-biznesmenet-e-incineratoreve/",
+          "label": "Source 1"
+        },
+        {
+          "url": "https://www.transparency.org/en/cepi/cases/albania-arben-ahmetaj-deputy-pm-involved-inincinerators-concession-scandal-",
+          "label": "Source 2"
+        }
+      ],
+      "subject": "Ahmetaj: the reported €491,000 allegation and denial",
+      "grade": "Allegation",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Klodian Zoto / Mirel Mërtiri",
+        "Arben Ahmetaj",
+        "Alleged benefits ≥€491,000; denied (2023 reporting)"
+      ]
+    },
+    {
+      "id": "R49",
+      "topic": "Institutions & funding",
+      "status": "Reported findings",
+      "title": "A 2016 report on OSFA’s reform strategy",
+      "body": "Exit’s 22 August 2016 article describes constitutional-reform advocacy in a document it identifies as OSFA’s 2014–2017 strategy. This establishes what Exit reported, rather than independent authentication of the underlying document.",
+      "limit": "The linked document could not be independently accessed in this review. The article’s interpretation is attributed to the outlet; it does not prove ownership of the judiciary, bribery or control over individual judicial decisions.",
+      "sources": [
+        {
+          "url": "https://exit.al/en/constitutional-reform-conceived-planned-and-carried-out-by-soros/",
+          "label": "Source 1"
+        }
+      ],
+      "subject": "A 2016 report on OSFA’s reform strategy",
+      "grade": "Reported findings",
+      "group": "Public claims & accountability",
+      "connection": [
+        "OSFA",
+        "Constitutional-reform advocacy",
+        "Reported strategy; original not authenticated"
+      ]
+    },
+    {
+      "id": "R50",
+      "topic": "Grants & public money",
+      "status": "Documented record",
+      "title": "The Ministry’s 2024 fiscal-risk statement",
+      "body": "The Ministry of Finance’s Fiscal Risk Statement for 2024, published with a Tirana 2025 date, reports on public-private partnerships and concession exposure. Its table distinguishes actual expenditure, plans and forecasts, expressed in thousand ALL.",
+      "limit": "Budget exposure is not proof of corruption or an individual payment. Keep actual and forecast figures separate; the report’s year and publication year are different. No project-specific total is inferred here.",
+      "sources": [
+        {
+          "url": "https://financa.gov.al/wp-content/uploads/2025/12/Fiscal-Risk-Statement-2024.pdf",
+          "label": "Source 1"
+        }
+      ],
+      "subject": "The Ministry’s 2024 fiscal-risk statement",
+      "grade": "Verified record",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Ministry of Finance",
+        "PPP fiscal exposure",
+        "2024 fiscal-risk reporting, published 2025"
+      ]
+    },
+    {
+      "id": "R51",
+      "topic": "Tirana concession & correspondence",
+      "status": "Reported findings",
+      "title": "Correspondence attributed to Rama and Veliaj",
+      "body": "On 11 December 2023, CNA reported documents released by the Democratic Party: a 2016 bonus approval attributed to Edi Rama and 2017 letters attributed to Erion Veliaj concerning the Tirana concession procedure and fee.",
+      "limit": "The letters and signatures were not independently authenticated in this review. The procurement register separately supports the bonus decision in R01; it does not authenticate these reproductions. Neither correspondence nor the outlet’s interpretation establishes criminal guilt.",
+      "sources": [
+        {
+          "url": "https://www.cna.al/english/aktualitet/dokumentet-firmat-e-rames-veliajt-dhe-agacit-per-aferen-me-incenerato-i383683",
+          "label": "Source 1"
+        },
+        {
+          "url": "https://openprocurement.al/sq/concession/view/id/5",
+          "label": "Source 2"
+        }
+      ],
+      "subject": "Correspondence attributed to Rama and Veliaj",
+      "grade": "Reported findings",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Rama / Veliaj",
+        "Tirana concession correspondence",
+        "Attributed letters; reported 2023, not authenticated"
+      ]
     }
   ],
   "events": [
@@ -1305,6 +1505,16 @@
       "url": "https://www.opensocietyfoundations.org/newsroom/open-society-foundations-albania",
       "record": "R35",
       "topic": "Grants & public money"
+    },
+    {
+      "date": "5 August 1996",
+      "title": "OSFA’s legal registration and representative",
+      "body": "OpenCorporates.al lists OSFA as an active nonprofit with identifier J62005011N, formation date 5 August 1996 and legal representative Andi Dobrushi. The listing records a last change on 21 February 2025.",
+      "limit": "This is a registry-derived listing, not a newly certified QKB extract. The linked historical PDF could not be retrieved in this review. Legal formation in 1996 is distinct from the foundation’s account that its Albania work began in 1992.",
+      "status": "Historical record",
+      "url": "https://opencorporates.al/en/nipt/j62005011n",
+      "record": "R45",
+      "topic": "Institutions & funding"
     },
     {
       "date": "1 April 2009",
@@ -1325,6 +1535,16 @@
       "url": "https://2009-2017.state.gov/r/pa/prs/ps/2013/03/206362.htm",
       "record": "R14",
       "topic": "Security & foreign policy"
+    },
+    {
+      "date": "22 August 2016 · reporting",
+      "title": "A 2016 report on OSFA’s reform strategy",
+      "body": "Exit’s 22 August 2016 article describes constitutional-reform advocacy in a document it identifies as OSFA’s 2014–2017 strategy. This establishes what Exit reported, rather than independent authentication of the underlying document.",
+      "limit": "The linked document could not be independently accessed in this review. The article’s interpretation is attributed to the outlet; it does not prove ownership of the judiciary, bribery or control over individual judicial decisions.",
+      "status": "Reported findings",
+      "url": "https://exit.al/en/constitutional-reform-conceived-planned-and-carried-out-by-soros/",
+      "record": "R49",
+      "topic": "Institutions & funding"
     },
     {
       "date": "7 December 2016",
@@ -1417,6 +1637,36 @@
       "topic": "Coastal projects"
     },
     {
+      "date": "15 July 2023 · reporting",
+      "title": "Ahmetaj: the reported €491,000 allegation and denial",
+      "body": "BIRN’s 15 July 2023 account of a prosecution file reports alleged benefits of at least €491,000 from businessmen Klodian Zoto and Mirel Mërtiri to Arben Ahmetaj. Transparency International summarises the allegation and records Ahmetaj’s denial and claim of political revenge.",
+      "limit": "These are reported prosecutorial allegations, not proven payments or a final conviction. The amount describes a combined allegation, not a separate payment by each businessman. This historical reporting does not establish the current case outcome or a payment to Edi Rama.",
+      "status": "Allegation",
+      "url": "https://www.reporter.al/2023/07/15/dosja-e-prokurorise-si-u-pagua-arben-ahmetaj-nga-biznesmenet-e-incineratoreve/",
+      "record": "R48",
+      "topic": "Public integrity & organised crime"
+    },
+    {
+      "date": "1 October 2023",
+      "title": "LëvizAlbania: historical consortium and a 2023 transition",
+      "body": "LëvizAlbania describes a Swiss-funded project implemented by OSFA, Partners Albania for Change and Development, and Co-PLAN. Its site says that from 1 October 2023 the independent LëvizAlbania Center operates outside Swiss development-agency auspices.",
+      "limit": "Swiss government material corroborates the historical consortium. Do not extend that arrangement into the present or infer that OSFA owns the other partners. This source does not establish a later funding contract.",
+      "status": "Official account",
+      "url": "https://www.levizalbania.al/en/about-us",
+      "record": "R47",
+      "topic": "Institutions & funding"
+    },
+    {
+      "date": "11 December 2023 · reporting",
+      "title": "Correspondence attributed to Rama and Veliaj",
+      "body": "On 11 December 2023, CNA reported documents released by the Democratic Party: a 2016 bonus approval attributed to Edi Rama and 2017 letters attributed to Erion Veliaj concerning the Tirana concession procedure and fee.",
+      "limit": "The letters and signatures were not independently authenticated in this review. The procurement register separately supports the bonus decision in R01; it does not authenticate these reproductions. Neither correspondence nor the outlet’s interpretation establishes criminal guilt.",
+      "status": "Reported findings",
+      "url": "https://www.cna.al/english/aktualitet/dokumentet-firmat-e-rames-veliajt-dhe-agacit-per-aferen-me-incenerato-i383683",
+      "record": "R51",
+      "topic": "Tirana concession & correspondence"
+    },
+    {
       "date": "2024 filing year",
       "title": "Two paid grant entries",
       "body": "The Foundation to Promote Open Society’s 2024 Form 990-PF (EIN 26-3753801), Part XIV 3(a), PDF page 12, lists general-support payments to Open Society Foundation for Albania of $2,560,000 and $3,347,000. Together these entries total $5,907,000. They appear in the paid-during-the-year section.",
@@ -1445,6 +1695,16 @@
       "url": "https://aida.gov.al/wp-content/uploads/2026/02/00.-REGJISTRI-AIDA-2025_30112025.pdf",
       "record": "R04",
       "topic": "Land & contracts"
+    },
+    {
+      "date": "2025 · publication of 2024 report",
+      "title": "The Ministry’s 2024 fiscal-risk statement",
+      "body": "The Ministry of Finance’s Fiscal Risk Statement for 2024, published with a Tirana 2025 date, reports on public-private partnerships and concession exposure. Its table distinguishes actual expenditure, plans and forecasts, expressed in thousand ALL.",
+      "limit": "Budget exposure is not proof of corruption or an individual payment. Keep actual and forecast figures separate; the report’s year and publication year are different. No project-specific total is inferred here.",
+      "status": "Verified record",
+      "url": "https://financa.gov.al/wp-content/uploads/2025/12/Fiscal-Risk-Statement-2024.pdf",
+      "record": "R50",
+      "topic": "Grants & public money"
     },
     {
       "date": "24 February 2025",
@@ -1527,6 +1787,16 @@
       "topic": "Land & contracts"
     },
     {
+      "date": "30 May–October 2026",
+      "title": "From the coast to the streets",
+      "body": "OSW traces the environmental demonstrations to 30 May. By October, reporting describes broader student demands about education, living costs and accountability.",
+      "limit": "Political support does not prove control of the movement. No reliable central financing account has been established here.",
+      "status": "Reported",
+      "url": "https://www.osw.waw.pl/en/publikacje/analyses/2026-06-23/flamingo-revolution-anti-government-protests-albania?page=1",
+      "record": "R30",
+      "topic": "Public accountability"
+    },
+    {
       "date": "18 June 2026",
       "title": "OCCRP reporting on Gjika allegations",
       "body": "OCCRP/Shteg’s 18 June 2026 report describes SPAK allegations against Dritan Gjika and others involving Latin American and European cocaine routes, with seizure action concerning approximately €150m in assets. It reports his May 2025 arrest in Abu Dhabi and Ecuadorian proceedings.",
@@ -1545,6 +1815,16 @@
       "url": "https://documents1.worldbank.org/curated/en/099328104212536745/pdf/IDU-6fcb8050-8dd2-4e73-9b5f-f5abfb7c6884.pdf",
       "record": "R09",
       "topic": "Architecture & institutions"
+    },
+    {
+      "date": "24 October 2026 · source review",
+      "title": "Who is listed on OSF Western Balkans leadership?",
+      "body": "The organisation’s roster, checked on 24 October 2026, lists Andi Dobrushi as director, Miodrag Milosavljevic as deputy director and Dukagjin Hyseni as chief operating officer.",
+      "limit": "This is the organisation’s own account. The review date is not an appointment date. A staff role does not establish political control, personal payments or responsibility for an unrelated project.",
+      "status": "Official account",
+      "url": "https://osfwb.org/who-we-are/",
+      "record": "R46",
+      "topic": "Institutions & funding"
     }
   ]
 }
