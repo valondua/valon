@@ -1493,19 +1493,79 @@
         "Tirana concession correspondence",
         "Attributed letters; reported 2023, not authenticated"
       ]
+    },
+    {
+      "id": "R52",
+      "topic": "Population & migration",
+      "status": "Official account",
+      "title": "Depopulation: several forces, not one cause",
+      "body": "UNFPA’s 11 December 2024 account of the Euronews Albania “Depopulation” series identifies emigration and falling fertility as major drivers of population decline, alongside population ageing. It advocates rights-based responses, including housing, childcare and a better work-life balance.",
+      "limit": "This is an institutional account of expert discussion, not a causal estimate of any government’s responsibility. The census difference includes births, deaths and net migration, as well as measurement differences; it is not a count of departures.",
+      "sources": [
+        {
+          "url": "https://albania.unfpa.org/en/news/%E2%80%9Cdepopulation%E2%80%9D-series-analyzes-factors-albanian-shrinking-population",
+          "label": "UNFPA · 11 December 2024"
+        }
+      ],
+      "subject": "Depopulation: several forces, not one cause",
+      "grade": "Official account",
+      "group": "Public claims & accountability",
+      "connection": [
+        "UNFPA",
+        "Population change",
+        "Published statistical context"
+      ]
+    },
+    {
+      "id": "R53",
+      "topic": "Population & migration",
+      "status": "Documented record",
+      "title": "EU permits: what “over one million” measures",
+      "body": "Eurostat records at least 1,056,487 first residence permits issued to Albanian citizens in today’s 27 EU countries during 2008–2025, summing available country-year observations. The 2025 EU27 total is 68,653. These are permit issuances over 18 years, not unique emigrants or the number living abroad today.",
+      "limit": "Fixed present-day EU27 geography, not EU membership in each historical year; the UK and EFTA are excluded. Croatia 2008–2012 and Luxembourg 2008 are missing, not zero, so the sum is a lower bound. A new permit after a gap of at least six months can count as “first” again. Do not add this cumulative flow to census decline or US diaspora estimates, or attribute the whole period to one administration.",
+      "sources": [
+        {
+          "url": "https://ec.europa.eu/eurostat/databrowser/view/migr_resfirst/default/table?lang=en",
+          "label": "Eurostat · migr_resfirst"
+        },
+        {
+          "url": "https://ec.europa.eu/eurostat/cache/metadata/Annexes/migr_resind_esmsip2_an_4.pdf",
+          "label": "Eurostat · definitions"
+        }
+      ],
+      "subject": "EU permits: what “over one million” measures",
+      "grade": "Verified record",
+      "group": "Public claims & accountability",
+      "connection": [
+        "Eurostat",
+        "EU first residence permits",
+        "Published statistical context"
+      ]
+    },
+    {
+      "id": "R54",
+      "topic": "Population & migration",
+      "status": "Documented record",
+      "title": "US diaspora: birthplace and ancestry are different",
+      "body": "INSTAT’s Diaspora in Figures 2025, section 2.3, reports 206,520 people in the US Albanian community using the 2023 American Community Survey: 94,616 born in Albania and 111,904 with Albanian ancestry born elsewhere. These are survey estimates of residents, not annual arrivals.",
+      "limit": "INSTAT calls the second group “second generation” but explicitly includes people born in Kosovo, North Macedonia or other countries who self-identify with Albanian ancestry. It is not limited to US-born children of Albania-born parents. The total is INSTAT’s published tabulation, not an independently reproduced ACS microdata estimate; uncertainty intervals are not supplied in that table.",
+      "sources": [
+        {
+          "url": "https://www.instat.gov.al/media/hnmh5ems/diaspora-ne-shifra.pdf",
+          "label": "INSTAT · section 2.3, table 4"
+        }
+      ],
+      "subject": "US diaspora: birthplace and ancestry are different",
+      "grade": "Verified record",
+      "group": "Public claims & accountability",
+      "connection": [
+        "INSTAT",
+        "US Albanian diaspora",
+        "Published statistical context"
+      ]
     }
   ],
   "events": [
-    {
-      "date": "1990s",
-      "title": "Foundation’s historical funding account",
-      "body": "Open Society’s Albania factsheet says work began in 1992, with over $57m for rebuilding 275 schools and kindergartens in the 1990s and $600,000 earmarked in 2015 for judicial-reform expertise and consultation. Alex Soros is listed as chair of the OSF board.",
-      "limit": "These are the foundation’s own program figures. The $600,000 is an earmark, not a verified list of payments to individuals. Swiss-funded LëvizAlbania cooperation must remain separate from OSF’s own funding and worldwide expenditure.",
-      "status": "Official account",
-      "url": "https://www.opensocietyfoundations.org/newsroom/open-society-foundations-albania",
-      "record": "R35",
-      "topic": "Grants & public money"
-    },
     {
       "date": "5 August 1996",
       "title": "OSFA’s legal registration and representative",
@@ -1515,6 +1575,136 @@
       "url": "https://opencorporates.al/en/nipt/j62005011n",
       "record": "R45",
       "topic": "Institutions & funding"
+    },
+    {
+      "date": "22 August 2016 · reporting",
+      "title": "A 2016 report on OSFA’s reform strategy",
+      "body": "Exit’s 22 August 2016 article describes constitutional-reform advocacy in a document it identifies as OSFA’s 2014–2017 strategy. This establishes what Exit reported, rather than independent authentication of the underlying document.",
+      "limit": "The linked document could not be independently accessed in this review. The article’s interpretation is attributed to the outlet; it does not prove ownership of the judiciary, bribery or control over individual judicial decisions.",
+      "status": "Reported findings",
+      "url": "https://exit.al/en/constitutional-reform-conceived-planned-and-carried-out-by-soros/",
+      "record": "R49",
+      "topic": "Institutions & funding"
+    },
+    {
+      "date": "15 July 2023 · reporting",
+      "title": "Ahmetaj: the reported €491,000 allegation and denial",
+      "body": "BIRN’s 15 July 2023 account of a prosecution file reports alleged benefits of at least €491,000 from businessmen Klodian Zoto and Mirel Mërtiri to Arben Ahmetaj. Transparency International summarises the allegation and records Ahmetaj’s denial and claim of political revenge.",
+      "limit": "These are reported prosecutorial allegations, not proven payments or a final conviction. The amount describes a combined allegation, not a separate payment by each businessman. This historical reporting does not establish the current case outcome or a payment to Edi Rama.",
+      "status": "Allegation",
+      "url": "https://www.reporter.al/2023/07/15/dosja-e-prokurorise-si-u-pagua-arben-ahmetaj-nga-biznesmenet-e-incineratoreve/",
+      "record": "R48",
+      "topic": "Public integrity & organised crime"
+    },
+    {
+      "date": "1 October 2023",
+      "title": "LëvizAlbania: historical consortium and a 2023 transition",
+      "body": "LëvizAlbania describes a Swiss-funded project implemented by OSFA, Partners Albania for Change and Development, and Co-PLAN. Its site says that from 1 October 2023 the independent LëvizAlbania Center operates outside Swiss development-agency auspices.",
+      "limit": "Swiss government material corroborates the historical consortium. Do not extend that arrangement into the present or infer that OSFA owns the other partners. This source does not establish a later funding contract.",
+      "status": "Official account",
+      "url": "https://www.levizalbania.al/en/about-us",
+      "record": "R47",
+      "topic": "Institutions & funding"
+    },
+    {
+      "date": "11 December 2023 · reporting",
+      "title": "Correspondence attributed to Rama and Veliaj",
+      "body": "On 11 December 2023, CNA reported documents released by the Democratic Party: a 2016 bonus approval attributed to Edi Rama and 2017 letters attributed to Erion Veliaj concerning the Tirana concession procedure and fee.",
+      "limit": "The letters and signatures were not independently authenticated in this review. The procurement register separately supports the bonus decision in R01; it does not authenticate these reproductions. Neither correspondence nor the outlet’s interpretation establishes criminal guilt.",
+      "status": "Reported findings",
+      "url": "https://www.cna.al/english/aktualitet/dokumentet-firmat-e-rames-veliajt-dhe-agacit-per-aferen-me-incenerato-i383683",
+      "record": "R51",
+      "topic": "Tirana concession & correspondence"
+    },
+    {
+      "date": "11 December 2024",
+      "title": "Depopulation: several forces, not one cause",
+      "body": "UNFPA’s 11 December 2024 account of the Euronews Albania “Depopulation” series identifies emigration and falling fertility as major drivers of population decline, alongside population ageing. It advocates rights-based responses, including housing, childcare and a better work-life balance.",
+      "limit": "This is an institutional account of expert discussion, not a causal estimate of any government’s responsibility. The census difference includes births, deaths and net migration, as well as measurement differences; it is not a count of departures.",
+      "status": "Official account",
+      "url": "https://albania.unfpa.org/en/news/%E2%80%9Cdepopulation%E2%80%9D-series-analyzes-factors-albanian-shrinking-population",
+      "record": "R52",
+      "topic": "Population & migration"
+    },
+    {
+      "date": "2025 · publication of 2024 report",
+      "title": "The Ministry’s 2024 fiscal-risk statement",
+      "body": "The Ministry of Finance’s Fiscal Risk Statement for 2024, published with a Tirana 2025 date, reports on public-private partnerships and concession exposure. Its table distinguishes actual expenditure, plans and forecasts, expressed in thousand ALL.",
+      "limit": "Budget exposure is not proof of corruption or an individual payment. Keep actual and forecast figures separate; the report’s year and publication year are different. No project-specific total is inferred here.",
+      "status": "Verified record",
+      "url": "https://financa.gov.al/wp-content/uploads/2025/12/Fiscal-Risk-Statement-2024.pdf",
+      "record": "R50",
+      "topic": "Grants & public money"
+    },
+    {
+      "date": "19 December 2025 · publication",
+      "title": "US diaspora: birthplace and ancestry are different",
+      "body": "INSTAT’s Diaspora in Figures 2025, section 2.3, reports 206,520 people in the US Albanian community using the 2023 American Community Survey: 94,616 born in Albania and 111,904 with Albanian ancestry born elsewhere. These are survey estimates of residents, not annual arrivals.",
+      "limit": "INSTAT calls the second group “second generation” but explicitly includes people born in Kosovo, North Macedonia or other countries who self-identify with Albanian ancestry. It is not limited to US-born children of Albania-born parents. The total is INSTAT’s published tabulation, not an independently reproduced ACS microdata estimate; uncertainty intervals are not supplied in that table.",
+      "status": "Verified record",
+      "url": "https://www.instat.gov.al/media/hnmh5ems/diaspora-ne-shifra.pdf",
+      "record": "R54",
+      "topic": "Population & migration"
+    },
+    {
+      "date": "24 October 2026 · source review",
+      "title": "Who is listed on OSF Western Balkans leadership?",
+      "body": "The organisation’s roster, checked on 24 October 2026, lists Andi Dobrushi as director, Miodrag Milosavljevic as deputy director and Dukagjin Hyseni as chief operating officer.",
+      "limit": "This is the organisation’s own account. The review date is not an appointment date. A staff role does not establish political control, personal payments or responsibility for an unrelated project.",
+      "status": "Official account",
+      "url": "https://osfwb.org/who-we-are/",
+      "record": "R46",
+      "topic": "Institutions & funding"
+    },
+    {
+      "date": "24 October 2026 · source review",
+      "title": "EU permits: what “over one million” measures",
+      "body": "Eurostat records at least 1,056,487 first residence permits issued to Albanian citizens in today’s 27 EU countries during 2008–2025, summing available country-year observations. The 2025 EU27 total is 68,653. These are permit issuances over 18 years, not unique emigrants or the number living abroad today.",
+      "limit": "Fixed present-day EU27 geography, not EU membership in each historical year; the UK and EFTA are excluded. Croatia 2008–2012 and Luxembourg 2008 are missing, not zero, so the sum is a lower bound. A new permit after a gap of at least six months can count as “first” again. Do not add this cumulative flow to census decline or US diaspora estimates, or attribute the whole period to one administration.",
+      "status": "Verified record",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/migr_resfirst/default/table?lang=en",
+      "record": "R53",
+      "topic": "Population & migration"
+    },
+    {
+      "date": "2021",
+      "title": "A meeting on the water",
+      "body": "Kushner’s family trip brought him to Albania. In Rama’s later account, an invitation aboard a yacht in Durrës introduced the two men. Reporting dates the encounter to summer 2021.",
+      "limit": "This is a retrospective account. The host’s identity is not consistently established; the meeting does not prove a financing arrangement.",
+      "status": "Reported",
+      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
+      "record": "",
+      "topic": "Coastal projects"
+    },
+    {
+      "date": "After the 2021 visit",
+      "title": "The conversation turns to investment",
+      "body": "According to the Financial Times account relayed by Politiko, a later conversation at Davos touched on Albania and investment opportunities.",
+      "limit": "The exact date of this meeting is not established here. An expression of interest is not an agreement.",
+      "status": "Reported",
+      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
+      "record": "",
+      "topic": "Coastal projects"
+    },
+    {
+      "date": "Summer 2023",
+      "title": "A return visit",
+      "body": "Kushner returned with a larger group, including Richard Grenell. The same account describes a week of visits and explicit interest in investing.",
+      "limit": "A visit establishes neither land ownership nor project approval.",
+      "status": "Reported",
+      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
+      "record": "",
+      "topic": "Coastal projects"
+    },
+    {
+      "date": "1990s",
+      "title": "Foundation’s historical funding account",
+      "body": "Open Society’s Albania factsheet says work began in 1992, with over $57m for rebuilding 275 schools and kindergartens in the 1990s and $600,000 earmarked in 2015 for judicial-reform expertise and consultation. Alex Soros is listed as chair of the OSF board.",
+      "limit": "These are the foundation’s own program figures. The $600,000 is an earmark, not a verified list of payments to individuals. Swiss-funded LëvizAlbania cooperation must remain separate from OSF’s own funding and worldwide expenditure.",
+      "status": "Official account",
+      "url": "https://www.opensocietyfoundations.org/newsroom/open-society-foundations-albania",
+      "record": "R35",
+      "topic": "Grants & public money"
     },
     {
       "date": "1 April 2009",
@@ -1537,16 +1727,6 @@
       "topic": "Security & foreign policy"
     },
     {
-      "date": "22 August 2016 · reporting",
-      "title": "A 2016 report on OSFA’s reform strategy",
-      "body": "Exit’s 22 August 2016 article describes constitutional-reform advocacy in a document it identifies as OSFA’s 2014–2017 strategy. This establishes what Exit reported, rather than independent authentication of the underlying document.",
-      "limit": "The linked document could not be independently accessed in this review. The article’s interpretation is attributed to the outlet; it does not prove ownership of the judiciary, bribery or control over individual judicial decisions.",
-      "status": "Reported findings",
-      "url": "https://exit.al/en/constitutional-reform-conceived-planned-and-carried-out-by-soros/",
-      "record": "R49",
-      "topic": "Institutions & funding"
-    },
-    {
       "date": "7 December 2016",
       "title": "Incinerator evaluation bonus",
       "body": "The Open Procurement register records an 8% evaluation bonus approved on 7 December 2016, one bidder, Integrated Energy B.V., and an offer of ALL 17,139,106,821 excluding VAT. The 30-year award is dated 24 August 2017; contract 6021 Rep., 2894 Kol. is dated 31 August 2017. The contracting authority was the Ministry of Environment.",
@@ -1565,26 +1745,6 @@
       "url": "https://openprocurement.al/sq/concession/view/id/5",
       "record": "R01",
       "topic": "Land & contracts"
-    },
-    {
-      "date": "2021",
-      "title": "A meeting on the water",
-      "body": "Kushner’s family trip brought him to Albania. In Rama’s later account, an invitation aboard a yacht in Durrës introduced the two men. Reporting dates the encounter to summer 2021.",
-      "limit": "This is a retrospective account. The host’s identity is not consistently established; the meeting does not prove a financing arrangement.",
-      "status": "Reported",
-      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
-      "record": "",
-      "topic": "Coastal projects"
-    },
-    {
-      "date": "After the 2021 visit",
-      "title": "The conversation turns to investment",
-      "body": "According to the Financial Times account relayed by Politiko, a later conversation at Davos touched on Albania and investment opportunities.",
-      "limit": "The exact date of this meeting is not established here. An expression of interest is not an agreement.",
-      "status": "Reported",
-      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
-      "record": "",
-      "topic": "Coastal projects"
     },
     {
       "date": "15 February 2022",
@@ -1627,46 +1787,6 @@
       "topic": "Security & foreign policy"
     },
     {
-      "date": "Summer 2023",
-      "title": "A return visit",
-      "body": "Kushner returned with a larger group, including Richard Grenell. The same account describes a week of visits and explicit interest in investing.",
-      "limit": "A visit establishes neither land ownership nor project approval.",
-      "status": "Reported",
-      "url": "https://politiko.al/english/e-tjera/projekti-per-sazanin-financial-times-zbulon-darken-e-jared-kushner-me-ed-i524672",
-      "record": "",
-      "topic": "Coastal projects"
-    },
-    {
-      "date": "15 July 2023 · reporting",
-      "title": "Ahmetaj: the reported €491,000 allegation and denial",
-      "body": "BIRN’s 15 July 2023 account of a prosecution file reports alleged benefits of at least €491,000 from businessmen Klodian Zoto and Mirel Mërtiri to Arben Ahmetaj. Transparency International summarises the allegation and records Ahmetaj’s denial and claim of political revenge.",
-      "limit": "These are reported prosecutorial allegations, not proven payments or a final conviction. The amount describes a combined allegation, not a separate payment by each businessman. This historical reporting does not establish the current case outcome or a payment to Edi Rama.",
-      "status": "Allegation",
-      "url": "https://www.reporter.al/2023/07/15/dosja-e-prokurorise-si-u-pagua-arben-ahmetaj-nga-biznesmenet-e-incineratoreve/",
-      "record": "R48",
-      "topic": "Public integrity & organised crime"
-    },
-    {
-      "date": "1 October 2023",
-      "title": "LëvizAlbania: historical consortium and a 2023 transition",
-      "body": "LëvizAlbania describes a Swiss-funded project implemented by OSFA, Partners Albania for Change and Development, and Co-PLAN. Its site says that from 1 October 2023 the independent LëvizAlbania Center operates outside Swiss development-agency auspices.",
-      "limit": "Swiss government material corroborates the historical consortium. Do not extend that arrangement into the present or infer that OSFA owns the other partners. This source does not establish a later funding contract.",
-      "status": "Official account",
-      "url": "https://www.levizalbania.al/en/about-us",
-      "record": "R47",
-      "topic": "Institutions & funding"
-    },
-    {
-      "date": "11 December 2023 · reporting",
-      "title": "Correspondence attributed to Rama and Veliaj",
-      "body": "On 11 December 2023, CNA reported documents released by the Democratic Party: a 2016 bonus approval attributed to Edi Rama and 2017 letters attributed to Erion Veliaj concerning the Tirana concession procedure and fee.",
-      "limit": "The letters and signatures were not independently authenticated in this review. The procurement register separately supports the bonus decision in R01; it does not authenticate these reproductions. Neither correspondence nor the outlet’s interpretation establishes criminal guilt.",
-      "status": "Reported findings",
-      "url": "https://www.cna.al/english/aktualitet/dokumentet-firmat-e-rames-veliajt-dhe-agacit-per-aferen-me-incenerato-i383683",
-      "record": "R51",
-      "topic": "Tirana concession & correspondence"
-    },
-    {
       "date": "2024 filing year",
       "title": "Two paid grant entries",
       "body": "The Foundation to Promote Open Society’s 2024 Form 990-PF (EIN 26-3753801), Part XIV 3(a), PDF page 12, lists general-support payments to Open Society Foundation for Albania of $2,560,000 and $3,347,000. Together these entries total $5,907,000. They appear in the paid-during-the-year section.",
@@ -1695,16 +1815,6 @@
       "url": "https://aida.gov.al/wp-content/uploads/2026/02/00.-REGJISTRI-AIDA-2025_30112025.pdf",
       "record": "R04",
       "topic": "Land & contracts"
-    },
-    {
-      "date": "2025 · publication of 2024 report",
-      "title": "The Ministry’s 2024 fiscal-risk statement",
-      "body": "The Ministry of Finance’s Fiscal Risk Statement for 2024, published with a Tirana 2025 date, reports on public-private partnerships and concession exposure. Its table distinguishes actual expenditure, plans and forecasts, expressed in thousand ALL.",
-      "limit": "Budget exposure is not proof of corruption or an individual payment. Keep actual and forecast figures separate; the report’s year and publication year are different. No project-specific total is inferred here.",
-      "status": "Verified record",
-      "url": "https://financa.gov.al/wp-content/uploads/2025/12/Fiscal-Risk-Statement-2024.pdf",
-      "record": "R50",
-      "topic": "Grants & public money"
     },
     {
       "date": "24 February 2025",
@@ -1815,16 +1925,6 @@
       "url": "https://documents1.worldbank.org/curated/en/099328104212536745/pdf/IDU-6fcb8050-8dd2-4e73-9b5f-f5abfb7c6884.pdf",
       "record": "R09",
       "topic": "Architecture & institutions"
-    },
-    {
-      "date": "24 October 2026 · source review",
-      "title": "Who is listed on OSF Western Balkans leadership?",
-      "body": "The organisation’s roster, checked on 24 October 2026, lists Andi Dobrushi as director, Miodrag Milosavljevic as deputy director and Dukagjin Hyseni as chief operating officer.",
-      "limit": "This is the organisation’s own account. The review date is not an appointment date. A staff role does not establish political control, personal payments or responsibility for an unrelated project.",
-      "status": "Official account",
-      "url": "https://osfwb.org/who-we-are/",
-      "record": "R46",
-      "topic": "Institutions & funding"
     }
   ]
 }
