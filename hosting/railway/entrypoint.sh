@@ -27,4 +27,6 @@ for module in /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm
 done
 a2enmod mpm_prefork
 apache2ctl -t
+install -d -o www-data -g www-data -m 0700 "$state/cron"
+runuser -u www-data -- php /usr/local/bin/valon-cron-loop.php &
 exec docker-php-entrypoint "$@"
