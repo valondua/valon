@@ -174,3 +174,61 @@ A 2025 **maintenance and safety** tender reportedly went to the A-M / Gjoka Kons
 6. Seek comment and supporting records from each company and relevant ministry; log denials and corrections alongside claims.
 
 **Interpretation:** The findings establish ownership and institutional decision relationships, not an illicit conspiracy. Unknown beneficial owners remain unknown; do not fill gaps by ethnic, religious or political association.
+
+
+## Organizations that honored Rama — screening register (23 October 2026)
+
+**Not exhaustive.** An award, honorary role, state office, formal membership and business contract are different relationships. Names and current roles require issuer verification before publication.
+
+| Organization / institution | Rama relationship | Named leader at time | Primary / institutional reference | Financial link to Albanian public contracts |
+| --- | --- | --- | --- | --- |
+| Combat Antisemitism Movement (CAM) | Global Leadership Award, Sept 2024 | CEO Sacha Roytman; advisory chair Natan Sharansky | https://combatantisemitism.org/cam-news/prime-minister-of-albania-edi-rama-honored-for-leadership-in-fight-against-antisemitism-at-un-general-assembly-event/ | **Not established**; search required |
+| Center for Jewish Impact | Award event co-organizer | Chairman Robert Singer | Same CAM event source | **Not established** |
+| Vital Voices Global Partnership | Voices of Solidarity recognition, Dec 2021 | President/CEO Alyse Nelson; co-founder Hillary Clinton | https://www.kryeministria.al/en/newsroom/kryeministri-rama-nderohet-me-cmimin-e-solidaritetit-nga-vital-voices-global-partnership/ | **Not established** |
+| Sesame Workshop | Joan Ganz Cooney Global Leadership Award, June 2022 | President/CEO Sherrie Westin | https://www.kryeministria.al/en/newsroom/shba-kryeministri-rama-nderohet-me-cmimin-prestigjoz-nga-organizata-sesame-workshop/ | **Not established** |
+| Israeli Presidency | Presidential Medal of Honor, April 2025 | President Isaac Herzog | https://www.kryeministria.al/en/newsroom/jeruzalem-kryeministri-rama-nderohet-me-medaljen-presidenciale-te-nderit-te-izraelit/ | No personal payment established |
+| UAE Presidency | Order of Zayed, Jan 2026 | President Mohamed bin Zayed Al Nahyan | UAE Foreign Ministry / government announcements | State-to-state cooperation and separate Eagle Hills investment are documented; **no award-for-contract exchange established** |
+| OSCE | Albania's rotating Chairmanship-in-Office, 2020 | Rama as chairman-in-office | https://www.osce.org/chairmanship | State role, not private award or membership |
+
+### UAE / Durrës Marina: a documented investment network, not an inferred award-for-contract arrangement
+
+The Durrës Port Authority describes a 10 August 2022 memorandum of understanding between Eagle Hills Real Estate Development, represented by **Mohamed Alabbar**, and Albanian Seaports Development Company, represented by **Erlis Hereni**. The project followed Strategic Investment Committee Decision 14/6 of 2 December 2021. [Port Authority record](https://durresport.al/durres-yachts-and-marina-signing-ceremony-of-the-memorandum-of-understanding-10-august-2022/). Registry-derived reporting identifies a historical indirect **40.18%** interest of Alabbar in Eagle Hills and a project-vehicle structure reported as **67% Eagle Hills / 33% Albanian Seaports Development Company**; the date and company IDs need confirmation against certified QKB extracts. [Registry-derived profile](https://opencorporates.al/en/nipt/m11726006h).
+
+**No evidence identified here** that the UAE president personally owned this project, received its proceeds, or conferred the 2026 honor in exchange for any project decision.
+
+## Certified-record acquisition and right-of-reply workflow
+
+### Requested original documents (not yet obtained or certified)
+
+| Priority | Custodian | Specific records | Why needed | Status |
+| --- | --- | --- | --- | --- |
+| P1 | QKB (Albanian National Business Center) | Certified current and historical company + beneficial-owner extracts for Integrated Energy BV SPV (NUIS L72031013B), Sazan Operations, Durrës Marina (NUIS M31423504A), and all Albanian intermediate entities | Confirm ultimate natural persons, effective dates, changes, pledges and directors | **Request pending — not submitted** |
+| P1 | Dutch Kamer van Koophandel (KvK) | Historical shareholder/filing extracts for GeoGenix BV (formerly Integrated Energy B.V.), Blue Industries Investment Holding BV and every intermediary in ownership chain | Verify parent stakes and reconcile UBO assertions | **Request pending — not submitted** |
+| P1 | AIDA / Strategic Investment Committee | Signed Sazan Decision 23/2024, annexes, extensions, correspondence and implementation agreement | Determine legal beneficiary, land rights, obligations and state commitments | **Request pending — not submitted** |
+| P1 | Ministry of Environment / concession archive | Signed 2017 Tirana incinerator concession, all amendments, payment schedules and performance reports | Identify actual contractual rights, costs and beneficiaries | **Request pending — not submitted** |
+| P1 | APP / Infrastructure Ministry | 2021 Llogara construction tender award, contract, consortium agreement, amendments, payment records (not 2025 maintenance tender) | Identify actual construction counterparties and payment trail | **Request pending — not submitted** |
+| P2 | Albanian Investment Corporation / Defense Ministry | Sazan negotiation minutes, state-asset valuation and demining decision/payment evidence | Quantify state contributions | **Request pending — not submitted** |
+| P2 | Durrës Port Authority / Ministry of Finance | Durrës Marina investment agreement, land valuation, guarantees, tax concessions, dividends and audited accounts | Test public benefit and financial exposure | **Request pending — not submitted** |
+| P2 | Delaware Division of Corporations / company | Atlantic Incubation Partners LLC registration and voluntary beneficial-ownership/capitalization disclosure | Public Delaware registration alone may not identify ultimate owners | **Request pending — not submitted** |
+
+### Draft document request (Albanian)
+
+**Subjekti: Kërkesë për informacion dhe kopje dokumentesh — [projekti / vendimi]**
+
+Në kuadër të një hulumtimi publik mbi transparencën e investimeve, koncesioneve dhe pronësinë përfituese, kërkojmë kopje elektronike të [numri dhe data e vendimit/kontratës], anekseve, ndryshimeve, vlerësimit të pronës publike, pagesave dhe identitetit të subjekteve kontraktuese, sipas rregullave për qasjen në informacionin publik. Ju lutemi tregoni çdo pjesë të kufizuar ligjërisht, bazën për kufizimin dhe mundësinë e qasjes së pjesshme. Ju lutemi të konfirmoni numrin e protokollit dhe afatin e përgjigjes.
+
+### Draft right-of-reply to companies (English)
+
+**Subject: Request for comment and supporting documents — Albania development/concession investigation**
+
+We are preparing a documented public-interest investigation into [project], focusing on corporate ownership, contractual rights, government decisions and public financial commitments. Please confirm (1) the current direct and ultimate beneficial owners, including effective dates and ownership percentages; (2) all project vehicles and material affiliates; (3) the signed investment or concession agreements and amendments; (4) any public land, guarantees, subsidies or tax advantages; and (5) any corrections to the factual relationships described in our source-linked register. We will distinguish your response from allegations and include relevant corrections. No allegation of unlawful conduct is inferred from ownership or political association.
+
+**Sending status:** No request or right-of-reply email has been sent. Recipients, addresses and case-specific assertions must be verified first.
+
+### Publication controls
+
+- Record company identifiers, ownership percentage, **effective date**, document identifier and original filing link for every graph edge.
+- Separate **verified document**, **reported document**, **allegation**, **inference** and **unresolved** in the UI.
+- Do not use a registered agent as if it were a beneficial owner.
+- Do not present historical percentages as current or a criminal charge as a conviction.
+- Log replies, denials, corrections and document access restrictions.
