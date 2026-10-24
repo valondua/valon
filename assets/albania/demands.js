@@ -10,7 +10,7 @@
   if (window.ResizeObserver && header) new ResizeObserver(measureHeader).observe(header);
   window.addEventListener('resize', measureHeader);
   function revealDemands() {
-    if (!['#demands', '#jewish-history-projects'].includes(location.hash)) return;
+    if (!['#demands', '#jewish-history-projects', '#christopher-hyland'].includes(location.hash)) return;
     const target = document.getElementById(location.hash.slice(1));
     if (!target) return;
     measureHeader();
@@ -27,7 +27,7 @@
   }
   window.addEventListener('hashchange', () => { preserveAnchor(); revealDemands(); });
   document.addEventListener('click', event => {
-    const link = event.target.closest('a[href="#demands"], a[href="#jewish-history-projects"]');
+    const link = event.target.closest('a[href="#demands"], a[href="#jewish-history-projects"], a[href="#christopher-hyland"]');
     if (link && location.hash === link.getAttribute('href')) { event.preventDefault(); revealDemands(); }
   });
   preserveAnchor();

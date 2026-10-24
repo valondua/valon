@@ -232,5 +232,20 @@
     "name": "Co-PLAN",
     "role": "An organisation named in the historical LëvizAlbania consortium; check the dated project sources.",
     "photo": null
+  },
+  "hyland": {
+    "name": "Christopher Hyland",
+    "role": "American businessman and public-affairs advocate; self-described Bektashi representative in North America. This is not evidence of a U.S. government mandate.",
+    "photo": null
+  },
+  "baba_mondi": {
+    "name": "Baba Mondi",
+    "role": "Bektashi leader; named by Hyland as a collaborator on the proposed Bektashi state.",
+    "photo": null
+  },
+  "hazis_vardar": {
+    "name": "Hazis Vardar",
+    "role": "Businessman named with Hyland in Kosovo’s official 2023 conference speech; a European advocacy role is reported by Shqiptarja via NRC.",
+    "photo": null
   }
 }

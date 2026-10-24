@@ -52,8 +52,8 @@ add_action('wp_enqueue_scripts', static function () {
 <body <?php body_class('albania-investigation'); ?>><?php wp_body_open(); ?>
 <?php
 // Both fragments are versioned, reviewed local HTML; no visitor input is interpolated.
-$content = str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->', '<!-- ALBANIA_DEMANDS -->', '<!-- ALBANIA_JEWISH_HISTORY_PROJECTS -->', 'ALBANIA_SUBMIT_URL', '<!-- ALBANIA_LANGUAGE_SWITCH -->'],
-    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'), file_get_contents(__DIR__ . '/template-parts/albania-demands.html'), file_get_contents(__DIR__ . '/template-parts/albania-jewish-history-projects.html'), esc_url(valon_albania_submit_url()), valon_albania_language_switch()],
+$content = str_replace(['ALBANIA_ASSETS', '<!-- ALBANIA_RESEARCH_REGISTER -->', '<!-- ALBANIA_DEMANDS -->', '<!-- ALBANIA_JEWISH_HISTORY_PROJECTS -->', '<!-- ALBANIA_HYLAND -->', 'ALBANIA_SUBMIT_URL', '<!-- ALBANIA_LANGUAGE_SWITCH -->'],
+    [esc_url(get_theme_file_uri('/assets/albania')), file_get_contents(__DIR__ . '/template-parts/albania-research-register.html'), file_get_contents(__DIR__ . '/template-parts/albania-demands.html'), file_get_contents(__DIR__ . '/template-parts/albania-jewish-history-projects.html'), file_get_contents(__DIR__ . '/template-parts/albania-hyland.html'), esc_url(valon_albania_submit_url()), valon_albania_language_switch()],
     file_get_contents(__DIR__ . '/template-parts/albania-investigation.html'));
 echo valon_albania_localize_html(get_option('valon_dossier_multipage_ready')?valon_dossier_render($content):$content);
 if(valon_albania_is_sq())echo '<p class="wrap" style="padding:1rem 0;font-size:.8rem">Përkthimi në shqip është asistuar nga Google Translate; terminologjia e provave është rishikuar. Për formulimin e saktë të dokumenteve dhe citimeve, shihni burimet origjinale të lidhura. Korrigjimet janë të mirëpritura.</p>';
