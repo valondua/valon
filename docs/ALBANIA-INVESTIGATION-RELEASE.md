@@ -2,7 +2,7 @@
 
 Public route: `/albania-protests-investigation/`. Publication is a separate WordPress page action; the theme does not automatically publish content.
 
-Source: supplied `albania_nzz_investigation.html`, 64,615 bytes, plus `docs/research-tirana-protests-1936-italian-warning.md`. The full original sections are retained, including the sections appended outside the original HTML document. Added the historical-context chapter, direct network source links, keyboard relationship selection, static story/timeline/source fallbacks and explicit research gaps. Leaflet 1.9.4 and vis-network 9.1.9 are bundled with licenses. OpenStreetMap tiles load only after the reader requests the map.
+Source: supplied original investigation HTML, 64,615 bytes, plus `docs/research-tirana-protests-1936-italian-warning.md`. The full original sections are retained, including the sections appended outside the original HTML document. Added the historical-context chapter, direct network source links, keyboard relationship selection, static story/timeline/source fallbacks and explicit research gaps. Leaflet 1.9.4 and vis-network 9.1.9 are bundled with licenses. OpenStreetMap tiles load only after the reader requests the map.
 
 ## Attribution checks and limits
 

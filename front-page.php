@@ -97,7 +97,7 @@
     valon_text("Selected media coverage", "Media të zgjedhura"),
 ); ?>">
     <span><?php echo esc_html(valon_text("In the media", "Në media")); ?></span>
-    <a href="https://www.nzz.ch/international/kosovo-diaspora-wichtig-fuer-wirtschaft-und-gesellschaft-ld.1699736" class="press-nzz">NZZ</a>
+
     <a href="https://www.srf.ch/news/schweiz/geld-schicken-kam-fuer-mich-nie-in-frage" class="press-srf">SRF</a>
     <a href="https://www.watson.ch/international/schweiz/571493168-was-die-schweiz-vom-kosovo-lernen-kann" class="press-watson">watson</a>
     <a href="https://balkaninsight.com/2020/08/20/new-app-aims-to-connect-albanians-around-the-world/" class="press-balkan">Balkan Insight</a>
