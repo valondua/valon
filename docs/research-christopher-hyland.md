@@ -47,3 +47,19 @@ Retrieved-file SHA-256 (raw archive response, not the original server’s bytes)
 - `bio2001.html`: `20f3706f15055dc90bb12bc435715ae0af7b9af46cfc07de50d01170b68f99d2`
 - `bio2019.html`: `7df616a63cdeff3d5f9c9ab3ad5ad66fcae512b0755a6d91a35e98af8abf78c7`
 - `bio2024.txt`: `f043625344d780a5d938aa7342dd7385f6b2a17c6124160f9f9bab3aad3e6e45`
+
+## Further proposal search — 24 October 2026
+
+A 13 October 2020 interview-based account by Ruben Avxhiu in Illyria supplies a retrospective narrative, not the detailed original plan: https://www.illyria.com/kthimi-i-nje-miku-te-harruar/ . The new public card preserves attribution and differentiates site autonomy from sovereignty. Three new graph links describe recollections only; none is a direct supporter edge to the historical idea. The timeline uses the publication date, not an invented day in 1992. Reprints in Albspirit and Tema are not independent corroboration. No institutional or financial backer is established.
+
+Further work checked the old company's media page and its two linked PDFs, current media bibliography, English/Albanian phrase searches and a focused Clinton-library web-index search. William G. Hyland partition material is a different person's work and was excluded. No full proposal or independently corroborating endorsement was located. No outreach or private-message authentication was performed; these remain possible next steps requiring original documents.
+
+- Archived media page: https://web.archive.org/web/20060509043307/http://www.christopherhyland.com/media.php
+- 49-page company press kit: https://web.archive.org/web/20061104032212/http://www.christopherhyland.com/pdf/hyland_presskit.pdf
+- Shelter excerpt: https://web.archive.org/web/20060509043337/http://www.christopherhyland.com/pdf/hyland_shelter.pdf
+
+The press-kit text layer and a page contact sheet were inspected, with selected scanned articles enlarged. It is design/biographical material, not a retrieved legal plan. Scanned text was not exhaustively OCR-transcribed; do not describe this search as exhaustive. Larger CDX index requests returned 503; targeted linked-file retrieval succeeded. PDF copies remain outside the public repository.
+
+Integration preserves the newly merged multipage dossier routes. All new profile fragments and the prior historical-idea fragment map to accountability. Existing source records and economic data remain unchanged.
+
+Follow-up validation: 31 automated tests passed, including composed Albanian graph labels. Protected staging returned 200 on all 22 dossier routes with valid fragment destinations, unique IDs, 55 source records and the existing 19-card history module. Browser checks exercised the new EN/SQ card-to-person links and the Albanian timeline-to-Hyland journey at 390 px without horizontal overflow. The Hyland module now has seven context cards, five timeline entries and eight personal graph edges; the three added edges are reported recollections. Scoped before-images are stored outside the public root at `hyland-followup-before`.
