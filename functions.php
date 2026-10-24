@@ -3,6 +3,7 @@ defined("ABSPATH") || exit();
 require_once __DIR__ . "/includes/dashboard.php";
 require_once __DIR__ . "/includes/albania-submissions.php";
 require_once __DIR__ . "/includes/albania-language.php";
+require_once __DIR__ . "/includes/albania-dossier.php";
 require_once __DIR__ . "/includes/static-images.php";
 require_once __DIR__ . "/includes/animated-images.php";
 require_once __DIR__ . "/includes/editorial.php";
