@@ -2065,7 +2065,6 @@
   "Resized, not cropped. Context photograph.": "Përmasat u ndryshuan, pa prerje. Fotografi për kontekst.",
   "Selected individual voices, alongside the dated platforms above. These clips do not establish a shared manifesto or represent every student, teacher or protester. Summaries are paraphrases; allegations remain the speakers’ claims.": "Zëra individualë të përzgjedhur, krahas platformave të datuara më sipër. Këto video nuk dëshmojnë një manifest të përbashkët dhe nuk përfaqësojnë çdo student, mësues apo protestues. Përmbledhjet janë parafrazime; akuzat mbeten pretendime të folësve.",
   "Voices from the protests": "Zëra nga protestat",
-  "Videos stay unloaded until you choose a player. Loading connects to YouTube or Rumble, which may process data and show advertising. Nothing plays automatically. Original source links work without JavaScript.": "Videot nuk ngarkohen derisa të zgjidhni një luajtës. Ngarkimi lidhet me YouTube ose Rumble, që mund të përpunojnë të dhëna dhe të shfaqin reklama. Asgjë nuk luhet automatikisht. Lidhjet e burimeve origjinale punojnë pa JavaScript.",
   "Student, aged 22 according to BalkanWeb · studio interview excerpt": "Studente, 22 vjeçe sipas BalkanWeb · fragment interviste në studio",
   "Recording date: not established. Published by BalkanWeb: 20 October 2026, 07:59.": "Data e regjistrimit: nuk është përcaktuar. Publikuar nga BalkanWeb: 20 tetor 2026, 07:59.",
   "In the excerpt reported by BalkanWeb, Toçka describes separation from family through emigration and unequal opportunities, and raises concern about physics and teacher-training courses closing. These are her account and concerns, not independently verified education statistics.": "Në fragmentin e raportuar nga BalkanWeb, Toçka përshkruan ndarjen nga familja për shkak të emigrimit dhe mundësitë e pabarabarta, si dhe shpreh shqetësim për mbylljen e degëve të fizikës dhe mësuesisë. Këto janë rrëfimi dhe shqetësimet e saj, jo statistika arsimore të verifikuara në mënyrë të pavarur.",
@@ -2096,5 +2095,8 @@
   "News24 Albania / BalkanWeb": "News24 Albania / BalkanWeb",
   "Report TV": "Report TV",
   "Euronews, 2023": "Euronews, 2023",
-  "Player requested. If it does not load, open the original video below.": "Luajtësi u kërkua. Nëse nuk ngarkohet, hapni videon origjinale më poshtë."
+  "Player requested. If it does not load, open the original video below.": "Luajtësi u kërkua. Nëse nuk ngarkohet, hapni videon origjinale më poshtë.",
+  "Samanta’s clip can be loaded here from Rumble, which may process data and show advertising. The other two videos open on YouTube; they do not play on this page. Nothing plays automatically. Original source links work without JavaScript.": "Videoja e Samantës mund të ngarkohet këtu nga Rumble, që mund të përpunojë të dhëna dhe të shfaqë reklama. Dy videot e tjera hapen në YouTube; ato nuk luhen në këtë faqe. Asgjë nuk luhet automatikisht. Lidhjet e burimeve origjinale punojnë pa JavaScript.",
+  "Watch on YouTube": "Shiko në YouTube",
+  "Watch this video on YouTube using the link below.": "Shikojeni këtë video në YouTube përmes lidhjes më poshtë."
 }
