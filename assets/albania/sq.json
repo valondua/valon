@@ -2085,7 +2085,6 @@
   "Load video": "Ngarkoni videon",
   "Close player": "Mbyllni luajtësin",
   "Original audio: Albanian. Read the summary above; automated captions, where available, may contain errors.": "Audioja origjinale: shqip. Lexoni përmbledhjen më sipër; titrat automatikë, kur janë të disponueshëm, mund të përmbajnë gabime.",
-  "Player loaded. Use its controls to play, or open the original video below.": "Luajtësi u ngarkua. Përdorni komandat e tij për ta luajtur, ose hapni videon origjinale më poshtë.",
   "Player closed.": "Luajtësi u mbyll.",
   "Load video: Samanta Toçka": "Ngarkoni videon: Samanta Toçka",
   "Load video: Taulanda Jupi": "Ngarkoni videon: Taulanda Jupi",
@@ -2096,5 +2095,6 @@
   "BalkanWeb / Rumble": "BalkanWeb / Rumble",
   "News24 Albania / BalkanWeb": "News24 Albania / BalkanWeb",
   "Report TV": "Report TV",
-  "Euronews, 2023": "Euronews, 2023"
+  "Euronews, 2023": "Euronews, 2023",
+  "Player requested. If it does not load, open the original video below.": "Luajtësi u kërkua. Nëse nuk ngarkohet, hapni videon origjinale më poshtë."
 }

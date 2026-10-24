@@ -34,7 +34,7 @@
    frame.title=card.querySelector('h4').textContent+' — '+t('Load video');
    frame.allow='encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
    button.hidden=true;box.appendChild(frame);close.hidden=false;
-   status.textContent=t('Player loaded. Use its controls to play, or open the original video below.');frame.focus();
+   status.textContent=t('Player requested. If it does not load, open the original video below.');frame.focus();
   });
   close.addEventListener('click',()=>{box.querySelector('iframe')?.remove();button.hidden=false;close.hidden=true;status.textContent=t('Player closed.');button.focus();});
  });
