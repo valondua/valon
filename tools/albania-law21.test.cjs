@@ -13,7 +13,7 @@ test('every law paragraph and navigation label has an explicit Albanian translat
  assert.ok(sq['Explore the law']);
 });
 test('draft, vote reporting, court outcome and permit limits remain distinct',()=>{
- for(const phrase of ['Sponsorship is not an individual voting record','74 Socialist MPs','individual roll call','37 MPs','five-judge majority','not a blanket ban on all tourism','does not name Jared Kushner','Do not quote that as the final law'])assert.ok(html.includes(phrase),phrase);
+ for(const phrase of ['Sponsorship is not an individual voting record','74 for, 0 against, 0 abstentions','Individual votes and absences: not verified','37 MPs','five-judge majority','not a blanket ban on all tourism','does not name Jared Kushner','Do not quote that as the final law'])assert.ok(html.includes(phrase),phrase);
  assert.match(html,/20231203012904/);assert.match(html,/202402271348113540/);
 });
 test('all new graph links are directly sourced legal roles with bilingual labels',()=>{
@@ -21,4 +21,14 @@ test('all new graph links are directly sourced legal roles with bilingual labels
  const related=edges.filter(e=>e[0]==='law21'||e[1]==='law21');assert.equal(related.length,5);
  for(const e of related){assert.ok(nodes.some(n=>n[0]===e[0]));assert.ok(nodes.some(n=>n[0]===e[1]));assert.ok(sources[e[0]+'|'+e[1]]);assert.ok(sq[e[2]]);assert.equal(e[3],'Documented');assert.ok(!e.includes('kushner'));}
  for(const id of ['law21','kkt','nasufi','kumbaro','zhupa']){const profile=JSON.parse(read('assets/albania/profiles-data.json'))[id];assert.ok(sq[profile.role]);assert.equal(profile.photo,null);}
+});
+
+test('official totals do not become inferred individual votes or absences',()=>{
+ assert.match(html,/202403051328240902Procesverbal/);
+ assert.ok(html.includes('assign no MP to a for, against, abstaining, not-voting or absent category'));
+ assert.ok(html.includes('not evidence of three abstentions'));
+ assert.ok(!html.includes('74 Socialist MPs voting'));
+ assert.ok(main.includes('Official parliamentary minutes record the final vote'));
+ const context={window:{}};vm.runInNewContext(read('assets/albania/sq.js'),context);
+ assert.equal(JSON.stringify(context.window.albaniaTranslations),JSON.stringify(sq));
 });

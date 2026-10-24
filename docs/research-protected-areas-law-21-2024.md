@@ -7,7 +7,7 @@ Reviewed 24 October 2026. This dossier addition compares the original 2017 law w
 - The original ministry PDF is preserved in a December 2023 Internet Archive capture. The AKZM PDF is a consolidated text and is explicitly labelled as such.
 - Amendment articles 2–3, 14, 16 and 20 support the principal before/after comparisons. Other amendment articles are indexed in an expandable guide.
 - Twelve sponsors are transcribed from the signed submission, pages 1–2. Eduard Ndreca follows the parliamentary spelling; neither these signatures nor committee attendance are treated as plenary voting records.
-- The 74 Socialist votes are attributed to contemporary Euronews Albania reporting. No authenticated individual roll call was located. The 77 votes for the Italy agreement are a separate vote.
+- The official plenary minutes, page 3, confirm 74 for, 0 against and 0 abstentions in principle and in the final whole-bill vote. No authenticated individual roll call or named attendance register for this vote was located. The earlier registration of 77 present does not establish individual absence or non-voting. The Italy agreement received a separate 77 votes.
 - Responsible and European Affairs committee reports establish presentation roles and stated reasons; no private motives are asserted. The European Affairs 10–0–0 result is explicitly a committee result.
 - Decision 45/2025 concerns 37 MP applicants, not 28. Decision date 31 July and announcement 31 October 2025 are distinguished. Rejection, dissent and failure to reach the required majority on particular issues are not collapsed into blanket approval of EU compliance.
 - The law does not name Kushner or provide a specific land transfer or project permit. No causal or wrongdoing link is inserted in the network.
@@ -45,3 +45,16 @@ Public legal PDFs were inspected outside the repository; the published site link
 - 35 Node tests passed, including bilingual law copy, route integration, source-backed graph links, and existing GDP, Hyland, history and dossier checks.
 - Protected staging: 22 routes passed canonical/noindex policy, navigation, unique IDs, evidence counts and fragment checks. Browser QA passed desktop English and 390px Albanian, language-switch hash retention, timeline-to-network links, graph-to-explainer return, keyboard disclosure and no horizontal overflow.
 - Scoped rollback copies for nine existing runtime files and an absent-file marker for the new fragment were saved outside the document root; the existing full backup and restore rehearsal remain available. Live verification follows deployment.
+
+## Official roll-call search — 24 October 2026
+
+Primary source: [Parliamentary minutes, 22 February 2024, page 3](https://kuvendiwebfiles.blob.core.windows.net/webfiles/202403051328240902Procesverbal%20dat%C3%AB%2022.2.2024.pdf#page=3).
+
+- The chair records 74 for, none against and none abstaining both in principle and on the bill as a whole. Articles 1–27 were approved with the same procedure; no separate numerical article-by-article breakdown is transcribed.
+- The earlier presence registration records 77. It is not a nominal attendance list for this vote. Do not subtract 74 or 77 from the chamber's membership to classify named MPs as absent. Zero recorded opposing votes does not establish that all opposition MPs supported the bill.
+- Names in signatures, sponsorship, committee reports or interventions are not individual plenary-vote evidence. No names have been added to vote/absence categories.
+- Checked the official bill dossier `b68d0c2e-f507-449f-90c2-33703a0d9f8d` and its six attached documents, the 22 February calendar entry, plenary records around the sitting, and document filename searches for date variants.
+- Queried Parliament's public API (`https://kuvendiapi.azurewebsites.net/api/dokumentet`) for the `Votimi i deputetëve` category (`007c261b-d399-43d8-bb88-845aea26f354`): downloaded 201 documents with 2024 upload timestamps and searched extracted text. Inspected first-page images of the 32 documents with little/no extractable text; their visible dates/topics were different. Upload dates sometimes belong to historical backfills and were not treated as sitting dates. Also searched this category across upload years by filename for 2024, protected areas and law 21/2024.
+- Two official copies of the three-page minutes were byte-identical. Page 3 was visually checked. The search did not locate the nominal record; this is not proof that no record exists. A verified nominal voting sheet and attendance register from Parliament remain necessary before assigning individual votes or absences.
+
+Minutes SHA-256: `235d312a085fcb737e431487697347d3ff827e33318324979e2fe41577f1e053`.
