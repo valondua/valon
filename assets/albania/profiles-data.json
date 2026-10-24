@@ -267,5 +267,30 @@
     "name": "George Stephanopoulos",
     "role": "Named in a retrospective interview account. This is not an independently verified role or an endorsement of the Orthodox-state idea.",
     "photo": null
+  },
+  "law21": {
+    "name": "Law 21/2024",
+    "role": "The 2024 amendment to Albania’s protected-areas law; a legal framework, not an individual project permit.",
+    "photo": null
+  },
+  "kkt": {
+    "name": "National Territorial Council",
+    "role": "The territorial decision-making body whose technical-rule powers were expanded by Law 21/2024.",
+    "photo": null
+  },
+  "nasufi": {
+    "name": "Fadil Nasufi",
+    "role": "One of 12 sponsors of the protected-areas amendment; presented the proposal in committee.",
+    "photo": null
+  },
+  "kumbaro": {
+    "name": "Mirela Kumbaro",
+    "role": "Tourism and environment minister who presented the government’s position on the amendment in 2024.",
+    "photo": null
+  },
+  "zhupa": {
+    "name": "Ina Zhupa",
+    "role": "MP representing the 37 MPs who challenged Law 21/2024 before the Constitutional Court.",
+    "photo": null
   }
 }
