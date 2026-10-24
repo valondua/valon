@@ -26,6 +26,9 @@ for f in base.rglob('index.html'):
  if p.canonical:assert p.canonical[0].endswith(route),(route,p.canonical)
  assert not re.search(r'Fatal error|Warning:|DOSSIER_[A-Z]+_URL|ALBANIA_ASSETS',h),route
  assert len(p.ids)==len(set(p.ids)),(route,'duplicate IDs',sorted({x for x in p.ids if p.ids.count(x)>1}))
+ if route=='/sq/shqiperia/hetime/llogaridhenia/':
+  def script_index(part):return next(i for i,s in enumerate(p.scripts) if part in s)
+  assert script_index('vis-network.min.js')<script_index('/locale.js')<script_index('/story.js'),p.scripts
  checks.append({'route':route,'bytes':len(h.encode()),'navigation_links':p.navlinks,'canonical':p.canonical[0] if p.canonical else 'suppressed by private-stage noindex guard'})
 for prefix,sources,history in [('/albania/','sources/','investigations/jewish-history-projects/'),('/sq/shqiperia/','burimet/','hetime/historia-hebreje/')]:
  p,h=pages[prefix+sources]

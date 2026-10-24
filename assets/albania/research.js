@@ -22,14 +22,21 @@
     count.textContent = `${visible} of ${records.length} research entries`;
     empty.hidden = visible !== 0;
   }
+  function syncVisibleSearch() {
+    const visibleSearch = document.getElementById('sourcefilter');
+    if (!visibleSearch) return;
+    visibleSearch.value = search.value;
+    visibleSearch.dispatchEvent(new Event('input', {bubbles: true}));
+  }
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('input', filter);
   form.addEventListener('change', filter);
-  form.addEventListener('reset', () => { setTimeout(filter, 0); });
+  form.addEventListener('reset', () => { setTimeout(() => { syncVisibleSearch(); filter(); }, 0); });
   function revealHash() {
     const target = records.find(({element}) => '#' + element.id === window.location.hash);
     if (!target) return;
     search.value = topic.value = status.value = '';
+    syncVisibleSearch();
     filter();
     target.element.querySelector('details').open = true;
     target.element.setAttribute('tabindex', '-1');
