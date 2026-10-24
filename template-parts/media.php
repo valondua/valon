@@ -53,7 +53,7 @@ $languages = [
 </section>
 <div class="press-strip media-press-strip"><span><?php echo esc_html(
     $t("In the media", "Në media", "In den Medien"),
-); ?></span><a href="#coverage" class="press-nzz">NZZ</a><a href="#coverage" class="press-srf">SRF</a><a href="#coverage" class="press-watson">watson</a><a href="#coverage" class="press-balkan">Balkan Insight</a></div>
+); ?></span><a href="#coverage" class="press-srf">SRF</a><a href="#coverage" class="press-watson">watson</a><a href="#coverage" class="press-balkan">Balkan Insight</a></div>
 
 <section class="section" id="interviews"><div class="section-heading"><div><p class="eyebrow"><?php echo esc_html(
     $t("Watch & listen", "Shiko & dëgjo", "Anschauen & zuhören"),

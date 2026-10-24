@@ -9,16 +9,16 @@ Reviewed 24 October 2026. Public section: `/albania/#christopher-hyland`; Albani
 - Kosovo PM speech, 17 October 2023: Hyland and Hazis Vardar named in the conference context. Do not infer a commercial partnership or Kurti's physical attendance from the speech.
 - Illyria, 28 July 2021: publication reports Albania's honour and includes Hyland's acceptance text. No presidential decree independently inspected.
 - Albanian Daily News, 25 March 2025: firsthand public advocacy for Bektashi sovereignty; Hyland names Baba Mondi, Vardar and himself. His own website describes his North American representative role. Neither proves a U.S. mandate or enacted sovereignty.
-- Syri, Enver Bytyçi, 25 August 2026: opinion/analysis attributes an Orthodox church-state claim to a message from Mark Crawford, referencing an older website. No retrievable original proposal or archived URL found in that article. Date and exact scope of the alleged proposal remain unverified. No graph edge asserts it as fact.
-- Hyland's March 2025 opposition to ethnoreligious designation of Kosovo towns is included as context, not treated as disproof of an unknown earlier text.
+- Syri, Enver Bytyçi, 25 August 2026: opinion/analysis attributes an Orthodox church-state claim to a message from Mark Crawford. Follow-up archive research now corroborates historical advocacy in Hyland’s own biography (see correction below). The private message and attachment are not authenticated; the full proposal, authorship date and legal scope remain unverified.
+- Hyland's March 2025 opposition to ethnoreligious designation of Kosovo towns is included as context, not treated as an explicit withdrawal of the historical idea.
 - Shqiptarja, 26 August 2026: derivative of NRC reporting; the unpaid-work assertion remains attributed and unaudited. Reprints are not independent corroboration. NRC original could not be inspected through this research interface; no access restrictions bypassed.
 - No allegations of criminality, hidden control or illicit finance added. No right-of-reply outreach sent. Public submission route invites originals and corrections for review.
 
 ## Release checks
 
-Uses existing editorial card styles and accessible section navigation, three dated timeline entries and four cited graph edges. Profile images use the existing initials fallback; no unauthorised photograph or synthetic likeness added. All new reader-facing copy has Albanian mappings. Existing GDP, demographic, map and Jewish-history work retained.
+Uses existing editorial card styles and accessible section navigation, four dated timeline entries (one explicitly an archive capture) and five cited graph edges. Profile images use the existing initials fallback; no unauthorised photograph or synthetic likeness added. All new reader-facing copy has Albanian mappings. Existing GDP, demographic, map and Jewish-history work retained.
 
-21 automated assertions passed across the Hyland, GDP, accuracy and Jewish-history suites. Host staging and bilingual browser verification precede merge; deployment hashes and screenshots retained in the task outputs. Before-images: `/data/private-albania-release-20261022/hyland-before`; prior full backup/restore evidence remains in the release records. This update changes no database or form settings.
+21 automated assertions passed across the Hyland, GDP, accuracy and Jewish-history suites. Host staging and bilingual browser verification passed, including graph/timeline links and 390px Albanian layout; deployment hashes and screenshots retained in the task outputs. Before-images: `/data/private-albania-release-20261022/hyland-archive-before`; prior full backup/restore evidence remains in the release records. This update changes no database or form settings.
 
 ## Source URLs
 - https://www.christopherhyland.io/full-biography
@@ -29,3 +29,21 @@ Uses existing editorial card styles and accessible section navigation, three dat
 - https://albaniandailynews.com/news/the-vision-for-a-bektashi-state
 - https://www.syri.net/analize/912148/zbulohet-plani-jo-vetem-shtet-bektashi-ne-shqiperi-por-edhe-shtet-te-fese-ortodokse-serbe-ne-kosove/
 - https://shqiptarja.com/lajm/shteti-bektashi-me-afer-se-kurre-ish-keshilltari-i-clinton-eshte-punuar-dy-vjet-per-finalizimin-e-tij
+
+## Archive correction — 24 October 2026
+
+The previous edition marked the historical Orthodox church-state advocacy claim unverified. A Wayback capture of Hyland’s company biography from **17 August 2001, 12:54:34 UTC** explicitly describes that advocacy, alongside support for Kosovo’s independence and a stable democratic Serbia. Captures from 10 June 2019 and 27 February 2024 retain the substance. The public section now corrects the earlier label, with a bounded historical-advocacy graph edge and a timeline entry expressly dated to the archive capture.
+
+This is a primary source for Hyland’s published self-description, **not the full original proposal**. No detailed legal text, borders, governance arrangement, recipients or adoption instrument was located. Capture dates are not authorship dates. A 1998 copyright footer does not date the proposal. The inspected 2006/2008 shorter biographies omit the phrase; neither omission nor the current site’s omission proves withdrawal. The 2025 interview is relevant context but not an explicit retraction of this specific idea. No claim of current advocacy, recognised statehood, government mandate or institutional endorsement follows from the archive.
+
+Method: Wayback CDX path inventory and targeted biography queries; raw HTML and rendered 2001/2024 pages inspected; dated 2019 capture compared. The 2001 biography links back to its homepage, not to a detailed proposal. English/Albanian/Serbian phrase searches did not yield the full plan. Archive service errors and incomplete indexing limit any claim of exhaustiveness. This is the earliest matching capture **located in this review**, not proof no earlier version exists. Full copyrighted page copies are kept outside the public repository; only concise attribution and source links are published.
+
+- [2001 biography](https://web.archive.org/web/20010817125434/http://www.christopherhyland.com:80/bio.html)
+- [2019 biography](https://web.archive.org/web/20190610193614/http://www.christopherhyland.com/biography/)
+- [2024 biography](https://web.archive.org/web/20240227175033/https://christopherhyland.com/biography/)
+
+Retrieved-file SHA-256 (raw archive response, not the original server’s bytes):
+
+- `bio2001.html`: `20f3706f15055dc90bb12bc435715ae0af7b9af46cfc07de50d01170b68f99d2`
+- `bio2019.html`: `7df616a63cdeff3d5f9c9ab3ad5ad66fcae512b0755a6d91a35e98af8abf78c7`
+- `bio2024.txt`: `f043625344d780a5d938aa7342dd7385f6b2a17c6124160f9f9bab3aad3e6e45`
