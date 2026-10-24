@@ -1666,5 +1666,8 @@
   "Download inflation-adjusted data (CSV)": "Shkarkoni të dhënat e korrigjuara për inflacionin (CSV)",
   "World Bank methodology ↗": "Metodologjia e Bankës Botërore ↗",
   "Interactive inflation-adjusted GDP per person chart": "Grafik interaktiv i PBB-së për banor të korrigjuar për inflacionin",
-  "constant 2015 USD": "USD me çmime konstante të vitit 2015"
+  "constant 2015 USD": "USD me çmime konstante të vitit 2015",
+  "Change since 2010 · to 2025": "Ndryshimi nga viti 2010 deri në 2025",
+  "Total change, not annual growth": "Ndryshimi i përgjithshëm, jo rritja vjetore",
+  "since 2010": "nga viti 2010"
 }
