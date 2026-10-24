@@ -1,0 +1,18 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const read=p=>fs.readFileSync(path.join(__dirname,'..',p),'utf8');
+test('speech players require an explicit click, use approved origins without autoplay, and close with focus restored',()=>{
+ const cases=[['rumble','v7ey0zo'],['youtube','x2nXzaHIBSI'],['youtube','iqHe3iky0QM'],['youtube','unreviewed']];let frames=[];
+ const boxes=cases.map(([provider,videoId])=>{let frame;const button={hidden:false,addEventListener:(e,f)=>button[e]=f,focus:()=>button.focused=true},close={hidden:true,addEventListener:(e,f)=>close[e]=f},status={textContent:''};const box={dataset:{provider,videoId},hidden:true,querySelector:s=>s==='iframe'?frame:button,appendChild:f=>frame=f,closest:()=>card};const card={querySelector:s=>s==='.speech-close'?close:s==='.speech-status'?status:{textContent:'Test speaker'}};return {box,button,close,status,remove:()=>frame=null};});
+ const document={body:{},getElementById:()=>null,querySelectorAll:s=>s==='.speech-player'?boxes.map(x=>x.box):[],createElement:tag=>{assert.equal(tag,'iframe');const f={focus:()=>f.focused=true,remove:()=>{for(const b of boxes)b.remove();}};frames.push(f);return f;}};
+ vm.runInNewContext(read('assets/albania/dossier.js'),{document,location:{hash:''},window:{addEventListener:()=>{}},MutationObserver:class{observe(){}},URL});
+ assert.equal(frames.length,0);assert.equal(boxes[3].box.hidden,true);
+ for(const b of boxes.slice(0,3)){assert.equal(b.box.hidden,false);b.button.click();const f=frames.at(-1);assert.match(f.src,/^https:\/\/(www.youtube-nocookie.com|rumble.com)\/embed\//);assert.match(f.src,/autoplay=0/);assert.doesNotMatch(f.allow,/autoplay/);assert.equal(f.referrerPolicy,'strict-origin-when-cross-origin');assert.equal(f.focused,true);assert.equal(b.close.hidden,false);const count=frames.length;b.button.click();assert.equal(frames.length,count);b.close.click();assert.equal(b.button.focused,true);assert.equal(b.button.hidden,false);assert.equal(b.close.hidden,true);}
+});
+test('three individual voices keep dates, source fallbacks, readable summaries and shared anchors',()=>{
+ const html=read('template-parts/albania-demands.html');assert.equal((html.match(/class="speech-card"/g)||[]).length,3);assert.equal((html.match(/Open the original video/g)||[]).length,3);assert.equal((html.match(/class="speech-player"[^>]+hidden/g)||[]).length,3);assert.doesNotMatch(html,/<iframe|<video|i.ytimg.com/);assert.match(html,/Recording date: not established/);assert.match(html,/studio interview excerpt/);assert.match(html,/not findings of criminal responsibility/);assert.match(html,/does not establish her current party office/);assert.match(html,/id="protest-voices"/);
+ const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);assert.equal(ids.length,new Set(ids).size);
+});
+test('each investigation has two local responsive images with explicit provenance and preserved context',()=>{
+ const php=read('includes/albania-dossier.php');for(const name of ['coast','accountability','history','media','development'])for(const size of [480,960]){const b=fs.readFileSync(path.join(__dirname,'..',`assets/albania/investigation-${name}-${size}.webp`));assert.equal(b.toString('ascii',0,4),'RIFF');assert.ok(b.length<220000);}
+ assert.match(php,/valon_dossier_card_image\(\$k\)/);assert.match(php,/Photo credit and licence/);assert.match(php,/creativecommons.org\/licenses/);assert.match(php,/Resized, not cropped/);assert.match(read('assets/albania/dossier.css'),/aspect-ratio:3\/2;object-fit:contain/);
+});
