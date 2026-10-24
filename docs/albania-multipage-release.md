@@ -1,0 +1,33 @@
+# Albania dossier: multipage release
+
+The former landing page required roughly 15,610 words of visible reading in a desktop browser (about 67,721 px high), with 16 navigation links and six separate search controls. A separate raw-text extraction counted about 25,494 words including repeated content. Those are inspection measurements, not analytics or reading-time observations.
+
+## Structure
+
+Six primary destinations: overview, demands, timeline, investigations, sources and online coverage. Five substantial investigation pages retain coastal development (including the original six chapters), accountability, media, the single connected Jewish history/statements/museums module, and development/context. Submit information remains a utility link.
+
+EN routes use `/albania/`; SQ routes use `/sq/shqiperia/`. `includes/albania-dossier.php` is the route and section mapping. `/online-coverage/` avoids WordPress's reserved `feed` slug. The underlying source fragments and 55 canonical records are preserved. The landing page includes orientation, demands, five dates, three dated reporting cards and links to further research.
+
+Original section/record fragments are mapped client-side to canonical child pages. The overview also provides server-rendered `noscript` fragment targets and links, because fragments are not sent to the server. Native links, breadcrumbs and the language switch work without JavaScript; JavaScript additionally preserves the selected fragment and focuses the target. Sources remain next to claims. The source library combines canonical records with a document catalog; it does not turn allegations into facts.
+
+## Feed and images
+
+Six manually reviewed source cards: Boldnews June 4, Ora June 26 about the June 22 platform, bne July 11, OBCT October 14 about October 13, the April 7 government transcript of the April 6 ceremony, and a clearly limited Reddit discussion lead with no invented publication date. No automatic ingestion, popularity ranking, field-footage claim or autoplay embed. Search/type/language filters and finite load-more enhancement; all cards remain present without JavaScript.
+
+Two June 13, 2026 photographs by Albinfo, CC BY 4.0, downloaded from verified Wikimedia Commons originals. Source pages, author and license links are in the captions. Resized without cropping; no endorsement implied. Hero variants: 600 and 1200 px; event image: 960 px. No synthetic protest imagery.
+
+## Release control
+
+Use the isolated `/data/private-albania-multipage-stage` and its separate `mp20261024_` table prefix. No mail/external HTTP from stage; loopback rendering and noindex guards retained. Candidate code remains in legacy mode until the idempotent `tools/albania-dossier-pages.php` has created and paired all 20 children and sets `valon_dossier_multipage_ready`. This prevents activation with missing destinations. The script rejects conflicting unrelated routes and preserves existing page content. It creates drafts first and publishes the known children after all pairs exist.
+
+Before publication reconcile remote main and runtime hashes, preserve unrelated changes, back up changed runtime files and affected page/options metadata outside the web root, then use the established publisher. Verify 22 direct routes, canonical links, language pairs, all 55 record anchors, the 19-card history module and representative browser journeys. Rollback restores scoped runtime files and the previous activation option; newly created children can be returned to drafts. Do not modify authentication, forms or infrastructure.
+
+## Validation
+
+Editorial regression suite and multipage structural/translation tests run with `node --test tools/albania-accuracy.test.cjs tools/albania-jewish-history.test.cjs tools/albania-dossier.test.cjs`. Protected PHP rendering and desktop/mobile/no-JavaScript checks are additional release gates. Optional video playback was not verified and no player is certified or embedded.
+
+Final pre-release validation: 29 repository tests passed, including the GDP and Hyland suites. All 22 isolated staging routes returned 200; their fragment maps resolve, IDs are unique, all 55 records and 19 history cards remain. Browser checks confirmed source search including Elton, explicit empty results, feed categories, keyboard demands focus, EN/SQ record switching and a no-script rendered fallback for an old #r27 bookmark. Mobile width 390 showed no horizontal overflow in the representative routes. The no-JavaScript browser fixture removes page scripts and exposes the original noscript markup; it does not change browser-wide security settings. Optional third-party plugin assets are absent in the local preview, so production checks remain necessary.
+
+PR #66 (Hyland) landed during this work and was merged into the candidate before final staging. Its section and sourced graph connections are retained under accountability, including #christopher-hyland and its profile links. Production then matched the reconciled main baseline exactly. The existing WP Pusher lock and in-memory commit pin are used; the tracked branch remains main. A fresh theme archive and page/activation-state backup are stored outside the web root.
+
+PR #68 was also integrated before release, including the archived Hyland evidence and unrelated publisher changes. Two review findings were fixed: the SQ locale now depends conditionally on the registered graph library, so the canvas wrapper exists before initial graph construction; source resets and fragment reveals synchronize the visible query, record filters and document catalog. Dedicated interaction tests and browser checks cover both paths. The rollback rehearsal restored the legacy EN/SQ overview with demands, R55, history and Hyland intact, then restored staged activation. Its SQ script order also passed.
