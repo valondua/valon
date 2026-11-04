@@ -1,0 +1,154 @@
+(() => {
+  "use strict";
+  const form = document.querySelector("#kt-form");
+  if (!form) return;
+  const button = document.querySelector("#kt-submit");
+  const status = document.querySelector("#kt-status");
+  const retry = document.querySelector("#kt-retry");
+  const funding = document.querySelector("#kt-funding");
+  const support = [...form.querySelectorAll('[name="support[]"]')];
+  let sending = false;
+  async function ticket() {
+    button.disabled = true;
+    retry.hidden = true;
+    try {
+      const response = await fetch(kthehuConfig.ticket, {
+        cache: "no-store",
+        credentials: "same-origin",
+      });
+      const result = await response.json();
+      if (!response.ok || !result.token) throw new Error();
+      form.elements.token.value = result.token;
+      status.textContent = "";
+      button.disabled = false;
+    } catch {
+      status.textContent =
+        "Formulari s’u lidh. Provo përsëri; përgjigjet mbesin këtu.";
+      retry.hidden = false;
+    }
+  }
+  retry.addEventListener("click", ticket);
+  const conditional = () => {
+    const selected = support[1].checked;
+    funding.hidden = !selected;
+    funding.querySelectorAll("input,select,textarea").forEach((input) => {
+      input.disabled = !selected;
+      input.required = selected;
+    });
+    const business =
+      form.elements.contribution.selectedIndex === 1 ||
+      form.elements.contribution.selectedIndex === 2;
+    document.querySelector("#kt-sustainability-label").textContent = business
+      ? "Kush do të paguajë për produktin ose shërbimin tand?"
+      : "Kush përfiton, dhe qysh mundet me vazhdu kjo punë?";
+  };
+  support.forEach((input) => input.addEventListener("change", conditional));
+  form.elements.contribution.addEventListener("change", conditional);
+  conditional();
+  ticket();
+  function error(key, message) {
+    const label = document.getElementById(`kt-${key}-error`);
+    if (label) label.textContent = message;
+    const input = document.getElementById(`kt-${key}`);
+    if (input) input.setAttribute("aria-invalid", "true");
+  }
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (sending) return;
+    form.querySelectorAll(".kt-error").forEach((el) => {
+      el.textContent = "";
+    });
+    form
+      .querySelectorAll("[aria-invalid]")
+      .forEach((el) => el.removeAttribute("aria-invalid"));
+    let firstInvalid = null;
+    [...form.elements].forEach((input) => {
+      if (!input.disabled && input.willValidate && !input.checkValidity()) {
+        error(
+          input.name,
+          input.validity.valueMissing
+            ? "Plotëso këtë fushë."
+            : "Kontrolloje këtë përgjigje.",
+        );
+        firstInvalid ||= input;
+      }
+    });
+    if (!support.some((input) => input.checked)) {
+      error("support", "Zgjedh të paktën nji lloj ndihme.");
+      firstInvalid ||= support[0];
+    }
+    const files = [...document.getElementById("kt-attachments").files];
+    if (
+      files.length > 3 ||
+      files.some(
+        (f) =>
+          f.size > 10 * 1024 * 1024 ||
+          !/\.(pdf|docx|pptx|xlsx|jpg|png)$/i.test(f.name),
+      )
+    ) {
+      error(
+        "attachments",
+        "Deri në 3 dokumente, deri në 10 MB secili: PDF, DOCX, PPTX, XLSX, JPG ose PNG.",
+      );
+      firstInvalid ||= document.getElementById("kt-attachments");
+    }
+    if (firstInvalid) {
+      status.textContent = "Kontrolloji fushat e shënueme.";
+      firstInvalid.focus();
+      return;
+    }
+    sending = true;
+    button.disabled = true;
+    form.setAttribute("aria-busy", "true");
+    status.textContent = "Po e ruejmë aplikimin dhe dokumentet…";
+    try {
+      const response = await fetch(kthehuConfig.apply, {
+        method: "POST",
+        body: new FormData(form),
+        credentials: "same-origin",
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        Object.entries(result.data?.fields || {}).forEach(([key, message]) =>
+          error(key, message),
+        );
+        status.textContent =
+          result.message || "Dërgimi dështoi. Provo përsëri.";
+        const key = Object.keys(result.data?.fields || {})[0];
+        (document.getElementById(`kt-${key}`) || status).focus();
+        if (result.code === "token") {
+          form.elements.token.value = "";
+          retry.hidden = false;
+        }
+        return;
+      }
+      if (!result.reference) throw new Error();
+      const confirmation = document.createElement("div");
+      confirmation.id = "kt-status";
+      confirmation.className = "kt-success";
+      confirmation.setAttribute("role", "status");
+      confirmation.tabIndex = -1;
+      const heading = document.createElement("h2");
+      heading.textContent = "Historia jote mbërriti.";
+      const message = document.createElement("p");
+      message.textContent = result.message;
+      const reference = document.createElement("strong");
+      reference.textContent = `Referenca: ${result.reference}`;
+      const mail = document.createElement("p");
+      mail.textContent = result.email_sent
+        ? "Konfirmimin ta nisëm edhe me email. Kontrolloje edhe dosjen spam."
+        : "Emaili i konfirmimit asht në pritje. Aplikimi yt asht ruejt — s’ka nevojë me e dërgu përsëri.";
+      confirmation.append(heading, message, reference, mail);
+      form.replaceWith(confirmation);
+      confirmation.focus();
+    } catch {
+      status.textContent =
+        "S’morëm konfirmim nga serveri. Përgjigjet tua mbesin këtu. Provo përsëri me këtë formular; nëse aplikimi asht ruejt, nuk krijohet dy herë.";
+      status.focus();
+    } finally {
+      sending = false;
+      button.disabled = !form.elements.token.value;
+      form.removeAttribute("aria-busy");
+    }
+  });
+})();
