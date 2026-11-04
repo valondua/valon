@@ -47,55 +47,22 @@ const fixture =
       ),
       true,
     );
-    assert.equal(
-      await page
-        .locator(".kt-section-grid")
-        .evaluate(
-          (e) => getComputedStyle(e).gridTemplateColumns.split(" ").length,
-        ),
-      1,
-    );
-    assert.equal(
-      await page
-        .locator(".kt-process")
-        .evaluate(
-          (e) => getComputedStyle(e).gridTemplateColumns.split(" ").length,
-        ),
-      1,
-    );
     await page.locator("#kt-submit").click();
     assert.match(await page.locator("#kt-name-error").textContent(), /Plotëso/);
     for (const [key, value] of Object.entries({
       name: "Test Kthehu",
       email: "kthehu-test@example.invalid",
       country: "Zvicër",
-      city: "Zürich",
-      town: "Prizren",
-      story: "Jam kthyer dhe dua me kontribuu.",
       plan: "Kurse për të rinjtë.",
-      progress: "Kam organizu dy punëtori.",
-      sustainability: "Komuniteti përfiton; partnerët mbulojnë shpenzimet.",
       obstacle: "Më duhet nji hapësinë.",
     }))
       await page.locator("#kt-" + key).fill(value);
-    for (const key of ["destination", "timeline", "stage"])
+    for (const key of ["destination", "timeline"])
       await page.locator("#kt-" + key).selectOption({ index: 1 });
     await page.locator("#kt-contribution").selectOption({ index: 1 });
-    assert.match(
-      await page.locator("#kt-sustainability-label").textContent(),
-      /paguajë/,
-    );
-    await page.locator("#kt-contribution").selectOption({ index: 4 });
-    assert.match(
-      await page.locator("#kt-sustainability-label").textContent(),
-      /përfiton/,
-    );
     const support = page.locator('[name="support[]"]');
     await support.nth(1).check();
-    assert.equal(await page.locator("#kt-funding").isVisible(), true);
-    assert.equal(await page.locator("#kt-amount").getAttribute("required"), "");
-    await support.nth(1).uncheck();
-    assert.equal(await page.locator("#kt-amount").isDisabled(), true);
+    assert.equal(await page.locator("#kt-funding").count(), 0);
     await support.first().check();
     await page.locator("#kt-consent").check();
     // Save the exact browser request so retry/duplicate behavior can be checked independently.
@@ -122,7 +89,7 @@ const fixture =
       await page.locator(".kt-success strong").textContent()
     ).replace("Referenca: ", "");
     console.log(
-      "PASS mobile form, conditional questions, validation and confirmation",
+      "PASS shorter mobile form, funding without extra required fields, validation and confirmation",
       reference,
     );
     let snapshot = await fixtureCall("inspect");
@@ -181,7 +148,7 @@ const fixture =
     assert.equal((await send({ story: "a".repeat(1001) })).status, 422);
     assert.equal(
       (await send({ support: ["Financim ose njohje me investitorë"] })).status,
-      422,
+      200,
     );
     assert.equal((await send({ consent: "0" })).status, 422);
     assert.equal((await send({ profile: "javascript:alert(1)" })).status, 422);
@@ -256,24 +223,19 @@ const fixture =
       await admin.locator("#kt-notes").inputValue(),
       "Follow up with local partner.",
     );
-    snapshot = await fixtureCall("review&id=" + attachmentRow.id);
-    const reviewed = snapshot.rows.find((r) => r.id === attachmentRow.id);
-    assert.equal(reviewed.ai_state, "ready");
-    assert.equal(reviewed.status, "Reviewing");
-    assert.equal(reviewed.mail_state, "sent");
-    assert.equal(snapshot.ai_request.store, false);
-    assert.ok(!snapshot.ai_request.tools);
-    for (const key of [
-      "name",
-      "email",
-      "phone",
-      "profile",
-      "document_link",
-      "podcast",
-    ])
-      assert.ok(!(key in JSON.parse(snapshot.ai_request.input)));
+    snapshot = await fixtureCall("inspect");
+    assert.equal(
+      snapshot.rows.find((r) => r.id === attachmentRow.id).mail_state,
+      "sent",
+    );
+    assert.equal(
+      await admin
+        .getByRole("button", { name: "Generate / retry AI review" })
+        .count(),
+      0,
+    );
     console.log(
-      "PASS email retry, team notes/status and mocked AI response with minimized input",
+      "PASS email retry and human review notes/status; no AI controls",
     );
     await admin.goto(
       base + "/wp-admin/admin.php?page=vp-kthehu&status=Reviewing&podcast=Jo",
@@ -366,6 +328,7 @@ print(json.dumps(out))`,
     const officeResult = await send(
       {
         email: "office@example.invalid",
+        support: ["Mentorim dhe këshilla për biznes"],
         plan: "Financim ose njohje me investitorë",
       },
       Object.entries(office).map(([ext, bytes]) => ({

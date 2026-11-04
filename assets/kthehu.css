@@ -517,3 +517,166 @@
     scroll-behavior: auto;
   }
 }
+/* Compact application: strong typography, quiet surfaces, one clear action. */
+.kt-page .kt-hero {
+  padding-block: 64px;
+  gap: 8%;
+}
+.kt-letter {
+  background: #80252c;
+  color: #fff5e9;
+  border: 0;
+  border-radius: 5px 64px 5px 5px;
+  padding: 40px;
+  transform: rotate(2deg);
+  box-shadow: 0 20px 45px #582d2314;
+}
+.kt-letter .kt-eyebrow,
+.kt-letter .kt-signature span {
+  color: #edd7c7;
+}
+.kt-letter-title {
+  font-size: clamp(32px, 3.8vw, 54px);
+  margin-block: 35px;
+}
+.kt-letter-title em {
+  color: #f0c69f;
+}
+.kt-signature {
+  border-color: #ffffff38;
+  margin-top: 30px;
+}
+.kt-page .kt-support {
+  padding-block: 45px 55px;
+  border-top: 1px solid var(--kt-line);
+}
+.kt-cards {
+  margin-top: 26px;
+  gap: 28px;
+}
+.kt-cards h3 {
+  margin-block: 12px;
+}
+.kt-application {
+  padding-block: 60px;
+  background: #edeae4;
+}
+#kt-form fieldset {
+  border: 0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 24px #30271b05;
+}
+#kt-form legend {
+  padding: 0 8px;
+  font-size: 22px;
+}
+.kt-field {
+  margin-bottom: 18px;
+}
+.kt-field textarea {
+  min-height: 96px;
+}
+.kt-field input:not([type="checkbox"]),
+.kt-field textarea,
+.kt-field select {
+  border-color: #d3cec6;
+  border-radius: 7px;
+}
+.kt-hint:empty,
+.kt-error:empty {
+  display: none;
+}
+.kt-checks {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.kt-checks label {
+  border-radius: 7px;
+  padding: 10px;
+  align-items: center;
+  font-size: 13px !important;
+}
+.kt-checks input {
+  margin-top: 0;
+}
+.kt-extras {
+  border-block: 1px solid var(--kt-line);
+  margin: 22px 0;
+  padding: 18px 0;
+}
+.kt-extras summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.kt-extras summary small {
+  display: block;
+  margin: 4px 0 0 18px;
+  color: var(--kt-muted);
+  font-weight: 400;
+}
+.kt-extras .kt-upload {
+  border-top: 0;
+  margin-top: 0;
+}
+.kt-consent {
+  font-size: 12px !important;
+  line-height: 1.6;
+}
+#kt-submit {
+  width: 100%;
+  border-radius: 7px;
+}
+.kt-page .kt-privacy {
+  padding-block: 40px;
+}
+.kt-privacy h2 {
+  font-size: 30px;
+  margin-bottom: 18px;
+}
+@media (max-width: 580px) {
+  .kt-page .kt-hero {
+    padding-block: 35px;
+    gap: 28px;
+  }
+  .kt-letter {
+    padding: 26px;
+    transform: none;
+    border-radius: 4px 42px 4px 4px;
+  }
+  .kt-letter-title {
+    font-size: 34px;
+    margin-block: 20px;
+  }
+  .kt-letter .kt-signature {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .kt-page .kt-support {
+    padding-block: 35px;
+  }
+  .kt-cards {
+    gap: 16px;
+  }
+  .kt-cards article {
+    padding-top: 16px;
+  }
+  .kt-cards h3 {
+    font-size: 22px;
+    margin-block: 8px;
+  }
+  .kt-cards p {
+    margin-block: 8px;
+  }
+  .kt-application {
+    padding-block: 35px;
+  }
+  #kt-form fieldset {
+    padding: 20px 16px;
+  }
+  .kt-form-layout {
+    row-gap: 20px;
+  }
+}
