@@ -10,6 +10,9 @@ require_once __DIR__ . "/includes/editorial.php";
 require_once __DIR__ . "/includes/performance.php";
 function valon_lang()
 {
+    if (is_page("kthehu") || is_page_template("page-kthehu.php")) {
+        return "sq";
+    }
     return function_exists("pll_current_language")
         ? (pll_current_language("slug") ?:
             "en")

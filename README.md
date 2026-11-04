@@ -62,3 +62,7 @@ For existing published articles, create a separate draft for substantive editing
 The homepage uses Valon's supplied studio portrait, with responsive AVIF/WebP sources at 480, 768, 1024 and 1448 pixels wide and an optimized JPEG fallback. Public archive content and its original image URLs are preserved in the local preview; the existing production media library remains the migration source of truth. A configurable portrait is available in the WordPress Customizer.
 
 Keep the current hosting, WordPress, Yoast and Mailchimp. The local preview is not evidence that production access, backups, social app permissions, deliverability or Search Console have been verified.
+
+## Kthehu initiative
+
+`page-kthehu.php` and the Valon Platform Kthehu module add an Albanian application page, private document storage, an authenticated review dashboard, CSV export, confirmation emails, and AI-assisted summaries. See [Kthehu setup and verification](docs/KTHEHU.md) for service configuration, privacy controls, the disposable preview, and launch checks.

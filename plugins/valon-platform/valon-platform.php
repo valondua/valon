@@ -72,3 +72,5 @@ require_once VP_DIR . "/includes/deployment.php";
 require_once VP_DIR . "/includes/video-articles.php";
 
 require_once VP_DIR . "/includes/consent.php";
+
+require_once VP_DIR . "/includes/kthehu.php";
