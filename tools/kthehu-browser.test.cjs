@@ -328,6 +328,7 @@ print(json.dumps(out))`,
     const officeResult = await send(
       {
         email: "office@example.invalid",
+        support: ["Mentorim dhe këshilla për biznes"],
         plan: "Financim ose njohje me investitorë",
       },
       Object.entries(office).map(([ext, bytes]) => ({
