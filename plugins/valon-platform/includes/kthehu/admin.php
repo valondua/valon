@@ -74,12 +74,6 @@ function vp_kt_admin()
     vp_kt_guard();
     global $wpdb;
     echo '<div class="wrap"><h1>Kthehu. Ndërto. Kontribuo.</h1><p>Private applications · Human review decides next steps. Podcast interest must never affect consideration.</p>';
-    if (
-        !vp_secret("VP_KTHEHU_OPENAI_KEY") ||
-        !vp_secret("VP_KTHEHU_OPENAI_MODEL")
-    ) {
-        echo '<div class="notice notice-warning"><p>AI review is not configured. Set VP_KTHEHU_OPENAI_KEY and VP_KTHEHU_OPENAI_MODEL on the server. Applications remain available for human review.</p></div>';
-    }
     $id = absint($_GET["application"] ?? 0);
     if ($id) {
         $row = $wpdb->get_row(
@@ -147,14 +141,7 @@ function vp_kt_admin()
         if (!$files) {
             echo "<li>No attachments.</li>";
         }
-        echo "</ul><h2>AI-assisted review · " .
-            esc_html($row->ai_state) .
-            '</h2><p>Applicant statements are unverified. AI inferences are suggestions, not facts. Attachments are not read by AI. Check all conclusions against the original application.</p><div style="white-space:pre-wrap;background:white;padding:20px;max-width:1000px">' .
-            esc_html(
-                $row->review ?:
-                "No AI review yet. Human review is available now.",
-            ) .
-            "</div>";
+        echo "</ul>";
         echo '<form method="post" action="' .
             esc_url(admin_url("admin-post.php")) .
             '"><input type="hidden" name="action" value="vp_kt_update"><input type="hidden" name="application" value="' .
@@ -173,7 +160,7 @@ function vp_kt_admin()
         }
         echo '</select></label></p><p><label for="kt-notes">Internal notes</label></p><textarea id="kt-notes" name="notes" rows="8" maxlength="20000" style="width:min(100%,1000px)">' .
             esc_textarea($row->notes) .
-            '</textarea><p><button class="button button-primary" name="operation" value="save">Save review</button> <button class="button" name="operation" value="ai">Generate / retry AI review</button> <button class="button" name="operation" value="email">Retry confirmation email</button></p><details><summary>Delete personal data</summary><p>Irreversibly removes this application, notes, AI review and attachments. Backups follow the hosting retention policy.</p><label><input type="checkbox" name="delete_confirm" value="1"> I intend to delete this application</label> <button class="button" name="operation" value="delete">Delete application</button></details></form></div>';
+            '</textarea><p><button class="button button-primary" name="operation" value="save">Save review</button> <button class="button" name="operation" value="email">Retry confirmation email</button></p><details><summary>Delete personal data</summary><p>Irreversibly removes this application, notes and attachments. Backups follow the hosting retention policy.</p><label><input type="checkbox" name="delete_confirm" value="1"> I intend to delete this application</label> <button class="button" name="operation" value="delete">Delete application</button></details></form></div>';
         return;
     }
     echo '<form method="get"><input type="hidden" name="page" value="vp-kthehu">';
@@ -231,7 +218,7 @@ function vp_kt_admin()
     );
     echo "<p>" .
         esc_html($count) .
-        ' applications</p><table class="widefat striped"><thead><tr><th>Reference / Applicant</th><th>Destination</th><th>Contribution</th><th>Submitted (UTC)</th><th>Status</th><th>Email / AI</th></tr></thead><tbody>';
+        ' applications</p><table class="widefat striped"><thead><tr><th>Reference / Applicant</th><th>Destination</th><th>Contribution</th><th>Submitted (UTC)</th><th>Status</th><th>Email</th></tr></thead><tbody>';
     foreach ($rows as $row) {
         $d = json_decode($row->payload, true);
         echo '<tr><td><a href="' .
@@ -251,7 +238,7 @@ function vp_kt_admin()
             "</td><td>" .
             esc_html($row->status) .
             "</td><td>" .
-            esc_html($row->mail_state . " / " . $row->ai_state) .
+            esc_html($row->mail_state) .
             "</td></tr>";
     }
     if (!$rows) {
@@ -310,14 +297,6 @@ add_action("admin_post_vp_kt_update", function () {
             ],
             ["id" => $id, "notes" => $row->notes, "status" => $row->status],
         );
-    }
-    if ($op === "ai") {
-        $wpdb->update(
-            vp_kt_table(),
-            ["review" => "", "ai_state" => "pending"],
-            ["id" => $id],
-        );
-        vp_kt_review($id);
     }
     if ($op === "email" && $row->mail_state !== "sent") {
         $wpdb->update(
@@ -384,7 +363,6 @@ add_action("admin_post_vp_kt_export", function () {
         array_merge(["Reference", "Submitted UTC", "Status"], $keys, [
             "support",
             "notes",
-            "ai_review",
             "mail_state",
         ]),
         ",",
@@ -414,7 +392,6 @@ add_action("admin_post_vp_kt_export", function () {
                 $values,
                 implode(" | ", $d["support"] ?? []),
                 $row->notes,
-                $row->review,
                 $row->mail_state,
             );
             fputcsv($out, array_map("vp_kt_csv_cell", $values), ",", '"', "");

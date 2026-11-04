@@ -65,4 +65,4 @@ Keep the current hosting, WordPress, Yoast and Mailchimp. The local preview is n
 
 ## Kthehu initiative
 
-`page-kthehu.php` and the Valon Platform Kthehu module add an Albanian application page, private document storage, an authenticated review dashboard, CSV export, confirmation emails, and AI-assisted summaries. See [Kthehu setup and verification](docs/KTHEHU.md) for service configuration, privacy controls, the disposable preview, and launch checks.
+`page-kthehu.php` and the Valon Platform Kthehu module add an Albanian application page, private document storage, an authenticated review dashboard, CSV export, confirmation emails, and human review. See [Kthehu setup and verification](docs/KTHEHU.md) for service configuration, privacy controls, the disposable preview, and launch checks.

@@ -61,8 +61,8 @@ function vp_kt_fields()
     return [
         "name" => ["Emni dhe mbiemni", 160, true, "text"],
         "email" => ["Emaili", 254, true, "email"],
-        "country" => ["Shteti ku jeton sot", 120, true, "text"],
-        "city" => ["Qyteti ku jeton sot", 120, true, "text"],
+        "country" => ["Ku jeton sot? (shteti)", 120, true, "text"],
+        "city" => ["Qyteti ku jeton sot", 120, false, "text"],
         "destination" => [
             "Ku don me u kthy ose me kontribuu?",
             100,
@@ -72,14 +72,14 @@ function vp_kt_fields()
         "town" => [
             "Qyteti ose fshati — shkruaje vendin saktë",
             200,
-            true,
+            false,
             "text",
         ],
         "timeline" => ["Ku je me kthimin?", 100, true, "select"],
         "story" => [
             "Na trego shkurt historinë tande dhe pse don me u kthy ose pse je kthy.",
             1000,
-            true,
+            false,
             "textarea",
         ],
         "phone" => ["Telefoni ose WhatsApp", 60, false, "tel"],
@@ -91,22 +91,22 @@ function vp_kt_fields()
         ],
         "contribution" => ["Qysh don me kontribuu?", 150, true, "select"],
         "plan" => [
-            "Çka don me ba, kujt i shërben dhe qysh krijon vlerë n’vend?",
+            "Çka don me ndërtu ose me ba n’vend?",
             1500,
             true,
             "textarea",
         ],
-        "stage" => ["Në cilën fazë je?", 100, true, "select"],
+        "stage" => ["Në cilën fazë je?", 100, false, "select"],
         "progress" => [
             "Çka ke ba deri tash dhe çfarë përvoje ose aftësish sjell?",
             1000,
-            true,
+            false,
             "textarea",
         ],
         "sustainability" => [
             "Kush përfiton, dhe qysh mundet me vazhdu kjo punë?",
             700,
-            true,
+            false,
             "textarea",
         ],
         "goals" => [
@@ -116,7 +116,7 @@ function vp_kt_fields()
             "textarea",
         ],
         "obstacle" => [
-            "Cila asht pengesa kryesore sot, dhe çfarë ndihme konkrete do të të çonte n’hapin tjetër?",
+            "Çka të duhet për me e ba hapin tjetër?",
             1000,
             true,
             "textarea",
@@ -141,7 +141,7 @@ function vp_kt_fields()
         ],
         "document_link" => ["Link dokumenti ose videoje", 1000, false, "url"],
         "podcast" => [
-            "A kishe pasë dëshirë me ardhë n’podcastin KONCENTROHU me tregu historinë, idenë dhe ndihmën që po kërkon?",
+            "Don me e tregu historinë në podcastin KONCENTROHU?",
             100,
             false,
             "select",
@@ -207,18 +207,6 @@ function vp_kt_validate($raw)
     }
     $data["support"] = array_values(array_unique($support));
     sort($data["support"]);
-    if (in_array($choices["support"][1], $support, true)) {
-        foreach (["amount", "funding_use", "funding_type"] as $key) {
-            if (empty($data[$key])) {
-                $errors[$key] =
-                    "Plotëso këtë fushë; mundesh me thanë edhe “S’e di ende”.";
-            }
-        }
-    } else {
-        foreach (["amount", "funding_use", "funding_type"] as $key) {
-            $data[$key] = "";
-        }
-    }
     if (($raw["consent"] ?? "") !== "1") {
         $errors["consent"] = "Lexoje dhe pranoje njoftimin e privatësisë.";
     }
@@ -230,4 +218,23 @@ function vp_kt_validate($raw)
             "fields" => $errors,
         ])
         : $data;
+}
+
+/** Short public labels; stored values remain compatible with existing filters. */
+function vp_kt_support_label($value)
+{
+    $labels = [
+        "Mentorim",
+        "Financim",
+        "Partnerë",
+        "Klientë & marketing",
+        "Punësim",
+        "Kthimi & vendosja",
+        "Ligj & administratë",
+        "Teknologji",
+        "Dukshmëni",
+        "Tjetër",
+    ];
+    $index = array_search($value, vp_kt_choices()["support"], true);
+    return $index === false ? $value : $labels[$index];
 }

@@ -5,7 +5,6 @@
   const button = document.querySelector("#kt-submit");
   const status = document.querySelector("#kt-status");
   const retry = document.querySelector("#kt-retry");
-  const funding = document.querySelector("#kt-funding");
   const support = [...form.querySelectorAll('[name="support[]"]')];
   let sending = false;
   async function ticket() {
@@ -28,23 +27,6 @@
     }
   }
   retry.addEventListener("click", ticket);
-  const conditional = () => {
-    const selected = support[1].checked;
-    funding.hidden = !selected;
-    funding.querySelectorAll("input,select,textarea").forEach((input) => {
-      input.disabled = !selected;
-      input.required = selected;
-    });
-    const business =
-      form.elements.contribution.selectedIndex === 1 ||
-      form.elements.contribution.selectedIndex === 2;
-    document.querySelector("#kt-sustainability-label").textContent = business
-      ? "Kush do të paguajë për produktin ose shërbimin tand?"
-      : "Kush përfiton, dhe qysh mundet me vazhdu kjo punë?";
-  };
-  support.forEach((input) => input.addEventListener("change", conditional));
-  form.elements.contribution.addEventListener("change", conditional);
-  conditional();
   ticket();
   function error(key, message) {
     const label = document.getElementById(`kt-${key}-error`);
@@ -94,6 +76,8 @@
     }
     if (firstInvalid) {
       status.textContent = "Kontrolloji fushat e shënueme.";
+      const details = firstInvalid.closest("details");
+      if (details) details.open = true;
       firstInvalid.focus();
       return;
     }
