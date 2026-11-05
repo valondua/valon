@@ -1,21 +1,5 @@
 (() => {
   "use strict";
-  const video = document.getElementById("kt-video");
-  video?.addEventListener("toggle", () => {
-    const container = document.getElementById("kt-video-player");
-    if (!video.open) {
-      container.replaceChildren();
-      return;
-    }
-    if (container.firstChild) return;
-    const frame = document.createElement("iframe");
-    frame.src = "https://www.tiktok.com/player/v1/7702456687784922389?autoplay=0&description=0&music_info=0";
-    frame.title = "Valon Asani: ftesë për me u kthy dhe kontribuu";
-    frame.allow = "fullscreen; picture-in-picture";
-    frame.allowFullscreen = true;
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    container.append(frame);
-  });
   const form = document.querySelector("#kt-form");
   if (!form) return;
   const button = document.querySelector("#kt-submit");

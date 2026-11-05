@@ -53,4 +53,4 @@ The page is published at `https://www.valonasani.com/kthehu/` (the requested ape
 
 Live verification covered an anonymous browser submission, funding questions, podcast refusal, PDF/PNG uploads, a 3 × 10 MB submission, browser retry without duplication, and actual confirmation receipt in the owner's connected Gmail inbox. Owner and explicitly granted reviewer access were checked alongside denial for anonymous and unprivileged users, download nonces, exact downloaded file bytes, notes/status persistence, filters, and CSV exports. Canonical routing, Albanian markup, mobile/desktop widths, and existing homepage/language/investigation/REST/sitemap routes passed.
 
-The invitation video is TikTok post `7702456687784922389`, selected by the owner. Its official player loads only when the visitor opens the video disclosure, never autoplays, unloads on close, and has a direct TikTok fallback link.
+The invitation video is TikTok post `7702456687784922389`, selected by the owner. Its official player is visible directly on the page at a compact 240 px width, never autoplays, and has a direct TikTok fallback link.
