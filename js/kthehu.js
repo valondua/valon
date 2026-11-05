@@ -59,6 +59,22 @@
         firstInvalid ||= input;
       }
     });
+    const upload = document.getElementById("kt-attachments");
+    const files = [...upload.files];
+    if (
+      files.length > 1 ||
+      files.some(
+        (file) =>
+          file.size > 10 * 1024 * 1024 ||
+          !/\.(pdf|docx|pptx|xlsx|jpg|png)$/i.test(file.name),
+      )
+    ) {
+      error(
+        "attachments",
+        "Zgjedh nji dokument deri në 10 MB: PDF, DOCX, PPTX, XLSX, JPG ose PNG.",
+      );
+      firstInvalid ||= upload;
+    }
     if (firstInvalid) {
       status.textContent = "Kontrolloji fushat e shënueme.";
       const details = firstInvalid.closest("details");

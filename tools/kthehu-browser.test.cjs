@@ -58,7 +58,7 @@ const fixture =
     assert.equal(
       await page
         .locator(
-          '#kt-form input:not([type="hidden"]):not([type="checkbox"]):not([name="company_url"]), #kt-form textarea',
+          '#kt-form input:not([type="hidden"]):not([type="checkbox"]):not([name="company_url"]):not([type="file"]), #kt-form textarea',
         )
         .count(),
       3,
@@ -101,7 +101,7 @@ const fixture =
       Array.isArray(snapshot.mail.to) ? snapshot.mail.to[0] : snapshot.mail.to,
       "kthehu-test@example.invalid",
     );
-    assert.match(snapshot.mail.message, /^Përshëndetje Test Kthehu,/);
+    assert.match(snapshot.mail.message, /^Përshëndetje Test,/);
     assert.ok(snapshot.mail.message.includes("Emni: Test Kthehu"));
     assert.ok(
       snapshot.mail.message.includes("Emaili: kthehu-test@example.invalid"),

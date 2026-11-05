@@ -458,7 +458,9 @@ function vp_kt_send_mail($id)
     }
     $data = json_decode($row->payload, true);
     $name = sanitize_text_field($data["name"] ?? "");
-    $greeting = $name !== "" ? "Përshëndetje {$name}," : "Përshëndetje,";
+    $first_name = preg_split("/\\s+/u", trim($name), 2)[0] ?? "";
+    $greeting =
+        $first_name !== "" ? "Përshëndetje {$first_name}," : "Përshëndetje,";
     $details =
         "\n\n—\nKopja e mesazhit tand\n\nEmni: {$name}\nEmaili: {$data["email"]}\n\nMesazhi yt:\n" .
         ($data["plan"] ?? "");

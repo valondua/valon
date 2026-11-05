@@ -1,6 +1,6 @@
 # Current experience — 5 November 2026
 
-The public page is a short introduction beside a three-field form: name, email and one message covering the idea, location and help needed. Consent is required and opens a compact privacy disclosure. There are no public dropdowns, support checklists, uploads or podcast questions. Legacy fields and private files remain supported for existing records/API clients, but removed fields are optional. Review is human-only.
+The public page is a short introduction beside a three-field form: name, email and one message covering the idea, location and help needed. Consent is required and opens a compact privacy disclosure. There are no public dropdowns, support checklists or podcast questions. One optional file picker accepts a document up to 10 MB. Legacy fields and private files remain supported for existing records/API clients, but removed fields are optional. Review is human-only. The email greeting uses the first whitespace-separated name; the full submitted name remains in the details. The diaspora illustration uses public-domain Natural Earth land geometry (ne_110m_land) and illustrative routes, without population counts.
 
 # Kthehu initiative
 

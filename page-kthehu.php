@@ -107,14 +107,17 @@ function valon_kt_field($key)
 <p class="kt-eyebrow">Nji nismë nga Valon Asani</p>
 <h1 id="kt-title">Kthehu.<br>Ndërto.<br><em>Kontribuo.</em></h1>
 <p class="kt-lead">Po mendon me u kthy, apo je kthy e po ndërton diçka? Më trego idenë tande dhe si mundem me të ndihmu.</p>
-<p class="kt-muted">Këshilla, lidhje ose mundësi për hapin tjetër.</p>
+<p class="kt-muted">Përvojën që e ke fitu jashtë mundesh me e sjellë n’vend — me nji biznes, nji zanat ose nji projekt për komunitetin. Unë dhe ekipi mundemi me të ndihmu me këshilla, lidhje dhe hapa konkretë.</p>
+<figure class="kt-diaspora"><img src="<?php echo esc_url(
+    get_theme_file_uri("/assets/kthehu-diaspora.svg"),
+); ?>" alt="Hartë ilustruese me lidhje nga diaspora në Amerikë, Europë e Australi drejt trojeve shqiptare." width="720" height="350"><figcaption><strong>Nga bota, drejt vendit.</strong><a href="https://www.dua.com/albanians/" target="_blank" rel="noopener">Shqiptarët nëpër botë ↗</a></figcaption></figure>
 </section>
 <section id="apliko" class="kt-essential-form" aria-labelledby="kt-form-title">
 <h2 id="kt-form-title">Le ta nisim me nji mesazh.</h2><p class="kt-caption">Pa llogari. Vetëm ti, Valoni dhe ekipi.</p>
 <?php if (
     !function_exists("vp_kt_fields")
 ): ?><p>Aplikimet do të hapen së shpejti.</p><?php else: ?>
-<form id="kt-form" method="post" novalidate>
+<form id="kt-form" enctype="multipart/form-data" method="post" novalidate>
 <noscript><p>Aktivizo JavaScript për me e dërgu këtë formular.</p></noscript>
 <div class="kt-honeypot" aria-hidden="true"><label>Lëre bosh<input name="company_url" tabindex="-1" autocomplete="off"></label></div>
 <input type="hidden" name="token" id="kt-token">
@@ -123,11 +126,12 @@ valon_kt_field("name");
 valon_kt_field("email");
 ?></div>
 <?php valon_kt_field("plan"); ?>
+<div class="kt-field kt-single-upload" data-field="attachments"><label for="kt-attachments">Shto nji dokument <small>(opsionale)</small></label><input id="kt-attachments" name="attachments[]" type="file" accept=".pdf,.docx,.pptx,.xlsx,.jpg,.png" aria-describedby="kt-upload-hint kt-attachments-error"><small id="kt-upload-hint" class="kt-hint">Plan, CV ose foto · deri në 10 MB · PDF, DOCX, PPTX, XLSX, JPG, PNG. Ruhet privatisht.</small><span id="kt-attachments-error" class="kt-error"></span></div>
 <div class="kt-field" data-field="consent"><label class="kt-consent"><input id="kt-consent" type="checkbox" name="consent" value="1" required aria-describedby="kt-consent-error"><span>Pranoj <a href="#kt-privacy">shqyrtimin privat</a> nga Valoni dhe ekipi. Asgja nuk publikohet pa lejen time.</span></label><span class="kt-error" id="kt-consent-error"></span></div>
 <div id="kt-status" role="status" aria-live="polite" tabindex="-1"></div><button id="kt-submit" class="kt-button" type="submit" disabled>Dërgo mesazhin <span aria-hidden="true">↗</span></button><button id="kt-retry" type="button" hidden>Provo me e lidhë formularin përsëri</button>
 </form><?php endif; ?>
 <p class="kt-caption">Të kontaktojmë nëse mundemi me ndihmu. Mbështetja nuk garantohet.</p>
-<details id="kt-privacy" class="kt-essential-privacy"><summary>Qysh i ruejmë të dhanat?</summary><p>Valon Asani dhe ekipi i autorizuem e lexojnë mesazhin për me shqyrtu ndihmën dhe me të kontaktu. Nuk përdorim AI dhe nuk publikojmë asgja pa leje.</p><p>Të dhanat dhe shënimet ruhen deri në 24 muaj në sistemin aktiv; kopjet rezervë ndjekin afatin e hostimit. Për qasje, korrigjim ose fshim: <a href="mailto:valon@dua.com">valon@dua.com</a>. Lexo <a href="<?php echo esc_url(
+<details id="kt-privacy" class="kt-essential-privacy"><summary>Qysh i ruejmë të dhanat?</summary><p>Valon Asani dhe ekipi i autorizuem e lexojnë mesazhin për me shqyrtu ndihmën dhe me të kontaktu. Nuk përdorim AI dhe nuk publikojmë asgja pa leje.</p><p>Të dhanat, dokumentet dhe shënimet ruhen deri në 24 muaj në sistemin aktiv; kopjet rezervë ndjekin afatin e hostimit. Për qasje, korrigjim ose fshim: <a href="mailto:valon@dua.com">valon@dua.com</a>. Lexo <a href="<?php echo esc_url(
     get_privacy_policy_url() ?: home_url("/privacy-policy/"),
 ); ?>">politikën e privatësisë</a>.</p></details>
 </section></div></main>
