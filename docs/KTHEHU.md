@@ -1,8 +1,6 @@
-# Current experience — 4 November 2026
+# Current experience — 5 November 2026
 
-The public form asks eight core fields, a support choice and privacy consent. Removed legacy questions remain optional in the schema so existing applications stay readable. Funding does not introduce extra required questions. Documents, a document link and podcast interest are optional within an expandable section.
-
-Review is human-only. No application data is sent to OpenAI; AI generation and its dashboard controls have been removed. Confirmation email retries, private documents, review notes, access control and retention remain active.
+The public page is a short introduction beside a three-field form: name, email and one message covering the idea, location and help needed. Consent is required and opens a compact privacy disclosure. There are no public dropdowns, support checklists, uploads or podcast questions. Legacy fields and private files remain supported for existing records/API clients, but removed fields are optional. Review is human-only.
 
 # Kthehu initiative
 

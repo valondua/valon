@@ -52,18 +52,19 @@ const fixture =
     for (const [key, value] of Object.entries({
       name: "Test Kthehu",
       email: "kthehu-test@example.invalid",
-      country: "Zvicër",
       plan: "Kurse për të rinjtë.",
-      obstacle: "Më duhet nji hapësinë.",
     }))
       await page.locator("#kt-" + key).fill(value);
-    for (const key of ["destination", "timeline"])
-      await page.locator("#kt-" + key).selectOption({ index: 1 });
-    await page.locator("#kt-contribution").selectOption({ index: 1 });
-    const support = page.locator('[name="support[]"]');
-    await support.nth(1).check();
-    assert.equal(await page.locator("#kt-funding").count(), 0);
-    await support.first().check();
+    assert.equal(
+      await page
+        .locator(
+          '#kt-form input:not([type="hidden"]):not([type="checkbox"]):not([name="company_url"]), #kt-form textarea',
+        )
+        .count(),
+      3,
+    );
+    await page.locator('a[href="#kt-privacy"]').click();
+    assert.equal(await page.locator("#kt-privacy").getAttribute("open"), "");
     await page.locator("#kt-consent").check();
     // Save the exact browser request so retry/duplicate behavior can be checked independently.
     await new Promise((resolve) => setTimeout(resolve, 2100));
@@ -89,7 +90,7 @@ const fixture =
       await page.locator(".kt-success strong").textContent()
     ).replace("Referenca: ", "");
     console.log(
-      "PASS shorter mobile form, funding without extra required fields, validation and confirmation",
+      "PASS three-field form, privacy disclosure, validation and confirmation",
       reference,
     );
     let snapshot = await fixtureCall("inspect");
