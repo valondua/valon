@@ -101,7 +101,11 @@ const fixture =
       Array.isArray(snapshot.mail.to) ? snapshot.mail.to[0] : snapshot.mail.to,
       "kthehu-test@example.invalid",
     );
-    assert.match(snapshot.mail.message, new RegExp(reference));
+    assert.equal(snapshot.mail.subject, "Faleminderit që më shkrove");
+    assert.ok(!snapshot.mail.message.includes(reference));
+    assert.ok(!snapshot.mail.message.includes("KONCENTROHU"));
+    assert.match(snapshot.mail.message, /mundesh me iu përgjigjë këtij emaili/);
+    assert.ok(snapshot.mail.headers.includes("Reply-To: Valon Asani <valon@dua.com>"));
     const repeat = await page.evaluate(async (base) => {
       const response = await fetch(base + "/wp-json/valon/v1/kthehu/apply", {
         method: "POST",

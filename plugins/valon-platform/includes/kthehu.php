@@ -459,9 +459,12 @@ function vp_kt_send_mail($id)
     $data = json_decode($row->payload, true);
     $sent = wp_mail(
         $data["email"],
-        "Aplikimi yt — " . $row->reference,
-        "Faleminderit! Aplikimi yt për Kthehu. Ndërto. Kontribuo. u ruejt.\n\nReferenca: {$row->reference}\n\nE shqyrtojmë secilin aplikim veçmas. Nëse ka nji mënyrë praktike me të ndihmu, të kontaktojmë. Aplikimi nuk garanton financim ose mbështetje. Pjesëmarrja në KONCENTROHU nuk ndikon në shqyrtim.\n\nValon Asani dhe ekipi",
-        ["Content-Type: text/plain; charset=UTF-8"],
+        "Faleminderit që më shkrove",
+        "Përshëndetje,\n\nFaleminderit që more kohë me ma tregu idenë tande. Mesazhi yt mbërriti.\n\nDo ta lexojmë me kujdes bashkë me ekipin. Nëse shohim nji mënyrë me të ndihmu, të shkruajmë dhe e vazhdojmë bisedën.\n\nNëse don me shtu diçka, mundesh me iu përgjigjë këtij emaili.\n\nTë përshëndes,\nValon",
+        [
+            "Content-Type: text/plain; charset=UTF-8",
+            "Reply-To: Valon Asani <valon@dua.com>",
+        ],
     );
     $wpdb->update(
         vp_kt_table(),
