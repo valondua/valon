@@ -61,12 +61,12 @@ function vp_kt_fields()
     return [
         "name" => ["Emni dhe mbiemni", 160, true, "text"],
         "email" => ["Emaili", 254, true, "email"],
-        "country" => ["Ku jeton sot? (shteti)", 120, true, "text"],
+        "country" => ["Ku jeton sot? (shteti)", 120, false, "text"],
         "city" => ["Qyteti ku jeton sot", 120, false, "text"],
         "destination" => [
             "Ku don me u kthy ose me kontribuu?",
             100,
-            true,
+            false,
             "select",
         ],
         "town" => [
@@ -75,7 +75,7 @@ function vp_kt_fields()
             false,
             "text",
         ],
-        "timeline" => ["Ku je me kthimin?", 100, true, "select"],
+        "timeline" => ["Ku je me kthimin?", 100, false, "select"],
         "story" => [
             "Na trego shkurt historinë tande dhe pse don me u kthy ose pse je kthy.",
             1000,
@@ -89,9 +89,9 @@ function vp_kt_fields()
             false,
             "url",
         ],
-        "contribution" => ["Qysh don me kontribuu?", 150, true, "select"],
+        "contribution" => ["Qysh don me kontribuu?", 150, false, "select"],
         "plan" => [
-            "Çka don me ndërtu ose me ba n’vend?",
+            "Çka don me ba dhe si mundemi me të ndihmu?",
             1500,
             true,
             "textarea",
@@ -118,7 +118,7 @@ function vp_kt_fields()
         "obstacle" => [
             "Çka të duhet për me e ba hapin tjetër?",
             1000,
-            true,
+            false,
             "textarea",
         ],
         "amount" => [
@@ -194,7 +194,6 @@ function vp_kt_validate($raw)
     $support = $raw["support"] ?? [];
     if (
         !is_array($support) ||
-        !$support ||
         count($support) > 10 ||
         array_filter(
             $support,
@@ -202,7 +201,7 @@ function vp_kt_validate($raw)
                 !in_array($v, $choices["support"], true),
         )
     ) {
-        $errors["support"] = "Zgjedh të paktën nji lloj ndihme.";
+        $errors["support"] = "Zgjedh nji lloj ndihme të vlefshëm.";
         $support = [];
     }
     $data["support"] = array_values(array_unique($support));
@@ -211,7 +210,7 @@ function vp_kt_validate($raw)
         $errors["consent"] = "Lexoje dhe pranoje njoftimin e privatësisë.";
     }
     $data["email"] = strtolower($data["email"] ?? "");
-    $data["privacy_version"] = "2026-11-04";
+    $data["privacy_version"] = "2026-11-05";
     return $errors
         ? new WP_Error("validation", "Kontrolloji fushat e shënueme.", [
             "status" => 422,

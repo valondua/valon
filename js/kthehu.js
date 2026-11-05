@@ -5,7 +5,6 @@
   const button = document.querySelector("#kt-submit");
   const status = document.querySelector("#kt-status");
   const retry = document.querySelector("#kt-retry");
-  const support = [...form.querySelectorAll('[name="support[]"]')];
   let sending = false;
   async function ticket() {
     button.disabled = true;
@@ -27,6 +26,11 @@
     }
   }
   retry.addEventListener("click", ticket);
+  document
+    .querySelector('a[href="#kt-privacy"]')
+    ?.addEventListener("click", () => {
+      document.querySelector("#kt-privacy").open = true;
+    });
   ticket();
   function error(key, message) {
     const label = document.getElementById(`kt-${key}-error`);
@@ -55,25 +59,6 @@
         firstInvalid ||= input;
       }
     });
-    if (!support.some((input) => input.checked)) {
-      error("support", "Zgjedh të paktën nji lloj ndihme.");
-      firstInvalid ||= support[0];
-    }
-    const files = [...document.getElementById("kt-attachments").files];
-    if (
-      files.length > 3 ||
-      files.some(
-        (f) =>
-          f.size > 10 * 1024 * 1024 ||
-          !/\.(pdf|docx|pptx|xlsx|jpg|png)$/i.test(f.name),
-      )
-    ) {
-      error(
-        "attachments",
-        "Deri në 3 dokumente, deri në 10 MB secili: PDF, DOCX, PPTX, XLSX, JPG ose PNG.",
-      );
-      firstInvalid ||= document.getElementById("kt-attachments");
-    }
     if (firstInvalid) {
       status.textContent = "Kontrolloji fushat e shënueme.";
       const details = firstInvalid.closest("details");
@@ -84,7 +69,7 @@
     sending = true;
     button.disabled = true;
     form.setAttribute("aria-busy", "true");
-    status.textContent = "Po e ruejmë aplikimin dhe dokumentet…";
+    status.textContent = "Po e dërgojmë mesazhin…";
     try {
       const response = await fetch(kthehuConfig.apply, {
         method: "POST",

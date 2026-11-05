@@ -680,3 +680,82 @@
     row-gap: 20px;
   }
 }
+/* Essential introduction and three-field contact form. */
+.kt-essential .kt-essential-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: start;
+  padding-block: 72px;
+}
+.kt-essential h1 {
+  font-size: clamp(58px, 6.7vw, 96px);
+}
+.kt-essential .kt-lead {
+  max-width: 34ch;
+  font-size: 20px;
+}
+.kt-essential .kt-essential-form {
+  background: #f1efea;
+  padding: 32px;
+  border-radius: 12px;
+  border-top: 3px solid var(--kt-red);
+  min-width: 0;
+  scroll-margin-top: 20px;
+}
+.kt-essential .kt-essential-form h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+.kt-essential #kt-form {
+  margin-top: 24px;
+}
+.kt-essential #kt-plan {
+  min-height: 132px;
+}
+.kt-essential .kt-hint {
+  line-height: 1.5;
+}
+.kt-essential .kt-essential-privacy {
+  border-top: 1px solid var(--kt-line);
+  padding-top: 16px;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--kt-muted);
+}
+.kt-essential-privacy summary {
+  cursor: pointer;
+}
+.kt-essential-privacy p {
+  line-height: 1.6;
+}
+@media (max-width: 800px) {
+  .kt-essential .kt-essential-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 32px;
+    max-width: 680px;
+  }
+  .kt-essential h1 {
+    font-size: clamp(46px, 12vw, 68px);
+    margin-bottom: 22px;
+  }
+  .kt-essential .kt-eyebrow {
+    margin-bottom: 20px;
+  }
+  .kt-essential .kt-lead {
+    font-size: 18px;
+    max-width: none;
+  }
+  .kt-essential .kt-essential-form {
+    padding: 24px;
+  }
+}
+@media (max-width: 400px) {
+  .kt-essential .kt-essential-form {
+    padding: 20px 16px;
+  }
+  .kt-essential .kt-essential-form h2 {
+    font-size: 27px;
+  }
+}
