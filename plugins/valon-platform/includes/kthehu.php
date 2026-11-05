@@ -457,10 +457,16 @@ function vp_kt_send_mail($id)
         return;
     }
     $data = json_decode($row->payload, true);
+    $name = sanitize_text_field($data["name"] ?? "");
+    $greeting = $name !== "" ? "Përshëndetje {$name}," : "Përshëndetje,";
+    $details =
+        "\n\n—\nKopja e mesazhit tand\n\nEmni: {$name}\nEmaili: {$data["email"]}\n\nMesazhi yt:\n" .
+        ($data["plan"] ?? "");
     $sent = wp_mail(
         $data["email"],
         "Faleminderit që më shkrove",
-        "Përshëndetje,\n\nFaleminderit që more kohë me ma tregu idenë tande. Mesazhi yt mbërriti.\n\nDo ta lexojmë me kujdes bashkë me ekipin. Nëse shohim nji mënyrë me të ndihmu, të shkruajmë dhe e vazhdojmë bisedën.\n\nNëse don me shtu diçka, mundesh me iu përgjigjë këtij emaili.\n\nTë përshëndes,\nValon",
+        "{$greeting}\n\nFaleminderit që more kohë me ma tregu idenë tande. Mesazhi yt mbërriti.\n\nDo ta lexojmë me kujdes bashkë me ekipin. Nëse shohim nji mënyrë me të ndihmu, të shkruajmë dhe e vazhdojmë bisedën.\n\nNëse don me shtu diçka, mundesh me iu përgjigjë këtij emaili.\n\nTë përshëndes,\nValon" .
+            $details,
         [
             "Content-Type: text/plain; charset=UTF-8",
             "Reply-To: Valon Asani <valon@dua.com>",
