@@ -4,7 +4,7 @@
 <aside class="home-submit-banner" aria-label="<?php echo esc_attr(valon_text('Kthehu — return and contribute','Kthehu — kontribuo në vendin tand')); ?>">
     <div class="container home-submit-inner">
         <div><strong><?php echo esc_html(valon_text('Return. Build. Contribute.', 'Kthehu. Ndërto. Kontribuo.')); ?></strong><p><?php echo esc_html(valon_text('Bring your experience home. Share your idea and let’s see how we can help.', 'Sille përvojën tande n’vend. Na trego idenë dhe si mundemi me të ndihmu.')); ?></p></div>
-        <a class="home-submit-button" href="<?php echo esc_url(home_url('/kthehu/')); ?>"><?php echo esc_html(valon_text('Explore Kthehu','Zbulo nismën')); ?> <span aria-hidden="true">→</span></a>
+        <a class="home-submit-button" href="<?php echo esc_url(home_url('/kthehu/')); ?>"><img src="<?php echo esc_url(get_theme_file_uri('/assets/albanian-flag.svg')); ?>" width="32" height="24" alt="" aria-hidden="true" style="display:block;flex-shrink:0;border-radius:2px"><?php echo esc_html(valon_text('Explore Kthehu','Zbulo nismën')); ?> <span aria-hidden="true">→</span></a>
     </div>
 </aside>
 <?php endif; ?>
