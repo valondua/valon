@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 <main id="main">
 <?php if (in_array(valon_lang(), ['en','sq'], true)) : ?>
-<aside class="home-submit-banner" aria-label="<?php echo esc_attr(valon_text('Contribute to the investigation','Kontribuo në hulumtim')); ?>">
+<aside class="home-submit-banner" aria-label="<?php echo esc_attr(valon_text('Kthehu — return and contribute','Kthehu — kontribuo në vendin tand')); ?>">
     <div class="container home-submit-inner">
-        <div><strong><?php echo esc_html(valon_text('Have information? Report an injustice.', 'Ke informacion? Raporto një padrejtësi.')); ?></strong><p><?php echo esc_html(valon_text('Share photos, documents or your account. Sent privately to Valon for review.', 'Dërgo foto, dokumente ose dëshminë tënde. Valoni i shqyrton privatisht.')); ?></p></div>
-        <a class="home-submit-button" href="<?php echo esc_url(valon_albania_submit_url(valon_lang()==='sq')); ?>"><?php echo esc_html(valon_text('Submit information','Dërgo informacion')); ?> <span aria-hidden="true">→</span></a>
+        <div><strong><?php echo esc_html(valon_text('Return. Build. Contribute.', 'Kthehu. Ndërto. Kontribuo.')); ?></strong><p><?php echo esc_html(valon_text('Bring your experience home. Share your idea and let’s see how we can help.', 'Sille përvojën tande n’vend. Na trego idenë dhe si mundemi me të ndihmu.')); ?></p></div>
+        <a class="home-submit-button" href="<?php echo esc_url(home_url('/kthehu/')); ?>"><?php echo esc_html(valon_text('Explore Kthehu','Zbulo nismën')); ?> <span aria-hidden="true">→</span></a>
     </div>
 </aside>
 <?php endif; ?>
