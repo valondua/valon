@@ -109,9 +109,7 @@ function valon_kt_field($key)
 <p class="kt-lead">Po mendon me u kthy, apo je kthy e po ndërton diçka? Më trego idenë tande dhe si mundem me të ndihmu.</p>
 <p class="kt-muted">Përvojën që e ke fitu jashtë mundesh me e sjellë n’vend — me nji biznes, nji zanat ose nji projekt për komunitetin. Unë dhe ekipi mundemi me të ndihmu me këshilla, lidhje dhe hapa konkretë.</p>
 <figure class="kt-video" id="kt-video"><p class="kt-video-title">Ftesa ime për me u kthy</p><iframe src="https://www.tiktok.com/player/v1/7702456687784922389?autoplay=0&amp;description=0&amp;music_info=0" title="Valon Asani: ftesë për me u kthy dhe kontribuu" width="240" height="427" allow="fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><figcaption class="kt-caption">Video nga TikTok · <a href="https://www.tiktok.com/@valon_asani/video/7702456687784922389" target="_blank" rel="noopener">Hape në TikTok ↗</a></figcaption></figure>
-<figure class="kt-diaspora"><img src="<?php echo esc_url(
-    get_theme_file_uri("/assets/kthehu-diaspora.svg"),
-); ?>" alt="Hartë ilustruese me lidhje nga diaspora në Amerikë, Europë e Australi drejt trojeve shqiptare." width="720" height="350"><figcaption><strong>Nga bota, drejt vendit.</strong><a href="https://www.dua.com/albanians/" target="_blank" rel="noopener">Shqiptarët nëpër botë ↗</a></figcaption></figure>
+
 </section>
 <section id="apliko" class="kt-essential-form" aria-labelledby="kt-form-title">
 <h2 id="kt-form-title">Le ta nisim me nji mesazh.</h2><p class="kt-caption">Pa llogari. Vetëm ti, Valoni dhe ekipi.</p>
@@ -135,5 +133,9 @@ valon_kt_field("email");
 <details id="kt-privacy" class="kt-essential-privacy"><summary>Qysh i ruejmë të dhanat?</summary><p>Valon Asani dhe ekipi i autorizuem e lexojnë mesazhin për me shqyrtu ndihmën dhe me të kontaktu. Nuk përdorim AI dhe nuk publikojmë asgja pa leje.</p><p>Të dhanat, dokumentet dhe shënimet ruhen deri në 24 muaj në sistemin aktiv; kopjet rezervë ndjekin afatin e hostimit. Për qasje, korrigjim ose fshim: <a href="mailto:valon@dua.com">valon@dua.com</a>. Lexo <a href="<?php echo esc_url(
     get_privacy_policy_url() ?: home_url("/privacy-policy/"),
 ); ?>">politikën e privatësisë</a>.</p></details>
-</section></div></main>
+</section></div>
+<section class="kt-world" aria-labelledby="kt-world-title"><div class="container kt-world-inner">
+<div class="kt-world-copy"><h2 id="kt-world-title">Nga bota.<br><span>Drejt vendit.</span></h2><p>Përvoja jote mundet me hapë mundësi këtu. Nji ide, nji lidhje, nji fillim i ri.</p><a href="https://www.dua.com/albanians/" target="_blank" rel="noopener">Shqiptarët nëpër botë <span aria-hidden="true">↗</span></a></div>
+<figure class="kt-world-globe"><img src="<?php echo esc_url(get_theme_file_uri('/assets/kthehu-diaspora.svg')); ?>" alt="Glob ilustrues: lidhje nga diaspora drejt trojeve shqiptare." width="680" height="620" loading="lazy"></figure>
+</div></section></main>
 <?php get_footer(); ?>

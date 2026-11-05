@@ -759,24 +759,6 @@
     font-size: 27px;
   }
 }
-.kt-diaspora {
-  margin: 26px 0 0;
-}
-.kt-diaspora img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.kt-diaspora figcaption {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--kt-muted);
-}
 .kt-single-upload input[type="file"] {
   padding: 12px;
   font-size: 13px;
@@ -792,15 +774,28 @@
   color: var(--kt-ink);
   cursor: pointer;
 }
-@media (max-width: 800px) {
-  .kt-diaspora {
-    max-width: 540px;
-    margin-top: 20px;
-  }
-}
-
 /* Visible, compact portrait player; playback starts only with the visitor. */
 .kt-video { margin: 20px 0 0; border-block: 1px solid var(--kt-line); padding-block: 15px; }
 .kt-video-title { font-size: 15px; font-weight: 600; color: var(--kt-red); margin: 0 0 12px; }
 .kt-video iframe { display: block; width: min(100%, 240px); height: auto; aspect-ratio: 9 / 16; border: 0; margin: 0; background: #211f1e; border-radius: 8px; }
 .kt-video .kt-caption { margin-bottom: 0; }
+
+/* A single editorial closing statement, with an illustrative geographic globe. */
+.kt-world { border-top: 1px solid #e5e5e2; background: #f7f8f7; overflow: hidden; }
+.kt-essential .kt-world-inner { display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; min-height: 420px; padding-block: 0; }
+.kt-world-copy { padding-block: 56px; position: relative; z-index: 1; }
+.kt-essential .kt-world h2 { font-size: clamp(38px, 4.5vw, 64px); line-height: 1.04; letter-spacing: -.055em; font-weight: 600; margin: 0 0 24px; }
+.kt-world h2 span { color: #7b8284; }
+.kt-world-copy p { max-width: 30ch; font-size: 17px; line-height: 1.6; color: #60696d; margin: 0 0 28px; }
+.kt-world-copy a { font-size: 14px; text-decoration: none; border-bottom: 1px solid #a8afb1; padding-bottom: 5px; }
+.kt-world-copy a span { display: inline-block; margin-left: 12px; }
+.kt-world-copy a:hover { color: var(--kt-red); border-color: currentColor; }
+.kt-world-globe { margin: -24px -20px -40px 0; }
+.kt-world-globe img { display: block; width: 100%; height: auto; }
+@media (max-width: 800px) {
+ .kt-essential .kt-world-inner { grid-template-columns: 1fr; max-width: 680px; }
+ .kt-world-copy { padding-block: 40px 0; }
+ .kt-essential .kt-world h2 { font-size: clamp(40px, 8vw, 56px); margin-bottom: 20px; }
+ .kt-world-copy p { font-size: 16px; max-width: 34ch; margin-bottom: 22px; }
+ .kt-world-globe { width: min(110%, 480px); justify-self: center; margin: 4px -5% -24px; }
+}
