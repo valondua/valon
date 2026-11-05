@@ -798,3 +798,10 @@
     margin-top: 20px;
   }
 }
+
+.kt-video { margin-top: 20px; border-block: 1px solid var(--kt-line); padding-block: 15px; }
+.kt-video summary { cursor: pointer; font-size: 15px; font-weight: 600; color: var(--kt-red); list-style: none; }
+.kt-video summary::-webkit-details-marker { display: none; }
+.kt-video summary span { display: inline-block; margin-right: 8px; }
+.kt-video iframe { display: block; width: 100%; max-width: 325px; aspect-ratio: 9 / 16; border: 0; margin: 18px auto 0; background: #211f1e; border-radius: 8px; }
+.kt-video .kt-caption { margin-bottom: 0; }
